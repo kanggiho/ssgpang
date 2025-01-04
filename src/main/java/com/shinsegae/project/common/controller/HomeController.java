@@ -10,6 +10,6 @@ public class HomeController {
 
     @GetMapping("home")
     public String home() {
-        return "user/home"; // 슬래시 제거
+        return "user/home";
     }
 }
