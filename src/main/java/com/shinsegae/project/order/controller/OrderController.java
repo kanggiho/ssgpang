@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("user/order")
 public class OrderController {
 
-    @GetMapping("outgoing")
-    public String outgoing() {
-        return "user/order/outgoing";
+    @GetMapping("do_outgoing")
+    public String do_outgoing() {
+        return "user/order/do_outgoing";
     }
 
     @GetMapping("confirm_outgoing_list")
