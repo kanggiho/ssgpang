@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <title>Title</title>
 </head>
 <body>
 <nav th:fragment="adminTopBar" class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -20,9 +20,17 @@
       <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
              aria-label="Search" aria-describedby="basic-addon2">
       <div class="input-group-append">
-        <button class="btn btn-primary" type="button">
+
+        <!--        원래코드-->
+        <!--        <button class="btn btn-primary" type="button">-->
+        <!--          <i class="fas fa-search fa-sm"></i>-->
+        <!--        </button>-->
+
+        <!--        테스트용 코드-->
+        <a href="/" class="btn btn-primary" type="button">
           <i class="fas fa-search fa-sm"></i>
-        </button>
+        </a>
+
       </div>
     </div>
   </form>
@@ -46,9 +54,15 @@
                    placeholder="Search for..." aria-label="Search"
                    aria-describedby="basic-addon2">
             <div class="input-group-append">
-              <button class="btn btn-primary" type="button">
+              <!--        원래코드-->
+              <!--        <button class="btn btn-primary" type="button">-->
+              <!--          <i class="fas fa-search fa-sm"></i>-->
+              <!--        </button>-->
+
+              <!--        테스트용 코드-->
+              <a href="/" class="btn btn-primary" type="button">
                 <i class="fas fa-search fa-sm"></i>
-              </button>
+              </a>
             </div>
           </div>
         </form>
