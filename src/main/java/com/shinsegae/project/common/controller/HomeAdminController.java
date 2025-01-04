@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("admin")
 public class HomeAdminController {
 
-    @GetMapping("home")
+    @GetMapping("home_admin")
     public String home() {
-        return "admin/home"; // 슬래시 제거
+        return "admin/home_admin";
     }
 }
