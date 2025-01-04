@@ -2,14 +2,17 @@ package com.shinsegae.project.common.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("user")
 public class HomeController {
 
-    @GetMapping("home")
+    @GetMapping("user/home")
     public String home() {
         return "user/home";
+    }
+
+    @GetMapping("admin/home_admin")
+    public String home_admin() {
+        return "admin/home_admin";
     }
 }
