@@ -8,30 +8,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("user/member")
 public class MemberController {
 
-    // localhost:8080/member/forgot-password
     @GetMapping("login")
     public String login() {
-        System.out.println("========================================");
-        System.out.println("GET request to login received...");
-
         return "user/member/login";
     }
 
-    // localhost:8080/member/forgot-password
-    @GetMapping("forgot-password")
-    public String forgotPw() {
-        System.out.println("========================================");
-        System.out.println("GET request to find password received...");
-
-        return "user/member/forgot-password";
+    @GetMapping("find_pw")
+    public String find_pw() {
+        return "user/member/find_pw";
     }
 
-    // localhost:8080/member/register
     @GetMapping("register")
     public String register() {
-        System.out.println("========================================");
-        System.out.println("GET request to register received...");
-
         return "user/member/register";
     }
 
