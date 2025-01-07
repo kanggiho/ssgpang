@@ -1,4 +1,4 @@
-package com.shinsegae.project.common.vo;
+package com.shinsegae.project.incoming.vo;
 
 
 import lombok.AllArgsConstructor;
@@ -10,12 +10,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class InventoryVO {
-   private String code;
-   private int product_code;
+public class InputVO {
+   private int input_num;
    private String manufacturer_code;
-   private int warehouse_id;
-   private int price;
-   private int stock;
-
+   private int product_code;
+   private int warehoused_quantity;
+   private String warehoused_date;
 }

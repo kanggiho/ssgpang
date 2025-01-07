@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("user/order")
-public class OrderController {
+public class  OrderController {
 
     @GetMapping("do_outgoing")
     public String do_outgoing() {
