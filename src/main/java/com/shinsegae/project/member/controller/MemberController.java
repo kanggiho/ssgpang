@@ -28,4 +28,13 @@ public class MemberController {
         return "user/member/register";
     }
 
+    @GetMapping("update")
+    public String update() {
+        return "user/member/update";
+    }
+
+    @GetMapping("delete")
+    public String delete() {
+        return "user/member/delete";
+    }
 }
