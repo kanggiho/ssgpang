@@ -1,5 +1,4 @@
-package com.shinsegae.project.common.vo;
-
+package com.shinsegae.project.common.dataset.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,9 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class AdminVO {
-   private int id;
-   private String password;
-   private String name;
-   private String tel;
+    private int id;
+    private String password;
+    private String name;
+    private String tel;
 
 }

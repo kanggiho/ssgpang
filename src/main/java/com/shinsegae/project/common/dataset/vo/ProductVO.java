@@ -1,5 +1,4 @@
-package com.shinsegae.project.common.vo;
-
+package com.shinsegae.project.common.dataset.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,8 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ClassificationVO {
-   private String code;
-   private String item_classification;
-
+public class ProductVO {
+    private int product_code;
+    private String product_name;
 }
