@@ -1,4 +1,4 @@
-package com.shinsegae.project.common.vo;
+package com.shinsegae.project.order.vo;
 
 
 import lombok.AllArgsConstructor;
