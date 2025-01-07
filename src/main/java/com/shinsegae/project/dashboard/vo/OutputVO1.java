@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class OutputVO {
+public class OutputVO1 {
    private int product_code;
    private int warehouse_id;
    private int user_id;
@@ -20,6 +20,4 @@ public class OutputVO {
    private int unit_price;
    private int release_quantity;
    private String release_date;
-
-
 }
