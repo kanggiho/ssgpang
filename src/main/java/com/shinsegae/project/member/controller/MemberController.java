@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("user/member")
 @RequiredArgsConstructor
 public class MemberController {
-    MemberService memberService;
+
+    private final MemberService memberService;
 
     @GetMapping("login")
     public String login() {
-        System.out.println(memberService.read().get(0).getId());
+        
         return "user/member/login";
     }
 
