@@ -13,6 +13,11 @@ public class MemberController {
         return "user/member/login";
     }
 
+    @GetMapping("find_id")
+    public String find_id() {
+        return "user/member/find_id";
+    }
+
     @GetMapping("find_pw")
     public String find_pw() {
         return "user/member/find_pw";
