@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shinsegae.project.member.mapper.UserMapper">
+
+    <insert id="insertUser"
+            parameterType="userVO">
+        INSERT INTO user VALUES (null, #{id}, #{password}, #{name}, #{tel}, #{email});
+    </insert>
+
+    <!-- 회원정보수정 -->
+    <update id="updateUser"
+            parameterType="userVO">
+        UPDATE user SET name=#{name}, password=#{password}, tel=#{tel}, email=#{email} WHERE id = #{id};
+    </update>
+
+    <!-- 회원탈퇴 -->
+    <delete id="deleteUser"
+            parameterType="string">
+        DELETE FROM user WHERE id = #{id};
+    </delete>
+
+    <!-- 로그인 -->
+    <select id="selectUserById"
+            parameterType="string"
+            resultType="com.shinsegae.project.member.vo.UserVO">
+        SELECT * FROM user WHERE id = #{id};
+    </select>
+
+    <!-- id 찾기 -->
+    <select id="selectIdByUserTel"
+            parameterType="string"
+            resultType="java.lang.String">
+        SELECT id FROM user WHERE tel = #{tel};
+    </select>
+
+
+</mapper>
