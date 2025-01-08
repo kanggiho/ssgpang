@@ -34,20 +34,36 @@ var myLineChart = new Chart(ctx, {
     data: {
         labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
         datasets: [{
-            label: "Earnings",
+            label: "입고",
             lineTension: 0.3,
             backgroundColor: "rgba(78, 115, 223, 0.05)",
-            borderColor: "rgba(78, 115, 223, 1)",
+            borderColor: "rgb(97,147,255)",
             pointRadius: 3,
-            pointBackgroundColor: "rgba(78, 115, 223, 1)",
+            pointBackgroundColor: "rgb(98,131,229)",
             pointBorderColor: "rgba(78, 115, 223, 1)",
             pointHoverRadius: 3,
             pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
             pointHoverBorderColor: "rgba(78, 115, 223, 1)",
             pointHitRadius: 10,
             pointBorderWidth: 2,
-            data: [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
-        }],
+            data: [2000, 1000, 1000, 1500, 1000, 3500, 1500, 2500, 2000, 300, 2500, 4000],
+        },
+            {
+                label: "출고",
+                lineTension: 0.3,
+                backgroundColor: "rgba(231, 74, 59, 0.05)",
+                borderColor: "rgb(255,143,107)",
+                pointRadius: 3,
+                pointBackgroundColor: "rgba(231, 74, 59, 1)",
+                pointBorderColor: "rgba(231, 74, 59, 1)",
+                pointHoverRadius: 3,
+                pointHoverBackgroundColor: "rgba(231, 74, 59, 1)",
+                pointHoverBorderColor: "rgba(231, 74, 59, 1)",
+                pointHitRadius: 10,
+                pointBorderWidth: 2,
+                data: [0, 3000, 400, 3000, 2000, 180, 2000, 230, 1800, 2800, 220, 3500],
+            }
+        ],
     },
     options: {
         maintainAspectRatio: false,
@@ -69,16 +85,19 @@ var myLineChart = new Chart(ctx, {
                     drawBorder: false
                 },
                 ticks: {
-                    maxTicksLimit: 7
+                    maxTicksLimit: 12
                 }
             }],
             yAxes: [{
                 ticks: {
+                    beginAtZero: true, // Y축 0부터 시작
+                    stepSize: 500, // Y축 1000 단위
+                    max: 4000, // Y축 최대값
                     maxTicksLimit: 5,
                     padding: 10,
                     // Include a dollar sign in the ticks
                     callback: function(value, index, values) {
-                        return '$' + number_format(value);
+                        return number_format(value)+'개';
                     }
                 },
                 gridLines: {
@@ -110,7 +129,7 @@ var myLineChart = new Chart(ctx, {
             callbacks: {
                 label: function(tooltipItem, chart) {
                     var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-                    return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+                    return datasetLabel + ": " + number_format(tooltipItem.yLabel) +'개';
                 }
             }
         }
