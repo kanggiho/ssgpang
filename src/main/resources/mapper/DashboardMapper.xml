@@ -2,8 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shinsegae.project.dashboard.mapper.DashboardMapper">
-    <select id="selectOutput1All" resultType="com.shinsegae.project.dashboard.vo.OutputVO1">
-        select *
-        from output
+    <select id="selectTotalInventory" resultType="java.lang.Integer">
+        SELECT SUM(stock) FROM inventory
+    </select>
+    <select id="selectInputQuantity" resultType="java.lang.Integer">
+        SELECT SUM(warehoused_quantity)
+        FROM input
+        WHERE warehoused_date = CURRENT_DATE()
+    </select>
+    <select id="selectOutputQuantity" resultType="java.lang.Integer">
+        SELECT SUM(release_quantity)
+        FROM output
+        WHERE release_date = CURRENT_DATE()
+    </select>
+    <select id="selectOutputByStatus" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM output
+        WHERE status = '대기중'
+        AND release_date = CURRENT_DATE()
     </select>
 </mapper>

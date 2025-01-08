@@ -7,5 +7,8 @@ import java.util.List;
 
 @Mapper
 public interface DashboardMapper {
-    List<OutputVO1> selectOutput1All();
+    int selectTotalInventory();
+    int selectInputQuantity();
+    Integer selectOutputQuantity();
+    Integer selectOutputByStatus();
 }
