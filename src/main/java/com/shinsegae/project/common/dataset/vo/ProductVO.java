@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class ProductVO {
-    private int product_Code;
-    private String product_Name;
+    private int product_code;
+    private String product_name;
 }
