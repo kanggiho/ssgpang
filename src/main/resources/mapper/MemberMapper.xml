@@ -3,8 +3,38 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.shinsegae.project.member.mapper.MemberMapper">
-    <insert id="insertMember"></insert>
-    <update id="updateMember"></update>
+
+    <!-- 회원가입 -->
+    <insert id="insertMember"
+            parameterType="memberVO">
+
+    </insert>
+
+    <!-- 회원정보수정 -->
+    <update id="updateMember"
+            parameterType="memberVO">
+
+    </update>
+
+    <!-- 회원탈퇴 -->
+    <delete id="deleteMember"
+            parameterType="string">
+
+    </delete>
+
+    <!-- 로그인 -->
+    <select id="selectMemberById"
+            parameterType="string"
+            resultType="com.shinsegae.project.member.vo.MemberVO">
+
+    </select>
+
+    <!-- id 찾기 -->
+    <select id="selectIdByUserTel"
+            parameterType="string"
+            resultType="java.lang.String">
+
+    </select>
 
 
 </mapper>
