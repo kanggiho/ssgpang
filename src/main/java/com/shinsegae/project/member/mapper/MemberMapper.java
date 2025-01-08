@@ -10,4 +10,7 @@ import java.util.List;
 public interface MemberMapper {
     int insertMember(MemberVO memberVO);
     int updateMember(MemberVO memberVO);
+    int deleteMember(String id);
+    MemberVO selectMemberById(String id);
+    String selectIdByUserTel(String tel);
 }
