@@ -13,8 +13,27 @@ public class DashboardService {
 
    private final DashboardMapper dashboardMapper;
 
-    public List<OutputVO1> read() {
-        return dashboardMapper.selectOutput1All();
+    public int selectTotalInventory(){
+        return dashboardMapper.selectTotalInventory();
     }
-
+    public int selectInputQuantity(){
+        return dashboardMapper.selectInputQuantity();
+    }
+    public Integer selectOutputQuantity(){
+        Integer result = dashboardMapper.selectOutputQuantity();
+        if (result == null) {
+            return 0;
+        } else {
+            return result;
+        }
+    }
+    public Integer selectOutputByStatus(){
+       return dashboardMapper.selectOutputByStatus();
+//        Integer result = dashboardMapper.selectOutputByStatus();
+//        if (result == null) {
+//            return 0;
+//        } else {
+//            return result;
+//        }
+    }
 }
