@@ -1,4 +1,5 @@
-package com.shinsegae.project.common.dataset.vo;
+package com.shinsegae.project.map.vo;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
