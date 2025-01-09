@@ -1,6 +1,7 @@
 package com.shinsegae.project.dashboard.mapper;
 
-import com.shinsegae.project.dashboard.vo.AreaChartDTO;
+import com.shinsegae.project.dashboard.vo.AreaChartInputDTO;
+import com.shinsegae.project.dashboard.vo.AreaChartOutputDTO;
 import com.shinsegae.project.dashboard.vo.BarChartDTO;
 import com.shinsegae.project.dashboard.vo.PieChartDTO;
 import org.apache.ibatis.annotations.Mapper;
@@ -19,10 +20,10 @@ public interface DashboardMapper {
     List<PieChartDTO> selectPieChartData();
 
     //Area chart 입고량
-    List<AreaChartDTO> selectAreaChartInputData();
+    List<AreaChartInputDTO> selectAreaChartInputData();
 
     //Area chart 출고량
-    List<AreaChartDTO> selectAreaChartOutputData();
+    List<AreaChartOutputDTO> selectAreaChartOutputData();
 
     //Bar chart
     List<BarChartDTO> selectBarChartData();

@@ -33,7 +33,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 const labels_Warehouse = [];
 const data_quantity = [];
 
-axios.get('/admin/home_admin/chart1')
+axios.get('/admin/home_admin/chart3')
     .then(function (response) {
       const barChartData = response.data;
       // for문을 사용해 데이터 넣기
@@ -69,7 +69,7 @@ axios.get('/admin/home_admin/chart1')
             }
           },
           scales: {
-            x: [{
+            x: {
               time: {
                 unit: 'month'
               },
@@ -79,14 +79,14 @@ axios.get('/admin/home_admin/chart1')
               },
               ticks: {
                 maxTicksLimit: labels_Warehouse.length,
-                autoSkip: false
+                autoSkip: true
               }
-            }],
-            y: [{
+            },
+            y: {
+              beginAtZero: true, // Y축이 0부터 시작
+              max: 300, // Y축 최대값
               ticks: {
-                beginAtZero: true, // 0부터 시작
-                max: 300, // Y축 최대값
-                stepSize: 1, // Y축 간격
+                stepSize: 10, // Y축 간격
                 callback: function(value) {
                   return number_format(value); // 값 포맷팅
                 }
@@ -98,7 +98,7 @@ axios.get('/admin/home_admin/chart1')
                 borderDash: [2],
                 zeroLineBorderDash: [2]
               }
-            }],
+            },
           },
           legend: {
             display: false

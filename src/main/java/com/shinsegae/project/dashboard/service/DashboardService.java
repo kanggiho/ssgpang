@@ -1,6 +1,8 @@
 package com.shinsegae.project.dashboard.service;
 
 import com.shinsegae.project.dashboard.mapper.DashboardMapper;
+import com.shinsegae.project.dashboard.vo.AreaChartInputDTO;
+import com.shinsegae.project.dashboard.vo.AreaChartOutputDTO;
 import com.shinsegae.project.dashboard.vo.BarChartDTO;
 import com.shinsegae.project.dashboard.vo.PieChartDTO;
 import lombok.RequiredArgsConstructor;
@@ -43,7 +45,18 @@ public class DashboardService {
         return dashboardMapper.selectPieChartData();
     }
 
-    //bar chart
+    //Area chart 입고량
+    public List<AreaChartInputDTO> selectAreaChartInputData(){
+        return dashboardMapper.selectAreaChartInputData();
+
+    }
+
+    //Area chart 출고량
+    public List<AreaChartOutputDTO> selectAreaChartOutputData(){
+        return dashboardMapper.selectAreaChartOutputData();
+    }
+
+    //Bar chart
     public List<BarChartDTO> selectBarChartData(){
         return dashboardMapper.selectBarChartData();
     }

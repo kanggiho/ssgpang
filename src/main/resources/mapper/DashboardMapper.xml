@@ -5,50 +5,53 @@
     <select id="selectTotalInventory" resultType="java.lang.Integer">
         SELECT SUM(stock) FROM inventory
     </select>
+
     <select id="selectInputQuantity" resultType="java.lang.Integer">
         SELECT SUM(warehoused_quantity)
         FROM input
         WHERE warehoused_date = CURRENT_DATE()
     </select>
+
     <select id="selectOutputQuantity" resultType="java.lang.Integer">
         SELECT SUM(release_quantity)
         FROM output
         WHERE release_date = CURRENT_DATE()
     </select>
+
     <select id="selectOutputByStatus" resultType="java.lang.Integer">
         SELECT COUNT(*)
         FROM output
         WHERE status = '대기중'
-          AND release_date = CURRENT_DATE()
+        AND release_date = CURRENT_DATE()
     </select>
 
     <select id="selectPieChartData" resultType="com.shinsegae.project.dashboard.vo.PieChartDTO">
         SELECT c.item_classification, i.stock
         FROM classification c
-                 JOIN inventory i
-                      ON c.code = i.code
+        JOIN inventory i
+        ON c.code = i.code
     </select>
 
-    <select id="selectAreaChartInputData" resultType="com.shinsegae.project.dashboard.vo.AreaChartDTO">
-        SELECT DATE_FORMAT(warehoused_date, '%m') AS warehoused_month, SUM(warehoused_quantity)
+    <select id="selectAreaChartInputData" resultType="com.shinsegae.project.dashboard.vo.AreaChartInputDTO">
+        SELECT DATE_FORMAT(warehoused_date, '%m') AS warehousedMonth, SUM(warehoused_quantity) AS warehousedQuantity
         FROM input
-        GROUP BY DATE_FORMAT(warehoused_date, '%m')
-        ORDER BY warehoused_month;
+        GROUP BY warehousedMonth
+        ORDER BY warehousedMonth
     </select>
 
-    <select id="selectAreaChartOutputData" resultType="com.shinsegae.project.dashboard.vo.AreaChartDTO">
-        SELECT DATE_FORMAT(release_date, '%m') as release_month, SUM(release_quantity)
+    <select id="selectAreaChartOutputData" resultType="com.shinsegae.project.dashboard.vo.AreaChartOutputDTO">
+        SELECT DATE_FORMAT(release_date, '%m') AS releaseMonth, SUM(release_quantity) AS releaseQuantity
         FROM output
         WHERE release_date IS NOT NULL
-        GROUP BY DATE_FORMAT(release_date, '%m')
-        ORDER BY release_month;
+        GROUP BY releaseMonth
+        ORDER BY releaseMonth
     </select>
 
     <select id="selectBarChartData" resultType="com.shinsegae.project.dashboard.vo.BarChartDTO">
         SELECT sum(o.release_quantity) AS releaseQuantity, w.warehouse_name
         FROM output o
-                 JOIN warehouse w
-                      ON o.warehouse_id = w.warehouse_id
-        GROUP BY warehouse_name;
+        JOIN warehouse w
+        ON o.warehouse_id = w.warehouse_id
+        GROUP BY warehouse_name
     </select>
 </mapper>
