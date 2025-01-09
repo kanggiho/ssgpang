@@ -19,6 +19,36 @@
         SELECT COUNT(*)
         FROM output
         WHERE status = '대기중'
-        AND release_date = CURRENT_DATE()
+          AND release_date = CURRENT_DATE()
+    </select>
+
+    <select id="selectPieChartData" resultType="com.shinsegae.project.dashboard.vo.PieChartDTO">
+        SELECT c.item_classification, i.stock
+        FROM classification c
+                 JOIN inventory i
+                      ON c.code = i.code
+    </select>
+
+    <select id="selectAreaChartInputData" resultType="com.shinsegae.project.dashboard.vo.AreaChartDTO">
+        SELECT DATE_FORMAT(warehoused_date, '%m') AS warehoused_month, SUM(warehoused_quantity)
+        FROM input
+        GROUP BY DATE_FORMAT(warehoused_date, '%m')
+        ORDER BY warehoused_month;
+    </select>
+
+    <select id="selectAreaChartOutputData" resultType="com.shinsegae.project.dashboard.vo.AreaChartDTO">
+        SELECT DATE_FORMAT(release_date, '%m') as release_month, SUM(release_quantity)
+        FROM output
+        WHERE release_date IS NOT NULL
+        GROUP BY DATE_FORMAT(release_date, '%m')
+        ORDER BY release_month;
+    </select>
+
+    <select id="selectBarChartData" resultType="com.shinsegae.project.dashboard.vo.BarChartDTO">
+        SELECT sum(o.release_quantity) AS releaseQuantity, w.warehouse_name
+        FROM output o
+                 JOIN warehouse w
+                      ON o.warehouse_id = w.warehouse_id
+        GROUP BY warehouse_name;
     </select>
 </mapper>
