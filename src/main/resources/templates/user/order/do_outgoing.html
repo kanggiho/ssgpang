@@ -16,6 +16,23 @@
     <link href="/css/sb-admin-2.css" rel="stylesheet">
     <link rel="icon" href="/img/favicon/starfavicon.png">
 
+    <style>
+        .table-responsive {
+            max-height: 495px; /* 테이블 높이 제한 */
+            overflow-y: auto;  /* 스크롤 추가 */
+        }
+
+        .table td, .table th {
+            padding: 5px 7px; /* 행 패딩 조절 */
+            text-align: center; /* 텍스트 중앙 정렬 */
+            vertical-align: middle; /* 세로 중앙 정렬 */
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: #f5f5f5; /* 행에 마우스 올릴 때 색 변경 */
+        }
+    </style>
+
 </head>
 
 <body id="page-top">
@@ -30,40 +47,36 @@
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <h1 class="h3 mb-4 text-gray-800">발주내역 확인</h1>
+                <h1 class="h3 mb-4 text-gray-800">발주하기</h1>
 
                 <div class="row">
                     <!-- Table Column -->
                     <div class="col-lg-8">
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">발주내역</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">재고</h6>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
+                                    <table class="table table-bordered text-center table-hover" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                         <tr>
+                                            <th>품목구분</th>
                                             <th>자재명</th>
-                                            <th>아이디</th>
+                                            <th>창고이름</th>
+                                            <th>제조업체명</th>
                                             <th>단가</th>
-                                            <th>발주량</th>
-                                            <th>발주날짜</th>
-                                            <th>승인번호</th>
-                                            <th>승인자이름</th>
-                                            <th>승인여부</th>
+                                            <th>재고수량</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr th:each="row : ${tableData}" th:data-id="${row.id}" onclick="showDetails(this)">
+                                        <tr th:each="row : ${tableDataConfirm}" th:data-id="${row.productName}" onclick="showDetails(this)">
+                                            <td th:text="${row.itemClassification}"></td>
                                             <td th:text="${row.productName}"></td>
-                                            <td th:text="${row.id}"></td>
-                                            <td th:text="${row.unitPrice}"></td>
-                                            <td th:text="${row.releaseQuantity}"></td>
-                                            <td th:text="${row.releaseDate}"></td>
-                                            <td th:text="${row.confirmNum}"></td>
-                                            <td th:text="${row.confirmId}"></td>
-                                            <td th:text="${row.status}"></td>
+                                            <td th:text="${row.warehouseName}"></td>
+                                            <td th:text="${row.manufacturerName}"></td>
+                                            <td th:text="${row.price}"></td>
+                                            <td th:text="${row.stock}"></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -80,13 +93,34 @@
                             </div>
                             <div class="card-body">
                                 <div id="details-container">
+                                    <p><strong>품목구분:</strong> <span id="detail-itemClassification"></span></p>
                                     <p><strong>자재명:</strong> <span id="detail-productName"></span></p>
-                                    <p><strong>단가:</strong> <span id="detail-unitPrice"></span></p>
-                                    <p><strong>발주량:</strong> <span id="detail-releaseQuantity"></span></p>
-                                    <p><strong>발주날짜:</strong> <span id="detail-releaseDate"></span></p>
-                                    <p><strong>승인번호:</strong> <span id="detail-confirmNum"></span></p>
-                                    <p><strong>승인자이름:</strong> <span id="detail-confirmId"></span></p>
-                                    <p><strong>승인여부:</strong> <span id="detail-status"></span></p>
+                                    <p><strong>창고이름:</strong> <span id="detail-warehouseName"></span></p>
+                                    <p><strong>제조업체명:</strong> <span id="detail-manufacturerName"></span></p>
+                                    <p><strong>단가:</strong> <span id="detail-price"></span></p>
+                                    <p><strong>재고수량:</strong> <span id="detail-stock"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">신청</h6>
+                            </div>
+                            <div class="card-body">
+                                <div id="details-container2">
+
+                                    <!-- Form Group 예시 -->
+                                    <div class="form-group" style="display: flex; align-items: center; justify-content: space-between;">
+                                        <label for="outputTextInput">신청 개수</label>
+                                        <input type="number" class="form-control" id="outputTextInput" value="0" min="0"
+                                               placeholder="수량을 입력해주세요." style="width: 200px">
+                                    </div>
+                                    <p style="font-size: 15pt"><strong>총 가격 : </strong><span id="detail-total">0</span></p>
+                                    <a id="" class="btn btn-primary" type="button">
+                                        <i class="fas fa-inbox fa-sm">
+                                            발주하기
+                                        </i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -106,25 +140,51 @@
 <script>
     function showDetails(row) {
         const data = {
-            productName: row.children[0].innerText,
-            id: row.children[1].innerText,
-            unitPrice: row.children[2].innerText,
-            releaseQuantity: row.children[3].innerText,
-            releaseDate: row.children[4].innerText,
-            confirmNum: row.children[5].innerText,
-            confirmId: row.children[6].innerText,
-            status: row.children[7].innerText,
+            itemClassification: row.children[0].innerText,
+            productName: row.children[1].innerText,
+            warehouseName: row.children[2].innerText,
+            manufacturerName: row.children[3].innerText,
+            price: row.children[4].innerText,
+            stock: row.children[5].innerText
         };
 
+        const input = document.getElementById('outputTextInput');
+
+        // 기존 이벤트 리스너 제거
+        const newInput = input.cloneNode(true); // 동일한 노드 복제
+        input.parentNode.replaceChild(newInput, input); // 기존 노드 교체
+
+        // 세부 정보 업데이트
+        document.getElementById('detail-itemClassification').innerText = data.itemClassification;
         document.getElementById('detail-productName').innerText = data.productName;
-        document.getElementById('detail-id').innerText = data.id;
-        document.getElementById('detail-unitPrice').innerText = data.unitPrice;
-        document.getElementById('detail-releaseQuantity').innerText = data.releaseQuantity;
-        document.getElementById('detail-releaseDate').innerText = data.releaseDate;
-        document.getElementById('detail-confirmNum').innerText = data.confirmNum;
-        document.getElementById('detail-confirmId').innerText = data.approverName;
-        document.getElementById('detail-status').innerText = data.status;
+        document.getElementById('detail-warehouseName').innerText = data.warehouseName;
+        document.getElementById('detail-manufacturerName').innerText = data.manufacturerName;
+        document.getElementById('detail-price').innerText = data.price;
+        document.getElementById('detail-stock').innerText = data.stock;
+
+        // 새로 추가된 input에 이벤트 리스너 추가
+        newInput.addEventListener('input', function () {
+            let value = parseInt(newInput.value, 10) || 0; // 값이 비어 있으면 0으로 처리
+
+            // 값이 0보다 작으면 0으로 제한
+            if (value < 0) {
+                value = 0;
+            }
+
+            // 값이 재고량(data.stock)보다 크면 최대값으로 제한
+            if (value > data.stock) {
+                value = data.stock;
+            }
+
+            // 변경된 값을 input.value에 반영
+            newInput.value = value;
+
+            // 총 가격 업데이트
+            document.getElementById('detail-total').innerText = (parseInt(data.price) * value).toString();
+        });
     }
+
+
 </script>
 
 </body>

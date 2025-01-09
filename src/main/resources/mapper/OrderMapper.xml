@@ -25,4 +25,21 @@
             user ON output.user_id = user.uid
 
     </select>
+
+    <select id="selectOrderInventoryManagementAll"
+            resultType="com.shinsegae.project.order.vo.OrderInventoryManagementDTO">
+        SELECT c.item_classification,
+               p.product_name,
+               w.warehouse_name,
+               m.manufacturer_name,
+               i.price,
+               i.stock
+        FROM inventory i
+                 JOIN product p ON p.product_code = i.product_code
+                 JOIN manufacture m ON i.manufacturer_code = m.manufacturer_code
+                 JOIN warehouse w ON i.warehouse_id = w.warehouse_id
+                 JOIN classification c ON i.code = c.code;
+
+
+    </select>
 </mapper>

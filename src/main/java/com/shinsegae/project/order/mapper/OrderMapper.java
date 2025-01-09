@@ -1,5 +1,6 @@
 package com.shinsegae.project.order.mapper;
 
+import com.shinsegae.project.order.vo.OrderInventoryManagementDTO;
 import com.shinsegae.project.order.vo.OrderManagementDTO;
 import com.shinsegae.project.order.vo.OutputVO;
 import org.apache.ibatis.annotations.Mapper;
@@ -8,8 +9,12 @@ import java.util.List;
 
 @Mapper
 public interface OrderMapper {
+
+    // 발주하기
+    List<OrderInventoryManagementDTO> selectOrderInventoryManagementAll();
+
+
+    // 발주내역확인
     List<OutputVO> selectOutputAll();
-
-
     List<OrderManagementDTO> selectOrderManagementAll();
 }
