@@ -5,6 +5,7 @@ import com.shinsegae.project.member.vo.MemberVO;
 import com.shinsegae.project.member.vo.UserVO;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -75,10 +76,27 @@ public class MemberController {
         return "user/member/find_pw";
     }
 
+    @GetMapping("info")
+    public String info(String id, Model model) {
+        UserVO userVO = userService.info(id);
+        System.out.println("user id >> " + id);
+        model.addAttribute("userVO", userVO);
+        return "user/member/info";
+    }
 
     @GetMapping("update")
     public String update() {
         return "user/member/update";
+    }
+
+    @PostMapping("update")
+    public String update(UserVO userVO) {
+        int result = userService.updateUser(userVO);
+        if (result > 0) {
+            return "user/member/update";
+        } else {
+            return "/index";
+        }
     }
 
     @GetMapping("delete")

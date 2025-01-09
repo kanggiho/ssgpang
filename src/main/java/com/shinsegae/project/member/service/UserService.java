@@ -1,6 +1,7 @@
 package com.shinsegae.project.member.service;
 
 import com.shinsegae.project.member.mapper.UserMapper;
+import com.shinsegae.project.member.vo.MemberVO;
 import com.shinsegae.project.member.vo.UserVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -36,9 +37,14 @@ public class UserService {
         }
     }
 
+    public UserVO info(String id) {
+        return userMapper.selectUserById(id);
+    }
+
     public int updateUser(UserVO userVO) {
         return userMapper.updateUser(userVO);
     };
+
     public int deleteUser(String id){
         return userMapper.deleteUser(id);
     };
