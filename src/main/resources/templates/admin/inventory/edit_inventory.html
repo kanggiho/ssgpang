@@ -47,12 +47,39 @@
                 <div class="row">
                     <!-- Content Column -->
                     <div class="col-lg-6 mb-4">
+                        <form th:action="@{/inventory/add}" method="post">
+                            <div class="form-group">
+                                <label for="itemClassification">품목구분</label>
+                                <input type="text" id="itemClassification" name="itemClassification" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="productName">자재명</label>
+                                <input type="text" id="productName" name="productName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="warehouseName">창고이름</label>
+                                <input type="text" id="warehouseName" name="warehouseName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="manufacturerName">제조업체명</label>
+                                <input type="text" id="manufacturerName" name="manufacturerName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="price">단가</label>
+                                <input type="number" id="price" name="price" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="stock">재고수량</label>
+                                <input type="number" id="stock" name="stock" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">재고 추가</button>
+                        </form>
                         <!-- ==============================내용이 들어가는 곳입니다.================================ -->
                         <!-- =================================================================================== -->
                         <!-- =================================================================================== -->
                         <!-- =================================================================================== -->
 
-                        <h1>재고수정 화면</h1>
+
 
                         <!-- =================================================================================== -->
                         <!-- =================================================================================== -->

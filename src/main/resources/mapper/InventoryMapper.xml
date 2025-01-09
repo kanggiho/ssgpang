@@ -52,12 +52,14 @@
     <insert id="insertInventory"
             parameterType="com.shinsegae.project.inventory.vo.InventoryManagementDTO">
         <!-- SQL문 추후 작성 -->
+        INSERT INTO inventory (item_classification, product_name, warehouse_name, manufacturer_name, price, stock)
+        VALUES (#{itemClassification}, #{productName}, #{warehouseName}, #{manufacturerName}, #{price}, #{stock})
     </insert>
 
     <!-- 재고 삭제 기능 -->
     <delete id="deleteInventory"
             parameterType="int">
-        <!-- SQL문 추후 작성 -->
+        DELETE FROM inventory WHERE product_code = #{product_code}
     </delete>
 
 </mapper>
