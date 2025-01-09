@@ -6,100 +6,143 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
     <title>SSGPANG Fresh</title>
 
     <!-- Custom fonts for this template-->
     <link href="/css/all.css" rel="stylesheet" type="text/css">
-    <link
-            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-            rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.css" rel="stylesheet">
     <link rel="icon" href="/img/favicon/starfavicon.png">
 
+    <style>
+        .table-responsive {
+            max-height: 495px; /* 테이블 높이 제한 */
+            overflow-y: auto;  /* 스크롤 추가 */
+        }
+
+        .table td, .table th {
+            padding: 5px 7px; /* 행 패딩 조절 */
+            text-align: center; /* 텍스트 중앙 정렬 */
+            vertical-align: middle; /* 세로 중앙 정렬 */
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: #f5f5f5; /* 행에 마우스 올릴 때 색 변경 */
+        }
+    </style>
+
 </head>
 
 <body id="page-top">
 
-<!-- Page Wrapper -->
 <div id="wrapper">
-
-    <!-- Sidebar -->
     <div th:replace="user/fragments/sidebar :: userSideBar"></div>
 
-    <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
-
-        <!-- Main Content -->
         <div id="content">
-
-            <!-- Topbar -->
             <div th:replace="user/fragments/topbar :: userTopBar"></div>
 
-            <!-- Begin Page Content -->
             <div class="container-fluid">
 
-                <!-- Content Row -->
+                <!-- Page Heading -->
+                <h1 class="h3 mb-4 text-gray-800">발주내역 확인</h1>
+
                 <div class="row">
-                    <!-- Content Column -->
-                    <div class="col-lg-6 mb-4">
-                        <!-- ==============================내용이 들어가는 곳입니다.================================ -->
-                        <!-- =================================================================================== -->
-                        <!-- =================================================================================== -->
-                        <!-- =================================================================================== -->
+                    <!-- Table Column -->
+                    <div class="col-lg-8">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">발주내역</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered text-center table-hover" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                        <tr>
+                                            <th>자재명</th>
+                                            <th>아이디</th>
+                                            <th>단가</th>
+                                            <th>발주량</th>
+                                            <th>발주날짜</th>
+                                            <th>승인번호</th>
+                                            <th>승인자이름</th>
+                                            <th>승인여부</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="row : ${tableData}" th:data-id="${row.id}" onclick="showDetails(this)">
+                                            <td th:text="${row.productName}"></td>
+                                            <td th:text="${row.id}"></td>
+                                            <td th:text="${row.unitPrice}"></td>
+                                            <td th:text="${row.releaseQuantity}"></td>
+                                            <td th:text="${row.releaseDate}"></td>
+                                            <td th:text="${row.confirmNum}"></td>
+                                            <td th:text="${row.confirmId}"></td>
+                                            <td th:text="${row.status}"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                        <h1>발주내역확인 화면</h1>
-
-                        <!-- =================================================================================== -->
-                        <!-- =================================================================================== -->
-                        <!-- =================================================================================== -->
-                        <!-- ==============================내용이 들어가는 곳입니다.================================ -->
+                    <!-- Details Column -->
+                    <div class="col-lg-4">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">정보</h6>
+                            </div>
+                            <div class="card-body">
+                                <div id="details-container">
+                                    <p><strong>자재명:</strong> <span id="detail-productName"></span></p>
+                                    <p><strong>단가:</strong> <span id="detail-unitPrice"></span></p>
+                                    <p><strong>발주량:</strong> <span id="detail-releaseQuantity"></span></p>
+                                    <p><strong>발주날짜:</strong> <span id="detail-releaseDate"></span></p>
+                                    <p><strong>승인번호:</strong> <span id="detail-confirmNum"></span></p>
+                                    <p><strong>승인자이름:</strong> <span id="detail-confirmId"></span></p>
+                                    <p><strong>승인여부:</strong> <span id="detail-status"></span></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
             </div>
-            <!-- /.container-fluid -->
-
         </div>
-        <!-- End of Main Content -->
 
-        <!-- Footer -->
         <div th:replace="user/fragments/footer :: userFooter"></div>
-
     </div>
-    <!-- End of Content Wrapper -->
-
 </div>
-<!-- End of Page Wrapper -->
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div th:replace="user/fragments/modal :: userModal"></div>
-
-<!-- Bootstrap core JavaScript-->
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript-->
 <script src="/js/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
 <script src="/js/sb-admin-2.min.js"></script>
+<script>
+    function showDetails(row) {
+        const data = {
+            productName: row.children[0].innerText,
+            id: row.children[1].innerText,
+            unitPrice: row.children[2].innerText,
+            releaseQuantity: row.children[3].innerText,
+            releaseDate: row.children[4].innerText,
+            confirmNum: row.children[5].innerText,
+            confirmId: row.children[6].innerText,
+            status: row.children[7].innerText,
+        };
 
-<!-- Page level plugins -->
-<script src="/js/Chart.min.js"></script>
-
-<!-- Page level custom scripts -->
-<script src="/js/demo/chart-area-demo.js"></script>
-<script src="/js/demo/chart-pie-demo.js"></script>
+        document.getElementById('detail-productName').innerText = data.productName;
+        document.getElementById('detail-id').innerText = data.id;
+        document.getElementById('detail-unitPrice').innerText = data.unitPrice;
+        document.getElementById('detail-releaseQuantity').innerText = data.releaseQuantity;
+        document.getElementById('detail-releaseDate').innerText = data.releaseDate;
+        document.getElementById('detail-confirmNum').innerText = data.confirmNum;
+        document.getElementById('detail-confirmId').innerText = data.approverName;
+        document.getElementById('detail-status').innerText = data.status;
+    }
+</script>
 
 </body>
 
