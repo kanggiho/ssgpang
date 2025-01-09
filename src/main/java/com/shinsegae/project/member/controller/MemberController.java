@@ -7,10 +7,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("user/member")
@@ -24,10 +21,12 @@ public class MemberController {
         return "user/member/login";
     }
 
-    @PostMapping("login") //contextpath/member/login
+    @PostMapping("login")
     public String login(UserVO userVO, HttpSession session, Model model) {
         System.out.println("UserVO" + userVO);
+        System.out.println("session" + session);
         boolean result = userService.login(userVO); //싱글톤 객체 찾아서 메서드 호출해야할 것 같음
+        System.out.println("============= result" + result + " =================");
         if (result) {
             session.setAttribute("id", userVO.getId());
         } else {
@@ -37,11 +36,19 @@ public class MemberController {
         return "/user/home";
     }
 
+    @GetMapping("checkId")
+    @ResponseBody
+    public boolean checkId(@RequestParam String id){
+        System.out.println("user id >> " + id);
+        boolean result = userService.checkId(id);
+        return result;
+    }
+
     @GetMapping("logout")
     public String logout(HttpSession session) {
         session.removeAttribute("id");
-        System.out.println("logout");
-        return "/index";
+        System.out.println("logout >> " + session.getAttribute("id"));
+        return "/user/member/login";
     }
 
     @GetMapping("register")

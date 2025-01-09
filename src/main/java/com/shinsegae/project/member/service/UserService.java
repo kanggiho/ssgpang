@@ -23,8 +23,10 @@ public class UserService {
 
     public boolean login(UserVO userVO) {
         UserVO userVO1 = userMapper.selectUserById(userVO.getId());
+        System.out.println("========= 서비스 단 UserVO " + userVO1 + " =============");
         if (userVO1 != null) {
             if (passwordEncoder.matches(userVO.getPassword(), userVO1.getPassword())) {
+                System.out.println("1111111111111111");
                 return true;
             } else {
                 return false;
@@ -46,6 +48,7 @@ public class UserService {
     public String selectIdByUserTel(String tel){
         return userMapper.selectIdByUserTel(tel);
     };
+
     public boolean checkId(String id) {
         return userMapper.selectUserById(id) == null;
     }
