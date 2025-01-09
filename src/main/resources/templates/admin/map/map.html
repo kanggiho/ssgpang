@@ -67,7 +67,7 @@
 
                             var mapContainer = document.getElementById('map'),
                                 mapOption = {
-                                    center: new kakao.maps.LatLng(37.479397,127.039076), // 초기 지도 중심
+                                    center: new kakao.maps.LatLng(37.479397, 127.039076), // 초기 지도 중심
                                     level: 2, // 확대 레벨
                                     mapTypeId: kakao.maps.MapTypeId.ROADMAP // 지도 타입
                                 };
@@ -81,21 +81,75 @@
 
                             var markers = [];
 
-                            // 마커 생성
+                            // 커스텀 오버레이 생성 함수
+                            function createCustomOverlay(marker, data) {
+                                var overlayContent = document.createElement('div');
+                                overlayContent.className = 'custom-overlay';
+                                overlayContent.style.cssText = 'background: rgba(255, 255, 255, 0.9);' +
+                                    ' padding: 10px; border: 2px solid #007bff;' +
+                                    ' border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);' +
+                                    ' transform: translateY(-110%);' +
+                                    ' font-size: 14px; color: #333;';
+                                overlayContent.innerHTML = `<strong>${data.name}</strong>`;
+
+                                var customOverlay = new kakao.maps.CustomOverlay({
+                                    content: overlayContent,
+                                    position: marker.getPosition(),
+                                    yAnchor: 1,
+                                    map: null
+                                });
+
+                                return customOverlay;
+                            }
+
+                            var imageSrc = "/img/logo/MapMarker.png", // 마커이미지의 주소입니다
+                                imageSize = new kakao.maps.Size(40, 40); // 마커이미지의 크기입니다
+
+                            var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize)
+
+                            // 마커 생성 및 이벤트 추가
                             warehouseData.forEach(function (data) {
                                 console.log("Marker Data:", data); // 마커 데이터 디버깅
 
                                 var marker = new kakao.maps.Marker({
                                     position: new kakao.maps.LatLng(data.latitude, data.longitude),
-                                    draggable : true,
+                                    image: markerImage,
                                     map: map
                                 });
 
                                 // 마커에 이름 추가
                                 marker.name = data.name;
 
+                                // 커스텀 오버레이 생성
+                                var customOverlay = createCustomOverlay(marker, data);
+
+                                // 마커 클릭 이벤트
+                                kakao.maps.event.addListener(marker, 'click', function (event) {
+                                    // 모든 마커의 커스텀 오버레이 닫기
+                                    markers.forEach(function (m) {
+                                        if (m.customOverlay) {
+                                            m.customOverlay.setMap(null);
+                                        }
+                                    });
+
+                                    // 현재 마커의 커스텀 오버레이 열기
+                                    customOverlay.setMap(map);
+
+                                    // 현재 마커의 커스텀 오버레이를 저장
+                                    marker.customOverlay = customOverlay;
+                                });
+
                                 // 배열에 마커 저장
-                                markers.push(marker);
+                                markers.push({marker: marker, customOverlay: customOverlay});
+                            });
+
+                            // 지도 클릭 이벤트 추가 - 오버레이 숨기기
+                            kakao.maps.event.addListener(map, 'click', function () {
+                                markers.forEach(function (m) {
+                                    if (m.customOverlay) {
+                                        m.customOverlay.setMap(null);
+                                    }
+                                });
                             });
 
                             // 드롭다운 선택 시 지도 이동
@@ -106,16 +160,26 @@
                                 console.log("Selected Name:", selectedName); // 선택된 이름 확인
 
                                 // 선택된 이름과 일치하는 마커 찾기
-                                var selectedMarker = markers.find(function (marker) {
-                                    return marker.name === selectedName;
+                                var selectedMarker = markers.find(function (m) {
+                                    return m.marker.name === selectedName;
                                 });
 
                                 if (selectedMarker) {
                                     console.log("Selected Marker:", selectedMarker); // 선택된 마커 데이터 확인
 
                                     // 마커의 위치로 지도 중심 이동
-                                    var moveLatLng = selectedMarker.getPosition();
+                                    var moveLatLng = selectedMarker.marker.getPosition();
                                     map.setCenter(moveLatLng);
+
+                                    // 모든 오버레이 닫기
+                                    markers.forEach(function (m) {
+                                        if (m.customOverlay) {
+                                            m.customOverlay.setMap(null);
+                                        }
+                                    });
+
+                                    // 선택된 마커의 오버레이 열기
+                                    selectedMarker.customOverlay.setMap(map);
                                 } else {
                                     console.log("No matching marker found.");
                                 }
