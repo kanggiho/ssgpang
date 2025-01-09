@@ -3,10 +3,13 @@ package com.shinsegae.project.order.controller;
 import com.shinsegae.project.order.service.OrderService;
 import com.shinsegae.project.order.vo.OrderInventoryManagementDTO;
 import com.shinsegae.project.order.vo.OrderManagementDTO;
+import com.shinsegae.project.order.vo.OrderRequestDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -37,4 +40,12 @@ public class  OrderController {
 
         return "user/order/confirm_outgoing_list";
     }
+
+    @PostMapping("/submit")
+    public String submitOrder(@RequestBody OrderRequestDto orderRequest) {
+        orderService.insertOutput(orderRequest); // 데이터 저장
+        return "Order submitted successfully"; // 응답 메시지
+    }
+
+
 }

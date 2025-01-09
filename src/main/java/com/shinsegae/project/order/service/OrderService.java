@@ -2,6 +2,7 @@ package com.shinsegae.project.order.service;
 
 import com.shinsegae.project.order.vo.OrderInventoryManagementDTO;
 import com.shinsegae.project.order.vo.OrderManagementDTO;
+import com.shinsegae.project.order.vo.OrderRequestDto;
 import com.shinsegae.project.order.vo.OutputVO;
 import com.shinsegae.project.order.mapper.OrderMapper;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,11 @@ public class OrderService {
 
     //발주하기
     public List<OrderInventoryManagementDTO> selectOutputTable(){ return orderMapper.selectOrderInventoryManagementAll();}
+
+    public int insertOutput(OrderRequestDto orderRequestDto){
+        OutputVO outputVO = new OutputVO();
+        return 0;
+    }
 
 
 

@@ -7,24 +7,7 @@
         select *
         from output
     </select>
-    <select id="selectOrderManagementAll" resultType="com.shinsegae.project.order.vo.OrderManagementDTO">
-        SELECT
-            product.product_name AS product_name,
-            user.id AS id,
-            output.unit_price AS unit_price,
-            output.release_quantity AS release_quantity,
-            output.release_date AS release_date,
-            output.confirm_num AS confirm_num,
-            output.confirm_id AS confirm_id,
-            output.status AS status
-        FROM
-            output
-                JOIN
-            product ON output.product_code = product.product_code
-                JOIN
-            user ON output.user_id = user.uid
 
-    </select>
 
     <select id="selectOrderInventoryManagementAll"
             resultType="com.shinsegae.project.order.vo.OrderInventoryManagementDTO">
@@ -42,4 +25,32 @@
 
 
     </select>
+
+
+    <select id="selectOrderManagementAll" resultType="com.shinsegae.project.order.vo.OrderManagementDTO">
+        SELECT
+            product.product_name AS product_name,
+            user.id AS id,
+            output.unit_price AS unit_price,
+            output.release_quantity AS release_quantity,
+            output.release_date AS release_date,
+            output.confirm_num AS confirm_num,
+            output.confirm_id AS confirm_id,
+            output.status AS status
+        FROM
+            output
+                JOIN product ON output.product_code = product.product_code
+                JOIN user ON output.user_id = user.uid
+        ORDER BY
+            CASE output.status
+                WHEN '거절' THEN 1
+                WHEN '승인' THEN 2
+                WHEN '대기중' THEN 3
+                ELSE 4 -- 예상치 못한 값 처리 (선택 사항)
+                END,
+            output.release_date ASC;
+
+    </select>
+
+
 </mapper>

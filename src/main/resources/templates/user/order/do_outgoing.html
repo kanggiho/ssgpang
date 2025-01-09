@@ -16,6 +16,9 @@
     <link href="/css/sb-admin-2.css" rel="stylesheet">
     <link rel="icon" href="/img/favicon/starfavicon.png">
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
     <style>
         .table-responsive {
             max-height: 495px; /* 테이블 높이 제한 */
@@ -116,7 +119,7 @@
                                                placeholder="수량을 입력해주세요." style="width: 200px">
                                     </div>
                                     <p style="font-size: 15pt"><strong>총 가격 : </strong><span id="detail-total">0</span></p>
-                                    <a id="" class="btn btn-primary" type="button">
+                                    <a id="outputBtn" class="btn btn-primary" type="button" onclick="submitOrder">
                                         <i class="fas fa-inbox fa-sm">
                                             발주하기
                                         </i>
@@ -182,6 +185,34 @@
             // 총 가격 업데이트
             document.getElementById('detail-total').innerText = (parseInt(data.price) * value).toString();
         });
+    }
+
+
+    function submitOrder(){
+        const productName = document.getElementById('detail-productName').innerText;
+        const orderQuantity = parseInt(document.getElementById('outputTextInput').value, 10) || 0;
+        const totalPrice = parseInt(document.getElementById('detail-total').innerText, 10) || 0;
+
+        // 필요한 데이터
+        const orderData = {
+            productName: productName,
+            quantity: orderQuantity
+        };
+
+        // Axios POST 요청
+        axios.post('/user/order/submit', orderData)
+            .then(response => {
+                // 성공 처리
+                if (response.status === 200) {
+                    alert('발주가 성공적으로 접수되었습니다!');
+                    window.location.reload(); // 페이지 새로고침 또는 원하는 행동
+                }
+            })
+            .catch(error => {
+                // 오류 처리
+                console.error('Error:', error);
+                alert('발주 처리 중 문제가 발생했습니다.');
+            });
     }
 
 
