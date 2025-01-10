@@ -2,7 +2,6 @@ package com.shinsegae.project.member.service;
 
 import com.shinsegae.project.member.mapper.AdminMapper;
 import com.shinsegae.project.member.vo.AdminVO;
-import com.shinsegae.project.member.vo.UserVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,13 +11,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AdminService {
     private final AdminMapper adminMapper;
-    private final PasswordEncoder passwordEncoder;
 
     //관리자 등록
     public int insertAdmin(AdminVO adminVO) {
-        String pw2 = passwordEncoder.encode(adminVO.getPassword());
-        adminVO.setPassword(pw2);
-        System.out.println("vo에 암호화된 pw >>> " + adminVO.getPassword());
+
         int result = adminMapper.insertAdmin(adminVO);
         return result;
     };
@@ -28,7 +24,7 @@ public class AdminService {
         AdminVO adminVO1 = adminMapper.selectAdminById(adminVO.getId());
         System.out.println("========= 서비스 단 AdminVO " + adminVO1 + " =============");
         if (adminVO1 != null) {
-            if (passwordEncoder.matches(adminVO.getPassword(), adminVO1.getPassword())) {
+            if ((adminVO.getPassword().equals(adminVO1.getPassword()))) {
                 System.out.println("비밀번호 일치");
                 return true;
             } else {
@@ -45,7 +41,7 @@ public class AdminService {
     }
 
     //관리자 삭제
-    public int deleteUser(int id){
+    public int deleteAdmin(int id){
         return adminMapper.deleteAdmin(id);
     };
 

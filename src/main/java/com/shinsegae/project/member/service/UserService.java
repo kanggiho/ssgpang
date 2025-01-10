@@ -70,6 +70,6 @@ public class UserService {
 
     //유저 이메일 유효성 검증
     public boolean checkEmail(String email) {
-        return userMapper.selectUserById(email) == null;
+        return userMapper.selectEmailById(email) == null;
     }
 }

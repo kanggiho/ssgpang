@@ -225,14 +225,16 @@
             const emailCheckResult = document.getElementById("emailCheckResult");
 
             if (!email) {
-                emailCheckResult.textContent = "";
                 emailCheckPass = false;
+                emailCheckResult.style.color = "crimson";
+                emailCheckResult.textContent = "이메일을 입력하세요."
                 return;
             }
-
-            axios.get("/user/member/checkEmail?email=" + encodeURIComponent(email))
+            axios.get("/user/member/checkEmail?email=" + email)
                 .then(function (response) {
-                    if (response.data) {
+                    const isEmailAvailable = response.data;
+
+                    if (isEmailAvailable) {
                         emailCheckPass = true;
                         emailCheckResult.style.color = "green";
                         emailCheckResult.textContent = "사용 가능한 이메일입니다.";
@@ -241,9 +243,9 @@
                         emailCheckResult.style.color = "crimson";
                         emailCheckResult.textContent = "이미 사용 중인 이메일입니다.";
                     }
-                })
-                .catch(function (error) {
+                }).catch(function (error) {
                     console.error(error);
+                    emailCheckPass = false;
                     emailCheckResult.style.color = "crimson";
                     emailCheckResult.textContent = "이메일 확인 중 오류가 발생했습니다.";
                 });

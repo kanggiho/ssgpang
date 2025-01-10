@@ -57,9 +57,11 @@ public class UserController {
 
     //유저 이메일 유효성 검증
     @GetMapping("checkEmail")
-    public ResponseEntity<Boolean> checkEmail(@RequestParam String email) {
-        boolean isEmailAvailable = !userService.checkEmail(email);
-        return ResponseEntity.ok(isEmailAvailable);
+    @ResponseBody
+    public boolean checkEmail(@RequestParam String email) {
+        System.out.println("user email >> " + email);
+        boolean isEmailAvailable = userService.checkEmail(email);
+        return isEmailAvailable;
     }
 
     //유저 로그아웃
@@ -103,9 +105,8 @@ public class UserController {
         System.out.println("user id >> " + id);
         model.addAttribute("userVO", userVO);
 
-        // 세션에 id가 있으면 회원정보 페이지로 리다이렉트
         if (session.getAttribute("id") != null) {
-            return "redirect:/user/member/info";
+            return "/user/member/info";
         }
 
         return "/user/member/login";  // 세션에 id가 없으면 로그인 페이지로
