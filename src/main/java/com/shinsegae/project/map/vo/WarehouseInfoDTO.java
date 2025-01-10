@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class WarehouseVO {
+public class WarehouseInfoDTO {
     private int warehouseId;
     private String warehouseName;
     private String warehouseLocation;
-    private String warehouseTemperature;
+    private String releaseDate;
 }

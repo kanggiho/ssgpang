@@ -33,7 +33,20 @@
             /*color: red;*/
         }
         .infoDiv {
+            font-size: 14px;
+            line-height: 1.6; /* 텍스트 간 간격 */
+            color: #333;
+            text-align: left;
+        }
 
+        .infoDiv p {
+            margin: 10px 0; /* 텍스트 위아래 여백 조정 */
+            border-bottom: 1px solid #ddd; /* 구분선 추가 */
+            padding-bottom: 5px;
+        }
+
+        .infoDiv p:last-child {
+            border-bottom: none; /* 마지막 요소는 구분선 제거 */
         }
 
         .dropdown-container h2 {
@@ -116,15 +129,15 @@
                         </div>
 
                         <!-- 카카오 지도 API -->
-                        <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fd1f2183ff68734564b1f9b1d01c6966"></script>
+                        <!-- 기존 HTML 생략 -->
 
+                        <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fd1f2183ff68734564b1f9b1d01c6966&libraries=services"></script>
                         <script th:inline="javascript">
                             var warehouseData = /*[[${warehouseData}]]*/ []; // 서버에서 전달된 데이터
-
                             var mapContainer = document.getElementById('map'),
                                 mapOption = {
-                                    center: new kakao.maps.LatLng(37.479397, 127.039076), // 초기 지도 중심
-                                    level: 2, // 확대 레벨
+                                    center: new kakao.maps.LatLng(37.3573167705361, 126.708531525163), // 초기 지도 중심
+                                    level: 3, // 확대 레벨
                                     mapTypeId: kakao.maps.MapTypeId.ROADMAP // 지도 타입
                                 };
 
@@ -135,6 +148,7 @@
                             var zoomControl = new kakao.maps.ZoomControl();
                             map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
+                            var geocoder = new kakao.maps.services.Geocoder(); // 주소 검색 객체 생성
                             var markers = [];
 
                             // 커스텀 오버레이 생성 함수
@@ -158,8 +172,8 @@
                                 return customOverlay;
                             }
 
-                            var imageSrc = "/img/logo/MapMarker.png", // 마커이미지의 주소입니다
-                                imageSize = new kakao.maps.Size(40, 40); // 마커이미지의 크기입니다
+                            var imageSrc = "/img/logo/MapMarker.png", // 마커 이미지 주소
+                                imageSize = new kakao.maps.Size(40, 40); // 마커 이미지 크기
 
                             var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 
@@ -188,22 +202,34 @@
 
                                     // 현재 마커의 커스텀 오버레이 열기
                                     customOverlay.setMap(map);
-
-                                    // 현재 마커의 커스텀 오버레이를 저장
                                     marker.customOverlay = customOverlay;
 
-                                    // 정보 패널에 데이터 표시
-                                    var infoDiv = document.getElementById('info');
-                                    infoDiv.innerHTML = `
-                                        <p class="infoDiv">창고명: ${data.name} <br>
-                                           위도: ${data.latitude} <br>
-                                           경도: ${data.longitude} <br>
-                                           기타 정보: ${map.index || '없음'}</p>
-                                    `;
+                                    // 도로명 주소 가져오기
+                                    geocoder.coord2Address(data.longitude, data.latitude, function (result, status) {
+                                        if (status === kakao.maps.services.Status.OK) {
+                                            var roadAddress = result[0].road_address
+                                                ? result[0].road_address.address_name
+                                                : '도로명 주소 없음';
+                                            var jibunAddress = result[0].address
+                                                ? result[0].address.address_name
+                                                : '지번 주소 없음';
+
+                                            // 정보 패널에 데이터 표시
+                                            var infoDiv = document.getElementById('info');
+                                            infoDiv.innerHTML = `
+                        <div class="infoDiv">
+                        <p><strong>창고명:</strong> ${data.name}</p>
+                        <p><strong>위도:</strong> ${data.latitude}</p>
+                        <p><strong>경도:</strong> ${data.longitude}</p>
+                        <p><strong>도로명 주소:</strong> ${roadAddress}</p>
+                        <p><strong>지번 주소:</strong> ${jibunAddress}</p>
+                        <p><strong>최근 발주일:</strong> ${data.date || '아직 발주하지 않음'}</p>
+                        </div>`;
+                                        }
+                                    });
                                 });
 
-                                // 배열에 마커 저장
-                                markers.push({marker: marker, customOverlay: customOverlay});
+                                markers.push({ marker: marker, customOverlay: customOverlay });
                             });
 
                             // 지도 클릭 이벤트 추가 - 오버레이 숨기기
@@ -219,16 +245,14 @@
                                 infoDiv.innerHTML = '<p>창고 정보를 확인하려면 마커를 클릭하세요.</p>';
                             });
 
-                            // 지도 타입 변경 컨트롤을 생성한다
+                            // 지도 타입 변경 컨트롤 추가
                             var mapTypeControl = new kakao.maps.MapTypeControl();
-
-                            // 지도의 상단 우측에 지도 타입 변경 컨트롤을 추가한다
                             map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
 
                             // 드롭다운 선택 시 지도 이동
                             function moveToLocation() {
                                 var select = document.getElementById('warehouseSelect');
-                                var selectedName = select.options[select.selectedIndex].text; // 선택된 항목의 텍스트 (이름)
+                                var selectedName = select.options[select.selectedIndex].text; // 선택된 항목의 텍스트
 
                                 // 선택된 이름과 일치하는 마커 찾기
                                 var selectedMarker = markers.find(function (m) {
@@ -250,17 +274,20 @@
                                     selectedMarker.customOverlay.setMap(map);
 
                                     // 정보 패널에 데이터 표시
-                                    var infoDiv = document.getElementById('info');
                                     var data = warehouseData.find(w => w.name === selectedName);
+                                    var infoDiv = document.getElementById('info');
                                     infoDiv.innerHTML = `
-                                        <p class="infoDiv">창고명: ${data.name} <br>
-                                           위도: ${data.latitude} <br>
-                                           경도: ${data.longitude} <br>
-                                           기타 정보: ${data.description || '없음'}</p>
-                                    `;
+            <div class="infoDiv">
+            <p><strong>창고명:</strong> ${data.name}</p>
+            <p><strong>위도:</strong> ${data.latitude}</p>
+            <p><strong>경도:</strong> ${data.longitude}</p>
+            <p><strong>최근 발주일:</strong> ${data.date || '아직 발주하지 않음'}</p>
+            </div>`;
                                 }
                             }
                         </script>
+
+                        <!-- 기존 HTML 생략 -->
 
                     </div>
                 </div>
