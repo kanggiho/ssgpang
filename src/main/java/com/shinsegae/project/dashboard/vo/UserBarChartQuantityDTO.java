@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class UserBarChartQuantityDTO {
-    private int releaseQuantity;
     private String releaseMonth;
+    private int releaseQuantity;
 }
 

@@ -130,14 +130,13 @@ axios.get('/admin/home_admin/chart3')
     })
 
 
-
 const data_outputPrice = []; //발주금액
 const data_outputQuantity = []; //발주수량
 
 axios.get('/user/home/chart1')
     .then(function (response) {
-      const UserOutputPrice = response.data;
-      const UserOutputQuantity = response.data;
+      const UserOutputPrice = response.data.UserOutputPrice;
+      const UserOutputQuantity = response.data.UserOutputQuantity;
 
       console.log(UserOutputPrice);
       console.log(UserOutputQuantity);
@@ -148,31 +147,19 @@ axios.get('/user/home/chart1')
         data_outputQuantity.push(UserOutputQuantity[i].releaseQuantity); // 발주수량데이터
       }
 
-      var ctx = document.getElementById("myBarChart2");
-      var myBarChart = new Chart(ctx, {
+      let ctx = document.getElementById("myBarChart2");
+      let myBarChart2 = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+          labels:data_outputPrice,
           datasets: [{
-            label: "발주 금액", //bar chart
+            label: "출고량",
             backgroundColor: "#0b30c2",
-            type: 'bar',
             hoverBackgroundColor: "#2e59d9",
             borderColor: "#4e73df",
-            data: data_outputPrice,
+            data: data_outputQuantity,
             maxBarThickness: 25,
-            yAxisID: 'yLeft', // 왼쪽 Y축
-          },
-            {
-              label: "발주 수량", //line chart
-              type: 'line',
-              backgroundColor: "#0b30c2",
-              hoverBackgroundColor: "#2e59d9",
-              borderColor: "#4e73df",
-              data: data_outputQuantity, //발주 수량
-              maxBarThickness: 25,
-              yAxisID: 'yRight', // 오른쪽 Y축
-            }],
+          }],
         },
         options: {
           maintainAspectRatio: false,
@@ -194,32 +181,11 @@ axios.get('/user/home/chart1')
                 drawBorder: false
               },
               ticks: {
-                maxTicksLimit: 12,
+                maxTicksLimit:data_outputPrice.length,
                 autoSkip: true
               }
             },
-            yLeft: {
-              type: 'linear',
-              position: 'left',
-              beginAtZero: true, // Y축이 0부터 시작
-              max: 300, // Y축 최대값
-              ticks: {
-                stepSize: 10, // Y축 간격
-                callback: function(value) {
-                  return number_format(value); // 값 포맷팅
-                }
-              },
-              gridLines: {
-                color: "rgb(234, 236, 244)",
-                zeroLineColor: "rgb(234, 236, 244)",
-                drawBorder: false,
-                borderDash: [2],
-                zeroLineBorderDash: [2]
-              }
-            },
-            yRight: {
-              type: 'linear',
-              position: 'right',
+            y: {
               beginAtZero: true, // Y축이 0부터 시작
               max: 300, // Y축 최대값
               ticks: {
@@ -265,4 +231,5 @@ axios.get('/user/home/chart1')
     .catch(function (error) {
       console.log("error: " + error);
     })
+
 

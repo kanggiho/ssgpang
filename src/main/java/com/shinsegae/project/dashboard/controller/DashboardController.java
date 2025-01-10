@@ -46,6 +46,7 @@ public class DashboardController {
         result.put("UserOutputQuantity", UserOutputQuantity);
         result.put("UserOutputPrice", UserOutputPrice);
         return ResponseEntity.ok(result);
+
     }
 
     //pie chart
