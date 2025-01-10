@@ -130,9 +130,16 @@
                 </div>
             </div>
         </div>
-        <div th:replace="admin/fragments/modal :: adminModal"></div>
+        <div th:replace="admin/fragments/footer :: adminFooter"></div>
     </div>
 </div>
+
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<div th:replace="admin/fragments/modal :: adminModal"></div>
+
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/jquery.easing.min.js"></script>
