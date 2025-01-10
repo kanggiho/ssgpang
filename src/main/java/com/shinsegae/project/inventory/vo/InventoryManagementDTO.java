@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class InventoryManagementDTO {
     private String itemClassification;
+    private String code;
     private String productName;
     private String warehouseName;
     private String manufacturerName;
