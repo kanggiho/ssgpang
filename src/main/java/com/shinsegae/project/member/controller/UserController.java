@@ -4,9 +4,13 @@ import com.shinsegae.project.member.service.UserService;
 import com.shinsegae.project.member.vo.UserVO;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("user/member")
@@ -97,21 +101,39 @@ public class UserController {
         return "user/member/find_pw";
     }
 
-    //유저 회원 정보
+    // 유저 회원 정보
     @GetMapping("info")
-    public String info(String id, Model model, HttpSession session) {
-        UserVO userVO = userService.info(id);
-        System.out.println("user id >> " + id);
-        model.addAttribute("userVO", userVO);
+    public String info(HttpSession session, Model model) {
+        // 세션에서 id 가져오기
+        String id = (String) session.getAttribute("id");
 
-        if (session.getAttribute("id") != null) {
-            return "/user/member/info";
+        if (id == null) {
+            // 세션에 id가 없으면 로그인 페이지로 리다이렉트
+            return "redirect:/user/member/login";
         }
 
-        return "user/member/login";  // 세션에 id가 없으면 로그인 페이지로
+        // DB에서 유저 정보 가져오기
+        UserVO userVO = userService.info(id);
+        if (userVO != null) {
+            model.addAttribute("userVO", userVO);
+            return "/user/member/info";
+        } else {
+            // 유저 정보를 찾지 못한 경우 예외 처리 페이지로 이동
+            return "redirect:/user/member/error";
+        }
     }
 
+
     //유저 회원정보수정
+    @GetMapping("update")
+    public String update(HttpSession session) {
+        // 세션에 id가 있으면 홈 페이지로 리다이렉트
+        if (session.getAttribute("id") != null) {
+            return "/user/member/update";
+        }
+        return "/user/member/login";  // 세션에 id가 없으면 로그인 페이지로
+    }
+
     @PostMapping("update")
     public String update(UserVO userVO) {
         int result = userService.updateUser(userVO);
