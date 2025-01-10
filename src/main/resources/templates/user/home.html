@@ -32,7 +32,7 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
-    <div th:replace="admin/fragments/sidebar :: adminSideBar"></div>
+    <div th:replace="user/fragments/sidebar :: userSideBar"></div>
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -41,7 +41,7 @@
         <div id="content">
 
             <!-- Topbar -->
-            <div th:replace="admin/fragments/topbar :: adminTopBar"></div>
+            <div th:replace="user/fragments/topbar :: userTopBar"></div>
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
@@ -234,7 +234,7 @@
                 <!-- End of Main Content -->
 
                 <!-- Footer -->
-                <div th:replace="admin/fragments/footer :: adminFooter"></div>
+                <div th:replace="user/fragments/footer :: userFooter"></div>
 
             </div>
             <!-- End of Content Wrapper -->
@@ -248,7 +248,7 @@
         </a>
 
         <!-- Logout Modal-->
-        <div th:replace="admin/fragments/modal :: adminModal"></div>
+        <div th:replace="user/fragments/modal :: userModal"></div>
 
         <!-- Bootstrap core JavaScript-->
         <script src="/js/jquery.min.js"></script>
