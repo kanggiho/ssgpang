@@ -21,6 +21,9 @@
     <link href="/css/sb-admin-2.css" rel="stylesheet">
     <link rel="icon" href="/img/favicon/starfavicon.png">
 
+    <!-- Axios 라이브러리 -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </head>
 
 <body id="page-top">
@@ -53,85 +56,85 @@
                 <!-- TODAY Section -->
                 <div class="card shadow-sm mb-4 today-section" style="border-radius: 10px; border: 1px solid #e0e0e0;">
                     <div class="card-header py-3" style="background-color: #f8f9fc; border-bottom: 1px solid #e0e0e0;">
-                        <h6 class="m-0 font-weight-bold text-primary">TODAY</h6>
+                        <h6 class="m-0 font-weight-bold">TODAY</h6>
                     </div>
                     <div class="card-body">
                         <!-- Card content here -->
                         <!-- Content Row -->
-                <div class="row">
+                        <div class="row">
 
-                    <!-- Earnings (Monthly) Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card shadow h-100 py-2" style="color: #5b93ff">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #5b93ff">
-                                            총 재고량</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${totalInventory}"></div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-boxes fa-2x" style="color: #5b93ff;"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Earnings (Monthly) Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #ff8f6b">
-                                            입고 수량</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${inputQuantity}"></div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Earnings (Monthly) Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #ffd66b">출고 수량
+                            <!-- Earnings (Monthly) Card Example -->
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card shadow h-100 py-2" style="color: #5b93ff">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #5b93ff;font-size: 15px;">
+                                                    총 재고량</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${totalInventory}"></div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-boxes fa-2x" style="color: #5b93ff;"></i>
+                                            </div>
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${outputQuantity} + '건'"></div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <!-- Pending Requests Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #cc97f7">
-                                            발주 승인대기 중 요청</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${outputStatus} + '건'"></div>
+                            <!-- Earnings (Monthly) Card Example -->
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #ff8f6b;font-size: 15px;">
+                                                    입고 수량</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${inputQuantity}"></div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-clock fa-2x" style="color: #cc97f7"></i>
+                                </div>
+                            </div>
+
+                            <!-- Earnings (Monthly) Card Example -->
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #ffd66b;font-size: 15px;">출고 수량
+                                                </div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${outputQuantity} + '건'"></div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pending Requests Card Example -->
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #96a1e8;font-size: 15px;">
+                                                    발주 승인대기 중 요청</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${outputStatus} + '건'"></div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-clock fa-2x" style="color: #bfc5ef"></i>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
                     </div>
                 </div>
 
@@ -146,7 +149,7 @@
                             <!-- Card Header - Dropdown -->
                             <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">입고/출고 현황</h6>
+                                <h6 class="m-0 font-weight-bold">입고/출고 현황</h6>
                                 <div class="dropdown no-arrow">
                                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -174,13 +177,13 @@
 
                 <!-- Content Row -->
                 <div class="row">
-
+                    <!--pie chart-->
                     <!-- Content Column -->
                     <div class="col-xl-4 col-lg-5">
                         <div class="card shadow mb-4">
                             <!-- Card Header - Dropdown -->
                             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">품목별 재고현황</h6>
+                                <h6 class="m-0 font-weight-bold">품목별 재고현황</h6>
                                 <div class="dropdown no-arrow">
                                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -222,7 +225,7 @@
                             <!-- Card Header - Dropdown -->
                             <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">지점별 출고 현황</h6>
+                                <h6 class="m-0 font-weight-bold">지점별 출고 현황</h6>
                             </div>
                             <!-- Card Body -->
                             <div class="card-body">
@@ -233,43 +236,43 @@
                         </div>
                     </div>
                     <!-- /.container-fluid -->
+                </div>
+                <!-- End of Main Content -->
+
+                <!-- Footer -->
+                <div th:replace="admin/fragments/footer :: adminFooter"></div>
+
+            </div>
+            <!-- End of Content Wrapper -->
+
         </div>
-        <!-- End of Main Content -->
+        <!-- End of Page Wrapper -->
 
-        <!-- Footer -->
-        <div th:replace="admin/fragments/footer :: adminFooter"></div>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-    </div>
-    <!-- End of Content Wrapper -->
+        <!-- Logout Modal-->
+        <div th:replace="admin/fragments/modal :: adminModal"></div>
 
-</div>
-<!-- End of Page Wrapper -->
+        <!-- Bootstrap core JavaScript-->
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/bootstrap.bundle.min.js"></script>
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
+        <!-- Core plugin JavaScript-->
+        <script src="/js/jquery.easing.min.js"></script>
 
-<!-- Logout Modal-->
-<div th:replace="admin/fragments/modal :: adminModal"></div>
+        <!-- Custom scripts for all pages-->
+        <script src="/js/sb-admin-2.min.js"></script>
 
-<!-- Bootstrap core JavaScript-->
-<script src="/js/jquery.min.js"></script>
-<script src="/js/bootstrap.bundle.min.js"></script>
+        <!-- Page level plugins -->
+        <script src="/js/Chart.min.js"></script>
 
-<!-- Core plugin JavaScript-->
-<script src="/js/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="/js/sb-admin-2.min.js"></script>
-
-<!-- Page level plugins -->
-<script src="/js/Chart.min.js"></script>
-
-<!-- Page level custom scripts -->
-<script src="/js/demo/chart-area-demo.js"></script>
-<script src="/js/demo/chart-pie-demo.js"></script>
-<script src="/js/demo/chart-bar-demo.js"></script>
+        <!-- Page level custom scripts -->
+        <script src="/js/demo/chart-area-demo.js"></script>
+        <script src="/js/demo/chart-pie-demo.js"></script>
+        <script src="/js/demo/chart-bar-demo.js"></script>
 
 </body>
 

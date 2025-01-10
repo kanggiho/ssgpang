@@ -14,7 +14,7 @@ public class EmailService {
 
     public void sendEmail(String to, String subject, String body) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("chuenreang@naver.com");  // 발신 주소 설정
+        message.setFrom("admin@ssg.com");  // 발신 주소 설정
         message.setTo(to);
         message.setSubject(subject);
         message.setText(body);

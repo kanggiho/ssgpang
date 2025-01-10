@@ -2,23 +2,115 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shinsegae.project.dashboard.mapper.DashboardMapper">
+    <!-- 관리자 -->
     <select id="selectTotalInventory" resultType="java.lang.Integer">
         SELECT SUM(stock) FROM inventory
     </select>
+
     <select id="selectInputQuantity" resultType="java.lang.Integer">
         SELECT SUM(warehoused_quantity)
         FROM input
         WHERE warehoused_date = CURRENT_DATE()
     </select>
+
     <select id="selectOutputQuantity" resultType="java.lang.Integer">
         SELECT SUM(release_quantity)
         FROM output
         WHERE release_date = CURRENT_DATE()
     </select>
+
     <select id="selectOutputByStatus" resultType="java.lang.Integer">
         SELECT COUNT(*)
         FROM output
         WHERE status = '대기중'
         AND release_date = CURRENT_DATE()
     </select>
+
+    <select id="selectPieChartData" resultType="com.shinsegae.project.dashboard.vo.PieChartDTO">
+        SELECT c.item_classification, i.stock
+        FROM classification c
+        JOIN inventory i
+        ON c.code = i.code
+    </select>
+
+    <select id="selectAreaChartInputData" resultType="com.shinsegae.project.dashboard.vo.AreaChartInputDTO">
+        SELECT DATE_FORMAT(warehoused_date, '%m') AS warehousedMonth, SUM(warehoused_quantity) AS warehousedQuantity
+        FROM input
+        GROUP BY warehousedMonth
+        ORDER BY warehousedMonth
+    </select>
+
+    <select id="selectAreaChartOutputData" resultType="com.shinsegae.project.dashboard.vo.AreaChartOutputDTO">
+        SELECT DATE_FORMAT(release_date, '%m') AS releaseMonth, SUM(release_quantity) AS releaseQuantity
+        FROM output
+        WHERE release_date IS NOT NULL
+        GROUP BY releaseMonth
+        ORDER BY releaseMonth
+    </select>
+
+    <select id="selectBarChartData" resultType="com.shinsegae.project.dashboard.vo.BarChartDTO">
+        SELECT sum(o.release_quantity) AS releaseQuantity, w.warehouse_name
+        FROM output o
+        JOIN warehouse w
+        ON o.warehouse_id = w.warehouse_id
+        GROUP BY warehouse_name
+    </select>
+
+    <!-- 사용자 -->
+    <select id="selectOutputByStatusWaiting" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM output
+        WHERE status = '대기중'
+        AND release_date = CURDATE()
+    </select>
+    <select id="selectOutputByStatusApproval" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM output
+        WHERE status = '승인'
+        AND release_date = CURDATE()
+
+    </select>
+    <select id="selectOutputByStatusReject" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM output
+        WHERE status = '거절'
+        AND release_date = CURDATE()
+    </select>
+
+    <select id="selectTotalOutputQuantity" resultType="java.lang.Integer">
+        SELECT SUM(release_quantity)
+        FROM output
+        WHERE MONTH(release_date) = MONTH(CURDATE())
+    </select>
+
+    <select id="selectTotalOutputPrice" resultType="java.lang.Integer">
+        SELECT SUM(release_quantity * unit_price)
+        FROM output
+        WHERE MONTH(release_date) = MONTH(CURDATE())
+    </select>
+
+    <select id="selectUserPieChartData" resultType="com.shinsegae.project.dashboard.vo.UserPieChartDTO">
+        SELECT p.product_name, SUM(o.release_quantity) AS totalQuantity
+        FROM product p
+        JOIN output o ON o.product_code = p.product_code
+        WHERE o.status = '승인'
+        GROUP BY p.product_name
+        ORDER BY totalQuantity DESC
+        LIMIT 5
+    </select>
+    <select id="selectUserOutputQuantity" resultType="com.shinsegae.project.dashboard.vo.UserBarChartQuantityDTO">
+        SELECT DATE_FORMAT(release_date, '%m') AS releaseMonth, SUM(release_quantity) AS releaseQuantity
+        FROM output
+        WHERE release_date IS NOT NULL
+        GROUP BY releaseMonth
+        ORDER BY releaseMonth
+    </select>
+    <select id="selectUserOutputPrice" resultType="com.shinsegae.project.dashboard.vo.UserBarChartPriceDTO">
+        SELECT DATE_FORMAT(release_date, '%m') AS releaseMonth, SUM(release_quantity * unit_price) AS releasePrice
+        FROM output
+        WHERE release_date IS NOT NULL
+        GROUP BY releaseMonth
+        ORDER BY releaseMonth
+    </select>
+
 </mapper>
