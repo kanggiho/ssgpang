@@ -34,7 +34,6 @@
 
 <body class="bg-gradient-primary">
 <div class="container" th:if="${session.id == null}">
-    <h4 class="row justify-content-center" style="color: red;">[[${result}]]</h4>
 
     <!-- Outer Row -->
     <div class="row justify-content-center">
@@ -46,9 +45,17 @@
                     <!-- Nested Row within Card Body -->
                     <div class="row">
                         <div class="col-lg-6 d-none d-lg-block bg-login-image"
-                             style="align-items:center !important; display: flex !important; justify-content:center !important;">
+                             style="align-items:center !important; display: flex !important; flex-direction: column; justify-content: center !important;">
                             <img src="/img/member/login.png" alt="이미지 자리" width="191" height="187">
+
+                            <!-- 로그인 실패 메시지를 <small> 태그로 출력 -->
+                            <div class="text-center mt-3">
+                                <small th:if="${result != null}" style="color: crimson;">
+                                    [[${result}]]
+                                </small>
+                            </div>
                         </div>
+
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="text-center">
@@ -106,6 +113,19 @@
 <!-- Custom scripts for all pages-->
 <script src="/js/sb-admin-2.min.js"></script>
 
+<th:block>
+    <script>
+        document.querySelector("form").addEventListener("submit", function (event) {
+            const id = document.getElementById("id").value.trim();
+            const password = document.getElementById("pw").value.trim();
+
+            if (!id || !password) {
+                event.preventDefault();  // 폼 제출 방지
+                alert("아이디와 비밀번호를 모두 입력해 주세요.");
+            }
+        });
+    </script>
+</th:block>
 
 </body>
 
