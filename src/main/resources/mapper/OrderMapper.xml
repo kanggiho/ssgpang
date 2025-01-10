@@ -16,6 +16,9 @@
                m.manufacturer_name,
                i.price,
                i.stock,
+               p.product_code,
+               w.warehouse_id
+
 
         FROM inventory i
                  JOIN product p ON p.product_code = i.product_code

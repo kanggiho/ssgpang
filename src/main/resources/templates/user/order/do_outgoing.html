@@ -21,7 +21,7 @@
     <style>
         .table-responsive {
             max-height: 495px; /* 테이블 높이 제한 */
-            overflow-y: auto;  /* 스크롤 추가 */
+            overflow-y: auto; /* 스크롤 추가 */
         }
 
         .table td, .table th {
@@ -60,7 +60,8 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered text-center table-hover" id="dataTable" width="100%" cellspacing="0">
+                                    <table class="table table-bordered text-center table-hover" id="dataTable"
+                                           width="100%" cellspacing="0">
                                         <thead>
                                         <tr>
                                             <th>품목구분</th>
@@ -72,7 +73,9 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr th:each="row : ${tableDataConfirm}" th:data-id="${row.productName}" onclick="showDetails(this)">
+                                        <tr th:each="row : ${tableDataConfirm}"
+                                            th:data-product-code="${row.productCode}"
+                                            th:data-warehouse-id="${row.warehouseId}" onclick="showDetails(this)">
                                             <td th:text="${row.itemClassification}"></td>
                                             <td th:text="${row.productName}"></td>
                                             <td th:text="${row.warehouseName}"></td>
@@ -112,12 +115,14 @@
                                 <div id="details-container2">
 
                                     <!-- Form Group 예시 -->
-                                    <div class="form-group" style="display: flex; align-items: center; justify-content: space-between;">
+                                    <div class="form-group"
+                                         style="display: flex; align-items: center; justify-content: space-between;">
                                         <label for="outputTextInput">신청 개수</label>
                                         <input type="number" class="form-control" id="outputTextInput" value="0" min="0"
                                                placeholder="수량을 입력해주세요." style="width: 200px">
                                     </div>
-                                    <p style="font-size: 15pt"><strong>총 가격 : </strong><span id="detail-total">0</span></p>
+                                    <p style="font-size: 15pt"><strong>총 가격 : </strong><span id="detail-total">0</span>
+                                    </p>
                                     <a id="outputBtn" class="btn btn-primary" type="button">
                                         <i class="fas fa-inbox fa-sm">
                                             발주하기
@@ -151,9 +156,9 @@
             }
 
             const data = {
-                product_code: selectedData.productCode || 104564, // 실제 데이터로 교체
-                warehouse_id: selectedData.warehouseId || 3002,
-                user_id: 5004,
+                product_code: selectedData.productCode, // 실제 데이터로 교체
+                warehouse_id: selectedData.warehouseId,
+                user_id: 5001,
                 confirm_num: 0,
                 confirm_id: 0,
                 status: "대기중",
@@ -181,7 +186,9 @@
             warehouseName: row.children[2].innerText,
             manufacturerName: row.children[3].innerText,
             price: row.children[4].innerText,
-            stock: row.children[5].innerText
+            stock: row.children[5].innerText,
+            productCode: row.getAttribute('data-product-code'),
+            warehouseId: row.getAttribute('data-warehouse-id')
         };
 
         // 세부 정보 업데이트
@@ -208,7 +215,6 @@
             document.getElementById('detail-total').innerText = (parseInt(selectedData.price) * value).toString();
         });
     }
-
 
 
 </script>

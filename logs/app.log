@@ -3893,3 +3893,973 @@ java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '104564-3002-
 2025-01-10 12:43:34 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
 2025-01-10 12:43:34 [restartedMain] INFO  c.s.project.Project2Application - Started Project2Application in 1.232 seconds (process running for 1656.636)
 2025-01-10 12:43:34 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+2025-01-10 14:26:33 [restartedMain] INFO  c.s.project.Project2Application - Starting Project2Application using Java 17 with PID 10232 (C:\Users\a\Desktop\project2\build\classes\java\main started by a in C:\Users\a\Desktop\project2)
+2025-01-10 14:26:33 [restartedMain] INFO  c.s.project.Project2Application - No active profile set, falling back to 1 default profile: "default"
+2025-01-10 14:26:33 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-01-10 14:26:33 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-01-10 14:26:34 [restartedMain] DEBUG o.m.s.b.a.MybatisAutoConfiguration - Searching for mappers annotated with @Mapper
+2025-01-10 14:26:34 [restartedMain] DEBUG o.m.s.b.a.MybatisAutoConfiguration - Using auto-configuration base package 'com.shinsegae.project'
+2025-01-10 14:26:34 [restartedMain] DEBUG o.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2025-01-10 14:26:34 [restartedMain] DEBUG o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [C:\Users\a\Desktop\project2\build\classes\java\main\com\shinsegae\project\dashboard\mapper\DashboardMapper.class]
+2025-01-10 14:26:34 [restartedMain] DEBUG o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [C:\Users\a\Desktop\project2\build\classes\java\main\com\shinsegae\project\incoming\mapper\IncomingMapper.class]
+2025-01-10 14:26:34 [restartedMain] DEBUG o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [C:\Users\a\Desktop\project2\build\classes\java\main\com\shinsegae\project\inventory\mapper\InventoryMapper.class]
+2025-01-10 14:26:34 [restartedMain] DEBUG o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [C:\Users\a\Desktop\project2\build\classes\java\main\com\shinsegae\project\map\mapper\MapMapper.class]
+2025-01-10 14:26:34 [restartedMain] DEBUG o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [C:\Users\a\Desktop\project2\build\classes\java\main\com\shinsegae\project\member\mapper\UserMapper.class]
+2025-01-10 14:26:34 [restartedMain] DEBUG o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [C:\Users\a\Desktop\project2\build\classes\java\main\com\shinsegae\project\order\mapper\OrderMapper.class]
+2025-01-10 14:26:34 [restartedMain] DEBUG o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'dashboardMapper' and 'com.shinsegae.project.dashboard.mapper.DashboardMapper' mapperInterface
+2025-01-10 14:26:34 [restartedMain] DEBUG o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'incomingMapper' and 'com.shinsegae.project.incoming.mapper.IncomingMapper' mapperInterface
+2025-01-10 14:26:34 [restartedMain] DEBUG o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'inventoryMapper' and 'com.shinsegae.project.inventory.mapper.InventoryMapper' mapperInterface
+2025-01-10 14:26:34 [restartedMain] DEBUG o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'mapMapper' and 'com.shinsegae.project.map.mapper.MapMapper' mapperInterface
+2025-01-10 14:26:34 [restartedMain] DEBUG o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'userMapper' and 'com.shinsegae.project.member.mapper.UserMapper' mapperInterface
+2025-01-10 14:26:34 [restartedMain] DEBUG o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'orderMapper' and 'com.shinsegae.project.order.mapper.OrderMapper' mapperInterface
+2025-01-10 14:26:34 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2025-01-10 14:26:34 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-01-10 14:26:34 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.5]
+2025-01-10 14:26:35 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-01-10 14:26:35 [restartedMain] DEBUG o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [C:\Users\a\Desktop\project2\build\resources\main\mapper\DashboardMapper.xml]'
+2025-01-10 14:26:35 [restartedMain] DEBUG o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [C:\Users\a\Desktop\project2\build\resources\main\mapper\IncomingMapper.xml]'
+2025-01-10 14:26:35 [restartedMain] DEBUG o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [C:\Users\a\Desktop\project2\build\resources\main\mapper\InventoryMapper.xml]'
+2025-01-10 14:26:35 [restartedMain] DEBUG o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [C:\Users\a\Desktop\project2\build\resources\main\mapper\MapMapper.xml]'
+2025-01-10 14:26:35 [restartedMain] DEBUG o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [C:\Users\a\Desktop\project2\build\resources\main\mapper\OrderMapper.xml]'
+2025-01-10 14:26:35 [restartedMain] DEBUG o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [C:\Users\a\Desktop\project2\build\resources\main\mapper\UserMapper.xml]'
+2025-01-10 14:26:35 [restartedMain] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-01-10 14:26:35 [restartedMain] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2025-01-10 14:26:35 [restartedMain] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 23 mappings in 'requestMappingHandlerMapping'
+2025-01-10 14:26:35 [restartedMain] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2025-01-10 14:26:35 [restartedMain] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-01-10 14:26:35 [restartedMain] DEBUG o.m.s.b.a.MybatisAutoConfiguration - Not found configuration for registering mapper bean using @MapperScan, MapperFactoryBean and MapperScannerConfigurer.
+2025-01-10 14:26:35 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-01-10 14:26:35 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2025-01-10 14:26:35 [restartedMain] INFO  c.s.project.Project2Application - Started Project2Application in 2.931 seconds (process running for 3.864)
+2025-01-10 14:26:36 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-10 14:26:36 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-01-10 14:26:36 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Detected StandardServletMultipartResolver
+2025-01-10 14:26:36 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Detected AcceptHeaderLocaleResolver
+2025-01-10 14:26:36 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Detected FixedThemeResolver
+2025-01-10 14:26:36 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@3404dee7
+2025-01-10 14:26:36 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@440b69c
+2025-01-10 14:26:36 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2025-01-10 14:26:36 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2025-01-10 14:26:36 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - GET "/", parameters={}
+2025-01-10 14:26:36 [http-nio-8080-exec-2] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2025-01-10 14:26:36 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:26:36 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - GET "/css/all.css", parameters={}
+2025-01-10 14:26:36 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/jquery.min.js", parameters={}
+2025-01-10 14:26:36 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - GET "/css/sb-admin-2.css", parameters={}
+2025-01-10 14:26:36 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/bootstrap.bundle.min.js", parameters={}
+2025-01-10 14:26:36 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/jquery.easing.min.js", parameters={}
+2025-01-10 14:26:36 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/sb-admin-2.min.js", parameters={}
+2025-01-10 14:26:36 [http-nio-8080-exec-3] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:26:36 [http-nio-8080-exec-4] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:26:36 [http-nio-8080-exec-7] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:26:36 [http-nio-8080-exec-6] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:26:36 [http-nio-8080-exec-5] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:26:36 [http-nio-8080-exec-8] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:26:36 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:26:36 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:26:36 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:26:36 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:26:36 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:26:36 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:27:21 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - GET "/user/home", parameters={}
+2025-01-10 14:27:21 [http-nio-8080-exec-9] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.shinsegae.project.dashboard.controller.DashboardController#home(HttpSession, Model)
+2025-01-10 14:27:21 [http-nio-8080-exec-9] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2025-01-10 14:27:21 [http-nio-8080-exec-9] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-9][user/home] Deprecated unwrapped fragment expression "user/fragments/sidebar :: userSideBar" found in template user/home, line 32, col 10. Please use the complete syntax of fragment expressions instead ("~{user/fragments/sidebar :: userSideBar}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:27:21 [http-nio-8080-exec-9] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-9][user/home] Deprecated unwrapped fragment expression "user/fragments/topbar :: userTopBar" found in template user/home, line 42, col 18. Please use the complete syntax of fragment expressions instead ("~{user/fragments/topbar :: userTopBar}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:27:21 [http-nio-8080-exec-9] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-9][user/home] Deprecated unwrapped fragment expression "user/fragments/footer :: userFooter" found in template user/home, line 379, col 14. Please use the complete syntax of fragment expressions instead ("~{user/fragments/footer :: userFooter}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:27:21 [http-nio-8080-exec-9] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-9][user/home] Deprecated unwrapped fragment expression "user/fragments/modal :: userModal" found in template user/home, line 394, col 6. Please use the complete syntax of fragment expressions instead ("~{user/fragments/modal :: userModal}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:27:21 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:27:21 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - GET "/css/all.css", parameters={}
+2025-01-10 14:27:21 [http-nio-8080-exec-10] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:27:21 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:27:21 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/css/sb-admin-2.css", parameters={}
+2025-01-10 14:27:21 [http-nio-8080-exec-1] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:27:21 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - GET "/img/logo/boy.png", parameters={}
+2025-01-10 14:27:21 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - GET "/img/logo/mainlogo.png", parameters={}
+2025-01-10 14:27:21 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/jquery.min.js", parameters={}
+2025-01-10 14:27:21 [http-nio-8080-exec-5] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:27:21 [http-nio-8080-exec-6] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:27:21 [http-nio-8080-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:27:21 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - GET "/user/img/undraw_posting_photo.svg", parameters={}
+2025-01-10 14:27:21 [http-nio-8080-exec-7] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:27:21 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/bootstrap.bundle.min.js", parameters={}
+2025-01-10 14:27:21 [http-nio-8080-exec-8] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:27:21 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:27:21 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:27:21 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:27:21 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:27:21 [http-nio-8080-exec-7] DEBUG o.s.w.s.r.ResourceHttpRequestHandler - Resource not found
+2025-01-10 14:27:21 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/sb-admin-2.min.js", parameters={}
+2025-01-10 14:27:21 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/demo/chart-area-demo.js", parameters={}
+2025-01-10 14:27:21 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+2025-01-10 14:27:21 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/Chart.min.js", parameters={}
+2025-01-10 14:27:21 [http-nio-8080-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:27:21 [http-nio-8080-exec-9] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:27:21 [http-nio-8080-exec-10] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:27:21 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:27:21 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:27:21 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:27:21 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:27:21 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/jquery.easing.min.js", parameters={}
+2025-01-10 14:27:21 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/demo/chart-pie-demo.js", parameters={}
+2025-01-10 14:27:21 [http-nio-8080-exec-6] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:27:21 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+2025-01-10 14:27:21 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:27:21 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-01-10 14:27:21 [http-nio-8080-exec-4] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:27:21 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:27:21 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json;q=0.8', given [image/avif, image/webp, image/apng, image/svg+xml, image/*, */*;q=0.8] and supported [application/json, application/*+json]
+2025-01-10 14:27:21 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{timestamp=Fri Jan 10 14:27:21 KST 2025, status=404, error=Not Found, message=No message available,  (truncated)...]
+2025-01-10 14:27:21 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/webfonts/fa-solid-900.woff2", parameters={}
+2025-01-10 14:27:21 [http-nio-8080-exec-1] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:27:21 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:27:21 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+2025-01-10 14:27:23 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - GET "/user/order/do_outgoing", parameters={}
+2025-01-10 14:27:23 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.shinsegae.project.order.controller.OrderController#do_outgoing(Model)
+2025-01-10 14:27:23 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-01-10 14:27:23 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6f1adc83] was not registered for synchronization because synchronization is not active
+2025-01-10 14:27:23 [http-nio-8080-exec-5] INFO  com.zaxxer.hikari.HikariDataSource - MyHikariPool - Starting...
+2025-01-10 14:27:23 [http-nio-8080-exec-5] INFO  com.zaxxer.hikari.pool.HikariPool - MyHikariPool - Added connection com.mysql.cj.jdbc.ConnectionImpl@25d1ece5
+2025-01-10 14:27:23 [http-nio-8080-exec-5] INFO  com.zaxxer.hikari.HikariDataSource - MyHikariPool - Start completed.
+2025-01-10 14:27:23 [http-nio-8080-exec-5] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@638993964 wrapping com.mysql.cj.jdbc.ConnectionImpl@25d1ece5] will not be managed by Spring
+2025-01-10 14:27:23 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6f1adc83]
+2025-01-10 14:27:23 [http-nio-8080-exec-5] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2025-01-10 14:27:23 [http-nio-8080-exec-5] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-5][user/order/do_outgoing] Deprecated unwrapped fragment expression "user/fragments/sidebar :: userSideBar" found in template user/order/do_outgoing, line 43, col 10. Please use the complete syntax of fragment expressions instead ("~{user/fragments/sidebar :: userSideBar}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:27:23 [http-nio-8080-exec-5] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-5][user/order/do_outgoing] Deprecated unwrapped fragment expression "user/fragments/topbar :: userTopBar" found in template user/order/do_outgoing, line 47, col 18. Please use the complete syntax of fragment expressions instead ("~{user/fragments/topbar :: userTopBar}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:27:23 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - GET "/css/all.css", parameters={}
+2025-01-10 14:27:23 [http-nio-8080-exec-3] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:27:23 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:27:23 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - GET "/css/sb-admin-2.css", parameters={}
+2025-01-10 14:27:23 [http-nio-8080-exec-3] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:27:23 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - GET "/img/logo/boy.png", parameters={}
+2025-01-10 14:27:23 [http-nio-8080-exec-8] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:27:23 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:27:23 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:27:23 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - GET "/img/logo/mainlogo.png", parameters={}
+2025-01-10 14:27:23 [http-nio-8080-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:27:23 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:27:23 [http-nio-8080-exec-5] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-5][user/order/do_outgoing] Deprecated unwrapped fragment expression "user/fragments/footer :: userFooter" found in template user/order/do_outgoing, line 139, col 14. Please use the complete syntax of fragment expressions instead ("~{user/fragments/footer :: userFooter}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:27:23 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:27:23 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - GET "/webfonts/fa-solid-900.woff2", parameters={}
+2025-01-10 14:27:23 [http-nio-8080-exec-9] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:27:23 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/sb-admin-2.min.js", parameters={}
+2025-01-10 14:27:23 [http-nio-8080-exec-1] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:27:23 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:27:23 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/bootstrap.bundle.min.js", parameters={}
+2025-01-10 14:27:23 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/jquery.min.js", parameters={}
+2025-01-10 14:27:23 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/jquery.easing.min.js", parameters={}
+2025-01-10 14:27:23 [http-nio-8080-exec-6] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:27:23 [http-nio-8080-exec-10] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:27:23 [http-nio-8080-exec-4] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:27:23 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:27:23 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:27:23 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:27:23 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:27:33 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - POST "/user/order/save", parameters={}
+2025-01-10 14:27:33 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.shinsegae.project.order.controller.OrderController#saveOutput(OutputVO)
+2025-01-10 14:27:33 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [OutputVO(output_id=0, product_code=132138, warehouse_id=3008, user_id=5001, confirm_num=0, confirm_i (truncated)...]
+2025-01-10 14:27:33 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-01-10 14:27:33 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4d10ab5a] was not registered for synchronization because synchronization is not active
+2025-01-10 14:27:33 [http-nio-8080-exec-7] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@573102360 wrapping com.mysql.cj.jdbc.ConnectionImpl@25d1ece5] will not be managed by Spring
+2025-01-10 14:27:33 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4d10ab5a]
+2025-01-10 14:27:33 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.view.RedirectView - View name 'redirect:', model {}
+2025-01-10 14:27:33 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - Completed 302 FOUND
+2025-01-10 14:27:33 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - GET "/user/order/do_outgoing", parameters={}
+2025-01-10 14:27:33 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.shinsegae.project.order.controller.OrderController#do_outgoing(Model)
+2025-01-10 14:27:33 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-01-10 14:27:33 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@72f09a7f] was not registered for synchronization because synchronization is not active
+2025-01-10 14:27:33 [http-nio-8080-exec-3] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@57257183 wrapping com.mysql.cj.jdbc.ConnectionImpl@25d1ece5] will not be managed by Spring
+2025-01-10 14:27:33 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@72f09a7f]
+2025-01-10 14:27:33 [http-nio-8080-exec-3] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected '*/*' given [application/json, text/plain, */*]
+2025-01-10 14:27:33 [http-nio-8080-exec-3] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-3][user/order/do_outgoing] Deprecated unwrapped fragment expression "user/fragments/sidebar :: userSideBar" found in template user/order/do_outgoing, line 43, col 10. Please use the complete syntax of fragment expressions instead ("~{user/fragments/sidebar :: userSideBar}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:27:33 [http-nio-8080-exec-3] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-3][user/order/do_outgoing] Deprecated unwrapped fragment expression "user/fragments/topbar :: userTopBar" found in template user/order/do_outgoing, line 47, col 18. Please use the complete syntax of fragment expressions instead ("~{user/fragments/topbar :: userTopBar}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:27:33 [http-nio-8080-exec-3] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-3][user/order/do_outgoing] Deprecated unwrapped fragment expression "user/fragments/footer :: userFooter" found in template user/order/do_outgoing, line 139, col 14. Please use the complete syntax of fragment expressions instead ("~{user/fragments/footer :: userFooter}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:27:33 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:27:39 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - POST "/user/order/save", parameters={}
+2025-01-10 14:27:39 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.shinsegae.project.order.controller.OrderController#saveOutput(OutputVO)
+2025-01-10 14:27:39 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [OutputVO(output_id=0, product_code=848561, warehouse_id=3001, user_id=5001, confirm_num=0, confirm_i (truncated)...]
+2025-01-10 14:27:39 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-01-10 14:27:39 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@41dfd2c9] was not registered for synchronization because synchronization is not active
+2025-01-10 14:27:39 [http-nio-8080-exec-8] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1292482501 wrapping com.mysql.cj.jdbc.ConnectionImpl@25d1ece5] will not be managed by Spring
+2025-01-10 14:27:39 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@41dfd2c9]
+2025-01-10 14:27:40 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - Failed to complete request: org.springframework.dao.DuplicateKeyException: 
+### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '848561-3001-5001' for key 'output.unique_output'
+### The error may exist in file [C:\Users\a\Desktop\project2\build\resources\main\mapper\OrderMapper.xml]
+### The error may involve com.shinsegae.project.order.mapper.OrderMapper.insertOutput-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO output (product_code, warehouse_id, user_id, confirm_num, confirm_id, status, unit_price,                                   release_quantity, release_date)         VALUES (?, ?, ?, ?, ?, ?, ?,                 ?, ?)
+### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '848561-3001-5001' for key 'output.unique_output'
+; Duplicate entry '848561-3001-5001' for key 'output.unique_output'
+2025-01-10 14:27:40 [http-nio-8080-exec-8] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.dao.DuplicateKeyException: 
+### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '848561-3001-5001' for key 'output.unique_output'
+### The error may exist in file [C:\Users\a\Desktop\project2\build\resources\main\mapper\OrderMapper.xml]
+### The error may involve com.shinsegae.project.order.mapper.OrderMapper.insertOutput-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO output (product_code, warehouse_id, user_id, confirm_num, confirm_id, status, unit_price,                                   release_quantity, release_date)         VALUES (?, ?, ?, ?, ?, ?, ?,                 ?, ?)
+### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '848561-3001-5001' for key 'output.unique_output'
+; Duplicate entry '848561-3001-5001' for key 'output.unique_output'] with root cause
+java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '848561-3001-5001' for key 'output.unique_output'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:117)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:354)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:47)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:74)
+	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50)
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:194)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:181)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:425)
+	at jdk.proxy2/jdk.proxy2.$Proxy64.insert(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:272)
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:62)
+	at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:145)
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:86)
+	at jdk.proxy3/jdk.proxy3.$Proxy71.insertOutput(Unknown Source)
+	at com.shinsegae.project.order.service.OrderService.saveOutput(OrderService.java:22)
+	at com.shinsegae.project.order.controller.OrderController.saveOutput(OrderController.java:45)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:207)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:152)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:884)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1080)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:973)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:731)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:814)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:223)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:177)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:119)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:400)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:859)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1734)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2025-01-10 14:27:40 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+2025-01-10 14:27:40 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-01-10 14:27:40 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2025-01-10 14:27:40 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{timestamp=Fri Jan 10 14:27:40 KST 2025, status=500, error=Internal Server Error, trace=org.springfr (truncated)...]
+2025-01-10 14:27:40 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 500
+2025-01-10 14:27:46 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - POST "/user/order/save", parameters={}
+2025-01-10 14:27:46 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.shinsegae.project.order.controller.OrderController#saveOutput(OutputVO)
+2025-01-10 14:27:46 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [OutputVO(output_id=0, product_code=324316, warehouse_id=3016, user_id=5001, confirm_num=0, confirm_i (truncated)...]
+2025-01-10 14:27:46 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-01-10 14:27:46 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@da58685] was not registered for synchronization because synchronization is not active
+2025-01-10 14:27:46 [http-nio-8080-exec-2] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1234118199 wrapping com.mysql.cj.jdbc.ConnectionImpl@25d1ece5] will not be managed by Spring
+2025-01-10 14:27:46 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@da58685]
+2025-01-10 14:27:46 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.view.RedirectView - View name 'redirect:', model {}
+2025-01-10 14:27:46 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 302 FOUND
+2025-01-10 14:27:46 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - GET "/user/order/do_outgoing", parameters={}
+2025-01-10 14:27:46 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.shinsegae.project.order.controller.OrderController#do_outgoing(Model)
+2025-01-10 14:27:46 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-01-10 14:27:46 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@16114ef1] was not registered for synchronization because synchronization is not active
+2025-01-10 14:27:46 [http-nio-8080-exec-5] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@2133934979 wrapping com.mysql.cj.jdbc.ConnectionImpl@25d1ece5] will not be managed by Spring
+2025-01-10 14:27:46 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@16114ef1]
+2025-01-10 14:27:46 [http-nio-8080-exec-5] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected '*/*' given [application/json, text/plain, */*]
+2025-01-10 14:27:46 [http-nio-8080-exec-5] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-5][user/order/do_outgoing] Deprecated unwrapped fragment expression "user/fragments/sidebar :: userSideBar" found in template user/order/do_outgoing, line 43, col 10. Please use the complete syntax of fragment expressions instead ("~{user/fragments/sidebar :: userSideBar}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:27:46 [http-nio-8080-exec-5] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-5][user/order/do_outgoing] Deprecated unwrapped fragment expression "user/fragments/topbar :: userTopBar" found in template user/order/do_outgoing, line 47, col 18. Please use the complete syntax of fragment expressions instead ("~{user/fragments/topbar :: userTopBar}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:27:46 [http-nio-8080-exec-5] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-5][user/order/do_outgoing] Deprecated unwrapped fragment expression "user/fragments/footer :: userFooter" found in template user/order/do_outgoing, line 139, col 14. Please use the complete syntax of fragment expressions instead ("~{user/fragments/footer :: userFooter}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:27:46 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:28:17 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - GET "/css/all.css", parameters={}
+2025-01-10 14:28:17 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/css/sb-admin-2.css", parameters={}
+2025-01-10 14:28:17 [http-nio-8080-exec-9] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:28:17 [http-nio-8080-exec-1] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:28:17 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:28:17 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:28:17 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/bootstrap.bundle.min.js.map", parameters={}
+2025-01-10 14:28:17 [http-nio-8080-exec-10] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:28:17 [http-nio-8080-exec-10] DEBUG o.s.w.s.r.ResourceHttpRequestHandler - Resource not found
+2025-01-10 14:28:17 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+2025-01-10 14:28:17 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+2025-01-10 14:28:17 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-01-10 14:28:17 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-01-10 14:28:17 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{timestamp=Fri Jan 10 14:28:17 KST 2025, status=404, error=Not Found, message=No message available,  (truncated)...]
+2025-01-10 14:28:17 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+2025-01-10 14:28:30 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - GET "/user/order/confirm_outgoing_list", parameters={}
+2025-01-10 14:28:30 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.shinsegae.project.order.controller.OrderController#confirm_outgoing_list(Model)
+2025-01-10 14:28:30 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-01-10 14:28:30 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7a11267f] was not registered for synchronization because synchronization is not active
+2025-01-10 14:28:30 [http-nio-8080-exec-3] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@460480942 wrapping com.mysql.cj.jdbc.ConnectionImpl@25d1ece5] will not be managed by Spring
+2025-01-10 14:28:30 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7a11267f]
+2025-01-10 14:28:30 [http-nio-8080-exec-3] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2025-01-10 14:28:30 [http-nio-8080-exec-3] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-3][user/order/confirm_outgoing_list] Deprecated unwrapped fragment expression "user/fragments/sidebar :: userSideBar" found in template user/order/confirm_outgoing_list, line 41, col 10. Please use the complete syntax of fragment expressions instead ("~{user/fragments/sidebar :: userSideBar}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:28:30 [http-nio-8080-exec-3] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-3][user/order/confirm_outgoing_list] Deprecated unwrapped fragment expression "user/fragments/topbar :: userTopBar" found in template user/order/confirm_outgoing_list, line 45, col 18. Please use the complete syntax of fragment expressions instead ("~{user/fragments/topbar :: userTopBar}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:28:30 [http-nio-8080-exec-3] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-3][user/order/confirm_outgoing_list] Deprecated unwrapped fragment expression "user/fragments/footer :: userFooter" found in template user/order/confirm_outgoing_list, line 115, col 14. Please use the complete syntax of fragment expressions instead ("~{user/fragments/footer :: userFooter}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:28:30 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:28:30 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - GET "/css/all.css", parameters={}
+2025-01-10 14:28:30 [http-nio-8080-exec-8] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:28:30 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - GET "/css/sb-admin-2.css", parameters={}
+2025-01-10 14:28:30 [http-nio-8080-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:28:30 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - GET "/img/logo/boy.png", parameters={}
+2025-01-10 14:28:30 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:28:30 [http-nio-8080-exec-5] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:28:30 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:28:30 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:28:30 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - GET "/img/logo/mainlogo.png", parameters={}
+2025-01-10 14:28:30 [http-nio-8080-exec-9] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:28:30 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:28:30 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/jquery.min.js", parameters={}
+2025-01-10 14:28:30 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/bootstrap.bundle.min.js", parameters={}
+2025-01-10 14:28:30 [http-nio-8080-exec-1] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:28:30 [http-nio-8080-exec-10] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:28:30 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/jquery.easing.min.js", parameters={}
+2025-01-10 14:28:30 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/sb-admin-2.min.js", parameters={}
+2025-01-10 14:28:30 [http-nio-8080-exec-6] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:28:30 [http-nio-8080-exec-7] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:28:30 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:28:30 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - GET "/webfonts/fa-solid-900.woff2", parameters={}
+2025-01-10 14:28:30 [http-nio-8080-exec-4] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:28:30 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:28:30 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:28:30 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:28:30 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:28:30 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/bootstrap.bundle.min.js.map", parameters={}
+2025-01-10 14:28:30 [http-nio-8080-exec-3] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:28:30 [http-nio-8080-exec-3] DEBUG o.s.w.s.r.ResourceHttpRequestHandler - Resource not found
+2025-01-10 14:28:30 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+2025-01-10 14:28:30 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+2025-01-10 14:28:30 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-01-10 14:28:30 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-01-10 14:28:30 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{timestamp=Fri Jan 10 14:28:30 KST 2025, status=404, error=Not Found, message=No message available,  (truncated)...]
+2025-01-10 14:28:30 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+2025-01-10 14:36:10 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - GET "/user/order/do_outgoing", parameters={}
+2025-01-10 14:36:10 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.shinsegae.project.order.controller.OrderController#do_outgoing(Model)
+2025-01-10 14:36:10 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-01-10 14:36:10 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@347b8984] was not registered for synchronization because synchronization is not active
+2025-01-10 14:36:10 [http-nio-8080-exec-7] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1517953914 wrapping com.mysql.cj.jdbc.ConnectionImpl@25d1ece5] will not be managed by Spring
+2025-01-10 14:36:10 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@347b8984]
+2025-01-10 14:36:10 [http-nio-8080-exec-7] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2025-01-10 14:36:10 [http-nio-8080-exec-7] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-7][user/order/do_outgoing] Deprecated unwrapped fragment expression "user/fragments/sidebar :: userSideBar" found in template user/order/do_outgoing, line 43, col 10. Please use the complete syntax of fragment expressions instead ("~{user/fragments/sidebar :: userSideBar}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:36:10 [http-nio-8080-exec-7] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-7][user/order/do_outgoing] Deprecated unwrapped fragment expression "user/fragments/topbar :: userTopBar" found in template user/order/do_outgoing, line 47, col 18. Please use the complete syntax of fragment expressions instead ("~{user/fragments/topbar :: userTopBar}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:36:10 [http-nio-8080-exec-7] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-7][user/order/do_outgoing] Deprecated unwrapped fragment expression "user/fragments/footer :: userFooter" found in template user/order/do_outgoing, line 139, col 14. Please use the complete syntax of fragment expressions instead ("~{user/fragments/footer :: userFooter}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:36:10 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:36:10 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - GET "/css/all.css", parameters={}
+2025-01-10 14:36:10 [http-nio-8080-exec-6] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:36:10 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - GET "/css/sb-admin-2.css", parameters={}
+2025-01-10 14:36:10 [http-nio-8080-exec-4] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:36:10 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - GET "/img/logo/boy.png", parameters={}
+2025-01-10 14:36:10 [http-nio-8080-exec-10] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:36:10 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:36:10 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:36:10 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:36:10 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/jquery.min.js", parameters={}
+2025-01-10 14:36:10 [http-nio-8080-exec-1] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:36:10 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:36:10 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/bootstrap.bundle.min.js", parameters={}
+2025-01-10 14:36:10 [http-nio-8080-exec-3] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:36:10 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/sb-admin-2.min.js", parameters={}
+2025-01-10 14:36:10 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/jquery.easing.min.js", parameters={}
+2025-01-10 14:36:10 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:36:10 [http-nio-8080-exec-9] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:36:10 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - GET "/img/logo/mainlogo.png", parameters={}
+2025-01-10 14:36:10 [http-nio-8080-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:36:10 [http-nio-8080-exec-8] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:36:10 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:36:10 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:36:10 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:36:10 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - GET "/webfonts/fa-solid-900.woff2", parameters={}
+2025-01-10 14:36:10 [http-nio-8080-exec-5] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:36:10 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:36:14 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - POST "/user/order/save", parameters={}
+2025-01-10 14:36:14 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.shinsegae.project.order.controller.OrderController#saveOutput(OutputVO)
+2025-01-10 14:36:14 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [OutputVO(output_id=0, product_code=262413, warehouse_id=3013, user_id=5001, confirm_num=0, confirm_i (truncated)...]
+2025-01-10 14:36:14 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-01-10 14:36:14 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6a749c30] was not registered for synchronization because synchronization is not active
+2025-01-10 14:36:14 [http-nio-8080-exec-7] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@949111859 wrapping com.mysql.cj.jdbc.ConnectionImpl@25d1ece5] will not be managed by Spring
+2025-01-10 14:36:14 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6a749c30]
+2025-01-10 14:36:14 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - Failed to complete request: org.springframework.dao.DuplicateKeyException: 
+### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '262413' for key 'output.unique_output'
+### The error may exist in file [C:\Users\a\Desktop\project2\build\resources\main\mapper\OrderMapper.xml]
+### The error may involve com.shinsegae.project.order.mapper.OrderMapper.insertOutput-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO output (product_code, warehouse_id, user_id, confirm_num, confirm_id, status, unit_price,                                   release_quantity, release_date)         VALUES (?, ?, ?, ?, ?, ?, ?,                 ?, ?)
+### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '262413' for key 'output.unique_output'
+; Duplicate entry '262413' for key 'output.unique_output'
+2025-01-10 14:36:14 [http-nio-8080-exec-7] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.dao.DuplicateKeyException: 
+### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '262413' for key 'output.unique_output'
+### The error may exist in file [C:\Users\a\Desktop\project2\build\resources\main\mapper\OrderMapper.xml]
+### The error may involve com.shinsegae.project.order.mapper.OrderMapper.insertOutput-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO output (product_code, warehouse_id, user_id, confirm_num, confirm_id, status, unit_price,                                   release_quantity, release_date)         VALUES (?, ?, ?, ?, ?, ?, ?,                 ?, ?)
+### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '262413' for key 'output.unique_output'
+; Duplicate entry '262413' for key 'output.unique_output'] with root cause
+java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '262413' for key 'output.unique_output'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:117)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:354)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:47)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:74)
+	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50)
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:194)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:181)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:425)
+	at jdk.proxy2/jdk.proxy2.$Proxy64.insert(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:272)
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:62)
+	at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:145)
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:86)
+	at jdk.proxy3/jdk.proxy3.$Proxy71.insertOutput(Unknown Source)
+	at com.shinsegae.project.order.service.OrderService.saveOutput(OrderService.java:22)
+	at com.shinsegae.project.order.controller.OrderController.saveOutput(OrderController.java:45)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:207)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:152)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:884)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1080)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:973)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:731)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:814)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:223)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:177)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:119)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:400)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:859)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1734)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2025-01-10 14:36:14 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+2025-01-10 14:36:14 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-01-10 14:36:14 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2025-01-10 14:36:14 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{timestamp=Fri Jan 10 14:36:14 KST 2025, status=500, error=Internal Server Error, trace=org.springfr (truncated)...]
+2025-01-10 14:36:14 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 500
+2025-01-10 14:36:21 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - POST "/user/order/save", parameters={}
+2025-01-10 14:36:21 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.shinsegae.project.order.controller.OrderController#saveOutput(OutputVO)
+2025-01-10 14:36:21 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [OutputVO(output_id=0, product_code=134532, warehouse_id=3012, user_id=5001, confirm_num=0, confirm_i (truncated)...]
+2025-01-10 14:36:21 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-01-10 14:36:21 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6861dfb5] was not registered for synchronization because synchronization is not active
+2025-01-10 14:36:21 [http-nio-8080-exec-6] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1673883063 wrapping com.mysql.cj.jdbc.ConnectionImpl@25d1ece5] will not be managed by Spring
+2025-01-10 14:36:21 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6861dfb5]
+2025-01-10 14:36:21 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - Failed to complete request: org.springframework.dao.DuplicateKeyException: 
+### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '134532' for key 'output.unique_output'
+### The error may exist in file [C:\Users\a\Desktop\project2\build\resources\main\mapper\OrderMapper.xml]
+### The error may involve com.shinsegae.project.order.mapper.OrderMapper.insertOutput-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO output (product_code, warehouse_id, user_id, confirm_num, confirm_id, status, unit_price,                                   release_quantity, release_date)         VALUES (?, ?, ?, ?, ?, ?, ?,                 ?, ?)
+### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '134532' for key 'output.unique_output'
+; Duplicate entry '134532' for key 'output.unique_output'
+2025-01-10 14:36:21 [http-nio-8080-exec-6] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.dao.DuplicateKeyException: 
+### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '134532' for key 'output.unique_output'
+### The error may exist in file [C:\Users\a\Desktop\project2\build\resources\main\mapper\OrderMapper.xml]
+### The error may involve com.shinsegae.project.order.mapper.OrderMapper.insertOutput-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO output (product_code, warehouse_id, user_id, confirm_num, confirm_id, status, unit_price,                                   release_quantity, release_date)         VALUES (?, ?, ?, ?, ?, ?, ?,                 ?, ?)
+### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '134532' for key 'output.unique_output'
+; Duplicate entry '134532' for key 'output.unique_output'] with root cause
+java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '134532' for key 'output.unique_output'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:117)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:354)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:47)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:74)
+	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50)
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:194)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:181)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:425)
+	at jdk.proxy2/jdk.proxy2.$Proxy64.insert(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:272)
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:62)
+	at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:145)
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:86)
+	at jdk.proxy3/jdk.proxy3.$Proxy71.insertOutput(Unknown Source)
+	at com.shinsegae.project.order.service.OrderService.saveOutput(OrderService.java:22)
+	at com.shinsegae.project.order.controller.OrderController.saveOutput(OrderController.java:45)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:207)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:152)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:884)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1080)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:973)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:731)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:814)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:223)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:177)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:119)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:400)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:859)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1734)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2025-01-10 14:36:21 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+2025-01-10 14:36:21 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-01-10 14:36:21 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2025-01-10 14:36:21 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{timestamp=Fri Jan 10 14:36:21 KST 2025, status=500, error=Internal Server Error, trace=org.springfr (truncated)...]
+2025-01-10 14:36:21 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 500
+2025-01-10 14:36:26 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - GET "/css/all.css", parameters={}
+2025-01-10 14:36:26 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - GET "/css/sb-admin-2.css", parameters={}
+2025-01-10 14:36:26 [http-nio-8080-exec-10] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:36:26 [http-nio-8080-exec-4] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:36:26 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:36:26 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:36:26 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/bootstrap.bundle.min.js.map", parameters={}
+2025-01-10 14:36:26 [http-nio-8080-exec-1] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:36:26 [http-nio-8080-exec-1] DEBUG o.s.w.s.r.ResourceHttpRequestHandler - Resource not found
+2025-01-10 14:36:26 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+2025-01-10 14:36:26 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+2025-01-10 14:36:26 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-01-10 14:36:26 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-01-10 14:36:26 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{timestamp=Fri Jan 10 14:36:26 KST 2025, status=404, error=Not Found, message=No message available,  (truncated)...]
+2025-01-10 14:36:26 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+2025-01-10 14:36:45 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - POST "/user/order/save", parameters={}
+2025-01-10 14:36:45 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.shinsegae.project.order.controller.OrderController#saveOutput(OutputVO)
+2025-01-10 14:36:45 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [OutputVO(output_id=0, product_code=783845, warehouse_id=3003, user_id=5001, confirm_num=0, confirm_i (truncated)...]
+2025-01-10 14:36:45 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-01-10 14:36:45 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6d802f55] was not registered for synchronization because synchronization is not active
+2025-01-10 14:36:45 [http-nio-8080-exec-3] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1810432017 wrapping com.mysql.cj.jdbc.ConnectionImpl@25d1ece5] will not be managed by Spring
+2025-01-10 14:36:45 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6d802f55]
+2025-01-10 14:36:45 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Failed to complete request: org.springframework.dao.DuplicateKeyException: 
+### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '783845' for key 'output.unique_output'
+### The error may exist in file [C:\Users\a\Desktop\project2\build\resources\main\mapper\OrderMapper.xml]
+### The error may involve com.shinsegae.project.order.mapper.OrderMapper.insertOutput-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO output (product_code, warehouse_id, user_id, confirm_num, confirm_id, status, unit_price,                                   release_quantity, release_date)         VALUES (?, ?, ?, ?, ?, ?, ?,                 ?, ?)
+### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '783845' for key 'output.unique_output'
+; Duplicate entry '783845' for key 'output.unique_output'
+2025-01-10 14:36:45 [http-nio-8080-exec-3] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.dao.DuplicateKeyException: 
+### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '783845' for key 'output.unique_output'
+### The error may exist in file [C:\Users\a\Desktop\project2\build\resources\main\mapper\OrderMapper.xml]
+### The error may involve com.shinsegae.project.order.mapper.OrderMapper.insertOutput-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO output (product_code, warehouse_id, user_id, confirm_num, confirm_id, status, unit_price,                                   release_quantity, release_date)         VALUES (?, ?, ?, ?, ?, ?, ?,                 ?, ?)
+### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '783845' for key 'output.unique_output'
+; Duplicate entry '783845' for key 'output.unique_output'] with root cause
+java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '783845' for key 'output.unique_output'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:117)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:354)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:47)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:74)
+	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50)
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:194)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:181)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:425)
+	at jdk.proxy2/jdk.proxy2.$Proxy64.insert(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:272)
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:62)
+	at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:145)
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:86)
+	at jdk.proxy3/jdk.proxy3.$Proxy71.insertOutput(Unknown Source)
+	at com.shinsegae.project.order.service.OrderService.saveOutput(OrderService.java:22)
+	at com.shinsegae.project.order.controller.OrderController.saveOutput(OrderController.java:45)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:207)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:152)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:884)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1080)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:973)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:731)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:814)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:223)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:177)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:119)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:400)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:859)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1734)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2025-01-10 14:36:45 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+2025-01-10 14:36:45 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-01-10 14:36:45 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2025-01-10 14:36:45 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{timestamp=Fri Jan 10 14:36:45 KST 2025, status=500, error=Internal Server Error, trace=org.springfr (truncated)...]
+2025-01-10 14:36:45 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 500
+2025-01-10 14:40:24 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - GET "/user/order/do_outgoing", parameters={}
+2025-01-10 14:40:24 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.shinsegae.project.order.controller.OrderController#do_outgoing(Model)
+2025-01-10 14:40:24 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-01-10 14:40:24 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@530b7356] was not registered for synchronization because synchronization is not active
+2025-01-10 14:40:24 [http-nio-8080-exec-2] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@32336941 wrapping com.mysql.cj.jdbc.ConnectionImpl@25d1ece5] will not be managed by Spring
+2025-01-10 14:40:24 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@530b7356]
+2025-01-10 14:40:24 [http-nio-8080-exec-2] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2025-01-10 14:40:24 [http-nio-8080-exec-2] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-2][user/order/do_outgoing] Deprecated unwrapped fragment expression "user/fragments/sidebar :: userSideBar" found in template user/order/do_outgoing, line 43, col 10. Please use the complete syntax of fragment expressions instead ("~{user/fragments/sidebar :: userSideBar}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:40:24 [http-nio-8080-exec-2] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-2][user/order/do_outgoing] Deprecated unwrapped fragment expression "user/fragments/topbar :: userTopBar" found in template user/order/do_outgoing, line 47, col 18. Please use the complete syntax of fragment expressions instead ("~{user/fragments/topbar :: userTopBar}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:40:24 [http-nio-8080-exec-2] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-2][user/order/do_outgoing] Deprecated unwrapped fragment expression "user/fragments/footer :: userFooter" found in template user/order/do_outgoing, line 139, col 14. Please use the complete syntax of fragment expressions instead ("~{user/fragments/footer :: userFooter}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:40:24 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:40:24 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - GET "/css/all.css", parameters={}
+2025-01-10 14:40:24 [http-nio-8080-exec-8] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:40:24 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - GET "/css/sb-admin-2.css", parameters={}
+2025-01-10 14:40:24 [http-nio-8080-exec-5] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:40:24 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - GET "/img/logo/boy.png", parameters={}
+2025-01-10 14:40:24 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:40:24 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/jquery.min.js", parameters={}
+2025-01-10 14:40:24 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:40:24 [http-nio-8080-exec-6] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:40:24 [http-nio-8080-exec-7] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:40:24 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:40:24 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:40:24 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/bootstrap.bundle.min.js", parameters={}
+2025-01-10 14:40:24 [http-nio-8080-exec-4] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:40:24 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/jquery.easing.min.js", parameters={}
+2025-01-10 14:40:24 [http-nio-8080-exec-10] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:40:24 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:40:24 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:40:24 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - GET "/img/logo/mainlogo.png", parameters={}
+2025-01-10 14:40:24 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/sb-admin-2.min.js", parameters={}
+2025-01-10 14:40:24 [http-nio-8080-exec-1] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:40:24 [http-nio-8080-exec-3] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:40:24 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:40:24 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:40:24 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - GET "/webfonts/fa-solid-900.woff2", parameters={}
+2025-01-10 14:40:24 [http-nio-8080-exec-9] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:40:24 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:40:24 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/bootstrap.bundle.min.js.map", parameters={}
+2025-01-10 14:40:24 [http-nio-8080-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:40:24 [http-nio-8080-exec-2] DEBUG o.s.w.s.r.ResourceHttpRequestHandler - Resource not found
+2025-01-10 14:40:24 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+2025-01-10 14:40:24 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+2025-01-10 14:40:24 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-01-10 14:40:24 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-01-10 14:40:24 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{timestamp=Fri Jan 10 14:40:24 KST 2025, status=404, error=Not Found, message=No message available,  (truncated)...]
+2025-01-10 14:40:24 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+2025-01-10 14:40:24 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - GET "/img/favicon/starfavicon.png", parameters={}
+2025-01-10 14:40:24 [http-nio-8080-exec-5] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:40:24 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:40:27 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - POST "/user/order/save", parameters={}
+2025-01-10 14:40:27 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.shinsegae.project.order.controller.OrderController#saveOutput(OutputVO)
+2025-01-10 14:40:27 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [OutputVO(output_id=0, product_code=345527, warehouse_id=3007, user_id=5001, confirm_num=0, confirm_i (truncated)...]
+2025-01-10 14:40:27 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-01-10 14:40:27 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@36defe7c] was not registered for synchronization because synchronization is not active
+2025-01-10 14:40:27 [http-nio-8080-exec-8] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@160741085 wrapping com.mysql.cj.jdbc.ConnectionImpl@25d1ece5] will not be managed by Spring
+2025-01-10 14:40:27 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@36defe7c]
+2025-01-10 14:40:27 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.view.RedirectView - View name 'redirect:', model {}
+2025-01-10 14:40:27 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - Completed 302 FOUND
+2025-01-10 14:40:27 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - GET "/user/order/do_outgoing", parameters={}
+2025-01-10 14:40:27 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.shinsegae.project.order.controller.OrderController#do_outgoing(Model)
+2025-01-10 14:40:27 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-01-10 14:40:27 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7e5661a8] was not registered for synchronization because synchronization is not active
+2025-01-10 14:40:27 [http-nio-8080-exec-6] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@217388525 wrapping com.mysql.cj.jdbc.ConnectionImpl@25d1ece5] will not be managed by Spring
+2025-01-10 14:40:27 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7e5661a8]
+2025-01-10 14:40:27 [http-nio-8080-exec-6] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected '*/*' given [application/json, text/plain, */*]
+2025-01-10 14:40:27 [http-nio-8080-exec-6] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-6][user/order/do_outgoing] Deprecated unwrapped fragment expression "user/fragments/sidebar :: userSideBar" found in template user/order/do_outgoing, line 43, col 10. Please use the complete syntax of fragment expressions instead ("~{user/fragments/sidebar :: userSideBar}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:40:27 [http-nio-8080-exec-6] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-6][user/order/do_outgoing] Deprecated unwrapped fragment expression "user/fragments/topbar :: userTopBar" found in template user/order/do_outgoing, line 47, col 18. Please use the complete syntax of fragment expressions instead ("~{user/fragments/topbar :: userTopBar}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:40:27 [http-nio-8080-exec-6] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-6][user/order/do_outgoing] Deprecated unwrapped fragment expression "user/fragments/footer :: userFooter" found in template user/order/do_outgoing, line 139, col 14. Please use the complete syntax of fragment expressions instead ("~{user/fragments/footer :: userFooter}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:40:27 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:40:31 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - POST "/user/order/save", parameters={}
+2025-01-10 14:40:31 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.shinsegae.project.order.controller.OrderController#saveOutput(OutputVO)
+2025-01-10 14:40:31 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [OutputVO(output_id=0, product_code=783845, warehouse_id=3003, user_id=5001, confirm_num=0, confirm_i (truncated)...]
+2025-01-10 14:40:31 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-01-10 14:40:31 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@760f7852] was not registered for synchronization because synchronization is not active
+2025-01-10 14:40:31 [http-nio-8080-exec-7] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@707432886 wrapping com.mysql.cj.jdbc.ConnectionImpl@25d1ece5] will not be managed by Spring
+2025-01-10 14:40:31 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@760f7852]
+2025-01-10 14:40:31 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.view.RedirectView - View name 'redirect:', model {}
+2025-01-10 14:40:31 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - Completed 302 FOUND
+2025-01-10 14:40:31 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - GET "/user/order/do_outgoing", parameters={}
+2025-01-10 14:40:31 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.shinsegae.project.order.controller.OrderController#do_outgoing(Model)
+2025-01-10 14:40:31 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-01-10 14:40:31 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@51ff4594] was not registered for synchronization because synchronization is not active
+2025-01-10 14:40:31 [http-nio-8080-exec-4] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@657568086 wrapping com.mysql.cj.jdbc.ConnectionImpl@25d1ece5] will not be managed by Spring
+2025-01-10 14:40:31 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@51ff4594]
+2025-01-10 14:40:31 [http-nio-8080-exec-4] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected '*/*' given [application/json, text/plain, */*]
+2025-01-10 14:40:31 [http-nio-8080-exec-4] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-4][user/order/do_outgoing] Deprecated unwrapped fragment expression "user/fragments/sidebar :: userSideBar" found in template user/order/do_outgoing, line 43, col 10. Please use the complete syntax of fragment expressions instead ("~{user/fragments/sidebar :: userSideBar}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:40:31 [http-nio-8080-exec-4] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-4][user/order/do_outgoing] Deprecated unwrapped fragment expression "user/fragments/topbar :: userTopBar" found in template user/order/do_outgoing, line 47, col 18. Please use the complete syntax of fragment expressions instead ("~{user/fragments/topbar :: userTopBar}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:40:31 [http-nio-8080-exec-4] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-4][user/order/do_outgoing] Deprecated unwrapped fragment expression "user/fragments/footer :: userFooter" found in template user/order/do_outgoing, line 139, col 14. Please use the complete syntax of fragment expressions instead ("~{user/fragments/footer :: userFooter}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:40:31 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:40:36 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - POST "/user/order/save", parameters={}
+2025-01-10 14:40:36 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.shinsegae.project.order.controller.OrderController#saveOutput(OutputVO)
+2025-01-10 14:40:36 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [OutputVO(output_id=0, product_code=243223, warehouse_id=3019, user_id=5001, confirm_num=0, confirm_i (truncated)...]
+2025-01-10 14:40:36 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-01-10 14:40:36 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@274576d] was not registered for synchronization because synchronization is not active
+2025-01-10 14:40:36 [http-nio-8080-exec-10] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@922950479 wrapping com.mysql.cj.jdbc.ConnectionImpl@25d1ece5] will not be managed by Spring
+2025-01-10 14:40:36 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@274576d]
+2025-01-10 14:40:36 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.view.RedirectView - View name 'redirect:', model {}
+2025-01-10 14:40:36 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - Completed 302 FOUND
+2025-01-10 14:40:36 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/user/order/do_outgoing", parameters={}
+2025-01-10 14:40:36 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.shinsegae.project.order.controller.OrderController#do_outgoing(Model)
+2025-01-10 14:40:36 [http-nio-8080-exec-1] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-01-10 14:40:36 [http-nio-8080-exec-1] DEBUG org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5b971833] was not registered for synchronization because synchronization is not active
+2025-01-10 14:40:36 [http-nio-8080-exec-1] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1757117301 wrapping com.mysql.cj.jdbc.ConnectionImpl@25d1ece5] will not be managed by Spring
+2025-01-10 14:40:36 [http-nio-8080-exec-1] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5b971833]
+2025-01-10 14:40:36 [http-nio-8080-exec-1] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected '*/*' given [application/json, text/plain, */*]
+2025-01-10 14:40:36 [http-nio-8080-exec-1] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-1][user/order/do_outgoing] Deprecated unwrapped fragment expression "user/fragments/sidebar :: userSideBar" found in template user/order/do_outgoing, line 43, col 10. Please use the complete syntax of fragment expressions instead ("~{user/fragments/sidebar :: userSideBar}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:40:36 [http-nio-8080-exec-1] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-1][user/order/do_outgoing] Deprecated unwrapped fragment expression "user/fragments/topbar :: userTopBar" found in template user/order/do_outgoing, line 47, col 18. Please use the complete syntax of fragment expressions instead ("~{user/fragments/topbar :: userTopBar}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:40:36 [http-nio-8080-exec-1] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-1][user/order/do_outgoing] Deprecated unwrapped fragment expression "user/fragments/footer :: userFooter" found in template user/order/do_outgoing, line 139, col 14. Please use the complete syntax of fragment expressions instead ("~{user/fragments/footer :: userFooter}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:40:36 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:40:40 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - GET "/user/order/confirm_outgoing_list", parameters={}
+2025-01-10 14:40:40 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.shinsegae.project.order.controller.OrderController#confirm_outgoing_list(Model)
+2025-01-10 14:40:40 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-01-10 14:40:40 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@623d3ec3] was not registered for synchronization because synchronization is not active
+2025-01-10 14:40:40 [http-nio-8080-exec-3] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@754554751 wrapping com.mysql.cj.jdbc.ConnectionImpl@25d1ece5] will not be managed by Spring
+2025-01-10 14:40:40 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@623d3ec3]
+2025-01-10 14:40:40 [http-nio-8080-exec-3] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2025-01-10 14:40:40 [http-nio-8080-exec-3] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-3][user/order/confirm_outgoing_list] Deprecated unwrapped fragment expression "user/fragments/sidebar :: userSideBar" found in template user/order/confirm_outgoing_list, line 41, col 10. Please use the complete syntax of fragment expressions instead ("~{user/fragments/sidebar :: userSideBar}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:40:40 [http-nio-8080-exec-3] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-3][user/order/confirm_outgoing_list] Deprecated unwrapped fragment expression "user/fragments/topbar :: userTopBar" found in template user/order/confirm_outgoing_list, line 45, col 18. Please use the complete syntax of fragment expressions instead ("~{user/fragments/topbar :: userTopBar}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:40:40 [http-nio-8080-exec-3] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-3][user/order/confirm_outgoing_list] Deprecated unwrapped fragment expression "user/fragments/footer :: userFooter" found in template user/order/confirm_outgoing_list, line 115, col 14. Please use the complete syntax of fragment expressions instead ("~{user/fragments/footer :: userFooter}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:40:40 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:40:40 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - GET "/css/all.css", parameters={}
+2025-01-10 14:40:40 [http-nio-8080-exec-9] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:40:40 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:40:40 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - GET "/img/logo/boy.png", parameters={}
+2025-01-10 14:40:40 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - GET "/css/sb-admin-2.css", parameters={}
+2025-01-10 14:40:40 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/jquery.min.js", parameters={}
+2025-01-10 14:40:40 [http-nio-8080-exec-5] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:40:40 [http-nio-8080-exec-8] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:40:40 [http-nio-8080-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:40:40 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:40:40 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:40:40 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:40:40 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/bootstrap.bundle.min.js", parameters={}
+2025-01-10 14:40:40 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/jquery.easing.min.js", parameters={}
+2025-01-10 14:40:40 [http-nio-8080-exec-6] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:40:40 [http-nio-8080-exec-7] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:40:40 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/sb-admin-2.min.js", parameters={}
+2025-01-10 14:40:40 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - GET "/img/logo/mainlogo.png", parameters={}
+2025-01-10 14:40:40 [http-nio-8080-exec-4] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:40:40 [http-nio-8080-exec-10] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:40:40 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:40:40 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:40:40 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:40:40 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:40:40 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/webfonts/fa-solid-900.woff2", parameters={}
+2025-01-10 14:40:40 [http-nio-8080-exec-1] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:40:40 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:40:40 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/bootstrap.bundle.min.js.map", parameters={}
+2025-01-10 14:40:40 [http-nio-8080-exec-3] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:40:40 [http-nio-8080-exec-3] DEBUG o.s.w.s.r.ResourceHttpRequestHandler - Resource not found
+2025-01-10 14:40:40 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+2025-01-10 14:40:40 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+2025-01-10 14:40:40 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-01-10 14:40:40 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-01-10 14:40:40 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{timestamp=Fri Jan 10 14:40:40 KST 2025, status=404, error=Not Found, message=No message available,  (truncated)...]
+2025-01-10 14:40:40 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+2025-01-10 14:42:47 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - GET "/user/order/do_outgoing", parameters={}
+2025-01-10 14:42:47 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.shinsegae.project.order.controller.OrderController#do_outgoing(Model)
+2025-01-10 14:42:47 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-01-10 14:42:47 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7d6e5b2b] was not registered for synchronization because synchronization is not active
+2025-01-10 14:42:47 [http-nio-8080-exec-7] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@62378513 wrapping com.mysql.cj.jdbc.ConnectionImpl@25d1ece5] will not be managed by Spring
+2025-01-10 14:42:47 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7d6e5b2b]
+2025-01-10 14:42:47 [http-nio-8080-exec-7] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2025-01-10 14:42:47 [http-nio-8080-exec-7] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-7][user/order/do_outgoing] Deprecated unwrapped fragment expression "user/fragments/sidebar :: userSideBar" found in template user/order/do_outgoing, line 43, col 10. Please use the complete syntax of fragment expressions instead ("~{user/fragments/sidebar :: userSideBar}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:42:47 [http-nio-8080-exec-7] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-7][user/order/do_outgoing] Deprecated unwrapped fragment expression "user/fragments/topbar :: userTopBar" found in template user/order/do_outgoing, line 47, col 18. Please use the complete syntax of fragment expressions instead ("~{user/fragments/topbar :: userTopBar}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:42:47 [http-nio-8080-exec-7] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-7][user/order/do_outgoing] Deprecated unwrapped fragment expression "user/fragments/footer :: userFooter" found in template user/order/do_outgoing, line 139, col 14. Please use the complete syntax of fragment expressions instead ("~{user/fragments/footer :: userFooter}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:42:47 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:42:47 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - GET "/css/all.css", parameters={}
+2025-01-10 14:42:47 [http-nio-8080-exec-6] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:42:47 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:42:47 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - GET "/img/logo/boy.png", parameters={}
+2025-01-10 14:42:47 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - GET "/css/sb-admin-2.css", parameters={}
+2025-01-10 14:42:47 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/jquery.min.js", parameters={}
+2025-01-10 14:42:47 [http-nio-8080-exec-4] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:42:47 [http-nio-8080-exec-10] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:42:47 [http-nio-8080-exec-1] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:42:47 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:42:47 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:42:47 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:42:47 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/bootstrap.bundle.min.js", parameters={}
+2025-01-10 14:42:47 [http-nio-8080-exec-3] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:42:47 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:42:47 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/jquery.easing.min.js", parameters={}
+2025-01-10 14:42:47 [http-nio-8080-exec-8] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:42:47 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - GET "/img/logo/mainlogo.png", parameters={}
+2025-01-10 14:42:47 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/sb-admin-2.min.js", parameters={}
+2025-01-10 14:42:47 [http-nio-8080-exec-9] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:42:47 [http-nio-8080-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:42:47 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:42:47 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:42:47 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:42:47 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - GET "/webfonts/fa-solid-900.woff2", parameters={}
+2025-01-10 14:42:47 [http-nio-8080-exec-5] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:42:47 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:44:53 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/user/order/confirm_outgoing_list", parameters={}
+2025-01-10 14:44:53 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.shinsegae.project.order.controller.OrderController#confirm_outgoing_list(Model)
+2025-01-10 14:44:53 [http-nio-8080-exec-1] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-01-10 14:44:53 [http-nio-8080-exec-1] DEBUG org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@35888432] was not registered for synchronization because synchronization is not active
+2025-01-10 14:44:53 [http-nio-8080-exec-1] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1420047284 wrapping com.mysql.cj.jdbc.ConnectionImpl@25d1ece5] will not be managed by Spring
+2025-01-10 14:44:53 [http-nio-8080-exec-1] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@35888432]
+2025-01-10 14:44:53 [http-nio-8080-exec-1] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2025-01-10 14:44:53 [http-nio-8080-exec-1] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-1][user/order/confirm_outgoing_list] Deprecated unwrapped fragment expression "user/fragments/sidebar :: userSideBar" found in template user/order/confirm_outgoing_list, line 41, col 10. Please use the complete syntax of fragment expressions instead ("~{user/fragments/sidebar :: userSideBar}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:44:53 [http-nio-8080-exec-1] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-1][user/order/confirm_outgoing_list] Deprecated unwrapped fragment expression "user/fragments/topbar :: userTopBar" found in template user/order/confirm_outgoing_list, line 45, col 18. Please use the complete syntax of fragment expressions instead ("~{user/fragments/topbar :: userTopBar}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:44:53 [http-nio-8080-exec-1] WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][http-nio-8080-exec-1][user/order/confirm_outgoing_list] Deprecated unwrapped fragment expression "user/fragments/footer :: userFooter" found in template user/order/confirm_outgoing_list, line 115, col 14. Please use the complete syntax of fragment expressions instead ("~{user/fragments/footer :: userFooter}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2025-01-10 14:44:53 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:44:53 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - GET "/css/all.css", parameters={}
+2025-01-10 14:44:53 [http-nio-8080-exec-10] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:44:53 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:44:53 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - GET "/css/sb-admin-2.css", parameters={}
+2025-01-10 14:44:53 [http-nio-8080-exec-3] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:44:53 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - GET "/img/logo/boy.png", parameters={}
+2025-01-10 14:44:53 [http-nio-8080-exec-8] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:44:53 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:44:53 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/jquery.min.js", parameters={}
+2025-01-10 14:44:53 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/bootstrap.bundle.min.js", parameters={}
+2025-01-10 14:44:53 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/jquery.easing.min.js", parameters={}
+2025-01-10 14:44:53 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:44:53 [http-nio-8080-exec-9] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:44:53 [http-nio-8080-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:44:53 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - GET "/js/sb-admin-2.min.js", parameters={}
+2025-01-10 14:44:53 [http-nio-8080-exec-5] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:44:53 [http-nio-8080-exec-7] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:44:53 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - GET "/img/logo/mainlogo.png", parameters={}
+2025-01-10 14:44:53 [http-nio-8080-exec-4] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:44:53 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:44:53 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:44:53 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:44:53 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:44:53 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-01-10 14:44:53 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - GET "/webfonts/fa-solid-900.woff2", parameters={}
+2025-01-10 14:44:53 [http-nio-8080-exec-6] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-01-10 14:44:53 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
