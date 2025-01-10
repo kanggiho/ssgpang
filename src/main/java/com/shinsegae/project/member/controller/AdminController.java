@@ -17,7 +17,6 @@ public class AdminController {
     //관리자 로그인
     @GetMapping("login")
     public String login(HttpSession session) {
-        // 세션에 id가 있으면 홈 페이지로 리다이렉트
         if (session.getAttribute("id") != null) {
             return "/admin/home_admin";  // 로그인된 경우 Admin 홈으로 리다이렉트
         }
@@ -43,15 +42,6 @@ public class AdminController {
             return "/user/member/login";  // 로그인 페이지로 다시 돌아가도록
         }
     }
-
-//    //관리자 아이디 유효성 검증
-//    @GetMapping("checkId")
-//    @ResponseBody
-//    public boolean checkId(@RequestParam String id) {
-//        System.out.println("user id >> " + id);
-//        boolean result = adminService.checkId(id);
-//        return result;
-//    }
 
 
     //관리자 로그아웃
