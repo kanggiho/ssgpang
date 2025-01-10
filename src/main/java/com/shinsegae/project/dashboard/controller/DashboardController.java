@@ -1,6 +1,7 @@
 package com.shinsegae.project.dashboard.controller;
 
 import com.shinsegae.project.dashboard.service.DashboardService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +14,8 @@ public class DashboardController {
     private final DashboardService dashboardService;
 
     @GetMapping("user/home")
-    public String home() {
+    public String home(HttpSession session, Model model) {
+        session.setAttribute("id","giho");
         return "user/home";
     }
 

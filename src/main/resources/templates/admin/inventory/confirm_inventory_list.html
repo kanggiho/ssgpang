@@ -6,100 +6,191 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
     <title>SSGPANG Fresh</title>
 
     <!-- Custom fonts for this template-->
     <link href="/css/all.css" rel="stylesheet" type="text/css">
-    <link
-            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-            rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.css" rel="stylesheet">
     <link rel="icon" href="/img/favicon/starfavicon.png">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <style>
+        .table-responsive {
+            max-height: 495px; /* 테이블 높이 제한 */
+            overflow-y: auto;  /* 스크롤 추가 */
+        }
+
+        .table td, .table th {
+            padding: 5px 7px; /* 행 패딩 조절 */
+            text-align: center; /* 텍스트 중앙 정렬 */
+            vertical-align: middle; /* 세로 중앙 정렬 */
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: #f5f5f5; /* 행에 마우스 올릴 때 색 변경 */
+        }
+    </style>
 
 </head>
 
 <body id="page-top">
 
-<!-- Page Wrapper -->
 <div id="wrapper">
-
-    <!-- Sidebar -->
     <div th:replace="admin/fragments/sidebar :: adminSideBar"></div>
 
-    <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
-
-        <!-- Main Content -->
         <div id="content">
-
-            <!-- Topbar -->
             <div th:replace="admin/fragments/topbar :: adminTopBar"></div>
 
-            <!-- Begin Page Content -->
             <div class="container-fluid">
 
-                <!-- Content Row -->
+
                 <div class="row">
-                    <!-- Content Column -->
-                    <div class="col-lg-6 mb-4">
-                        <!-- ==============================내용이 들어가는 곳입니다.================================ -->
-                        <!-- =================================================================================== -->
-                        <!-- =================================================================================== -->
-                        <!-- =================================================================================== -->
+                    <!-- Table Column -->
+                    <div class="col-lg-8">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">재고</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered text-center table-hover" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                        <tr>
+                                            <th>품목구분</th>
+                                            <th>자재명</th>
+                                            <th>창고이름</th>
+                                            <th>제조업체명</th>
+                                            <th>단가</th>
+                                            <th>재고수량</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="confirm_inventory, status : ${confirm_inventory_list}" onmouseover="showDetails(this)" onmouseout="resetDetails()"
+                                        th:id = "${confirm_inventory.code}">
+                                            <td th:text="${confirm_inventory.itemClassification}"></td>
+                                            <td th:text="${confirm_inventory.productName}"></td>
+                                            <td th:text="${confirm_inventory.warehouseName}"></td>
+                                            <td th:text="${confirm_inventory.manufacturerName}"></td>
+                                            <td th:text="${confirm_inventory.price} + '원'"></td>
+                                            <td th:text="${confirm_inventory.stock} + '개'"></td>
+                                            <td><button class="btn btn-danger btn-sm"
+                                                        th:data-code = ${confirm_inventory.code}
+                                                        onclick="deleteRow(this)">삭제</button></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                        <h1>재고확인 화면</h1>
+                    <!-- Details Column -->
+                    <div class="col-lg-4">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">정보</h6>
+                            </div>
+                            <div class="card-body">
+                                <div id="details-container">
+                                    <p><strong>품목구분:</strong> <span id="detail-itemClassification"></span></p>
+                                    <p><strong>자재명:</strong> <span id="detail-productName"></span></p>
+                                    <p><strong>창고이름:</strong> <span id="detail-warehouseName"></span></p>
+                                    <p><strong>제조업체명:</strong> <span id="detail-manufacturerName"></span></p>
+                                    <p><strong>단가:</strong> <span id="detail-price"></span></p>
+                                    <p><strong>재고수량:</strong> <span id="detail-stock"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">신청</h6>
+                            </div>
+                            <div class="card-body">
+                                <div id="details-container2">
 
-                        <!-- =================================================================================== -->
-                        <!-- =================================================================================== -->
-                        <!-- =================================================================================== -->
-                        <!-- ==============================내용이 들어가는 곳입니다.================================ -->
+                                    <!-- Form Group 예시 -->
+                                    <div class="form-group" style="display: flex; align-items: center; justify-content: space-between;">
+                                        <label for="outputTextInput" style="font-size: 0.85rem">수정개수</label>
+                                        <input type="number" class="form-control" id="outputTextInput" value="0" min="0"
+                                               placeholder="수량을 입력해주세요." style="width: 200px">
+                                    </div>
+                                    <a id="" class="btn btn-primary" type="button">
+                                        <i class="fas fa-inbox fa-sm">
+                                            수정하기
+                                        </i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
             </div>
-            <!-- /.container-fluid -->
-
         </div>
-        <!-- End of Main Content -->
-
-        <!-- Footer -->
-        <div th:replace="admin/fragments/footer :: adminFooter"></div>
-
+        <div th:replace="admin/fragments/modal :: adminModal"></div>
     </div>
-    <!-- End of Content Wrapper -->
-
 </div>
-<!-- End of Page Wrapper -->
-
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div th:replace="admin/fragments/modal :: adminModal"></div>
-
-<!-- Bootstrap core JavaScript-->
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript-->
 <script src="/js/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
 <script src="/js/sb-admin-2.min.js"></script>
 
-<!-- Page level plugins -->
 <script src="/js/Chart.min.js"></script>
-
-<!-- Page level custom scripts -->
 <script src="/js/demo/chart-area-demo.js"></script>
 <script src="/js/demo/chart-pie-demo.js"></script>
+<script>
+    function showDetails(row) {
+        const data = {
+            itemClassification: row.children[0].innerText,
+            productName: row.children[1].innerText,
+            warehouseName: row.children[2].innerText,
+            manufacturerName: row.children[3].innerText,
+            price: row.children[4].innerText,
+            stock: row.children[5].innerText
+        };
+
+        document.getElementById('detail-itemClassification').innerText = data.itemClassification;
+        document.getElementById('detail-productName').innerText = data.productName;
+        document.getElementById('detail-warehouseName').innerText = data.warehouseName;
+        document.getElementById('detail-manufacturerName').innerText = data.manufacturerName;
+        document.getElementById('detail-price').innerText = data.price;
+        document.getElementById('detail-stock').innerText = data.stock;
+    }
+
+    function resetDetails() {
+        document.getElementById('detail-itemClassification').innerText = '';
+        document.getElementById('detail-productName').innerText = '';
+        document.getElementById('detail-warehouseName').innerText = '';
+        document.getElementById('detail-manufacturerName').innerText = '';
+        document.getElementById('detail-price').innerText = '';
+        document.getElementById('detail-stock').innerText = '';
+    }
+
+    function deleteRow(button) {
+        const row = button.closest('tr');
+        const code = button.dataset.code;
+        //const row = document.getElementById(code);
+        const confirmation = confirm('해당 재고를 삭제하시겠습니까?');
+        if (confirmation) {
+
+            axios.delete("/admin/inventory/delete/" + code)
+                .then(function (response) {
+                    if (response.data) {
+                        row.remove();
+                        alert('데이터가 성공적으로 삭제되었습니다.');
+                    } else {
+                        alert('데이터 삭제에 실패했습니다.');
+                    }
+                }).catch(error => {
+                    console.error('Error:', error);
+                    alert('데이터 삭제 중 오류가 발생했습니다.');
+            })
+        }
+    };
+</script>
 
 </body>
 

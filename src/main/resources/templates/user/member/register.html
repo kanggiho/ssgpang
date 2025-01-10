@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -20,10 +20,21 @@
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.css" rel="stylesheet">
 
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <style>
-        .input-group-append > #exampleIdCheck{
+        .input-group-append > #idCheck{
             width: 10rem;
+            border-bottom-right-radius: 10rem;
+            border-top-right-radius: 10rem;
         }
+
+        #idCheckResult, #telCheckResult, #pwCheckResult, #emailCheckResult{
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
     </style>
 
 </head>
@@ -44,45 +55,52 @@
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4">회원가입</h1>
                         </div>
-                        <form class="user">
-                            <div class="form-group">
-                                <div>
-                                    <input type="text" class="form-control form-control-user" id="exampleInputName" placeholder="이름">
-                                </div>
-                            </div>
+                        <form class="user" id="signUpForm" action="/user/member/register" method="post">
 
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input type="text" class="form-control form-control-user" id="exampleInputId" placeholder="아이디">
+                                    <input type="text" class="form-control form-control-user" id="id" name="id" placeholder="아이디">
                                     <div class="input-group-append">
-                                        <button type="button" class="btn btn-primary btn-user" onclick="checkId()" id="exampleIdCheck">중복 체크</button>
+                                        <button type="button" class="btn btn-primary btn-user" id="idCheck" name="idCheck">중복 체크</button>
                                     </div>
+                                    <br>
                                 </div>
+                                <small id="idCheckResult" class="form-text"></small>
                             </div>
-
 
                             <div class="form-group">
                                 <div>
-                                    <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="비밀번호">
+                                    <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="비밀번호">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div>
-                                    <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="비밀번호 확인">
+                                    <input type="password" class="form-control form-control-user" id="password2" name="password2" placeholder="비밀번호 확인">
+                                    <small id="pwCheckResult" class="form-text"></small>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <input type="email" class="form-control form-control-user" id="exampleInputEmail"
+                                <div>
+                                    <input type="text" class="form-control form-control-user" id="name" name="name" placeholder="이름">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" id="tel" name="tel" placeholder="전화번호 ( '-' 제외 )">
+                                <small id="telCheckResult" class="form-text"></small>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="email" class="form-control form-control-user" id="email" name="email"
                                        placeholder="이메일">
+                                <small id="emailCheckResult" class="form-text"></small>
                             </div>
 
-                                <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" id="exampleInputPhone" placeholder="전화번호 ( '-' 제외 )">
-                                </div>
-                            <a href="/" class="btn btn-primary btn-user btn-block">
+                            <button class="btn btn-primary btn-user btn-block" id="registerBtn">
                                 회원가입
-                            </a>
+                            </button>
+
                         </form>
                         <hr>
                         <div class="text-center">
@@ -105,6 +123,176 @@
 
 <!-- Custom scripts for all pages-->
 <script src="/js/sb-admin-2.min.js"></script>
+
+
+<th:block>
+    <script>
+        let idCheckPass = false;
+        let emailCheckPass = false;
+
+        // 실시간 아이디 입력 검증
+        document.getElementById("id").addEventListener("input", function () {
+            const id = document.getElementById("id").value.trim();
+            const idCheckResult = document.getElementById("idCheckResult");
+            const idRegex = /^[a-zA-Z0-9]{4,}$/;
+
+            if (!id) {
+                idCheckResult.textContent = "";
+                return;
+            }
+
+            if (idRegex.test(id)) {
+                idCheckResult.textContent = "";
+                idCheckPass = true;
+            } else {
+                idCheckResult.style.color = "crimson";
+                idCheckResult.textContent = "ID는 4자 이상, 영문자와 숫자만 포함해야 합니다.";
+                idCheckPass = false;
+            }
+        });
+
+        // 비밀번호 일치 실시간 검사
+        function checkPasswordMatch() {
+            const password = document.getElementById("password").value.trim();
+            const password2 = document.getElementById("password2").value.trim();
+            const pwCheckResult = document.getElementById("pwCheckResult");
+
+            if (!password2) {
+                pwCheckResult.textContent = "";
+                return;
+            }
+
+            if (password === password2) {
+                pwCheckResult.style.color = "green";
+                pwCheckResult.textContent = "비밀번호가 일치합니다.";
+            } else {
+                pwCheckResult.style.color = "crimson";
+                pwCheckResult.textContent = "비밀번호가 일치하지 않습니다.";
+            }
+        }
+
+        document.getElementById("password").addEventListener("input", checkPasswordMatch);
+        document.getElementById("password2").addEventListener("input", checkPasswordMatch);
+
+        // ID 중복 체크 버튼 이벤트
+        document.getElementById("idCheck").addEventListener("click", function () {
+            const id = document.getElementById("id").value.trim();
+            if (!id) {
+                alert("아이디를 입력해주세요.");
+                return;
+            }
+            axios.get("/user/member/checkId?id=" + id).then(function (response) {
+                const result = response.data;
+                const idCheckResult = document.getElementById("idCheckResult");
+                if (result) {
+                    idCheckPass = true;
+                    idCheckResult.style.color = "green";
+                    idCheckResult.textContent = "사용 가능한 ID";
+                } else {
+                    idCheckPass = false;
+                    idCheckResult.style.color = "crimson";
+                    idCheckResult.textContent = "이미 사용 중인 ID";
+                }
+            }).catch(function (error) {
+                alert("Error! ID 중복 체크를 확인해주세요.");
+                console.error(error);
+            });
+        });
+
+        // 전화번호 입력 시 실시간 유효성 검사
+        document.getElementById("tel").addEventListener("input", function () {
+            const tel = document.getElementById("tel").value.trim();
+            const telCheckResult = document.getElementById("telCheckResult");
+            const telRegex = /^010\d{8}$/;
+
+            if (!tel) {
+                telCheckResult.textContent = "";
+                return;
+            }
+
+            if (telRegex.test(tel)) {
+                telCheckResult.style.color = "green";
+                telCheckResult.textContent = "올바른 전화번호입니다.";
+            } else {
+                telCheckResult.style.color = "crimson";
+                telCheckResult.textContent = "전화번호는 '010'으로 시작하며, '-'를 제외한 11자리 숫자여야 합니다.";
+            }
+        });
+
+        // 이메일 실시간 중복 체크
+        document.getElementById("email").addEventListener("input", function () {
+            const email = document.getElementById("email").value.trim();
+            const emailCheckResult = document.getElementById("emailCheckResult");
+
+            if (!email) {
+                emailCheckPass = false;
+                emailCheckResult.style.color = "crimson";
+                emailCheckResult.textContent = "이메일을 입력하세요."
+                return;
+            }
+            axios.get("/user/member/checkEmail?email=" + email)
+                .then(function (response) {
+                    const isEmailAvailable = response.data;
+
+                    if (isEmailAvailable) {
+                        emailCheckPass = true;
+                        emailCheckResult.style.color = "green";
+                        emailCheckResult.textContent = "사용 가능한 이메일입니다.";
+                    } else {
+                        emailCheckPass = false;
+                        emailCheckResult.style.color = "crimson";
+                        emailCheckResult.textContent = "이미 사용 중인 이메일입니다.";
+                    }
+                }).catch(function (error) {
+                    console.error(error);
+                    emailCheckPass = false;
+                    emailCheckResult.style.color = "crimson";
+                    emailCheckResult.textContent = "이메일 확인 중 오류가 발생했습니다.";
+                });
+        });
+
+        // 회원가입 버튼 클릭 이벤트
+        document.getElementById("registerBtn").addEventListener("click", function (event) {
+            event.preventDefault();
+
+            const id = document.getElementById("id").value.trim();
+            const pw = document.getElementById("password").value.trim();
+            const pw2 = document.getElementById("password2").value.trim();
+            const name = document.getElementById("name").value.trim();
+            const tel = document.getElementById("tel").value.trim();
+            const email = document.getElementById("email").value.trim();
+
+            // 유효성 검사
+            if (pw !== pw2) {
+                alert("PW가 일치하지 않습니다!");
+                return;
+            }
+
+            if (!id || !pw || !name || !tel || !email) {
+                alert("입력란이 비어있습니다!");
+                return;
+            }
+
+            if (!/^010\d{8}$/.test(tel)) {
+                alert("전화번호는 '010'으로 시작하며, 11자리 숫자여야 합니다!");
+                return;
+            }
+
+            if (!idCheckPass) {
+                alert("ID 중복체크가 완료되지 않았습니다!");
+                return;
+            }
+
+            if (!emailCheckPass) {
+                alert("이메일 중복체크가 완료되지 않았습니다!");
+                return;
+            }
+
+            // 모든 유효성 검사를 통과하면 폼 제출
+            document.getElementById("signUpForm").submit();
+        });
+    </script>
+</th:block>
 
 </body>
 
