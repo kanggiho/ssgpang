@@ -28,6 +28,13 @@
         SELECT * FROM user WHERE id = #{id};
     </select>
 
+    <!-- 이메일 검증 -->
+    <select id="selectEmailById"
+            parameterType="string"
+            resultType="com.shinsegae.project.member.vo.UserVO">
+        SELECT * FROM user WHERE email = #{email};
+    </select>
+
     <!-- id 찾기 -->
     <select id="selectIdByUserTel"
             parameterType="string"
