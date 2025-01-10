@@ -30,7 +30,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 const InputQuantity = [];
 const OutputQuantity = [];
 
-axios.get('/admin/home_admin/chart2')
+axios.get('/admin/home_admin/chart1')
     .then(function (response) {
         const areaChartInputData = response.data.areaChartInputData;
         const areaChartOutputData = response.data.areaChartOutputData;

@@ -129,3 +129,140 @@ axios.get('/admin/home_admin/chart3')
       console.log("error: " + error);
     })
 
+
+
+const data_outputPrice = []; //발주금액
+const data_outputQuantity = []; //발주수량
+
+axios.get('/user/home/chart1')
+    .then(function (response) {
+      const UserOutputPrice = response.data;
+      const UserOutputQuantity = response.data;
+
+      console.log(UserOutputPrice);
+      console.log(UserOutputQuantity);
+
+      // 데이터 넣기
+      for (let i = 0; i < 12; i++) {
+        data_outputPrice.push(UserOutputPrice[i].releasePrice); // 발주금액데이터
+        data_outputQuantity.push(UserOutputQuantity[i].releaseQuantity); // 발주수량데이터
+      }
+
+      var ctx = document.getElementById("myBarChart2");
+      var myBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+          datasets: [{
+            label: "발주 금액", //bar chart
+            backgroundColor: "#0b30c2",
+            type: 'bar',
+            hoverBackgroundColor: "#2e59d9",
+            borderColor: "#4e73df",
+            data: data_outputPrice,
+            maxBarThickness: 25,
+            yAxisID: 'yLeft', // 왼쪽 Y축
+          },
+            {
+              label: "발주 수량", //line chart
+              type: 'line',
+              backgroundColor: "#0b30c2",
+              hoverBackgroundColor: "#2e59d9",
+              borderColor: "#4e73df",
+              data: data_outputQuantity, //발주 수량
+              maxBarThickness: 25,
+              yAxisID: 'yRight', // 오른쪽 Y축
+            }],
+        },
+        options: {
+          maintainAspectRatio: false,
+          layout: {
+            padding: {
+              left: 10,
+              right: 25,
+              top: 25,
+              bottom: 0
+            }
+          },
+          scales: {
+            x: {
+              time: {
+                unit: 'month'
+              },
+              gridLines: {
+                display: false,
+                drawBorder: false
+              },
+              ticks: {
+                maxTicksLimit: 12,
+                autoSkip: true
+              }
+            },
+            yLeft: {
+              type: 'linear',
+              position: 'left',
+              beginAtZero: true, // Y축이 0부터 시작
+              max: 300, // Y축 최대값
+              ticks: {
+                stepSize: 10, // Y축 간격
+                callback: function(value) {
+                  return number_format(value); // 값 포맷팅
+                }
+              },
+              gridLines: {
+                color: "rgb(234, 236, 244)",
+                zeroLineColor: "rgb(234, 236, 244)",
+                drawBorder: false,
+                borderDash: [2],
+                zeroLineBorderDash: [2]
+              }
+            },
+            yRight: {
+              type: 'linear',
+              position: 'right',
+              beginAtZero: true, // Y축이 0부터 시작
+              max: 300, // Y축 최대값
+              ticks: {
+                stepSize: 10, // Y축 간격
+                callback: function(value) {
+                  return number_format(value); // 값 포맷팅
+                }
+              },
+              gridLines: {
+                color: "rgb(234, 236, 244)",
+                zeroLineColor: "rgb(234, 236, 244)",
+                drawBorder: false,
+                borderDash: [2],
+                zeroLineBorderDash: [2]
+              }
+            },
+          },
+          legend: {
+            display: false
+          },
+          tooltips: {
+            titleMarginBottom: 10,
+            titleFontColor: '#6e707e',
+            titleFontSize: 14,
+            backgroundColor: "rgb(255,255,255)",
+            bodyFontColor: "#858796",
+            borderColor: '#dddfeb',
+            borderWidth: 1,
+            xPadding: 15,
+            yPadding: 15,
+            displayColors: false,
+            caretPadding: 10,
+            callbacks: {
+              label: function(tooltipItem, chart) {
+                var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                return datasetLabel + ': ' + number_format(tooltipItem.yLabel);
+              }
+            }
+          },
+        }
+      });
+    })
+    .catch(function (error) {
+      console.log("error: " + error);
+    })
+
