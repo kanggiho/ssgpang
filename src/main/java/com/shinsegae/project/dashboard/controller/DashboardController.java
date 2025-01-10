@@ -15,7 +15,10 @@ public class DashboardController {
 
     @GetMapping("user/home")
     public String home(HttpSession session, Model model) {
-        session.setAttribute("id","giho");
+        if (session.getAttribute("id") == null) {
+            return "redirect:/user/member/login";
+            // 세션이 없으면 로그인 페이지로 리다이렉트
+        }
         return "user/home";
     }
 
