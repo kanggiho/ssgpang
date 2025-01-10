@@ -1,6 +1,6 @@
 package com.shinsegae.project.map.service;
 
-import com.shinsegae.project.map.vo.WarehouseVO;
+import com.shinsegae.project.map.vo.WarehouseInfoDTO;
 import com.shinsegae.project.map.mapper.MapMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,14 +16,14 @@ public class MapService {
     private final MapMapper mapMapper;
 
     public List<Map<String, Object>> getWarehouseData() {
-        List<WarehouseVO> warehouses = mapMapper.getWarehouseData();
+        List<WarehouseInfoDTO> warehouses = mapMapper.getWarehouseData();
         if (warehouses == null || warehouses.isEmpty()) {
             System.out.println("No data fetched from database");
             return new ArrayList<>();
         }
 
         List<Map<String, Object>> warehouseData = new ArrayList<>();
-        for (WarehouseVO warehouse : warehouses) {
+        for (WarehouseInfoDTO warehouse : warehouses) {
             System.out.println("Fetched warehouse: " + warehouse); // 디버깅 로그 추가
 
             String[] splitLocation = warehouse.getWarehouseLocation().split(",");
@@ -34,6 +34,7 @@ public class MapService {
             data.put("name", warehouse.getWarehouseName());
             data.put("latitude", latitude);
             data.put("longitude", longitude);
+            data.put("date", warehouse.getReleaseDate());
             warehouseData.add(data);
         }
 
