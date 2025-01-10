@@ -8,7 +8,6 @@
         from output
     </select>
 
-
     <select id="selectOrderInventoryManagementAll"
             resultType="com.shinsegae.project.order.vo.OrderInventoryManagementDTO">
         SELECT c.item_classification,
@@ -16,7 +15,8 @@
                w.warehouse_name,
                m.manufacturer_name,
                i.price,
-               i.stock
+               i.stock,
+
         FROM inventory i
                  JOIN product p ON p.product_code = i.product_code
                  JOIN manufacture m ON i.manufacturer_code = m.manufacturer_code
@@ -25,6 +25,15 @@
 
 
     </select>
+
+
+    <insert id="insertOutput" parameterType="com.shinsegae.project.order.vo.OutputVO">
+        INSERT INTO output (product_code, warehouse_id, user_id, confirm_num, confirm_id, status, unit_price,
+                                  release_quantity, release_date)
+        VALUES (#{product_code}, #{warehouse_id}, #{user_id}, #{confirm_num}, #{confirm_id}, #{status}, #{unit_price},
+                #{release_quantity}, #{release_date})
+    </insert>
+
 
 
     <select id="selectOrderManagementAll" resultType="com.shinsegae.project.order.vo.OrderManagementDTO">

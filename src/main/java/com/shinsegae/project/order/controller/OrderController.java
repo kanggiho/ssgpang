@@ -3,7 +3,7 @@ package com.shinsegae.project.order.controller;
 import com.shinsegae.project.order.service.OrderService;
 import com.shinsegae.project.order.vo.OrderInventoryManagementDTO;
 import com.shinsegae.project.order.vo.OrderManagementDTO;
-import com.shinsegae.project.order.vo.OrderRequestDto;
+import com.shinsegae.project.order.vo.OutputVO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,15 +37,16 @@ public class  OrderController {
         model.addAttribute("tableData", list);
 
 
-
         return "user/order/confirm_outgoing_list";
     }
 
-    @PostMapping("/submit")
-    public String submitOrder(@RequestBody OrderRequestDto orderRequest) {
-        orderService.insertOutput(orderRequest); // 데이터 저장
-        return "Order submitted successfully"; // 응답 메시지
+    @PostMapping("/save")
+    public String saveOutput(@RequestBody OutputVO outputVO) {
+        orderService.saveOutput(outputVO);
+        return "redirect:/user/order/do_outgoing";
     }
+
+
 
 
 }

@@ -12,6 +12,7 @@ public interface OrderMapper {
 
     // 발주하기
     List<OrderInventoryManagementDTO> selectOrderInventoryManagementAll();
+    void insertOutput(OutputVO outputVO);
 
 
     // 발주내역확인

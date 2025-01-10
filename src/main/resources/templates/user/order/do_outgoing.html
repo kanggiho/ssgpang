@@ -18,7 +18,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-
     <style>
         .table-responsive {
             max-height: 495px; /* 테이블 높이 제한 */
@@ -119,7 +118,7 @@
                                                placeholder="수량을 입력해주세요." style="width: 200px">
                                     </div>
                                     <p style="font-size: 15pt"><strong>총 가격 : </strong><span id="detail-total">0</span></p>
-                                    <a id="outputBtn" class="btn btn-primary" type="button" onclick="submitOrder">
+                                    <a id="outputBtn" class="btn btn-primary" type="button">
                                         <i class="fas fa-inbox fa-sm">
                                             발주하기
                                         </i>
@@ -141,8 +140,42 @@
 <script src="/js/jquery.easing.min.js"></script>
 <script src="/js/sb-admin-2.min.js"></script>
 <script>
+    let selectedData = {}; // 전역 변수로 선택된 데이터를 저장
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // outputBtn에 이벤트 리스너를 한 번만 등록
+        document.getElementById('outputBtn').addEventListener('click', function () {
+            if (!selectedData.productName) {
+                alert('먼저 발주할 항목을 선택해주세요.');
+                return;
+            }
+
+            const data = {
+                product_code: selectedData.productCode || 104564, // 실제 데이터로 교체
+                warehouse_id: selectedData.warehouseId || 3002,
+                user_id: 5004,
+                confirm_num: 0,
+                confirm_id: 0,
+                status: "대기중",
+                unit_price: parseInt(selectedData.price),
+                release_quantity: parseInt(document.getElementById('outputTextInput').value),
+                release_date: new Date().toISOString().split('T')[0] // 오늘 날짜
+            };
+
+            axios.post('/user/order/save', data)
+                .then(response => {
+                    alert('발주 성공');
+                })
+                .catch(error => {
+                    console.error(error);
+                    alert('발주 실패 : 이미 동일한 발주가 있습니다.');
+                });
+        });
+    });
+
     function showDetails(row) {
-        const data = {
+        // 선택한 데이터 가져오기
+        selectedData = {
             itemClassification: row.children[0].innerText,
             productName: row.children[1].innerText,
             warehouseName: row.children[2].innerText,
@@ -151,69 +184,31 @@
             stock: row.children[5].innerText
         };
 
-        const input = document.getElementById('outputTextInput');
-
-        // 기존 이벤트 리스너 제거
-        const newInput = input.cloneNode(true); // 동일한 노드 복제
-        input.parentNode.replaceChild(newInput, input); // 기존 노드 교체
-
         // 세부 정보 업데이트
-        document.getElementById('detail-itemClassification').innerText = data.itemClassification;
-        document.getElementById('detail-productName').innerText = data.productName;
-        document.getElementById('detail-warehouseName').innerText = data.warehouseName;
-        document.getElementById('detail-manufacturerName').innerText = data.manufacturerName;
-        document.getElementById('detail-price').innerText = data.price;
-        document.getElementById('detail-stock').innerText = data.stock;
+        document.getElementById('detail-itemClassification').innerText = selectedData.itemClassification;
+        document.getElementById('detail-productName').innerText = selectedData.productName;
+        document.getElementById('detail-warehouseName').innerText = selectedData.warehouseName;
+        document.getElementById('detail-manufacturerName').innerText = selectedData.manufacturerName;
+        document.getElementById('detail-price').innerText = selectedData.price;
+        document.getElementById('detail-stock').innerText = selectedData.stock;
 
-        // 새로 추가된 input에 이벤트 리스너 추가
-        newInput.addEventListener('input', function () {
-            let value = parseInt(newInput.value, 10) || 0; // 값이 비어 있으면 0으로 처리
+        // Input 이벤트 리스너 추가
+        const input = document.getElementById('outputTextInput');
+        input.value = 0; // 초기화
+        input.addEventListener('input', function () {
+            let value = parseInt(input.value, 10) || 0;
 
-            // 값이 0보다 작으면 0으로 제한
-            if (value < 0) {
-                value = 0;
-            }
+            // 값 제한
+            if (value < 0) value = 0;
+            if (value > parseInt(selectedData.stock)) value = parseInt(selectedData.stock);
 
-            // 값이 재고량(data.stock)보다 크면 최대값으로 제한
-            if (value > data.stock) {
-                value = data.stock;
-            }
-
-            // 변경된 값을 input.value에 반영
-            newInput.value = value;
+            input.value = value;
 
             // 총 가격 업데이트
-            document.getElementById('detail-total').innerText = (parseInt(data.price) * value).toString();
+            document.getElementById('detail-total').innerText = (parseInt(selectedData.price) * value).toString();
         });
     }
 
-
-    function submitOrder(){
-        const productName = document.getElementById('detail-productName').innerText;
-        const orderQuantity = parseInt(document.getElementById('outputTextInput').value, 10) || 0;
-        const totalPrice = parseInt(document.getElementById('detail-total').innerText, 10) || 0;
-
-        // 필요한 데이터
-        const orderData = {
-            productName: productName,
-            quantity: orderQuantity
-        };
-
-        // Axios POST 요청
-        axios.post('/user/order/submit', orderData)
-            .then(response => {
-                // 성공 처리
-                if (response.status === 200) {
-                    alert('발주가 성공적으로 접수되었습니다!');
-                    window.location.reload(); // 페이지 새로고침 또는 원하는 행동
-                }
-            })
-            .catch(error => {
-                // 오류 처리
-                console.error('Error:', error);
-                alert('발주 처리 중 문제가 발생했습니다.');
-            });
-    }
 
 
 </script>
