@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MemberVO {
+public class AdminVO {
     private int id;
     private String password;
     private String name;
