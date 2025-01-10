@@ -109,7 +109,7 @@ public class UserController {
             return "/user/member/info";
         }
 
-        return "/user/member/login";  // 세션에 id가 없으면 로그인 페이지로
+        return "user/member/login";  // 세션에 id가 없으면 로그인 페이지로
     }
 
     //유저 회원정보수정
