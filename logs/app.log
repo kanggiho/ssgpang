@@ -13920,7 +13920,11 @@ org.thymeleaf.exceptions.TemplateInputException: Error resolving template [user/
 2025-01-09 18:56:51 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7dfa19bd] was not registered for synchronization because synchronization is not active
 2025-01-09 18:56:51 [http-nio-8080-exec-10] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1784760134 wrapping com.mysql.cj.jdbc.ConnectionImpl@6c70ba1c] will not be managed by Spring
 2025-01-09 18:56:51 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7dfa19bd]
+<<<<<<< HEAD
+2025-01-09 18:56:51 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - Failed to complete request: org.springframework.dao.DuplicateKeyException:
+=======
 2025-01-09 18:56:51 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - Failed to complete request: org.springframework.dao.DuplicateKeyException: 
+>>>>>>> origin/develop
 ### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'test@gmail.com' for key 'user.email'
 ### The error may exist in file [C:\workSpace\project2\build\resources\main\mapper\UserMapper.xml]
 ### The error may involve com.shinsegae.project.member.mapper.UserMapper.insertUser-Inline
@@ -13928,7 +13932,11 @@ org.thymeleaf.exceptions.TemplateInputException: Error resolving template [user/
 ### SQL: INSERT INTO user VALUES (null, ?, ?, ?, ?, ?);
 ### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'test@gmail.com' for key 'user.email'
 ; Duplicate entry 'test@gmail.com' for key 'user.email'
+<<<<<<< HEAD
+2025-01-09 18:56:51 [http-nio-8080-exec-10] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.dao.DuplicateKeyException:
+=======
 2025-01-09 18:56:51 [http-nio-8080-exec-10] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.dao.DuplicateKeyException: 
+>>>>>>> origin/develop
 ### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'test@gmail.com' for key 'user.email'
 ### The error may exist in file [C:\workSpace\project2\build\resources\main\mapper\UserMapper.xml]
 ### The error may involve com.shinsegae.project.member.mapper.UserMapper.insertUser-Inline
@@ -22505,7 +22513,11 @@ org.springframework.expression.spel.SpelEvaluationException: EL1007E: Property o
 2025-01-09 19:49:54 [http-nio-8080-exec-10] INFO  com.zaxxer.hikari.HikariDataSource - MyHikariPool - Start completed.
 2025-01-09 19:49:54 [http-nio-8080-exec-10] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1935867622 wrapping com.mysql.cj.jdbc.ConnectionImpl@6fc2479b] will not be managed by Spring
 2025-01-09 19:49:54 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7fbc701d]
+<<<<<<< HEAD
+2025-01-09 19:49:54 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - Failed to complete request: org.springframework.jdbc.BadSqlGrammarException:
+=======
 2025-01-09 19:49:54 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - Failed to complete request: org.springframework.jdbc.BadSqlGrammarException: 
+>>>>>>> origin/develop
 ### Error querying database.  Cause: java.sql.SQLException: Operand should contain 1 column(s)
 ### The error may exist in file [C:\workSpace\project2\build\resources\main\mapper\UserMapper.xml]
 ### The error may involve com.shinsegae.project.member.mapper.UserMapper.selectUserById-Inline
@@ -22513,7 +22525,11 @@ org.springframework.expression.spel.SpelEvaluationException: EL1007E: Property o
 ### SQL: SELECT (id, password, name, tel, email) FROM user WHERE id = ?;
 ### Cause: java.sql.SQLException: Operand should contain 1 column(s)
 ; bad SQL grammar []
+<<<<<<< HEAD
+2025-01-09 19:49:54 [http-nio-8080-exec-10] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.jdbc.BadSqlGrammarException:
+=======
 2025-01-09 19:49:54 [http-nio-8080-exec-10] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.jdbc.BadSqlGrammarException: 
+>>>>>>> origin/develop
 ### Error querying database.  Cause: java.sql.SQLException: Operand should contain 1 column(s)
 ### The error may exist in file [C:\workSpace\project2\build\resources\main\mapper\UserMapper.xml]
 ### The error may involve com.shinsegae.project.member.mapper.UserMapper.selectUserById-Inline
