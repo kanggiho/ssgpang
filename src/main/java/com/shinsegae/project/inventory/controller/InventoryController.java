@@ -5,8 +5,7 @@ import com.shinsegae.project.inventory.vo.InventoryManagementDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -16,6 +15,7 @@ import java.util.Map;
 @RequestMapping("admin/inventory")
 @RequiredArgsConstructor
 public class InventoryController {
+
     private final InventoryService inventoryService;
 
     @GetMapping("confirm_inventory_list")
@@ -34,5 +34,13 @@ public class InventoryController {
     public String edit_inventory() {
         return "admin/inventory/edit_inventory";
     }
+
+    @DeleteMapping("delete/{code}")
+    @ResponseBody
+    public boolean deleteInventory(@PathVariable("code") String code) {
+        System.out.println(code);
+        boolean result = inventoryService.deleteInventory(code);  // 삭제 서비스 호출
+    return result;
+   }
 
 }

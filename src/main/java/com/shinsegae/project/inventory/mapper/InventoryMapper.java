@@ -12,5 +12,5 @@ public interface InventoryMapper {
     List<InventoryManagementDTO> getInventoryByContent();
     int updateInventory(InventoryManagementDTO inventoryManagementDTO);
     int insertInventory(InventoryManagementDTO inventoryManagementDTO);
-    int deleteInventory(int product_code);
+    void deleteInventory(String code);
 }

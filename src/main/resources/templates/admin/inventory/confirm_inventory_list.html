@@ -15,6 +15,7 @@
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.css" rel="stylesheet">
     <link rel="icon" href="/img/favicon/starfavicon.png">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <style>
         .table-responsive {
@@ -68,13 +69,17 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr th:each="confirm_inventory : ${confirm_inventory_list}" onmouseover="showDetails(this)" onmouseout="resetDetails()">
+                                        <tr th:each="confirm_inventory, status : ${confirm_inventory_list}" onmouseover="showDetails(this)" onmouseout="resetDetails()"
+                                        th:id = "${confirm_inventory.code}">
                                             <td th:text="${confirm_inventory.itemClassification}"></td>
                                             <td th:text="${confirm_inventory.productName}"></td>
                                             <td th:text="${confirm_inventory.warehouseName}"></td>
                                             <td th:text="${confirm_inventory.manufacturerName}"></td>
                                             <td th:text="${confirm_inventory.price} + '원'"></td>
                                             <td th:text="${confirm_inventory.stock} + '개'"></td>
+                                            <td><button class="btn btn-danger btn-sm"
+                                                        th:data-code = ${confirm_inventory.code}
+                                                        onclick="deleteRow(this)">삭제</button></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -126,7 +131,8 @@
             </div>
         </div>
         <div th:replace="admin/fragments/modal :: adminModal"></div>
-
+    </div>
+</div>
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/jquery.easing.min.js"></script>
@@ -162,6 +168,28 @@
         document.getElementById('detail-price').innerText = '';
         document.getElementById('detail-stock').innerText = '';
     }
+
+    function deleteRow(button) {
+        const row = button.closest('tr');
+        const code = button.dataset.code;
+        //const row = document.getElementById(code);
+        const confirmation = confirm('해당 재고를 삭제하시겠습니까?');
+        if (confirmation) {
+
+            axios.delete("/admin/inventory/delete/" + code)
+                .then(function (response) {
+                    if (response.data) {
+                        row.remove();
+                        alert('데이터가 성공적으로 삭제되었습니다.');
+                    } else {
+                        alert('데이터 삭제에 실패했습니다.');
+                    }
+                }).catch(error => {
+                    console.error('Error:', error);
+                    alert('데이터 삭제 중 오류가 발생했습니다.');
+            })
+        }
+    };
 </script>
 
 </body>

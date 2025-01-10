@@ -4,6 +4,7 @@ import com.shinsegae.project.inventory.mapper.InventoryMapper;
 import com.shinsegae.project.inventory.vo.InventoryManagementDTO;
 import com.shinsegae.project.inventory.vo.InventoryVO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class InventoryService {
+    @Autowired
     private final InventoryMapper inventoryMapper;
 
     public List<InventoryManagementDTO> selectInventoryAll() {
@@ -52,8 +54,14 @@ public class InventoryService {
         return inventoryMapper.insertInventory(inventoryManagementDTO);
     }
 
-    public int deleteInventory(int product_code) {
-        return inventoryMapper.deleteInventory(product_code);
+    public boolean deleteInventory(String code) {
+        try {
+            inventoryMapper.deleteInventory(code);  // Mapper의 deleteInventory 메서드 호출
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 }

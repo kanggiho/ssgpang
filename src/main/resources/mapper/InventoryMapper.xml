@@ -7,6 +7,7 @@
     <select id="selectInventoryAll"
             resultType="com.shinsegae.project.inventory.vo.InventoryManagementDTO">
         SELECT c.item_classification,
+               i.code,
                p.product_name,
                w.warehouse_name,
                m.manufacturer_name,
@@ -58,8 +59,8 @@
 
     <!-- 재고 삭제 기능 -->
     <delete id="deleteInventory"
-            parameterType="int">
-        DELETE FROM inventory WHERE product_code = #{product_code}
+            parameterType="string">
+        DELETE FROM inventory WHERE code = #{code}
     </delete>
 
 </mapper>
