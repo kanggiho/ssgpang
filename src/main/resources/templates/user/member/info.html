@@ -1,10 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SSGPANG - 회원정보 확인</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="/css/all.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/css/sb-admin-2.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
-<body>
-    <h1>회원 정보 화면</h1>
+
+<body class="bg-gradient-primary">
+
+<div class="container">
+    <div class="container">
+        <h1 class="text-center my-4">회원정보 확인</h1>
+        <table class="table table-bordered">
+            <tr>
+                <th>ID</th>
+                <td th:text="${userVO.id}"></td>
+            </tr>
+            <tr>
+                <th>이름</th>
+                <td th:text="${userVO.name}"></td>
+            </tr>
+            <tr>
+                <th>이메일</th>
+                <td th:text="${userVO.email}"></td>
+            </tr>
+            <tr>
+                <th>전화번호</th>
+                <td th:text="${userVO.tel}"></td>
+            </tr>
+        </table>
+        <div class="text-center">
+            <a href="/user/member/update" class="btn btn-primary">회원정보 수정</a>
+        </div>
+    </div>
+</div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/js/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/js/sb-admin-2.min.js"></script>
+
+
 </body>
 </html>
