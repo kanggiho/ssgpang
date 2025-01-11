@@ -3,10 +3,49 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shinsegae.project.order.mapper.OrderMapper">
 
+
+
     <select id="selectOutputAll" resultType="com.shinsegae.project.order.vo.OutputVO">
         select *
         from output
     </select>
+
+    <select id="selectOrderInventoryManagementAll"
+            resultType="com.shinsegae.project.order.vo.OrderInventoryManagementDTO">
+        SELECT c.item_classification,
+               p.product_name,
+               w.warehouse_name,
+               m.manufacturer_name,
+               i.price,
+               i.stock,
+               p.product_code,
+               w.warehouse_id
+
+
+        FROM inventory i
+                 JOIN product p ON p.product_code = i.product_code
+                 JOIN manufacture m ON i.manufacturer_code = m.manufacturer_code
+                 JOIN warehouse w ON i.warehouse_id = w.warehouse_id
+                 JOIN classification c ON i.code = c.code;
+
+
+    </select>
+
+    <update id="updateInventory" parameterType="com.shinsegae.project.order.vo.OrderInventoryUpdateVO">
+        update inventory
+        set stock = stock - #{change}
+        where product_code = #{productCode}
+    </update>
+
+    <insert id="insertOutput" parameterType="com.shinsegae.project.order.vo.OutputVO">
+        INSERT INTO output (product_code, warehouse_id, user_id, confirm_num, confirm_id, status, unit_price,
+                                  release_quantity, release_date)
+        VALUES (#{product_code}, #{warehouse_id}, #{user_id}, #{confirm_num}, #{confirm_id}, #{status}, #{unit_price},
+                #{release_quantity}, #{release_date})
+    </insert>
+
+
+
     <select id="selectOrderManagementAll" resultType="com.shinsegae.project.order.vo.OrderManagementDTO">
         SELECT
             product.product_name AS product_name,
@@ -19,27 +58,18 @@
             output.status AS status
         FROM
             output
-                JOIN
-            product ON output.product_code = product.product_code
-                JOIN
-            user ON output.user_id = user.uid
+                JOIN product ON output.product_code = product.product_code
+                JOIN user ON output.user_id = user.uid
+        ORDER BY
+            CASE output.status
+                WHEN '거절' THEN 1
+                WHEN '승인' THEN 2
+                WHEN '대기중' THEN 3
+                ELSE 4 -- 예상치 못한 값 처리 (선택 사항)
+                END,
+            output.release_date ASC;
 
     </select>
 
-    <select id="selectOrderInventoryManagementAll"
-            resultType="com.shinsegae.project.order.vo.OrderInventoryManagementDTO">
-        SELECT c.item_classification,
-               p.product_name,
-               w.warehouse_name,
-               m.manufacturer_name,
-               i.price,
-               i.stock
-        FROM inventory i
-                 JOIN product p ON p.product_code = i.product_code
-                 JOIN manufacture m ON i.manufacturer_code = m.manufacturer_code
-                 JOIN warehouse w ON i.warehouse_id = w.warehouse_id
-                 JOIN classification c ON i.code = c.code;
 
-
-    </select>
 </mapper>

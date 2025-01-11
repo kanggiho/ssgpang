@@ -1,5 +1,4 @@
-package com.shinsegae.project.map.vo;
-
+package com.shinsegae.project.dashboard.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,9 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class WarehouseVO {
-    private int warehouseId;
+public class BarChartDTO {
     private String warehouseName;
-    private String warehouseLocation;
-    private String warehouseTemperature;
+    private int releaseQuantity;
 }

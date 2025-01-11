@@ -14,4 +14,6 @@ public class OrderInventoryManagementDTO {
     private String manufacturerName;
     private int price;
     private int stock;
+    private int productCode;
+    private int warehouseId;
 }
