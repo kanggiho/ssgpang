@@ -46,8 +46,15 @@ public class InventoryService {
         return inventoryMapper.getInventoryByContent();
     }
 
-    public int updateInventory(InventoryManagementDTO inventoryManagementDTO) {
-        return inventoryMapper.updateInventory(inventoryManagementDTO);
+    // 수량 업데이트
+    public boolean updateStock(String code, int stock) {
+        try {
+            inventoryMapper.updateStock(code, stock);  // Mapper의 updateStock 메서드 호출
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public int insertInventory(InventoryManagementDTO inventoryManagementDTO) {

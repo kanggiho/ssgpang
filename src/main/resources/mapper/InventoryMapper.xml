@@ -42,11 +42,10 @@
     </select>
 
     <!-- 재고 수량만 변경할수 있도록 구현 -->
-    <update id="updateInventory"
-            parameterType="InventoryManagementDTO">
+    <update id="updateStock" parameterType="map">
         UPDATE inventory
         SET stock = #{stock}
-        WHERE product_name = #{product_name}
+        WHERE code = #{code}
     </update>
 
     <!-- 새로운 재고 추가 기능-->

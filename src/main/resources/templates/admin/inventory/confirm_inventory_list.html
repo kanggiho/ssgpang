@@ -150,17 +150,18 @@
 <script src="/js/demo/chart-pie-demo.js"></script>
 <script>
     function updateStock() {
-        const newStock = document.getElementById('outputTextInput').value;
-        const code = document.querySelector('#details-container').dataset.code;
+        const newStock = document.getElementById('outputTextInput').value;  // 수정된 수량 가져오기
+        const code = document.querySelector('#details-container').dataset.code;  // 선택된 품목의 코드
 
+        // Axios PUT 요청으로 수량 업데이트
         axios.put(`/admin/inventory/update/${code}`, { stock: newStock })
             .then(function (response) {
                 if (response.data) {
-                    // 테이블 업데이트
+                    // 테이블에서 재고 수량 업데이트
                     const row = document.getElementById(code);
-                    row.children[5].innerText = newStock + '개';
+                    row.children[5].innerText = newStock + '개';  // 테이블에서 수량 표시 업데이트
 
-                    // 상세 정보 패널 업데이트
+                    // 상세 정보 패널에서 수량 업데이트
                     document.getElementById('detail-stock').innerText = newStock + '개';
 
                     alert('재고가 성공적으로 업데이트되었습니다.');
@@ -175,6 +176,7 @@
     }
 
     function showDetails(row) {
+        const code = row.id;
         const data = {
             itemClassification: row.children[0].innerText,
             productName: row.children[1].innerText,
@@ -192,6 +194,7 @@
         document.getElementById('detail-stock').innerText = data.stock;
 
         document.getElementById('outputTextInput').value = parseInt(data.stock);
+        document.querySelector('#details-container').dataset.code = code;
     }
 
     function resetDetails() {
