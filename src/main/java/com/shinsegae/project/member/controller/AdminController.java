@@ -13,44 +13,44 @@ import org.springframework.web.bind.annotation.*;
 public class AdminController {
     private final AdminService adminService;
 
-
-    //관리자 로그인
     @GetMapping("login")
     public String login(HttpSession session) {
-        if (session.getAttribute("id") != null) {
-            return "/admin/home_admin";  // 로그인된 경우 Admin 홈으로 리다이렉트
+        String role = (String) session.getAttribute("role");
+        if (role != null) {
+            if ("ADMIN".equals(role)) {
+                return "redirect:/admin/home_admin";  // 관리자 홈으로 리다이렉트
+            } else if ("USER".equals(role)) {
+                return "redirect:/user/home";  // 유저 홈으로 리다이렉트
+            }
         }
-        return "/user/member/login";  // 세션에 id가 없으면 로그인 페이지로
+        return "user/member/login";  // 로그인 페이지로 리다이렉트
     }
 
     @PostMapping("login")
     public String login(AdminVO adminVO, HttpSession session, Model model) {
-        System.out.println("AdminVO" + adminVO);
-        System.out.println("session" + session);
 
-        // 로그인 검증: id와 비밀번호가 맞는지 체크
         boolean result = adminService.login(adminVO);
-        System.out.println("============= result" + result + " =================");
 
         if (result) {
-            // 로그인 성공: 세션에 사용자 정보 설정
-            session.setAttribute("id", adminVO.getId());
-            return "/admin/home_admin";  // 로그인 성공 시 홈 페이지로 리다이렉트
+            // 로그인 성공 시 세션에 관리자 정보 저장
+            session.setAttribute("adminId", adminVO.getId());  // 관리자 ID 저장
+            session.setAttribute("role", "ADMIN");  // 관리자 역할 설정
+            return "redirect:/admin/home_admin";  // 관리자 홈으로 리다이렉트
         } else {
-            // 로그인 실패: 에러 메시지 전달
+            // 로그인 실패 시 세션 초기화 불필요
             model.addAttribute("result", "로그인에 실패하였습니다!");
-            return "/user/member/login";  // 로그인 페이지로 다시 돌아가도록
+            return "user/member/login";  // 로그인 실패 시 로그인 페이지로 리다이렉트
         }
     }
 
-
-    //관리자 로그아웃
+    // 관리자 로그아웃
     @GetMapping("logout")
     public String logout(HttpSession session) {
-        session.removeAttribute("id");
-        System.out.println("logout >> " + session.getAttribute("id"));
-        return "/user/member/login";
+        session.removeAttribute("adminId");  // 관리자 세션 삭제
+        session.removeAttribute("role");
+        return "user/member/login";  // 로그인 페이지로 리다이렉트
     }
+
 
     //관리자 등록
     @GetMapping("register")
@@ -75,13 +75,13 @@ public class AdminController {
 
     //관리자 정보 확인
     @GetMapping("info")
-    public String info (int id, Model model, HttpSession session) {
+    public String info(int id, Model model, HttpSession session) {
         AdminVO adminVO = adminService.info(id);
         System.out.println("admin id >> " + id);
         model.addAttribute("adminVO", adminVO);
 
         // 세션에 id가 있으면 회원정보 페이지로 리다이렉트
-        if (session.getAttribute("id") != null) {
+        if (session.getAttribute("adminId") != null) {
             return "/user/member/info";
         }
 

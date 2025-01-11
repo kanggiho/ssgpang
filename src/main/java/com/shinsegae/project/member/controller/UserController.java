@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,35 +20,43 @@ public class UserController {
     private final UserService userService;
 
 
-    //유저 로그인
     @GetMapping("login")
     public String login(HttpSession session) {
-        // 세션에 id가 있으면 홈 페이지로 리다이렉트
-        if (session.getAttribute("id") != null) {
-            return "redirect:/user/home";  // 로그인된 경우 홈으로 리다이렉트
+        System.out.printf("User login session id: %s\n", session.getId());
+        String role = (String) session.getAttribute("role");
+        if (role != null) {
+            if ("USER".equals(role)) {
+                return "redirect:/user/home";  // 유저 홈으로 리다이렉트
+            } else if ("ADMIN".equals(role)) {
+                return "redirect:/admin/home_admin";  // 관리자 홈으로 리다이렉트
+            }
         }
-        return "/user/member/login";  // 세션에 id가 없으면 로그인 페이지로
+        return "user/member/login";  // 로그인 페이지로 리다이렉트
     }
 
     @PostMapping("login")
     public String login(UserVO userVO, HttpSession session, Model model) {
-        System.out.println("UserVO" + userVO);
-        System.out.println("session" + session);
-
-        // 로그인 검증: id와 비밀번호가 맞는지 체크
         boolean result = userService.login(userVO);
-        System.out.println("============= result" + result + " =================");
 
         if (result) {
-            // 로그인 성공: 세션에 사용자 정보 설정
-            session.setAttribute("id", userVO.getId());
-            return "redirect:/user/home";  // 로그인 성공 시 홈 페이지로 리다이렉트
+            // 로그인 성공 시 세션에 사용자 정보 저장
+            session.setAttribute("userId", userVO.getId());  // 사용자 ID 저장
+            session.setAttribute("role", "USER");  // 사용자 역할 설정
+            return "redirect:/user/home";  // 사용자 홈으로 리다이렉트
         } else {
-            // 로그인 실패: 에러 메시지 전달
             model.addAttribute("result", "로그인에 실패하였습니다!");
-            return "/user/member/login";  // 로그인 페이지로 다시 돌아가도록
+            return "user/member/login";  // 로그인 실패 시 로그인 페이지로 리다이렉트
         }
     }
+
+    // 유저 로그아웃
+    @GetMapping("logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("userId");  // 사용자 세션 삭제
+        session.removeAttribute("role");
+        return "user/member/login";  // 로그인 페이지로 리다이렉트
+    }
+
 
     //유저 아이디 유효성 검증
     @GetMapping("checkId")
@@ -65,14 +74,6 @@ public class UserController {
         System.out.println("user email >> " + email);
         boolean isEmailAvailable = userService.checkEmail(email);
         return isEmailAvailable;
-    }
-
-    //유저 로그아웃
-    @GetMapping("logout")
-    public String logout(HttpSession session) {
-        session.removeAttribute("id");
-        System.out.println("logout >> " + session.getAttribute("id"));
-        return "/user/member/login";
     }
 
     //유저 회원가입
@@ -120,18 +121,18 @@ public class UserController {
         return "user/member/find_pw";
     }
 
-    // 유저 회원 정보
+    // 유저 회원정보
     @GetMapping("info")
     public String info(HttpSession session, Model model) {
         // 세션에서 id 가져오기
-        String id = (String) session.getAttribute("id");
+        String userId = (String) session.getAttribute("userId");
 
-        if (id == null) {
+        if (userId == null) {
             // 세션에 id가 없으면 로그인 페이지로 리다이렉트
             return "redirect:/user/member/login";
         }
 
-        UserVO userVO = userService.info(id);
+        UserVO userVO = userService.info(userId);
         if (userVO != null) {
             model.addAttribute("userVO", userVO);
             return "/user/member/info";
@@ -142,10 +143,10 @@ public class UserController {
     }
 
 
-    // 회원정보수정 GET 요청
+    // 회원정보수정
     @GetMapping("update")
     public String update(HttpSession session, Model model) {
-        String userId = (String) session.getAttribute("id");
+        String userId = (String) session.getAttribute("userId");
 
         if (userId != null) {
             UserVO userVO = userService.selectUserById(userId);
@@ -156,23 +157,54 @@ public class UserController {
         return "/user/member/login";  // 세션에 id가 없으면 로그인 페이지로 이동
     }
 
-    // 회원정보수정 POST 요청
+    // 회원정보수정
     @PostMapping("update")
-    public String update(HttpSession session, UserVO userVO) {
-
+    public String update(UserVO userVO) {
         int result = userService.updateUser(userVO);
 
         if (result > 0) {
-            return "redirect:/user/member/info";  // 수정 성공 후 정보 페이지로 리다이렉트
+            return "redirect:/user/member/info";
         } else {
-            return "redirect:/index";  // 수정 실패 시 홈 페이지로 리다이렉트
+            return "/user/home";
         }
     }
 
 
-    //유저 회원탈퇴
+    //회원탈퇴
     @GetMapping("delete")
     public String delete() {
+
         return "user/member/delete";
     }
+
+    @PostMapping("delete")
+    public String deleteUser(String id, String password,
+            @RequestParam("agree") boolean agree,
+            Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+
+        // 동의 여부 확인
+        if (!agree) {
+            model.addAttribute("error", "탈퇴 동의 체크박스를 선택해야 합니다.");
+            return "user/member/delete";
+        }
+
+        // 비밀번호 확인
+        boolean checkPassword = userService.checkPassword(password);
+        if (!checkPassword) {
+            model.addAttribute("error", "비밀번호가 올바르지 않습니다.");
+            return "user/member/delete";
+        }
+
+        // 회원 탈퇴 처리
+        int result = userService.deleteUser(id);
+        if (result > 0) {
+            session.invalidate(); // 세션 완전 무효화
+            redirectAttributes.addFlashAttribute("successMessage", "회원 탈퇴가 완료되었습니다.");
+            return "redirect:/user/member/login"; // 탈퇴 후 로그인 페이지로 리다이렉트
+        } else {
+            model.addAttribute("error", "회원 탈퇴 중 문제가 발생했습니다.");
+            return "user/member/delete"; // 탈퇴 실패 시 다시 폼으로
+        }
+    }
+
 }

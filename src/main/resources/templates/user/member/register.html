@@ -159,17 +159,29 @@
             }
         });
 
-        // 비밀번호 일치 실시간 검사
+        // 비밀번호 일치 및 유효성 실시간 검사
         function checkPasswordMatch() {
             const password = document.getElementById("password").value.trim();
             const password2 = document.getElementById("password2").value.trim();
             const pwCheckResult = document.getElementById("pwCheckResult");
 
+            // 비밀번호 유효성 검사 (영어, 숫자, 특수문자 포함, 8자 이상)
+            const passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+
+            // 두 번째 비밀번호 입력란이 비어있을 때
             if (!password2) {
                 pwCheckResult.textContent = "";
                 return;
             }
 
+            // 비밀번호 형식 유효성 검사
+            if (!passwordPattern.test(password)) {
+                pwCheckResult.style.color = "crimson";
+                pwCheckResult.textContent = "비밀번호는 영어, 숫자, 특수문자를 포함해 8자 이상이어야 합니다.";
+                return;
+            }
+
+            // 비밀번호가 일치하는지 검사
             if (password === password2) {
                 pwCheckResult.style.color = "green";
                 pwCheckResult.textContent = "비밀번호가 일치합니다.";

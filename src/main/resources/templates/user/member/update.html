@@ -214,7 +214,6 @@
                 emailCheckResult.style.color = "green";
                 emailCheckResult.textContent = "기존 이메일 그대로 사용됩니다.";
                 emailCheckPass = true;  // 기존 이메일 사용 시 중복 체크 완료 처리
-
                 return;
             }
 
@@ -243,20 +242,23 @@
                     if (isEmailAvailable) {
                         emailCheckResult.style.color = "green";
                         emailCheckResult.textContent = "사용 가능한 이메일입니다.";
+                        emailCheckPass = true;  // 이메일 중복 체크 완료
                     } else {
                         emailCheckResult.style.color = "crimson";
                         emailCheckResult.textContent = "이미 사용 중인 이메일입니다.";
+                        emailCheckPass = false;  // 중복된 이메일일 경우
                     }
                 })
                 .catch(function (error) {
                     console.error(error);
                     emailCheckResult.style.color = "crimson";
                     emailCheckResult.textContent = "이메일 확인 중 오류가 발생했습니다.";
+                    emailCheckPass = false;
                 });
         });
 
 
-        // 회원가입 버튼 클릭 이벤트
+        // 수정 버튼 클릭 이벤트
         document.getElementById("updateBtn").addEventListener("click", function (event) {
             event.preventDefault();
 

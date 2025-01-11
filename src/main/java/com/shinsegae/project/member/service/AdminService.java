@@ -14,7 +14,6 @@ public class AdminService {
 
     //관리자 등록
     public int insertAdmin(AdminVO adminVO) {
-
         int result = adminMapper.insertAdmin(adminVO);
         return result;
     };

@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -33,13 +31,11 @@
 </head>
 
 <body class="bg-gradient-primary">
-<div class="container" th:if="${session.id == null}">
-
+<!-- 세션에 userId나 adminId가 있을 경우 로그인 페이지를 표시하지 않도록 처리 -->
+<div class="container" th:if="${session.userId == null and session.adminId == null}">
     <!-- Outer Row -->
     <div class="row justify-content-center">
-
         <div class="col-xl-10 col-lg-12 col-md-9">
-
             <div class="card o-hidden border-0 shadow-lg my-5">
                 <div class="card-body p-0">
                     <!-- Nested Row within Card Body -->
@@ -54,6 +50,11 @@
                                     [[${result}]]
                                 </small>
                             </div>
+
+                            <!-- 로그인 페이지에서 성공 메시지 출력 -->
+                            <div th:if="${successMessage}" class="alert alert-success">
+                                <p th:text="${successMessage}"></p>
+                            </div>
                         </div>
 
                         <div class="col-lg-6">
@@ -64,7 +65,7 @@
                                 <form class="user" action="/user/member/login" method="post">
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-user"
-                                               th:value="${id}" id="id" name="id"
+                                               id="id" name="id"
                                                placeholder="ID 입력" required>
                                     </div>
 
@@ -101,7 +102,6 @@
         </div>
     </div>
 </div>
-
 
 <!-- Bootstrap core JavaScript-->
 <script src="/js/jquery.min.js"></script>

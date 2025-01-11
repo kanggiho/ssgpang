@@ -55,9 +55,22 @@ public class UserService {
 
 
     //유저 회원탈퇴
-    public int deleteUser(String id){
+    public int deleteUser(String id) {
+
         return userMapper.deleteUser(id);
     };
+
+    // 비밀번호 검증 메서드
+    public boolean checkPassword(String password) {
+        // 실제 DB에서 사용자 정보를 가져와서 비밀번호 비교
+        String deletePw = userMapper.deleteUserByPw(password);
+        if (deletePw != null && passwordEncoder.matches(password, deletePw)){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     public UserVO selectUserById(String id){
         return userMapper.selectUserById(id);
