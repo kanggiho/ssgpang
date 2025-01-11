@@ -54,4 +54,10 @@ public class InventoryController {
         return ResponseEntity.ok(result);
     }
 
+    @PostMapping("/add")
+    public ResponseEntity<String> addStock(@RequestBody InventoryManagementDTO inventoryManagementDTO) {
+        inventoryService.insertInventory(inventoryManagementDTO);
+        return ResponseEntity.ok("Stock added successfully");
+    }
+
 }

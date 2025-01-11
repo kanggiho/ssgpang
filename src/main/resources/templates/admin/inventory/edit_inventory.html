@@ -216,23 +216,38 @@
 
 <script>
     document.getElementById('stockForm').addEventListener('submit', function (event) {
-        event.preventDefault(); // 폼 제출 시 페이지 리로드를 막음
+        event.preventDefault();
 
-        // 입력값 가져오기
-        const itemClassification = document.getElementById('itemClassification').value;
-        const productName = document.getElementById('productName').value;
-        const warehouseName = document.getElementById('warehouseName').value;
-        const manufacturerName = document.getElementById('manufacturerName').value;
-        const price = document.getElementById('price').value;
-        const stock = document.getElementById('stock').value;
+        const inventoryManagementDTO = {
+            itemClassification: document.getElementById('itemClassification').value,
+            productName: document.getElementById('productName').value,
+            manufacturerName: document.getElementById('manufacturerName').value,
+            warehouseName: document.getElementById('warehouseName').value,
+            price: document.getElementById('price').value,
+            stock: document.getElementById('stock').value,
+        };
 
-        // 정보 패널에 값 업데이트
-        document.getElementById('detail-itemClassification').textContent = itemClassification;
-        document.getElementById('detail-productName').textContent = productName;
-        document.getElementById('detail-warehouseName').textContent = warehouseName;
-        document.getElementById('detail-manufacturerName').textContent = manufacturerName;
-        document.getElementById('detail-price').textContent = price;
-        document.getElementById('detail-stock').textContent = stock;
+        axios.post('/admin/inventory/add', inventoryManagementDTO)
+            .then(function (response) {
+                const itemClassification = document.getElementById('itemClassification').value;
+                const productName = document.getElementById('productName').value;
+                const warehouseName = document.getElementById('warehouseName').value;
+                const manufacturerName = document.getElementById('manufacturerName').value;
+                const price = document.getElementById('price').value;
+                const stock = document.getElementById('stock').value;
+
+                document.getElementById('detail-itemClassification').textContent = itemClassification;
+                document.getElementById('detail-productName').textContent = productName;
+                document.getElementById('detail-warehouseName').textContent = warehouseName;
+                document.getElementById('detail-manufacturerName').textContent = manufacturerName;
+                document.getElementById('detail-price').textContent = price;
+                document.getElementById('detail-stock').textContent = stock;
+
+                alert('재고가 성공적으로 추가되었습니다.');
+            })
+            .catch(function (error) {
+                alert('재고 추가에 실패했습니다.');
+            });
     });
 </script>
 

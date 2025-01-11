@@ -52,8 +52,15 @@
     <insert id="insertInventory"
             parameterType="com.shinsegae.project.inventory.vo.InventoryManagementDTO">
         <!-- SQL문 추후 작성 -->
-        INSERT INTO inventory (item_classification, product_name, warehouse_name, manufacturer_name, price, stock)
-        VALUES (#{itemClassification}, #{productName}, #{warehouseName}, #{manufacturerName}, #{price}, #{stock})
+        INSERT INTO inventory (code, product_code, manufacturer_code, warehouse_id, price, stock)
+        VALUES (
+                (SELECT code FROM classification WHERE item_classification = #{itemClassification}),
+                (SELECT product_code FROM product WHERE product_name = #{productName}),
+                (SELECT manufacturer_code FROM manufacture WHERE manufacturer_name = #{manufacturerName}),
+                (SELECT warehouse_id FROM warehouse WHERE warehouse_name = #{warehouseName}),
+                #{price},
+                #{stock}
+        )
     </insert>
 
     <!-- 재고 삭제 기능 -->
