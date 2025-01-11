@@ -20,6 +20,17 @@
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.css" rel="stylesheet">
 
+    <style>
+        .nav-link {
+            padding: 0 10px; /* 좌우 여백 조정 */
+        }
+        .nav-link.text-muted {
+            cursor: default; /* 구분선 클릭 방지 */
+            pointer-events: none;
+        }
+    </style>
+
+
 </head>
 
 <body class="bg-gradient-primary">
@@ -41,27 +52,26 @@
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-2">Forgot Your Password?</h1>
-                                    <p class="mb-4">We get it, stuff happens. Just enter your email address below
-                                        and we'll send you a link to reset your password!</p>
+                                    <h1 class="h4 text-gray-900 mb-2">비밀번호를 잊으셨나요?</h1>
+                                    <p class="mb-4">이메일을 입력하여 비밀번호를 찾아보세요!</p>
                                 </div>
                                 <form class="user">
                                     <div class="form-group">
                                         <input type="email" class="form-control form-control-user"
                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                               placeholder="Enter Email Address...">
+                                               placeholder="이메일 입력">
                                     </div>
+                                    <!-- !!!!!!!!!!!!! 비밀번호 찾는 페이지 만들기 !!!!!!!!!!!!! -->
                                     <a href="/user/member/login" class="btn btn-primary btn-user btn-block">
-                                        Reset Password
+                                        비밀번호 찾기
                                     </a>
                                 </form>
                                 <hr>
-                                <div class="text-center">
-                                    <a class="small" href="/user/member/register">Create an Account!</a>
-                                </div>
-                                <div class="text-center">
-                                    <a class="small" href="/user/member/login">Already have an account? Login!</a>
-                                </div>
+                                <nav class="nav justify-content-center">
+                                    <a class="nav-link small" href="/user/member/register">회원가입</a>
+                                    <span class="nav-link small text-muted">|</span>
+                                    <a class="nav-link small" href="/user/member/login">로그인</a>
+                                </nav>
                             </div>
                         </div>
                     </div>

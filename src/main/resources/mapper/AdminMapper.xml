@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shinsegae.project.member.mapper.AdminMapper">
+
+    <!-- 관리자 등록 -->
+    <insert id="insertAdmin"
+            parameterType="adminVO">
+        INSERT INTO admin VALUES (#{id}, #{password}, #{name}, #{tel});
+    </insert>
+
+    <!-- 정보수정 -->
+    <update id="updateAdmin"
+            parameterType="adminVO">
+        UPDATE admin SET name=#{name}, password=#{password}, tel=#{tel} WHERE id = #{id};
+    </update>
+
+    <!-- 탈퇴 -->
+    <delete id="deleteAdmin"
+            parameterType="int">
+        DELETE FROM admin WHERE id = #{id};
+    </delete>
+
+    <!-- 로그인 -->
+    <select id="selectAdminById"
+            parameterType="int"
+            resultType="com.shinsegae.project.member.vo.AdminVO">
+        SELECT * FROM admin WHERE id = #{id};
+    </select>
+
+    <!-- pw 찾기 -->
+    <select id="selectPwByAdminId"
+            parameterType="int"
+            resultType="java.lang.String">
+        SELECT password FROM admin WHERE id = #{id};
+    </select>
+
+
+</mapper>
