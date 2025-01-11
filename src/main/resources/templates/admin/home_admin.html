@@ -69,9 +69,12 @@
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #5b93ff;font-size: 15px;">
-                                                    총 재고량</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${totalInventory}"></div>
+                                                <div class="text-xs font-weight-bold text-uppercase mb-1"
+                                                     style="color: #5b93ff;font-size: 15px;">
+                                                    총 재고량
+                                                </div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800"
+                                                     th:text="${totalInventory}"></div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-boxes fa-2x" style="color: #5b93ff;"></i>
@@ -87,9 +90,12 @@
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #ff8f6b;font-size: 15px;">
-                                                    입고 수량</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${inputQuantity}"></div>
+                                                <div class="text-xs font-weight-bold text-uppercase mb-1"
+                                                     style="color: #ff8f6b;font-size: 15px;">
+                                                    입고 수량
+                                                </div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800"
+                                                     th:text="${inputQuantity}"></div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -105,9 +111,11 @@
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #ffd66b;font-size: 15px;">출고 수량
+                                                <div class="text-xs font-weight-bold text-uppercase mb-1"
+                                                     style="color: #ffd66b;font-size: 15px;">출고 수량
                                                 </div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${outputQuantity} + '건'"></div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800"
+                                                     th:text="${outputQuantity}"></div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -123,9 +131,12 @@
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #96a1e8;font-size: 15px;">
-                                                    발주 승인대기 중 요청</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${outputStatus} + '건'"></div>
+                                                <div class="text-xs font-weight-bold text-uppercase mb-1"
+                                                     style="color: #96a1e8;font-size: 15px;">
+                                                    발주 승인 요청
+                                                </div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800"
+                                                     th:text="${outputStatus} + '건'"></div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-clock fa-2x" style="color: #bfc5ef"></i>
@@ -177,50 +188,44 @@
 
                 <!-- Content Row -->
                 <div class="row">
-                    <!--pie chart-->
+                    <!--테이블 -->
                     <!-- Content Column -->
-                    <div class="col-xl-4 col-lg-5">
+                    <div class="col-xl-5 col-lg-5">
                         <div class="card shadow mb-4">
-                            <!-- Card Header - Dropdown -->
-                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold">품목별 재고현황</h6>
-                                <div class="dropdown no-arrow">
-                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                         aria-labelledby="dropdownMenuLink">
-                                        <div class="dropdown-header">Dropdown Header:</div>
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                </div>
+                            <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold">오늘의 입고 상품</h6>
                             </div>
                             <!-- Card Body -->
                             <div class="card-body">
-                                <div class="chart-pie pt-4 pb-2">
-                                    <canvas id="myPieChart"></canvas>
-                                </div>
-                                <div class="mt-4 text-center small">
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle" style="color: #5b93ff"></i> Direct
-                                        </span>
-                                    <span class="mr-2">
-                                            <i class="fas fa-circle" style="color: #ff8f6b"></i> Social
-                                        </span>
-                                    <span class="mr-2">
-                                            <i class="fas fa-circle" style="color: #ffd66b"></i> Referral
-                                    </span>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered text-center table-hover" id="dataTable">
+                                        <thead>
+                                        <tr>
+                                            <th>입고번호</th>
+                                            <th>제조업체명</th>
+                                            <th>자재코드</th>
+                                            <th>자재명</th>
+                                            <th>입고수량</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="row : ${inputList}">
+                                            <td th:text="${row.inputNum}"></td>
+                                            <td th:text="${row.manufacturerName}"></td>
+                                            <td th:text="${row.productCode}"></td>
+                                            <td th:text="${row.productName}"></td>
+                                            <td th:text="${row.warehousedQuantity}"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Bar Chart -->
-                    <div class="col-8">
+                    <div class="col-7">
                         <div class="card shadow mb-4">
                             <!-- Card Header - Dropdown -->
                             <div

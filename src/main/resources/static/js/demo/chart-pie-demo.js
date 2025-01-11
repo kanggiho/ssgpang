@@ -2,10 +2,13 @@
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 
+//사용자 대시보드 pie Chart: 나의 발주정보
+//나의 발주 품목 TOP5
 const labels_product = []
+//발주수량
 const data_totalQuantity = [];
 
-axios.get('/user/home/chart3')
+axios.get('/user/home/piechart_output')
     .then(function (response){
         const userPieChartData = response.data;
         console.log(userPieChartData);
@@ -14,7 +17,7 @@ axios.get('/user/home/chart3')
             data_totalQuantity.push(userPieChartData[i].totalQuantity);
         }
 
-        // Pie Chart Example
+        // Pie Chart
         var ctx = document.getElementById("myPieChart");
         var myPieChart = new Chart(ctx, {
             type: 'doughnut',
@@ -40,7 +43,11 @@ axios.get('/user/home/chart3')
                     caretPadding: 10,
                 },
                 legend: {
-                    display: false
+                    // display: true
+                    usePointStyle: true,
+                    position: 'right',
+                    align: 'start',
+
                 },
                 cutoutPercentage: 65,
             },
