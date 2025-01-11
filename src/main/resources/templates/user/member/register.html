@@ -24,13 +24,13 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <style>
-        .input-group-append > #idCheck{
+        .input-group-append > #idCheck {
             width: 10rem;
             border-bottom-right-radius: 10rem;
             border-top-right-radius: 10rem;
         }
 
-        #idCheckResult, #telCheckResult, #pwCheckResult, #emailCheckResult{
+        #idCheckResult, #telCheckResult, #pwCheckResult, #emailCheckResult {
             font-size: 0.9rem;
             margin-top: 5px;
         }
@@ -47,7 +47,8 @@
         <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
             <div class="row">
-                <div class="col-lg-5 d-none d-lg-block bg-register-image" style="align-items:center !important; display: flex !important; justify-content:center !important;">
+                <div class="col-lg-5 d-none d-lg-block bg-register-image"
+                     style="align-items:center !important; display: flex !important; justify-content:center !important;">
                     <img src="/img/member/register.png" alt="이미지 자리" width="191" height="187">
                 </div>
                 <div class="col-lg-7">
@@ -59,9 +60,12 @@
 
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input type="text" class="form-control form-control-user" id="id" name="id" placeholder="아이디">
+                                    <input type="text" class="form-control form-control-user" id="id" name="id"
+                                           placeholder="아이디">
                                     <div class="input-group-append">
-                                        <button type="button" class="btn btn-primary btn-user" id="idCheck" name="idCheck">중복 체크</button>
+                                        <button type="button" class="btn btn-primary btn-user" id="idCheck"
+                                                name="idCheck">중복 체크
+                                        </button>
                                     </div>
                                     <br>
                                 </div>
@@ -70,24 +74,28 @@
 
                             <div class="form-group">
                                 <div>
-                                    <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="비밀번호">
+                                    <input type="password" class="form-control form-control-user" id="password"
+                                           name="password" placeholder="비밀번호">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div>
-                                    <input type="password" class="form-control form-control-user" id="password2" name="password2" placeholder="비밀번호 확인">
+                                    <input type="password" class="form-control form-control-user" id="password2"
+                                           name="password2" placeholder="비밀번호 확인">
                                     <small id="pwCheckResult" class="form-text"></small>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div>
-                                    <input type="text" class="form-control form-control-user" id="name" name="name" placeholder="이름">
+                                    <input type="text" class="form-control form-control-user" id="name" name="name"
+                                           placeholder="이름">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" id="tel" name="tel" placeholder="전화번호 ( '-' 제외 )">
+                                <input type="text" class="form-control form-control-user" id="tel" name="tel"
+                                       placeholder="전화번호 ( '-' 제외 )">
                                 <small id="telCheckResult" class="form-text"></small>
                             </div>
 
@@ -201,15 +209,25 @@
 
         // 전화번호 입력 시 실시간 유효성 검사
         document.getElementById("tel").addEventListener("input", function () {
-            const tel = document.getElementById("tel").value.trim();
+            const telInput = document.getElementById("tel");
+            let tel = telInput.value.trim();  // 공백 제거
+
+            // 전화번호 입력 결과를 표시할 요소
             const telCheckResult = document.getElementById("telCheckResult");
+
+            // 숫자 이외의 문자는 제거 (정규식 사용)
+            tel = tel.replace(/[^0-9]/g, '');  // 숫자 이외의 문자는 모두 제거
+
+            // '010'으로 시작하고, 11자리 숫자만 허용하는 정규식
             const telRegex = /^010\d{8}$/;
 
+            // 전화번호가 비어있을 경우
             if (!tel) {
                 telCheckResult.textContent = "";
                 return;
             }
 
+            // 전화번호가 올바른 형식인지 검사
             if (telRegex.test(tel)) {
                 telCheckResult.style.color = "green";
                 telCheckResult.textContent = "올바른 전화번호입니다.";
@@ -217,19 +235,36 @@
                 telCheckResult.style.color = "crimson";
                 telCheckResult.textContent = "전화번호는 '010'으로 시작하며, '-'를 제외한 11자리 숫자여야 합니다.";
             }
+
+            // 입력값을 다시 업데이트 (숫자 외 문자는 자동으로 제거됨)
+            telInput.value = tel;
         });
 
-        // 이메일 실시간 중복 체크
+
+        //이메일 중복 실시간 검증
         document.getElementById("email").addEventListener("input", function () {
             const email = document.getElementById("email").value.trim();
             const emailCheckResult = document.getElementById("emailCheckResult");
 
+            // 이메일 형식 유효성
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+            // 이메일이 비어있을 때
             if (!email) {
                 emailCheckPass = false;
                 emailCheckResult.style.color = "crimson";
-                emailCheckResult.textContent = "이메일을 입력하세요."
+                emailCheckResult.textContent = "이메일을 입력하세요.";
                 return;
             }
+
+            // 이메일 형식이 올바르지 않을 때
+            if (!emailPattern.test(email)) {
+                emailCheckPass = false;
+                emailCheckResult.style.color = "crimson";
+                emailCheckResult.textContent = "잘못된 이메일 형식입니다.";
+                return;
+            }
+
             axios.get("/user/member/checkEmail?email=" + email)
                 .then(function (response) {
                     const isEmailAvailable = response.data;
@@ -244,11 +279,11 @@
                         emailCheckResult.textContent = "이미 사용 중인 이메일입니다.";
                     }
                 }).catch(function (error) {
-                    console.error(error);
-                    emailCheckPass = false;
-                    emailCheckResult.style.color = "crimson";
-                    emailCheckResult.textContent = "이메일 확인 중 오류가 발생했습니다.";
-                });
+                console.error(error);
+                emailCheckPass = false;
+                emailCheckResult.style.color = "crimson";
+                emailCheckResult.textContent = "이메일 확인 중 오류가 발생했습니다.";
+            });
         });
 
         // 회원가입 버튼 클릭 이벤트

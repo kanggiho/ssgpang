@@ -1,26 +1,40 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SSGPANG - Update</title>
+    <title>SSGPANG - 회원정보수정</title>
 
     <!-- Custom fonts for this template-->
     <link href="/css/all.css" rel="stylesheet" type="text/css">
-    <link
-            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-            rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.css" rel="stylesheet">
 
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+    <style>
+
+        #telCheckResult, #pwCheckResult, #emailCheckResult {
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .form-label {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+    </style>
 </head>
 
 <body class="bg-gradient-primary">
@@ -31,7 +45,8 @@
         <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
             <div class="row">
-                <div class="col-lg-5 d-none d-lg-block bg-register-image" style="align-items:center !important; display: flex !important; justify-content:center !important;">
+                <div class="col-lg-5 d-none d-lg-block bg-register-image"
+                     style="align-items:center !important; display: flex !important; justify-content:center !important;">
                     <img src="/img/member/register.png" alt="이미지 자리" width="191" height="187">
                 </div>
                 <div class="col-lg-7">
@@ -39,39 +54,56 @@
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4">회원정보수정</h1>
                         </div>
-                        <form class="user" action="/user/member/update" method="post">
+                        <form class="user" id="updateForm" action="/user/member/update" method="post">
+                            <!-- 아이디 -->
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-user" id="id" name="id" placeholder="아이디">
+                                <label for="id" class="form-label">아이디</label>
+                                <input type="text" id="id" name="id" class="form-control form-control-user" readonly
+                                       th:value="${userVO.id}">
+                            </div>
+
+                            <!-- 이름 -->
+                            <div class="form-group">
+                                <label for="id" class="form-label">이름</label>
+                                <input type="text" class="form-control form-control-user" id="name" name="name"
+                                       placeholder="이름"
+                                       th:value="${userVO.name}">
+                            </div>
+
+                            <!-- 비밀번호 -->
+                            <div class="form-group">
+                                <label for="id" class="form-label">비밀번호</label>
+                                <input type="password" class="form-control form-control-user" id="password"
+                                       name="password" placeholder="비밀번호">
                             </div>
 
                             <div class="form-group">
-                                <div>
-                                    <input type="text" class="form-control form-control-user" id="name" name="name" placeholder="이름">
-                                </div>
+                                <input type="password" class="form-control form-control-user" id="password2"
+                                       name="password2" placeholder="비밀번호 확인">
+                                <small id="pwCheckResult" class="form-text"></small>
                             </div>
 
+                            <!-- 전화번호 -->
                             <div class="form-group">
-                                <div>
-                                    <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="비밀번호">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div>
-                                    <input type="password" class="form-control form-control-user" id="password2" name="password2" placeholder="비밀번호 확인">
-                                </div>
+                                <label for="id" class="form-label">전화번호</label>
+                                <input type="text" class="form-control form-control-user" id="tel" name="tel"
+                                       placeholder="전화번호 ( '-' 제외 )"
+                                       th:value="${userVO.tel}">
+                                <small id="telCheckResult" class="form-text"></small>
                             </div>
 
+                            <!-- 이메일 -->
                             <div class="form-group">
+                                <label for="id" class="form-label">이메일</label>
                                 <input type="email" class="form-control form-control-user" id="email" name="email"
-                                       placeholder="이메일">
+                                       placeholder="이메일 [ ex) ssg559@example.com ]"
+                                       th:value="${userVO.email}">
+                                <small id="emailCheckResult" class="form-text"></small>
                             </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" id="tel" name="tel" placeholder="전화번호 ( '-' 제외 )">
-                                </div>
-                        <hr>
-                        <a href="/user/member/info" class="btn btn-primary btn-user btn-block" type="submit">
-                            회원정보수정
-                        </a>
+
+                            <hr>
+                            <button class="btn btn-primary btn-user btn-block" type="button" id="updateBtn">수정완료
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -91,6 +123,175 @@
 <!-- Custom scripts for all pages-->
 <script src="/js/sb-admin-2.min.js"></script>
 
+
+<th:block>
+    <script>
+        let emailCheckPass = false;
+
+        //전화번호 유효성 검증
+        document.getElementById('tel').addEventListener('input', function () {
+            this.value = this.value.replace(/[^0-9]/g, '');  // 숫자 이외의 문자는 제거
+        });
+
+        // 비밀번호 일치 및 유효성 실시간 검사
+        function checkPasswordMatch() {
+            const password = document.getElementById("password").value.trim();
+            const password2 = document.getElementById("password2").value.trim();
+            const pwCheckResult = document.getElementById("pwCheckResult");
+
+            // 비밀번호 유효성 검사 (영어, 숫자, 특수문자 포함, 8자 이상)
+            const passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+
+            // 두 번째 비밀번호 입력란이 비어있을 때
+            if (!password2) {
+                pwCheckResult.textContent = "";
+                return;
+            }
+
+            // 비밀번호 형식 유효성 검사
+            if (!passwordPattern.test(password)) {
+                pwCheckResult.style.color = "crimson";
+                pwCheckResult.textContent = "비밀번호는 영어, 숫자, 특수문자를 포함해 8자 이상이어야 합니다.";
+                return;
+            }
+
+            // 비밀번호가 일치하는지 검사
+            if (password === password2) {
+                pwCheckResult.style.color = "green";
+                pwCheckResult.textContent = "비밀번호가 일치합니다.";
+            } else {
+                pwCheckResult.style.color = "crimson";
+                pwCheckResult.textContent = "비밀번호가 일치하지 않습니다.";
+            }
+        }
+
+        document.getElementById("password").addEventListener("input", checkPasswordMatch);
+        document.getElementById("password2").addEventListener("input", checkPasswordMatch);
+
+        // 전화번호 입력 시 실시간 유효성 검사
+        document.getElementById("tel").addEventListener("input", function () {
+            const telInput = document.getElementById("tel");
+            let tel = telInput.value.trim();  // 공백 제거
+
+            // 전화번호 입력 결과를 표시할 요소
+            const telCheckResult = document.getElementById("telCheckResult");
+
+            // 숫자 이외의 문자는 제거 (정규식 사용)
+            tel = tel.replace(/[^0-9]/g, '');  // 숫자 이외의 문자는 모두 제거
+
+            // '010'으로 시작하고, 11자리 숫자만 허용하는 정규식
+            const telRegex = /^010\d{8}$/;
+
+            // 전화번호가 비어있을 경우
+            if (!tel) {
+                telCheckResult.textContent = "";
+                return;
+            }
+
+            // 전화번호가 올바른 형식인지 검사
+            if (telRegex.test(tel)) {
+                telCheckResult.style.color = "green";
+                telCheckResult.textContent = "올바른 전화번호입니다.";
+            } else {
+                telCheckResult.style.color = "crimson";
+                telCheckResult.textContent = "전화번호는 '010'으로 시작하며, '-'를 제외한 11자리 숫자여야 합니다.";
+            }
+
+            // 입력값을 다시 업데이트 (숫자 외 문자는 자동으로 제거됨)
+            telInput.value = tel;
+        });
+
+
+        // 이메일 중복 실시간 검증
+        let originalEmail = document.getElementById("email").value.trim(); // 기존 이메일 값
+
+        document.getElementById("email").addEventListener("input", function () {
+            const email = document.getElementById("email").value.trim();
+            const emailCheckResult = document.getElementById("emailCheckResult");
+
+            // 이메일이 수정되지 않았으면 중복 체크를 하지 않음
+            if (email === originalEmail) {
+                emailCheckResult.style.color = "green";
+                emailCheckResult.textContent = "기존 이메일 그대로 사용됩니다.";
+                emailCheckPass = true;  // 기존 이메일 사용 시 중복 체크 완료 처리
+
+                return;
+            }
+
+            // 이메일 형식 유효성 검사
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+            // 이메일이 비어있을 때
+            if (!email) {
+                emailCheckResult.style.color = "crimson";
+                emailCheckResult.textContent = "이메일을 입력하세요.";
+                return;
+            }
+
+            // 이메일 형식이 올바르지 않을 때
+            if (!emailPattern.test(email)) {
+                emailCheckResult.style.color = "crimson";
+                emailCheckResult.textContent = "잘못된 이메일 형식입니다.";
+                return;
+            }
+
+            // 이메일이 수정되었을 때 중복 체크
+            axios.get("/user/member/checkEmail?email=" + email)
+                .then(function (response) {
+                    const isEmailAvailable = response.data;
+
+                    if (isEmailAvailable) {
+                        emailCheckResult.style.color = "green";
+                        emailCheckResult.textContent = "사용 가능한 이메일입니다.";
+                    } else {
+                        emailCheckResult.style.color = "crimson";
+                        emailCheckResult.textContent = "이미 사용 중인 이메일입니다.";
+                    }
+                })
+                .catch(function (error) {
+                    console.error(error);
+                    emailCheckResult.style.color = "crimson";
+                    emailCheckResult.textContent = "이메일 확인 중 오류가 발생했습니다.";
+                });
+        });
+
+
+        // 회원가입 버튼 클릭 이벤트
+        document.getElementById("updateBtn").addEventListener("click", function (event) {
+            event.preventDefault();
+
+            const pw = document.getElementById("password").value.trim();
+            const pw2 = document.getElementById("password2").value.trim();
+            const name = document.getElementById("name").value.trim();
+            const tel = document.getElementById("tel").value.trim();
+            const email = document.getElementById("email").value.trim();
+
+            // 유효성 검사
+            if (pw !== pw2) {
+                alert("PW가 일치하지 않습니다!");
+                return;
+            }
+
+            if (!pw || !name || !tel || !email) {
+                alert("입력란이 비어있습니다!");
+                return;
+            }
+
+            if (!/^010\d{8}$/.test(tel)) {
+                alert("전화번호는 '010'으로 시작하며, 11자리 숫자여야 합니다!");
+                return;
+            }
+
+            if (email !== originalEmail && !emailCheckPass) {
+                alert("이메일 중복체크가 완료되지 않았습니다!");
+                return;
+            }
+
+            // 모든 유효성 검사를 통과하면 폼 제출
+            document.getElementById("updateForm").submit();
+        });
+    </script>
+</th:block>
 </body>
 
 </html>

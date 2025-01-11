@@ -95,6 +95,25 @@ public class UserController {
         return "user/member/find_id";
     }
 
+    @PostMapping("find_id")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> find_id2(@RequestBody Map<String, String> request) {
+        String tel = request.get("tel");
+        System.out.printf("user find_id >> " + tel);
+
+        // 전화번호로 아이디 찾기
+        String userId = userService.selectIdByUserTel(tel);
+
+        Map<String, Object> response = new HashMap<>();
+        if (userId != null) {
+            response.put("userId", userId);  // 아이디가 있을 경우
+        } else {
+            response.put("userId", null);  // 아이디가 없을 경우
+        }
+
+        return ResponseEntity.ok(response);
+    }
+
     //유저 PW 찾기
     @GetMapping("find_pw")
     public String find_pw() {
@@ -112,7 +131,6 @@ public class UserController {
             return "redirect:/user/member/login";
         }
 
-        // DB에서 유저 정보 가져오기
         UserVO userVO = userService.info(id);
         if (userVO != null) {
             model.addAttribute("userVO", userVO);
@@ -124,25 +142,33 @@ public class UserController {
     }
 
 
-    //유저 회원정보수정
+    // 회원정보수정 GET 요청
     @GetMapping("update")
-    public String update(HttpSession session) {
-        // 세션에 id가 있으면 홈 페이지로 리다이렉트
-        if (session.getAttribute("id") != null) {
-            return "/user/member/update";
+    public String update(HttpSession session, Model model) {
+        String userId = (String) session.getAttribute("id");
+
+        if (userId != null) {
+            UserVO userVO = userService.selectUserById(userId);
+            model.addAttribute("userVO", userVO);
+            return "/user/member/update";  // 정보 수정 페이지로 이동
         }
-        return "/user/member/login";  // 세션에 id가 없으면 로그인 페이지로
+
+        return "/user/member/login";  // 세션에 id가 없으면 로그인 페이지로 이동
     }
 
+    // 회원정보수정 POST 요청
     @PostMapping("update")
-    public String update(UserVO userVO) {
+    public String update(HttpSession session, UserVO userVO) {
+
         int result = userService.updateUser(userVO);
+
         if (result > 0) {
-            return "user/member/info";
+            return "redirect:/user/member/info";  // 수정 성공 후 정보 페이지로 리다이렉트
         } else {
-            return "/index";
+            return "redirect:/index";  // 수정 실패 시 홈 페이지로 리다이렉트
         }
     }
+
 
     //유저 회원탈퇴
     @GetMapping("delete")

@@ -45,8 +45,14 @@ public class UserService {
 
     //유저 회원정보수정
     public int updateUser(UserVO userVO) {
+        if (userVO.getPassword() != null && !userVO.getPassword().isEmpty()) {
+            String updatePassword = passwordEncoder.encode(userVO.getPassword());
+            userVO.setPassword(updatePassword);
+        }
+
         return userMapper.updateUser(userVO);
-    };
+    }
+
 
     //유저 회원탈퇴
     public int deleteUser(String id){
