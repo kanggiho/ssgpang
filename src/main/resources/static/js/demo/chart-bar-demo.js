@@ -27,26 +27,28 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   return s.join(dec);
 }
 
-//관리자 대시보드 Bar Chart: 지점별 출고 현황
-//User
-const labels_user = [];
-//출고량
+
+// Bar Chart Example
+
+const labels_Warehouse = [];
 const data_quantity = [];
 
-axios.get('/admin/home_admin/barchart_user_output')
+axios.get('/admin/home_admin/chart3')
     .then(function (response) {
       const barChartData = response.data;
+      // for문을 사용해 데이터 넣기
       for (let i = 0; i < barChartData.length; i++) {
-        labels_user.push(barChartData[i].userId);
-        data_quantity.push(barChartData[i].releaseQuantity);
+        labels_Warehouse.push(barChartData[i].warehouseName); // x축: 창고 이름
+        data_quantity.push(barChartData[i].releaseQuantity); // y축: 출고량
       }
       console.log(barChartData);
+
 
       var ctx = document.getElementById("myBarChart");
       var myBarChart = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: labels_user,
+          labels:labels_Warehouse,
           datasets: [{
             label: "출고량",
             backgroundColor: "#0b30c2",
@@ -67,7 +69,6 @@ axios.get('/admin/home_admin/barchart_user_output')
             }
           },
           scales: {
-            //x축
             x: {
               time: {
                 unit: 'month'
@@ -77,16 +78,17 @@ axios.get('/admin/home_admin/barchart_user_output')
                 drawBorder: false
               },
               ticks: {
-                maxTicksLimit: labels_user.length,
+                maxTicksLimit: labels_Warehouse.length,
                 autoSkip: true
               }
             },
-            //y축
             y: {
-              beginAtZero: true,  //Y축 0부터 시작
+              beginAtZero: true, // Y축이 0부터 시작
+              max: 300, // Y축 최대값
               ticks: {
+                stepSize: 10, // Y축 간격
                 callback: function(value) {
-                  return number_format(value);
+                  return number_format(value); // 값 포맷팅
                 }
               },
               gridLines: {
@@ -125,55 +127,38 @@ axios.get('/admin/home_admin/barchart_user_output')
     })
     .catch(function (error) {
       console.log("error: " + error);
-    });
+    })
 
-//사용자 대시보드 Bar Chart: 월별 발주량, 발주금액
-//발주금액
-const data_outputPrice = [];
-//발주수량
-const data_outputQuantity = [];
 
-axios.get('/user/home/barchart_output')
+const data_outputPrice = []; //발주금액
+const data_outputQuantity = []; //발주수량
+
+axios.get('/user/home/chart1')
     .then(function (response) {
       const UserOutputPrice = response.data.UserOutputPrice;
       const UserOutputQuantity = response.data.UserOutputQuantity;
 
-      // 배열에 데이터 넣기
+      console.log(UserOutputPrice);
+      console.log(UserOutputQuantity);
+
+      // 데이터 넣기
       for (let i = 0; i < 12; i++) {
-        //발주금액 데이터
-        data_outputPrice.push(UserOutputPrice[i].releasePrice);
-        //발주수량 데이터
-        data_outputQuantity.push(UserOutputQuantity[i].releaseQuantity);
+        data_outputPrice.push(UserOutputPrice[i].releasePrice); // 발주금액데이터
+        data_outputQuantity.push(UserOutputQuantity[i].releaseQuantity); // 발주수량데이터
       }
 
-      //bar chart
       let ctx = document.getElementById("myBarChart2");
       let myBarChart2 = new Chart(ctx, {
         type: 'bar',
         data: {
-          //x축 고정 1~12월
-          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+          labels:data_outputPrice,
           datasets: [{
-            //막대그래프: 발주금액
-            label: "발주금액",
-            data: data_outputPrice,
-            yAxisID: 'yAxisLeft',  //왼쪽 축ID
+            label: "출고량",
             backgroundColor: "#0b30c2",
             hoverBackgroundColor: "#2e59d9",
             borderColor: "#4e73df",
-            maxBarThickness: 25,
-          },{
-            //선그래프: 발주수량
-            type: 'line',
-            label: "발주수량",
             data: data_outputQuantity,
-            yAxisID: 'yAxisRight', //오른쪽 축ID
-            borderColor: "#f6c23e",
-            backgroundColor: "#f6c23e",
-            fill: false,
-            tension: 0.2,         // 선의 곡률(부드럽게)
-            pointRadius: 3,
-            pointHoverRadius: 3,
+            maxBarThickness: 25,
           }],
         },
         options: {
@@ -187,7 +172,7 @@ axios.get('/user/home/barchart_output')
             }
           },
           scales: {
-            xAxes: [{
+            x: {
               time: {
                 unit: 'month'
               },
@@ -196,47 +181,30 @@ axios.get('/user/home/barchart_output')
                 drawBorder: false
               },
               ticks: {
-                maxTicksLimit: 12,
+                maxTicksLimit:data_outputPrice.length,
                 autoSkip: true
               }
-            }],
-            yAxes: [
-              {
-                //왼쪽 축
-                id: 'yAxisLeft',
-                type: 'linear',
-                position: 'left',
-                ticks: {
-                  beginAtZero: true,
-                  callback: function(value) {
-                    return number_format(value);
-                  }
-                },
-                gridLines: {
-                  color: "rgb(234, 236, 244)",
-                  drawBorder: false,
-                  borderDash: [2],
-                  zeroLineBorderDash: [2]
+            },
+            y: {
+              beginAtZero: true, // Y축이 0부터 시작
+              max: 300, // Y축 최대값
+              ticks: {
+                stepSize: 10, // Y축 간격
+                callback: function(value) {
+                  return number_format(value); // 값 포맷팅
                 }
               },
-              {
-                //오른쪽 축
-                id: 'yAxisRight',
-                type: 'linear',
-                position: 'right',
-                ticks: {
-                  beginAtZero: true,
-                  callback: function(value) {
-                    return number_format(value);
-                  }
-                },
+              gridLines: {
+                color: "rgb(234, 236, 244)",
+                zeroLineColor: "rgb(234, 236, 244)",
+                drawBorder: false,
+                borderDash: [2],
+                zeroLineBorderDash: [2]
               }
-            ]
+            },
           },
           legend: {
-            display: true,
-            position: 'right',
-            align: 'start',
+            display: false
           },
           tooltips: {
             titleMarginBottom: 10,
@@ -251,7 +219,7 @@ axios.get('/user/home/barchart_output')
             displayColors: false,
             caretPadding: 10,
             callbacks: {
-              label: function (tooltipItem, chart) {
+              label: function(tooltipItem, chart) {
                 var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
                 return datasetLabel + ': ' + number_format(tooltipItem.yLabel);
               }
@@ -262,4 +230,6 @@ axios.get('/user/home/barchart_output')
     })
     .catch(function (error) {
       console.log("error: " + error);
-    });
+    })
+
+

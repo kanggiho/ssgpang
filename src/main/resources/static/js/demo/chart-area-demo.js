@@ -27,13 +27,10 @@ function number_format(number, decimals, dec_point, thousands_sep) {
     return s.join(dec);
 }
 
-//관리자 대시보드 area Chart: 입출고현황
-//입고수량
 const InputQuantity = [];
-//출고수량
 const OutputQuantity = [];
 
-axios.get('/admin/home_admin/areachart')
+axios.get('/admin/home_admin/chart1')
     .then(function (response) {
         const areaChartInputData = response.data.areaChartInputData;
         const areaChartOutputData = response.data.areaChartOutputData;
@@ -41,14 +38,13 @@ axios.get('/admin/home_admin/areachart')
         console.log(areaChartInputData);
         console.log(areaChartOutputData);
 
-        //데이터 넣기
         for (let i = 0; i < 12; i++) {
             InputQuantity.push(areaChartInputData[i].warehousedQuantity);
             OutputQuantity.push(areaChartOutputData[i].releaseQuantity);
         }
 
 
-        // Area Chart
+        // Area Chart Example
         var ctx = document.getElementById("myAreaChart");
         var myLineChart = new Chart(ctx, {
             type: 'line',
@@ -109,7 +105,6 @@ axios.get('/admin/home_admin/areachart')
                             maxTicksLimit: 12
                         }
                     }],
-                    //y축
                     yAxes: [{
                         ticks: {
                             beginAtZero: true, // Y축 0부터 시작
@@ -117,6 +112,7 @@ axios.get('/admin/home_admin/areachart')
                             max: 200, // Y축 최대값
                             maxTicksLimit: 5,
                             padding: 10,
+                            // Include a dollar sign in the ticks
                             callback: function(value, index, values) {
                                 return number_format(value);
                             }
@@ -131,10 +127,7 @@ axios.get('/admin/home_admin/areachart')
                     }],
                 },
                 legend: {
-                    display: true,
-                    position: 'right',
-                    align: 'start',
-                    // font: 'bold'
+                    display: false
                 },
                 tooltips: {
                     backgroundColor: "rgb(255,255,255)",
