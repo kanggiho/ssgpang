@@ -30,7 +30,7 @@
 
 <!-- Page Wrapper -->
 <!-- 세션에 adminId만 있을 때 관리자 페이지를 표시하도록 처리-->
-<div id="wrapper" th:if="${session.userId == null and session.adminId != null}">>
+<div id="wrapper" th:if="${session.userId == null and session.adminId != null}">
 
     <!-- Sidebar -->
     <div th:replace="admin/fragments/sidebar :: adminSideBar"></div>

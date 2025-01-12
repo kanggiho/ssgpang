@@ -72,6 +72,11 @@
                             <div th:if="${successMessage}" class="alert alert-success">
                                 <p th:text="${successMessage}"></p>
                             </div>
+                            <!-- 이메일 전송 성공 메시지 출력 -->
+                            <div th:if="${message}" class="alert alert-success">
+                                <p th:text="${message}"></p>
+                            </div>
+
                         </div>
 
                         <div class="col-lg-6">

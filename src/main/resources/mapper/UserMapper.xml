@@ -42,5 +42,18 @@
         SELECT id FROM user WHERE tel = #{tel}LIMIT 1;
     </select>
 
+    <!-- 이메일 검증 -->
+    <select id="isEmailExists"
+            parameterType="string"
+            resultType="java.lang.Boolean">
+        SELECT * FROM user WHERE email = #{email};
 
+    </select>
+
+    <update id="updateTemporaryPassword"
+            parameterType="string">
+
+        UPDATE user SET password=#{password} WHERE email = #{email};
+
+    </update>
 </mapper>

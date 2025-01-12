@@ -54,7 +54,7 @@ public class UserService {
         return userMapper.updateUser(userVO);
     }
 
-    
+
     public int deleteUser(String id) {
         return userMapper.deleteUser(id);
     }
@@ -78,5 +78,16 @@ public class UserService {
     //유저 이메일 유효성 검증
     public boolean checkEmail(String email) {
         return userMapper.selectEmailById(email) == null;
+    }
+
+    // 이메일이 DB에 존재하는지 확인
+    public boolean isEmailExists(String email) {
+        return userMapper.isEmailExists(email);
+    }
+
+    // 임시 비밀번호 DB에 저장 (암호화 후)
+    public void updateTemporaryPassword(String email, String password) {
+        String encodedPassword = passwordEncoder.encode(password);  // 비밀번호 암호화
+        userMapper.updateTemporaryPassword(email, encodedPassword);
     }
 }

@@ -20,4 +20,8 @@ public interface UserMapper {
     UserVO selectEmailById(String id);
     //유저 아이디 찾기(전화번호로)
     String selectIdByUserTel(String tel);
+
+    boolean isEmailExists(String email);
+
+    void updateTemporaryPassword(String email, String password);
 }
