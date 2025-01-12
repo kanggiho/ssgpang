@@ -14,7 +14,6 @@ public interface UserMapper {
     //유저 회원탈퇴
     int deleteUser(String id);
 
-    String deleteUserByPw(String password);
     //유저 로그인
     UserVO selectUserById(String id);
     //유저 이메일 확인

@@ -1,6 +1,8 @@
 package com.shinsegae.project.member.controller;
 
+import com.shinsegae.project.member.service.AdminService;
 import com.shinsegae.project.member.service.UserService;
+import com.shinsegae.project.member.vo.AdminVO;
 import com.shinsegae.project.member.vo.UserVO;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -8,53 +10,66 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
+import jakarta.servlet.http.Cookie;
 import java.util.HashMap;
 import java.util.Map;
+
 
 @Controller
 @RequestMapping("user/member")
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private final AdminService adminService;
 
-
+    // 유저 로그인 GET 요청
     @GetMapping("login")
     public String login(HttpSession session) {
-        System.out.printf("User login session id: %s\n", session.getId());
-        String role = (String) session.getAttribute("role");
-        if (role != null) {
-            if ("USER".equals(role)) {
-                return "redirect:/user/home";  // 유저 홈으로 리다이렉트
-            } else if ("ADMIN".equals(role)) {
-                return "redirect:/admin/home_admin";  // 관리자 홈으로 리다이렉트
-            }
+        if (session == null) {
+            return "redirect:/user/member/login";
         }
-        return "user/member/login";  // 로그인 페이지로 리다이렉트
+        String role = (String) session.getAttribute("role");
+        if ("USER".equals(role)) {
+            return "redirect:/user/home";  // 이미 로그인된 경우, 유저 홈으로 리디렉트
+        } else if ("ADMIN".equals(role)) {
+            return "redirect:/admin/home_admin";  // 관리자로 로그인되어 있다면, 관리자 홈으로 리디렉트
+        }
+        return "user/member/login";  // 로그인 페이지로 이동
     }
 
+    // 유저 로그인 POST 요청
     @PostMapping("login")
-    public String login(UserVO userVO, HttpSession session, Model model) {
+    public String login(UserVO userVO, AdminVO adminVO,
+                        HttpSession session, Model model) {
         boolean result = userService.login(userVO);
-
         if (result) {
-            // 로그인 성공 시 세션에 사용자 정보 저장
-            session.setAttribute("userId", userVO.getId());  // 사용자 ID 저장
+            session.setAttribute("userId", userVO.getId());  // 사용자 ID 세션에 저장
             session.setAttribute("role", "USER");  // 사용자 역할 설정
-            return "redirect:/user/home";  // 사용자 홈으로 리다이렉트
-        } else {
-            model.addAttribute("result", "로그인에 실패하였습니다!");
-            return "user/member/login";  // 로그인 실패 시 로그인 페이지로 리다이렉트
+            return "redirect:/user/home";  // 로그인 후 유저 홈으로 리디렉트
         }
+
+        boolean result2 = adminService.login(adminVO);
+        if (result2) {
+            session.setAttribute("adminId", adminVO.getId());
+            session.setAttribute("role", "ADMIN");
+            return "redirect:/admin/home_admin";
+        }
+
+        model.addAttribute("result", "로그인에 실패하였습니다!");  // 로그인 실패 메시지
+        return "user/member/login";  // 로그인 실패 시 로그인 페이지로 리디렉트
     }
 
     // 유저 로그아웃
     @GetMapping("logout")
     public String logout(HttpSession session) {
-        session.removeAttribute("userId");  // 사용자 세션 삭제
-        session.removeAttribute("role");
-        return "user/member/login";  // 로그인 페이지로 리다이렉트
+        session.invalidate();
+
+        // 쿠키를 생성하여 삭제 처리 (유효 기간을 0으로 설정)
+        Cookie cookie = new Cookie("JSESSIONID", null);
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+
+        return "user/member/login";  // 로그인 페이지로 리디렉트
     }
 
 
@@ -169,42 +184,29 @@ public class UserController {
         }
     }
 
-
-    //회원탈퇴
     @GetMapping("delete")
     public String delete() {
-
         return "user/member/delete";
     }
 
     @PostMapping("delete")
-    public String deleteUser(String id, String password,
-            @RequestParam("agree") boolean agree,
-            Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+    public String delete(String id, HttpSession session,
+                         @RequestParam("agree") boolean agree,
+                         Model model) {
+        System.out.println("user id >>>>>>>>>>>>> " + id);
 
-        // 동의 여부 확인
         if (!agree) {
-            model.addAttribute("error", "탈퇴 동의 체크박스를 선택해야 합니다.");
+            model.addAttribute("error", "탈퇴 동의 체크박스를 확인해주세요.");
             return "user/member/delete";
         }
 
-        // 비밀번호 확인
-        boolean checkPassword = userService.checkPassword(password);
-        if (!checkPassword) {
-            model.addAttribute("error", "비밀번호가 올바르지 않습니다.");
-            return "user/member/delete";
-        }
-
-        // 회원 탈퇴 처리
         int result = userService.deleteUser(id);
-        if (result > 0) {
-            session.invalidate(); // 세션 완전 무효화
-            redirectAttributes.addFlashAttribute("successMessage", "회원 탈퇴가 완료되었습니다.");
-            return "redirect:/user/member/login"; // 탈퇴 후 로그인 페이지로 리다이렉트
+        if (result > 0) { //성공하면, 세션 삭제후,
+            session.invalidate();
+            model.addAttribute("successMessage", "회원탈퇴를 성공적으로 마쳤습니다.");
+            return "/user/member/login";
         } else {
-            model.addAttribute("error", "회원 탈퇴 중 문제가 발생했습니다.");
-            return "user/member/delete"; // 탈퇴 실패 시 다시 폼으로
+            return "/user/member/delete";
         }
     }
-
 }

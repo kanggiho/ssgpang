@@ -22,15 +22,15 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <style>
-
         .form-control[readonly] {
             background-color: #e9ecef;
         }
         .lead {
             font-size: 18.5px;
         }
-
-
+        #goToUpdate{
+            text-decoration-line: none;
+        }
     </style>
 </head>
 
@@ -42,7 +42,7 @@
             <!-- Nested Row within Card Body -->
             <div class="row">
                 <div class="col-lg-5 d-none d-lg-block bg-register-image text-center">
-                    <img src="/img/member/profile.png" alt="프로필 이미지" width="150" height="150">
+                    <img src="/img/logo/boy.png" alt="프로필 이미지" width="150" height="150">
                 </div>
                 <div class="col-lg-7">
                     <div class="p-5">
@@ -76,7 +76,7 @@
                                        th:value="${userVO.email}">
                             </div>
                             <hr>
-                            <a href="/user/member/update">
+                            <a id="goToUpdate" href="/user/member/update">
                                 <button type="button" class="btn btn-primary btn-user btn-block">
                                     회원정보 수정
                                 </button>

@@ -20,11 +20,6 @@
             parameterType="string">
         DELETE FROM user WHERE id = #{id};
     </delete>
-    <!-- 회원탈퇴 -->
-    <delete id="deleteUserByPw"
-            parameterType="string">
-        DELETE FROM user WHERE password = #{password};
-    </delete>
 
     <!-- 로그인 -->
     <select id="selectUserById"

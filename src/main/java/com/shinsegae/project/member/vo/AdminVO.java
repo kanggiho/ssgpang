@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class AdminVO {
-    private int id;
+    private String id;
     private String password;
     private String name;
     private String tel;

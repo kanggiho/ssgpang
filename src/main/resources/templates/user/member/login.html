@@ -26,11 +26,30 @@
         .nav-link.text-muted {
             cursor: default; /* 구분선은 클릭되지 않도록 */
         }
+
+
+        .alert-success {
+            font-weight: bold;
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 6px;
+            padding: 5px;
+        }
+
+        /* 유의사항 문구 스타일 */
+        .alert-danger {
+            font-weight: bold;
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 6px;
+            padding: 5px;
+        }
     </style>
 
 </head>
 
 <body class="bg-gradient-primary">
+
 <!-- 세션에 userId나 adminId가 있을 경우 로그인 페이지를 표시하지 않도록 처리 -->
 <div class="container" th:if="${session.userId == null and session.adminId == null}">
     <!-- Outer Row -->
@@ -45,13 +64,11 @@
                             <img src="/img/member/login.png" alt="이미지 자리" width="191" height="187">
 
                             <!-- 로그인 실패 메시지를 <small> 태그로 출력 -->
-                            <div class="text-center mt-3">
-                                <small th:if="${result != null}" style="color: crimson;">
-                                    [[${result}]]
-                                </small>
+                            <div th:if="${result != null}" class="alert alert-danger">
+                                <p th:text="${result}"></p>
                             </div>
 
-                            <!-- 로그인 페이지에서 성공 메시지 출력 -->
+                            <!-- 회원탈퇴 성공 메시지 출력 -->
                             <div th:if="${successMessage}" class="alert alert-success">
                                 <p th:text="${successMessage}"></p>
                             </div>

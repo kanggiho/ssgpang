@@ -35,12 +35,12 @@ public class AdminService {
     }
 
     //관리자 정보 확인
-    public AdminVO info(int id) {
+    public AdminVO info(String id) {
         return adminMapper.selectAdminById(id);
     }
 
     //관리자 삭제
-    public int deleteAdmin(int id){
+    public int deleteAdmin(String id){
         return adminMapper.deleteAdmin(id);
     };
 
@@ -50,7 +50,7 @@ public class AdminService {
     };
 
     //관리자 pw 찾기
-    public String selectPwByAdminId (int id){
+    public String selectPwByAdminId (String id){
         return adminMapper.selectPwByAdminId(id);
     };
 
