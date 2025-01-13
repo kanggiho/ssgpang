@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
@@ -37,5 +38,39 @@ public class OrderService {
         return orderMapper.selectOutputAll();
     }
     public List<OrderManagementDTO> selectOutputConfirmTable(){ return orderMapper.selectOrderManagementAll();}
+
+    //발주요청관리
+    /**
+     * 승인 처리
+     * @param outputId   승인할 주문 ID
+     * @param adminId   승인자 ID (현재 관리자)
+     */
+    public void approveOrder(int outputId, int adminId) {
+        int confirmNum = Integer.parseInt(generateRandomNumber(6)); // 6자리 난수 생성
+        orderMapper.updateApproval(outputId, confirmNum, adminId, "승인");
+    }
+
+    /**
+     * 거절 처리
+     * @param outputId   거절할 주문 ID
+     */
+    public void rejectOrder(int outputId) {
+        orderMapper.updateStatus(outputId, "거절");
+    }
+
+    /**
+     * 6자리 난수 생성
+     * @param length 생성할 난수 길이
+     * @return 6자리 난수 문자열
+     */
+    private String generateRandomNumber(int length) {
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder();
+
+        for(int i = 0; i < length; i++){
+            sb.append(random.nextInt(10)); // 0~9
+        }
+        return sb.toString();
+    }
 
 }

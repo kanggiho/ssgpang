@@ -5,6 +5,8 @@ import com.shinsegae.project.order.vo.OrderManagementDTO;
 import com.shinsegae.project.order.vo.HandleDTO;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,18 +31,23 @@ public class OrderAdminController {
         return "admin/order/manage_outgoing_request";
     }
 
-    @PostMapping("/handle")
-    public String handleOrder(@RequestBody HandleDTO request, HttpSession session) {
-        String adminId = (String) session.getAttribute("adminId");
+    @PostMapping("handle")
+    public ResponseEntity<String> handleOrder(@RequestBody HandleDTO request, HttpSession session) {
+        int adminId = Integer.parseInt((String) session.getAttribute("adminId"));
 
-        if ("approve".equals(request.getActionType())) {
-            //orderService.approveOrder(request.getOrderId(), adminId);
-        } else if ("reject".equals(request.getActionType())) {
-            //orderService.rejectOrder(request.getOrderId());
-        } else {
-            return "INVALID_ACTION";
+        try {
+            if ("approve".equals(request.getActionType())) {
+                orderService.approveOrder(request.getOutputId(), adminId);
+            } else if ("reject".equals(request.getActionType())) {
+                orderService.rejectOrder(request.getOutputId());
+            } else {
+                return ResponseEntity.badRequest().body("INVALID_ACTION");
+            }
+            return ResponseEntity.ok("SUCCESS");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("ERROR: " + e.getMessage());
         }
-        return "SUCCESS";
     }
 
 

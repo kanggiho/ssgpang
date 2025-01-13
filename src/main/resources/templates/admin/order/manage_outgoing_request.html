@@ -213,25 +213,29 @@
             return;
         }
 
-        const payload = {
-            orderId: data.outputId, // 현재 선택된 요청 ID
+        const requestData = {
+            outputId: parseInt(data.outputId), // 현재 선택된 요청 ID
             actionType: actionType  // "approve" 또는 "reject"
         };
 
-        // Axios로 POST 요청 전송
-        axios.post('/admin/order/handle', payload)
-            .then(response => {
-                if (response.data === 'SUCCESS') {
-                    alert(actionType === 'approve' ? '승인되었습니다.' : '거절되었습니다.');
-                    location.reload(); // 페이지 새로고침
-                } else {
-                    alert('처리 실패: ' + response.data);
-                }
-            })
-            .catch(error => {
-                console.error(error);
-                alert('오류가 발생했습니다. 관리자에게 문의하세요.');
-            });
+        if (data.status === '대기중'){
+            // Axios로 POST 요청 전송
+            axios.post('/admin/order/handle', requestData)
+                .then(response => {
+                    if (response.data === 'SUCCESS') {
+                        alert(actionType === 'approve' ? '승인되었습니다.' : '거절되었습니다.');
+                        location.reload(); // 페이지 새로고침
+                    } else {
+                        alert('처리 실패: ' + response.data);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error.response ? error.response.data : error.message);
+                    alert('오류가 발생했습니다. 관리자에게 문의하세요.');
+                });
+        }else{
+            alert('대기중인 상태만 승인, 거절이 가능합니다.')
+        }
     }
 
 

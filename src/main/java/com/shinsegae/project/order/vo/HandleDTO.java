@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class HandleDTO {
-    private String orderId;
+    private int outputId;
     private String actionType;
 }

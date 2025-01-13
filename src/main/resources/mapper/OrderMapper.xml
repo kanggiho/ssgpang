@@ -81,4 +81,26 @@
     </select>
 
 
+
+<!--    발주요청관리-->
+
+    <!-- 승인 처리 -->
+    <update id="updateApproval">
+        UPDATE output
+        SET confirm_num = #{confirmNum},
+            confirm_id = #{confirmId},
+            status = #{status}
+        WHERE output_id = #{outputId}
+    </update>
+
+    <!-- 거절 처리 -->
+    <update id="updateStatus">
+        UPDATE output
+        SET status = #{status},
+            confirm_num = 0,
+            confirm_id = 0
+        WHERE output_id = #{outputId}
+    </update>
+
+
 </mapper>
