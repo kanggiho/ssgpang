@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SSGPANG - Delete</title>
+    <title>SSGPANG - 회원탈퇴</title>
 
     <!-- Custom fonts for this template-->
     <link href="/css/all.css" rel="stylesheet" type="text/css">
@@ -27,6 +27,43 @@
         .nav-link.text-muted {
             cursor: default; /* 구분선은 클릭되지 않도록 */
         }
+
+        #deleteBtn:hover {
+            background-color: #e74a3b; /* btn-danger 색상 */
+            border-color: #e74a3b; /* border 색상도 변경 */
+        }
+
+        /* 유의사항 문구 스타일 */
+        .warning-text {
+            color: #d9534f;  /* 경고를 나타내는 빨간색 */
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 15px;  /* 입력란과의 간격 */
+            padding: 10px;
+            border: 1px solid #d9534f;  /* 빨간색 테두리 */
+            border-radius: 5px;  /* 테두리 둥글게 */
+            background-color: #f8d7da;  /* 연한 빨간색 배경 */
+        }
+
+        /* 입력란의 기본 스타일 */
+        .form-group input {
+            margin-top: 10px;  /* 위쪽 여백 */
+            border-radius: 5px;  /* 테두리 둥글게 */
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        /* 전체 폼 스타일 */
+        #deleteUser {
+            width: 100%;
+            max-width: 400px;  /* 폼의 최대 너비 */
+            margin: 0 auto;  /* 가운데 정렬 */
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
     </style>
 
 </head>
@@ -45,35 +82,52 @@
                     <div class="row">
                         <div class="col-lg-6 d-none d-lg-block bg-login-image" style="align-items:center !important; display: flex !important; justify-content:center !important;">
                             <img src="/img/member/login.png" alt="이미지 자리" width="191" height="187">
+
+                            <div th:if="${error}" class="alert">
+                                <p th:text="${error}"></p>
+                            </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">회원탈퇴</h1>
                                 </div>
-                                <form class="user">
+                                <form class="user" id="deleteUser" action="/user/member/delete" method="post">
+
+                                    <!-- 유의사항 문구 -->
                                     <div class="form-group">
-                                        <input type="email" class="form-control form-control-user"
-                                               id="exampleInputEmail" aria-describedby="emailHelp"
-                                               placeholder="ID 입력">
+                                        <p class="warning-text">회원 탈퇴 시, 모든 개인 정보와 데이터는 복구할 수 없습니다.
+                                            <br>정말로 탈퇴하시겠습니까?</p>
                                     </div>
+
+                                    <!-- 아이디 입력 -->
                                     <div class="form-group">
-                                        <input type="password" class="form-control form-control-user"
-                                               id="exampleInputPassword" placeholder="PW 입력">
+                                        <input type="text" class="form-control form-control-user" id="id" name="id" placeholder="ID 입력" required>
                                     </div>
-                                    <a href="/user/home" class="btn btn-primary btn-user btn-block">
-                                        로그인
-                                    </a>
+
+                                    <!-- 비밀번호 입력 -->
+                                    <div class="form-group">
+                                        <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="PW 입력" required>
+                                    </div>
+
+                                    <!-- 유의사항 체크박스 -->
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="agree" name="agree" required>
+                                            <label class="custom-control-label" for="agree">위 내용을 모두 읽고 동의합니다.</label>
+                                        </div>
+                                    </div>
+
+                                    <!-- 탈퇴 버튼 -->
+                                    <button id="deleteBtn" type="submit" class="btn btn-primary btn-user btn-block">
+                                        회원 탈퇴
+                                    </button>
+
                                 </form>
+
                                 <hr>
                                 <nav class="nav justify-content-center">
-                                    <a class="nav-link small" href="/user/member/find_id">아이디 찾기</a>
-                                    <span class="nav-link small text-muted">|</span>
-
-                                    <a class="nav-link small" href="/user/member/find_pw">비밀번호 찾기</a>
-                                    <span class="nav-link small text-muted">|</span>
-
-                                    <a class="nav-link small" href="/user/member/register">회원가입</a>
+                                    <a class="nav-link small" href="/user/home">홈 화면</a>
                                 </nav>
                             </div>
                         </div>
@@ -96,6 +150,17 @@
 
 <!-- Custom scripts for all pages-->
 <script src="/js/sb-admin-2.min.js"></script>
+
+<th:block>
+    <script>
+        document.getElementById("agree").addEventListener("change", function() {
+            const deleteBtn = document.getElementById("deleteBtn");
+            deleteBtn.disabled = !this.checked;
+        });
+
+    </script>
+</th:block>
+
 
 </body>
 

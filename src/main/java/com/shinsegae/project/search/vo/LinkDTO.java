@@ -1,4 +1,5 @@
-package com.shinsegae.project.dashboard.vo;
+package com.shinsegae.project.search.vo;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BarChartDTO {
-    private String warehouseName;
-    private int releaseQuantity;
+public class LinkDTO {
+     private String url;
+        private String text;
 }

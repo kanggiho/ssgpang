@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SSGPANG Fresh</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="/css/all.css" rel="stylesheet" type="text/css">
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/css/sb-admin-2.css" rel="stylesheet">
+    <link rel="icon" href="/img/favicon/starfavicon.png">
+
+    <style>
+        .chat-container {
+            width: 100%;
+            max-width: 600px;
+            height: 500px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        .chat-header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .chat-body {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .chat-message {
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 70%;
+        }
+        .user-message {
+            align-self: flex-end;
+            background-color: #007bff;
+            color: white;
+        }
+        .bot-message {
+            align-self: flex-start;
+            background-color: #f1f1f1;
+            color: #333;
+        }
+        .chat-footer {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+        }
+        .chat-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .chat-send {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .question-list {
+            margin-top: 20px;
+        }
+        .question-header {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .question-item {
+            cursor: pointer; /* 마우스를 올리면 손모양으로 변경 */
+            padding: 10px;
+            border-radius: 12px; /* 둥근 모서리 */
+            background-color: #f8f9fa; /* 배경색 */
+            margin-bottom: 10px; /* 항목 간 간격 */
+            transition: background-color 0.3s ease; /* 배경색 변화에 부드러운 전환 효과 추가 */
+        }
+        .question-item:hover {
+            background-color: #e2e6ea; /* 마우스를 올렸을 때 배경색 변화 */
+        }
+    </style>
+
+</head>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <div th:replace="user/fragments/sidebar :: userSideBar"></div>
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <div th:replace="user/fragments/topbar :: userTopBar"></div>
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Content Row -->
+                <div class="row">
+                    <!-- Content Column -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="chat-container">
+                            <div class="chat-header">SSGPANG Chatbot</div>
+                            <div class="chat-body" id="chatBody"></div>
+                            <div class="chat-footer">
+                                <input type="text" id="chatInput" class="chat-input" placeholder="Type your message...">
+                                <button id="sendButton" class="chat-send">Send</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="question-list">
+                            <div class="question-header">자주 묻는 질문</div>
+                            <div class="question-item">What are your operating hours?</div>
+                            <div class="question-item">How can I contact customer support?</div>
+                            <div class="question-item">Where is your store located?</div>
+                            <!-- 더 많은 질문 항목 추가 가능 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <div th:replace="user/fragments/footer :: userFooter"></div>
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div th:replace="user/fragments/modal :: userModal"></div>
+
+<!-- Bootstrap core JavaScript-->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="/js/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="/js/sb-admin-2.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="/js/Chart.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="/js/demo/chart-area-demo.js"></script>
+<script src="/js/demo/chart-pie-demo.js"></script>
+
+<script>
+    const chatBody = document.getElementById('chatBody');
+    const chatInput = document.getElementById('chatInput');
+    const sendButton = document.getElementById('sendButton');
+
+    sendButton.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') sendMessage();
+    });
+
+    function sendMessage() {
+        const message = chatInput.value.trim();
+        if (message === '') return;
+
+        addMessageToChat('user', message);
+        chatInput.value = '';
+        setTimeout(() => {
+            addMessageToChat('bot', 'This is a response from the chatbot!');
+        }, 500);
+    }
+
+    function addMessageToChat(sender, message) {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('chat-message');
+        messageElement.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
+        messageElement.textContent = message;
+        chatBody.appendChild(messageElement);
+        chatBody.scrollTop = chatBody.scrollHeight;
+    }
+    document.querySelectorAll('.question-item').forEach(item => {
+        item.addEventListener('click', function() {
+            chatInput.value = this.textContent;
+            chatInput.focus();
+        });
+    });
+</script>
+
+</body>
+
+</html>

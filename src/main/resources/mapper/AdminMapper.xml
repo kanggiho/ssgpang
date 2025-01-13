@@ -18,20 +18,20 @@
 
     <!-- 탈퇴 -->
     <delete id="deleteAdmin"
-            parameterType="int">
+            parameterType="string">
         DELETE FROM admin WHERE id = #{id};
     </delete>
 
     <!-- 로그인 -->
     <select id="selectAdminById"
-            parameterType="int"
+            parameterType="string"
             resultType="com.shinsegae.project.member.vo.AdminVO">
         SELECT * FROM admin WHERE id = #{id};
     </select>
 
     <!-- pw 찾기 -->
     <select id="selectPwByAdminId"
-            parameterType="int"
+            parameterType="string"
             resultType="java.lang.String">
         SELECT password FROM admin WHERE id = #{id};
     </select>
