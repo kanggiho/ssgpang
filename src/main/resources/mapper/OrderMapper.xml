@@ -58,7 +58,8 @@
             output.release_date AS release_date,
             output.confirm_num AS confirm_num,
             output.confirm_id AS confirm_id,
-            output.status AS status
+            output.status AS status,
+            output.output_id AS output_id
         FROM
             output
                 JOIN product ON output.product_code = product.product_code

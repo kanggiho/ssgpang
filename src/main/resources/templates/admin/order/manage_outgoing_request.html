@@ -15,6 +15,7 @@
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.css" rel="stylesheet">
     <link rel="icon" href="/img/favicon/starfavicon.png">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <style>
         .table-responsive {
@@ -89,7 +90,7 @@
                     <div class="dropdown-group">
                         <label for="idFilter">아이디 필터:</label>
                         <select id="idFilter">
-                            <option value="current">현재 로그인 유저</option>
+                            <option value="current">현재 관리자</option>
                             <option value="all" selected>전체</option>
                         </select>
                     </div>
@@ -107,6 +108,7 @@
                                     <table class="table table-bordered text-center table-hover" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                         <tr>
+                                            <th>발주번호</th>
                                             <th>자재명</th>
                                             <th>아이디</th>
                                             <th>단가</th>
@@ -119,6 +121,7 @@
                                         </thead>
                                         <tbody>
                                         <tr th:each="row : ${tableData}" th:data-id="${row.id}" onclick="showDetails(this)">
+                                            <td th:text="${row.outputId}"></td>
                                             <td th:text="${row.productName}"></td>
                                             <td th:text="${row.id}"></td>
                                             <td th:text="${row.unitPrice}"></td>
@@ -143,6 +146,7 @@
                             </div>
                             <div class="card-body">
                                 <div id="details-container">
+                                    <p><strong>발주번호:</strong> <span id="detail-outputId"></span></p>
                                     <p><strong>자재명:</strong> <span id="detail-productName"></span></p>
                                     <p><strong>아이디:</strong> <span id="detail-id"></span></p>
                                     <p><strong>단가:</strong> <span id="detail-unitPrice"></span></p>
@@ -152,6 +156,8 @@
                                     <p><strong>승인자이름:</strong> <span id="detail-confirmId"></span></p>
                                     <p><strong>승인여부:</strong> <span id="detail-status"></span></p>
                                 </div>
+                                <button type="button" class="btn btn-success" onclick="handleApproval('approve')">승인</button>
+                                <button type="button" class="btn btn-danger" onclick="handleApproval('reject')">거절</button>
                             </div>
                         </div>
                     </div>
@@ -173,19 +179,23 @@
 <script src="/js/sb-admin-2.min.js"></script>
 
 <script>
+    let data = {};
+
     // 상세보기 함수 (기존)
     function showDetails(row) {
-        const data = {
-            productName: row.children[0].innerText,
-            id: row.children[1].innerText,
-            unitPrice: row.children[2].innerText,
-            releaseQuantity: row.children[3].innerText,
-            releaseDate: row.children[4].innerText,
-            confirmNum: row.children[5].innerText,
-            confirmId: row.children[6].innerText,
-            status: row.children[7].innerText,
+        data = {
+            outputId: row.children[0].innerText,
+            productName: row.children[1].innerText,
+            id: row.children[2].innerText,
+            unitPrice: row.children[3].innerText,
+            releaseQuantity: row.children[4].innerText,
+            releaseDate: row.children[5].innerText,
+            confirmNum: row.children[6].innerText,
+            confirmId: row.children[7].innerText,
+            status: row.children[8].innerText,
         };
 
+        document.getElementById('detail-outputId').innerText = data.outputId;
         document.getElementById('detail-productName').innerText = data.productName;
         document.getElementById('detail-id').innerText = data.id;
         document.getElementById('detail-unitPrice').innerText = data.unitPrice;
@@ -195,6 +205,36 @@
         document.getElementById('detail-confirmId').innerText = data.confirmId;
         document.getElementById('detail-status').innerText = data.status;
     }
+
+    // 승인/거절 요청 처리
+    function handleApproval(actionType) {
+        if (!data.outputId) {
+            alert("처리할 요청을 먼저 선택하세요.");
+            return;
+        }
+
+        const payload = {
+            orderId: data.outputId, // 현재 선택된 요청 ID
+            actionType: actionType  // "approve" 또는 "reject"
+        };
+
+        // Axios로 POST 요청 전송
+        axios.post('/admin/order/handle', payload)
+            .then(response => {
+                if (response.data === 'SUCCESS') {
+                    alert(actionType === 'approve' ? '승인되었습니다.' : '거절되었습니다.');
+                    location.reload(); // 페이지 새로고침
+                } else {
+                    alert('처리 실패: ' + response.data);
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                alert('오류가 발생했습니다. 관리자에게 문의하세요.');
+            });
+    }
+
+
 
     // 테이블 필터링 함수
     function filterTable() {
@@ -208,7 +248,7 @@
             }
         }
 
-        var currentUserId = '[[${userId}]]';
+        var currentUserId = '[[${adminId}]]';
 
         // 드롭다운에서 현재 선택된 ID 필터 값
         const idFilterValue = document.getElementById('idFilter').value;
@@ -219,14 +259,15 @@
 
         for (let i = 0; i < rows.length; i++) {
             const tds = rows[i].getElementsByTagName('td');
-            const productName = tds[0].innerText;
-            const rowId       = tds[1].innerText; // 아이디
-            const unitPrice   = tds[2].innerText;
-            const quantity    = tds[3].innerText;
-            const date        = tds[4].innerText;
-            const confirmNum  = tds[5].innerText;
-            const confirmId   = tds[6].innerText; // 승인자이름
-            const status      = tds[7].innerText; // 상태
+            const outputId    = tds[0].innerText;
+            const productName = tds[1].innerText;
+            const rowId       = tds[2].innerText; // 아이디
+            const unitPrice   = tds[3].innerText;
+            const quantity    = tds[4].innerText;
+            const date        = tds[5].innerText;
+            const confirmNum  = tds[6].innerText;
+            const confirmId   = tds[7].innerText; // 승인자이름
+            const status      = tds[8].innerText; // 상태
 
 
             // 1) status 필터 확인
@@ -238,7 +279,7 @@
             let idMatch = true;
             if (idFilterValue === 'current') {
                 // rowId가 현재 로그인 유저 ID와 같아야 함
-                idMatch = (rowId === currentUserId);
+                idMatch = (confirmId === currentUserId);
             }
 
             // 두 조건을 모두 만족하면 보여주고, 아니면 숨김
