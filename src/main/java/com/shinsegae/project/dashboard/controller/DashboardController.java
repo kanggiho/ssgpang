@@ -30,10 +30,6 @@ public class DashboardController {
         model.addAttribute("statusReject", dashboardService.selectOutputByStatusReject());
         model.addAttribute("totalOutputQuantity", dashboardService.selectTotalOutputQuantity());
         model.addAttribute("totalOutputPrice", dashboardService.selectTotalOutputPrice());
-        //pie chart: 나의 발주정보
-        //${userPieChartData.productName} 출력
-//        List<UserPieChartDTO> userPieChartData = dashboardService.selectUserPieChartData();
-//        model.addAttribute("userPieChartData", userPieChartData);
         return "user/home";
     }
 

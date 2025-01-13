@@ -82,11 +82,6 @@ public class DashboardService {
 //        }
     }
 
-    //pie chart
-//    public List<PieChartDTO> selectPieChartData(){
-//        return dashboardMapper.selectPieChartData();
-//    }
-
     //area chart: 월별 입고량
     public List<AreaChartInputDTO> selectAreaChartInputData(){
         return dashboardMapper.selectAreaChartInputData();

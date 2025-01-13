@@ -19,8 +19,6 @@ public interface DashboardMapper {
     List<UserBarChartQuantityDTO> selectUserOutputQuantity();
     List<UserBarChartPriceDTO> selectUserOutputPrice();
 
-
-
     //pie chart: 나의 발주정보
     List<UserPieChartDTO> selectUserPieChartData();
 

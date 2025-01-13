@@ -49,11 +49,15 @@ axios.get('/admin/home_admin/barchart_user_output')
           labels: labels_user,
           datasets: [{
             label: "출고량",
-            backgroundColor: "#0b30c2",
-            hoverBackgroundColor: "#2e59d9",
-            borderColor: "#4e73df",
             data: data_quantity,
-            maxBarThickness: 25,
+            backgroundColor: "#1e32bb",
+            hoverBackgroundColor: "#5b93ff",
+           //borderColor: "#5b93ff",
+            //borderSkipped: false ,
+            borderWidth: 2,
+            borderRadius: 20,
+            borderdSkipped: false,
+            maxBarThickness: 12,
           }],
         },
         options: {
@@ -68,7 +72,7 @@ axios.get('/admin/home_admin/barchart_user_output')
           },
           scales: {
             //x축
-            x: {
+            xAxes:[{
               time: {
                 unit: 'month'
               },
@@ -78,13 +82,19 @@ axios.get('/admin/home_admin/barchart_user_output')
               },
               ticks: {
                 maxTicksLimit: labels_user.length,
-                autoSkip: true
+                autoSkip: true,
+                fontSize: 14, // 글씨 크기 설정
+                fontStyle: 'bold', // 글씨 스타일 설정 (굵게)
               }
-            },
+            }],
             //y축
-            y: {
-              beginAtZero: true,  //Y축 0부터 시작
+            yAxes: [{
               ticks: {
+                beginAtZero: true,  //Y축 0부터 시작
+                min: 0,
+                autoSkip: true,
+                fontSize: 14, // 글씨 크기 설정
+                fontStyle: 'bold', // 글씨 스타일 설정 (굵게)
                 callback: function(value) {
                   return number_format(value);
                 }
@@ -96,10 +106,17 @@ axios.get('/admin/home_admin/barchart_user_output')
                 borderDash: [2],
                 zeroLineBorderDash: [2]
               }
-            },
+            }]
           },
           legend: {
-            display: false
+            display: true,
+            position: 'right',
+            align: 'start',
+            labels: {
+              fontSize: 14, // 글씨 크기
+              fontColor: "#000", // 범례 글씨 색상
+              fontStyle: 'bold', // 범례 글씨 스타일
+            }
           },
           tooltips: {
             titleMarginBottom: 10,
@@ -158,18 +175,18 @@ axios.get('/user/home/barchart_output')
             label: "발주금액",
             data: data_outputPrice,
             yAxisID: 'yAxisLeft',  //왼쪽 축ID
-            backgroundColor: "#0b30c2",
+            backgroundColor: "#1e32bb",
             hoverBackgroundColor: "#2e59d9",
             borderColor: "#4e73df",
-            maxBarThickness: 25,
+            maxBarThickness: 12,
           },{
             //선그래프: 발주수량
             type: 'line',
             label: "발주수량",
             data: data_outputQuantity,
             yAxisID: 'yAxisRight', //오른쪽 축ID
-            borderColor: "#f6c23e",
-            backgroundColor: "#f6c23e",
+            borderColor: "rgba(238,183,166,0.93)",
+            backgroundColor: "rgb(255,143,107)",
             fill: false,
             tension: 0.2,         // 선의 곡률(부드럽게)
             pointRadius: 3,
@@ -197,7 +214,9 @@ axios.get('/user/home/barchart_output')
               },
               ticks: {
                 maxTicksLimit: 12,
-                autoSkip: true
+                autoSkip: true,
+                fontSize: 14, // 글씨 크기 설정
+                fontStyle: 'bold', // 글씨 스타일 설정 (굵게)
               }
             }],
             yAxes: [
@@ -207,6 +226,8 @@ axios.get('/user/home/barchart_output')
                 type: 'linear',
                 position: 'left',
                 ticks: {
+                  fontSize: 14, // 글씨 크기 설정
+                  fontStyle: 'bold', // 글씨 스타일 설정 (굵게)
                   beginAtZero: true,
                   callback: function(value) {
                     return number_format(value);
@@ -225,6 +246,8 @@ axios.get('/user/home/barchart_output')
                 type: 'linear',
                 position: 'right',
                 ticks: {
+                  fontSize: 14, // 글씨 크기 설정
+                 fontStyle: 'bold', // 글씨 스타일 설정 (굵게)
                   beginAtZero: true,
                   callback: function(value) {
                     return number_format(value);
@@ -235,8 +258,15 @@ axios.get('/user/home/barchart_output')
           },
           legend: {
             display: true,
-            position: 'right',
-            align: 'start',
+            position: 'bottom',
+            align: 'center',
+            labels: {
+              fontSize: 14, // 글씨 크기
+              fontColor: "#000", // 범례 글씨 색상
+              fontStyle: 'bold', // 범례 글씨 스타일
+              //boxWidth: 20, // 범례 아이콘 크기
+              padding: 15, // 범례 아이템 간 간격
+            }
           },
           tooltips: {
             titleMarginBottom: 10,

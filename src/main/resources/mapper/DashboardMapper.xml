@@ -98,13 +98,6 @@
         AND release_date = CURRENT_DATE()
     </select>
 
-<!--    <select id="selectPieChartData" resultType="com.shinsegae.project.dashboard.vo.PieChartDTO">-->
-<!--        SELECT c.item_classification, i.stock-->
-<!--        FROM classification c-->
-<!--        JOIN inventory i-->
-<!--        ON c.code = i.code-->
-<!--    </select>-->
-
     <!-- area chart: 월별 입고량 -->
     <select id="selectAreaChartInputData" resultType="com.shinsegae.project.dashboard.vo.AreaChartInputDTO">
         SELECT DATE_FORMAT(warehoused_date, '%m') AS warehousedMonth, SUM(warehoused_quantity) AS warehousedQuantity

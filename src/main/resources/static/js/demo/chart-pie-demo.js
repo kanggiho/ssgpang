@@ -25,8 +25,9 @@ axios.get('/user/home/piechart_output')
                 labels: labels_product,
                 datasets: [{
                     data: data_totalQuantity,
-                    backgroundColor: ['#5b93ff', '#bfc5ef', '#ff8f6b','#bfc5ef','#ffd66b'],
-                    hoverBackgroundColor: ['#3775ef', '#e5b435', '#ec683c','#3775ef','#3775ef'],
+                    backgroundColor: ["#1E3A8A","#2563EB","#60A5FA", "#93C5FD","#E0F2FE"],
+                    hoverBackgroundColor: [
+                ],
                     hoverBorderColor: "rgba(234, 236, 244, 1)",
                 }],
             },
@@ -43,13 +44,19 @@ axios.get('/user/home/piechart_output')
                     caretPadding: 10,
                 },
                 legend: {
-                    // display: true
-                    usePointStyle: true,
+                    display: true,
+                    //usePointStyle: true,
                     position: 'right',
                     align: 'start',
-
+                    labels: {
+                        fontSize: 15, // 글씨 크기
+                        fontColor: "#000", // 범례 글씨 색상
+                        fontStyle: 'bold', // 범례 글씨 스타일
+                        boxWidth: 15, // 범례 아이콘 크기
+                        //padding: 15, // 범례 아이템 간 간격
+                    }
                 },
-                cutoutPercentage: 65,
+                cutoutPercentage: 80,
             },
         });
     })
