@@ -1,9 +1,6 @@
 package com.shinsegae.project.order.service;
 
-import com.shinsegae.project.order.vo.OrderInventoryManagementDTO;
-import com.shinsegae.project.order.vo.OrderInventoryUpdateVO;
-import com.shinsegae.project.order.vo.OrderManagementDTO;
-import com.shinsegae.project.order.vo.OutputVO;
+import com.shinsegae.project.order.vo.*;
 import com.shinsegae.project.order.mapper.OrderMapper;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -54,8 +51,12 @@ public class OrderService {
      * 거절 처리
      * @param outputId   거절할 주문 ID
      */
-    public void rejectOrder(int outputId) {
+    public void rejectOrder(int outputId, int quantity, String name) {
         orderMapper.updateStatus(outputId, "거절");
+        OrderInventoryUpdateVO updateVO = new OrderInventoryUpdateVO();
+        updateVO.setChange(quantity);
+        updateVO.setProductCode(orderMapper.findProductCode(name));
+        orderMapper.updateAdminInventory(updateVO);
     }
 
     /**

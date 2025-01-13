@@ -103,4 +103,17 @@
     </update>
 
 
+    <update id="updateAdminInventory" parameterType="com.shinsegae.project.order.vo.OrderInventoryUpdateVO">
+        update inventory
+        set stock = stock + #{change}
+        where product_code = #{productCode}
+    </update>
+
+    <select id="findProductCode" resultType="java.lang.Integer">
+        SELECT product_code
+        FROM product
+        WHERE product_name = #{productName}
+    </select>
+
+
 </mapper>

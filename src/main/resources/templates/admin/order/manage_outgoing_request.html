@@ -215,7 +215,9 @@
 
         const requestData = {
             outputId: parseInt(data.outputId), // 현재 선택된 요청 ID
-            actionType: actionType  // "approve" 또는 "reject"
+            actionType: actionType,  // "approve" 또는 "reject"
+            releaseQuantity: parseInt(data.releaseQuantity),
+            productName: data.productName.toString()
         };
 
         if (data.status === '대기중'){

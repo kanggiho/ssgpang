@@ -10,4 +10,6 @@ import lombok.NoArgsConstructor;
 public class HandleDTO {
     private int outputId;
     private String actionType;
+    private int releaseQuantity;
+    private String productName;
 }

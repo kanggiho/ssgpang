@@ -1,9 +1,6 @@
 package com.shinsegae.project.order.mapper;
 
-import com.shinsegae.project.order.vo.OrderInventoryManagementDTO;
-import com.shinsegae.project.order.vo.OrderInventoryUpdateVO;
-import com.shinsegae.project.order.vo.OrderManagementDTO;
-import com.shinsegae.project.order.vo.OutputVO;
+import com.shinsegae.project.order.vo.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -48,6 +45,11 @@ public interface OrderMapper {
      */
     void updateStatus(@Param("outputId") int outputId,
                       @Param("status") String status);
+
+
+    void updateAdminInventory(OrderInventoryUpdateVO updateVO);
+
+    int findProductCode(String productName);
 
 
 

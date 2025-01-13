@@ -39,7 +39,7 @@ public class OrderAdminController {
             if ("approve".equals(request.getActionType())) {
                 orderService.approveOrder(request.getOutputId(), adminId);
             } else if ("reject".equals(request.getActionType())) {
-                orderService.rejectOrder(request.getOutputId());
+                orderService.rejectOrder(request.getOutputId(),request.getReleaseQuantity(),request.getProductName());
             } else {
                 return ResponseEntity.badRequest().body("INVALID_ACTION");
             }
