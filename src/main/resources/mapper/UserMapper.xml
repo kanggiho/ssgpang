@@ -28,13 +28,6 @@
         SELECT * FROM user WHERE id = #{id};
     </select>
 
-    <!-- 이메일 검증 -->
-    <select id="selectEmailById"
-            parameterType="string"
-            resultType="com.shinsegae.project.member.vo.UserVO">
-        SELECT * FROM user WHERE email = #{email};
-    </select>
-
     <!-- id 찾기 -->
     <select id="selectIdByUserTel"
             parameterType="string"
@@ -43,10 +36,19 @@
     </select>
 
     <!-- 이메일 검증 -->
-    <select id="isEmailExists"
+    <select id="checkEmail"
             parameterType="string"
             resultType="java.lang.Boolean">
-        SELECT * FROM user WHERE email = #{email};
+        SELECT CASE WHEN COUNT(*) > 0 THEN true ELSE false END
+        FROM user
+        WHERE email = #{email};
+    </select>
+
+    <!-- 전화번호 검증 -->
+    <select id="checkTel"
+            parameterType="string"
+            resultType="java.lang.Boolean">
+        SELECT * FROM user WHERE tel = #{tel};
 
     </select>
 
