@@ -10,10 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class WarehouseVO {
-    private int warehouse_id;
-    private String warehouse_name;
-    private String warehouse_location;
-    private String warehouse_temperature;
-
-
+    private int warehouseId;
+    private String warehouseName;
+    private String warehouseLocation;
+    private String warehouseTemperature;
 }

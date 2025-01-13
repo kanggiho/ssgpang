@@ -32,6 +32,27 @@
         .table-hover tbody tr:hover {
             background-color: #f5f5f5; /* 행에 마우스 올릴 때 색 변경 */
         }
+
+        .form-group-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            margin-right: 10px;
+        }
+
+        .form-group select {
+            width: 140px; /* 드롭다운 너비를 줄임 */
+        }
     </style>
 
 </head>
@@ -47,6 +68,114 @@
 
             <div class="container-fluid">
 
+                <h1 class="h3 mb-4 text-gray-800">재고 확인</h1>
+
+                <div class="form-group-container">
+                    <div class="form-group">
+                        <label for="categorySelect1">품목구분:</label>
+                        <select class="form-control" id="categorySelect1" onchange="filterCategory()">
+                            <option value="all">전체</option>
+                            <option value="bakedgoods">bakedgoods</option>
+                            <option value="beverage">beverage</option>
+                            <option value="cannedfood">cannedfood</option>
+                            <option value="certain">certain</option>
+                            <option value="condiment">condiment</option>
+                            <option value="dairy">dairy</option>
+                            <option value="fruit">fruit</option>
+                            <option value="frozenfood">frozenfood</option>
+                            <option value="grain">grain</option>
+                            <option value="herb">herb</option>
+                            <option value="legume">legume</option>
+                            <option value="meat">meat</option>
+                            <option value="noodle">noodle</option>
+                            <option value="nut">nut</option>
+                            <option value="oil">oil</option>
+                            <option value="seed">seed</option>
+                            <option value="seafood">seafood</option>
+                            <option value="spice">spice</option>
+                            <option value="snack">snack</option>
+                            <option value="vegetable">vegetable</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="anotherSelect">자재명:</label>
+                        <select class="form-control" id="anotherSelect" onchange="filterCategory()">
+                            <option value="all">전체</option>
+                            <option value="carrot">carrot</option>
+                            <option value="chicken">chicken</option>
+                            <option value="butter">butter</option>
+                            <option value="banana">banana</option>
+                            <option value="beef">beef</option>
+                            <option value="bread">bread</option>
+                            <option value="potato">potato</option>
+                            <option value="tomato">tomato</option>
+                            <option value="cheese">cheese</option>
+                            <option value="sugar">sugar</option>
+                            <option value="pasta">pasta</option>
+                            <option value="bean">bean</option>
+                            <option value="yogurt">yogurt</option>
+                            <option value="flour">flour</option>
+                            <option value="apple">apple</option>
+                            <option value="salt">salt</option>
+                            <option value="egg">egg</option>
+                            <option value="milk">milk</option>
+                            <option value="rice">rice</option>
+                            <option value="olive">olive</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="another1Select">창고이름:</label>
+                        <select class="form-control" id="another1Select" onchange="filterCategory()">
+                            <option value="all">전체</option>
+                            <option value="Nexus">Nexus</option>
+                            <option value="Orion">Orion</option>
+                            <option value="Titan">Titan</option>
+                            <option value="Vega">Vega</option>
+                            <option value="Nova">Nova</option>
+                            <option value="Atlas">Atlas</option>
+                            <option value="Luna">Luna</option>
+                            <option value="Astra">Astra</option>
+                            <option value="Echo">Echo</option>
+                            <option value="Draco">Draco</option>
+                            <option value="Helix">Helix</option>
+                            <option value="Raven">Raven</option>
+                            <option value="Lyric">Lyric</option>
+                            <option value="Onyx">Onyx</option>
+                            <option value="Pulse">Pulse</option>
+                            <option value="Pixel">Pixel</option>
+                            <option value="Rogue">Rogue</option>
+                            <option value="Storm">Storm</option>
+                            <option value="Blaze">Blaze</option>
+                            <option value="Flash">Flash</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="another2Select">제조업체명:</label>
+                        <select class="form-control" id="another2Select" onchange="filterCategory()">
+                            <option value="all">전체</option>
+                            <option value="Wilson">Wilson</option>
+                            <option value="Hudson">Hudson</option>
+                            <option value="Smith">Smith</option>
+                            <option value="Carter">Carter</option>
+                            <option value="Gonzalez">Gonzalez</option>
+                            <option value="Daniels">Daniels</option>
+                            <option value="Stanley">Stanley</option>
+                            <option value="Sloan">Sloan</option>
+                            <option value="Cortez">Cortez</option>
+                            <option value="Rodriguez">Rodriguez</option>
+                            <option value="Evans">Evans</option>
+                            <option value="Oliver">Oliver</option>
+                            <option value="Hernandez">Hernandez</option>
+                            <option value="Goodman">Goodman</option>
+                            <option value="Richardson">Richardson</option>
+                            <option value="Harrison">Harrison</option>
+                            <option value="Jackson">Jackson</option>
+                            <option value="Williams">Williams</option>
+                            <option value="Jacobs">Jacobs</option>
+                            <option value="Rodriguez">Rodriguez</option>
+                        </select>
+                    </div>
+                </div>
 
                 <div class="row">
                     <!-- Table Column -->
@@ -130,9 +259,16 @@
                 </div>
             </div>
         </div>
-        <div th:replace="admin/fragments/modal :: adminModal"></div>
+        <div th:replace="admin/fragments/footer :: adminFooter"></div>
     </div>
 </div>
+
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<div th:replace="admin/fragments/modal :: adminModal"></div>
+
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/jquery.easing.min.js"></script>
@@ -142,32 +278,65 @@
 <script src="/js/demo/chart-area-demo.js"></script>
 <script src="/js/demo/chart-pie-demo.js"></script>
 <script>
-    function updateStock() {
-        const newStock = document.getElementById('outputTextInput').value;
-        const code = document.querySelector('#details-container').dataset.code;
+    function filterCategory() {
+        // 드롭다운에서 선택된 값을 가져오기
+        const category = document.getElementById('categorySelect1').value;
+        const material = document.getElementById('anotherSelect').value;
+        const warehouse = document.getElementById('another1Select').value;
+        const manufacturer = document.getElementById('another2Select').value;
 
+        // 테이블의 모든 행을 가져오기
+        const rows = document.querySelectorAll('#dataTable tbody tr');
+
+        rows.forEach(row => {
+            // 각 행에서 셀 데이터를 가져오기
+            const itemClassification = row.children[0].innerText;
+            const productName = row.children[1].innerText;
+            const warehouseName = row.children[2].innerText;
+            const manufacturerName = row.children[3].innerText;
+
+            // 모든 필터 조건이 일치하는지 확인
+            const matchesCategory = (category === 'all' || itemClassification === category);
+            const matchesMaterial = (material === 'all' || productName === material);
+            const matchesWarehouse = (warehouse === 'all' || warehouseName === warehouse);
+            const matchesManufacturer = (manufacturer === 'all' || manufacturerName === manufacturer);
+
+            // 모든 조건이 맞으면 해당 행을 표시하고 아니면 숨기기
+            if (matchesCategory && matchesMaterial && matchesWarehouse && matchesManufacturer) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+    function updateStock() {
+        const newStock = document.getElementById('outputTextInput').value;  // 수정된 수량 가져오기
+        const code = document.querySelector('#details-container').dataset.code;  // 선택된 품목의 코드
+
+        // Axios PUT 요청으로 수량 업데이트
         axios.put(`/admin/inventory/update/${code}`, { stock: newStock })
             .then(function (response) {
                 if (response.data) {
-                    // 테이블 업데이트
+                    // 테이블에서 재고 수량 업데이트
                     const row = document.getElementById(code);
-                    row.children[5].innerText = newStock + '개';
+                    row.children[5].innerText = newStock + '개';  // 테이블에서 수량 표시 업데이트
 
-                    // 상세 정보 패널 업데이트
+                    // 상세 정보 패널에서 수량 업데이트
                     document.getElementById('detail-stock').innerText = newStock + '개';
 
-                    alert('재고가 성공적으로 업데이트되었습니다.');
+                    alert('재고가 성공적으로 수정되었습니다.');
                 } else {
-                    alert('재고 업데이트에 실패했습니다.');
+                    alert('재고 수정에 실패했습니다.');
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('재고 업데이트 중 오류가 발생했습니다.');
+                alert('재고 수정 중 오류가 발생했습니다.');
             });
     }
 
     function showDetails(row) {
+        const code = row.id;
         const data = {
             itemClassification: row.children[0].innerText,
             productName: row.children[1].innerText,
@@ -185,6 +354,7 @@
         document.getElementById('detail-stock').innerText = data.stock;
 
         document.getElementById('outputTextInput').value = parseInt(data.stock);
+        document.querySelector('#details-container').dataset.code = code;
     }
 
     function resetDetails() {
@@ -207,13 +377,13 @@
                 .then(function (response) {
                     if (response.data) {
                         row.remove();
-                        alert('데이터가 성공적으로 삭제되었습니다.');
+                        alert('재고가 성공적으로 삭제되었습니다.');
                     } else {
-                        alert('데이터 삭제에 실패했습니다.');
+                        alert('재고 삭제에 실패했습니다.');
                     }
                 }).catch(error => {
                     console.error('Error:', error);
-                    alert('데이터 삭제 중 오류가 발생했습니다.');
+                    alert('재고 삭제 중 오류가 발생했습니다.');
             })
         }
     };

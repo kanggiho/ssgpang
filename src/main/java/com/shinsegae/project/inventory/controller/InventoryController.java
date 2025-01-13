@@ -3,10 +3,13 @@ package com.shinsegae.project.inventory.controller;
 import com.shinsegae.project.inventory.service.InventoryService;
 import com.shinsegae.project.inventory.vo.InventoryManagementDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,5 +45,19 @@ public class InventoryController {
         boolean result = inventoryService.deleteInventory(code);  // 삭제 서비스 호출
     return result;
    }
+
+    // 수량 업데이트 API
+    @PutMapping("/update/{code}")
+    public ResponseEntity<Boolean> updateStock(@PathVariable("code") String code, @RequestBody Map<String, Integer> request) {
+        int stock = request.get("stock");
+        boolean result = inventoryService.updateStock(code, stock);
+        return ResponseEntity.ok(result);
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<String> addStock(@RequestBody InventoryManagementDTO inventoryManagementDTO) {
+        inventoryService.insertInventory(inventoryManagementDTO);
+        return ResponseEntity.ok("Stock added successfully");
+    }
 
 }

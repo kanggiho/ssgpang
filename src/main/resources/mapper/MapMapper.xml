@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shinsegae.project.map.mapper.MapMapper">
+
+    <select id="getWarehouseData" resultType="com.shinsegae.project.map.vo.WarehouseInfoDTO">
+        SELECT w.warehouse_name, w.warehouse_location, o.release_date
+        FROM warehouse w
+        JOIN output o
+        ON w.warehouse_id = o.warehouse_id
+
+    </select>
+
+</mapper>

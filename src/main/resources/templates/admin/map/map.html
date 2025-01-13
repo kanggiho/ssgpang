@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SSGPANG Fresh</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="/css/all.css" rel="stylesheet" type="text/css">
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/css/sb-admin-2.css" rel="stylesheet">
+    <link rel="icon" href="/img/favicon/starfavicon.png">
+
+    <style>
+        .dropdown-container {
+            position: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .dropdown-container h2 {
+            position: fixed;
+            margin: 0;
+            font-size: 20px;
+            margin-right: auto;
+        }
+
+        select {
+            position: fixed;
+            left: 1275px;
+            padding: 0px 12px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s ease;
+        }
+        select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        #map {
+            position: fixed;
+            width: 1000px;
+            height: 550px;
+            margin: 30px auto;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+        }
+
+        #info {
+            position: fixed;
+            width: 210px;
+            height: 550px;
+            border: 1px solid #ccc;
+            left: 1275px;
+            border-radius: 20px;
+            bottom: 90px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            font-size: 14px;
+            background-color: #f9f9f9;
+        }
+
+        .infoDiv {
+            font-size: 14px;
+            line-height: 1.6; /* 텍스트 간 간격 */
+            color: #333;
+            text-align: left;
+        }
+        .infoDiv p {
+            margin: 10px 0; /* 텍스트 위아래 여백 조정 */
+            border-bottom: 1px solid #ddd; /* 구분선 추가 */
+            padding-bottom: 5px;
+        }
+        .infoDiv p:last-child {
+            border-bottom: none; /* 마지막 요소는 구분선 제거 */
+        }
+        .infoDiv img {
+            width: 150px;
+            height: auto;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+    <!-- Sidebar -->
+    <div th:replace="admin/fragments/sidebar :: adminSideBar"></div>
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+            <!-- Topbar -->
+            <div th:replace="admin/fragments/topbar :: adminTopBar"></div>
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Content Row -->
+                <div class="row">
+                    <!-- Content Column -->
+                    <div class="col-lg-6 mb-4">
+
+                        <!-- 드롭다운 + 제목 -->
+                        <div class="dropdown-container">
+                            <h2>창고별 위치</h2>
+                            <select id="warehouseSelect" onchange="moveToLocation()">
+                                <option value="">창고 이름을 선택해주세요.</option>
+                                <!-- 서버에서 warehouseData 반복문 -->
+                                <option th:each="warehouse, index : ${warehouseData}"
+                                        th:value="${index}" th:text="${warehouse.name}"></option>
+                            </select>
+                        </div>
+
+                        <!-- 지도 표시 영역 -->
+                        <div id="map"></div>
+
+                        <!-- 창고 정보 표시 영역 -->
+                        <div id="info">
+                            <p>창고 정보를 확인하려면 마커를 클릭하세요.</p>
+                        </div>
+
+                        <!-- 카카오 지도 API (appkey 교체 필수) -->
+                        <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fd1f2183ff68734564b1f9b1d01c6966&libraries=services"></script>
+
+                        <script th:inline="javascript">
+                            // 서버에서 넘겨주는 창고 데이터
+                            var warehouseData = /*[[${warehouseData}]]*/ [];
+
+                            // 지도 기본 옵션
+                            var mapContainer = document.getElementById('map'),
+                                mapOption = {
+                                    center: new kakao.maps.LatLng(37.3573167705361, 126.708531525163), // 초기 지도 중심
+                                    level: 3,  // 확대 레벨
+                                    mapTypeId: kakao.maps.MapTypeId.ROADMAP
+                                };
+
+                            // 지도 생성
+                            var map = new kakao.maps.Map(mapContainer, mapOption);
+
+                            // 지도 확대/축소 컨트롤
+                            var zoomControl = new kakao.maps.ZoomControl();
+                            map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+                            // 지도 타입 변경 컨트롤
+                            var mapTypeControl = new kakao.maps.MapTypeControl();
+                            map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+
+                            // 주소 검색 객체
+                            var geocoder = new kakao.maps.services.Geocoder();
+
+                            // 마커/오버레이 목록
+                            var markers = [];
+
+                            // 마커 아이콘 (원하시는 이미지로 교체 가능)
+                            var imageSrc = "/img/logo/MapMarker.png",
+                                imageSize = new kakao.maps.Size(40, 40);
+                            var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+                            // (A) 커스텀 오버레이 생성 함수
+                            function createCustomOverlay(marker, data) {
+                                var overlayContent = document.createElement('div');
+                                overlayContent.className = 'custom-overlay';
+                                overlayContent.style.cssText = [
+                                    'background: rgba(255, 255, 255, 0.9)',
+                                    'padding: 10px',
+                                    'border: 2px solid #007bff',
+                                    'border-radius: 8px',
+                                    'box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1)',
+                                    'transform: translateY(-110%)',
+                                    'font-size: 14px',
+                                    'color: #333'
+                                ].join('; ');
+                                overlayContent.innerHTML = `<strong>${data.name}</strong>`;
+
+                                return new kakao.maps.CustomOverlay({
+                                    content: overlayContent,
+                                    position: marker.getPosition(),
+                                    yAnchor: 1,
+                                    map: null
+                                });
+                            }
+
+                            // (B) 창고 데이터로 마커/오버레이 생성
+                            warehouseData.forEach(function (data, index) {
+                                // 마커 생성
+                                var marker = new kakao.maps.Marker({
+                                    position: new kakao.maps.LatLng(data.latitude, data.longitude),
+                                    image: markerImage,
+                                    map: map
+                                });
+
+                                // 마커에 '창고명' 할당
+                                marker.name = data.name;
+
+                                // 커스텀 오버레이 (창고명만 표시)
+                                var customOverlay = createCustomOverlay(marker, data);
+
+                                // 마커 클릭 이벤트
+                                kakao.maps.event.addListener(marker, 'click', function () {
+                                    // 모든 오버레이 닫기
+                                    markers.forEach(function (m) {
+                                        if (m.customOverlay) {
+                                            m.customOverlay.setMap(null);
+                                        }
+                                    });
+
+                                    // 현재 마커 오버레이 열기
+                                    customOverlay.setMap(map);
+                                    marker.customOverlay = customOverlay;
+
+                                    // 도로명 주소/지번 주소 가져오기
+                                    geocoder.coord2Address(data.longitude, data.latitude, function (result, status) {
+                                        if (status === kakao.maps.services.Status.OK) {
+                                            var roadAddress = result[0].road_address
+                                                ? result[0].road_address.address_name
+                                                : '도로명 주소 없음';
+                                            var jibunAddress = result[0].address
+                                                ? result[0].address.address_name
+                                                : '지번 주소 없음';
+
+                                            // (중요) warehouse+인덱스+1로 파일 이름 연결
+                                            // 예: warehouse1.jpg, warehouse2.jpg, ...
+                                            var warehouseImage = `warehouse${index + 1}.jpg`;
+
+                                            // 정보 패널 출력
+                                            var infoDiv = document.getElementById('info');
+                                            infoDiv.innerHTML = `
+                                                <div class="infoDiv">
+                                                    <img src="/img/warehouse/${warehouseImage}"
+                                                         alt="창고 이미지" />
+
+                                                    <p><strong>창고명:</strong> ${data.name}</p>
+                                                    <p><strong>위도:</strong> ${data.latitude}</p>
+                                                    <p><strong>경도:</strong> ${data.longitude}</p>
+                                                    <p><strong>도로명 주소:</strong> ${roadAddress}</p>
+                                                    <p><strong>지번 주소:</strong> ${jibunAddress}</p>
+                                                    <p><strong>최근 발주일:</strong> ${data.date || '아직 발주하지 않음'}</p>
+                                                </div>`;
+                                        }
+                                    });
+                                });
+
+                                // markers 배열에 저장 (index 포함)
+                                markers.push({
+                                    marker: marker,
+                                    customOverlay: customOverlay,
+                                    dataIndex: index
+                                });
+                            });
+
+                            // (C) 지도 클릭 시 오버레이/패널 초기화
+                            kakao.maps.event.addListener(map, 'click', function () {
+                                markers.forEach(function (m) {
+                                    if (m.customOverlay) {
+                                        m.customOverlay.setMap(null);
+                                    }
+                                });
+                                var infoDiv = document.getElementById('info');
+                                infoDiv.innerHTML = '<p>창고 정보를 확인하려면 마커를 클릭하세요.</p>';
+                            });
+
+                            // (D) 드롭다운 선택 시 지도 이동
+                            function moveToLocation() {
+                                var select = document.getElementById('warehouseSelect');
+                                var selectedName = select.options[select.selectedIndex].text;
+                                // 선택된 창고명
+
+                                // 선택된 마커 찾기
+                                var selectedMarkerObj = markers.find(function (m) {
+                                    return m.marker.name === selectedName;
+                                });
+
+                                if (selectedMarkerObj) {
+                                    // 지도 이동
+                                    var moveLatLng = selectedMarkerObj.marker.getPosition();
+                                    map.setCenter(moveLatLng);
+
+                                    // 모든 오버레이 닫기
+                                    markers.forEach(function (m) {
+                                        if (m.customOverlay) {
+                                            m.customOverlay.setMap(null);
+                                        }
+                                    });
+
+                                    // 선택된 마커 오버레이 열기
+                                    selectedMarkerObj.customOverlay.setMap(map);
+
+                                    // warehouseData 중 인덱스
+                                    var dataIndex = selectedMarkerObj.dataIndex;
+                                    var data = warehouseData[dataIndex];
+
+                                    // 도로명/지번 주소
+                                    geocoder.coord2Address(data.longitude, data.latitude, function (result, status) {
+                                        if (status === kakao.maps.services.Status.OK) {
+                                            var roadAddress = result[0].road_address
+                                                ? result[0].road_address.address_name
+                                                : '도로명 주소 없음';
+                                            var jibunAddress = result[0].address
+                                                ? result[0].address.address_name
+                                                : '지번 주소 없음';
+
+                                            // 이미지 파일명 (warehouse1.jpg, warehouse2.jpg ...)
+                                            var warehouseImage = `warehouse${dataIndex + 1}.jpg`;
+
+                                            // infoDiv에 표시
+                                            var infoDiv = document.getElementById('info');
+                                            infoDiv.innerHTML = `
+                                                <div class="infoDiv">
+                                                    <img src="/img/warehouse/${warehouseImage}"
+                                                         alt="창고 이미지" />
+
+                                                    <p><strong>창고명:</strong> ${data.name}</p>
+                                                    <p><strong>위도:</strong> ${data.latitude}</p>
+                                                    <p><strong>경도:</strong> ${data.longitude}</p>
+                                                    <p><strong>도로명 주소:</strong> ${roadAddress}</p>
+                                                    <p><strong>지번 주소:</strong> ${jibunAddress}</p>
+                                                    <p><strong>최근 발주일:</strong> ${data.date || '아직 발주하지 않음'}</p>
+                                                </div>`;
+                                        }
+                                    });
+                                }
+                            }
+                        </script>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <div th:replace="admin/fragments/footer :: adminFooter"></div>
+    </div>
+    <!-- End of Content Wrapper -->
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div th:replace="admin/fragments/modal :: adminModal"></div>
+
+<!-- Bootstrap core JavaScript-->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="/js/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="/js/sb-admin-2.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="/js/Chart.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="/js/demo/chart-area-demo.js"></script>
+<script src="/js/demo/chart-pie-demo.js"></script>
+
+</body>
+</html>

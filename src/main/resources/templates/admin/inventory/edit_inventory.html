@@ -2,7 +2,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,31 +10,26 @@
 
     <title>SSGPANG Fresh</title>
 
-    <!-- Custom fonts for this template-->
     <link href="/css/all.css" rel="stylesheet" type="text/css">
-    <link
-            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-            rel="stylesheet">
-
-    <!-- Custom styles for this template-->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="/css/sb-admin-2.css" rel="stylesheet">
     <link rel="icon" href="/img/favicon/starfavicon.png">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <style>
         .table-responsive {
-            max-height: 495px; /* 테이블 높이 제한 */
-            overflow-y: auto;  /* 스크롤 추가 */
+            max-height: 495px;
+            overflow-y: auto;
         }
 
         .table td, .table th {
-            padding: 5px 7px; /* 행 패딩 조절 */
-            text-align: center; /* 텍스트 중앙 정렬 */
-            vertical-align: middle; /* 세로 중앙 정렬 */
+            padding: 5px 7px;
+            text-align: center;
+            vertical-align: middle;
         }
 
         .table-hover tbody tr:hover {
-            background-color: #f5f5f5; /* 행에 마우스 올릴 때 색 변경 */
+            background-color: #f5f5f5;
         }
     </style>
 
@@ -43,213 +37,219 @@
 
 <body id="page-top">
 
-<!-- Page Wrapper -->
 <div id="wrapper">
 
-    <!-- Sidebar -->
     <div th:replace="admin/fragments/sidebar :: adminSideBar"></div>
 
-    <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 
-        <!-- Main Content -->
         <div id="content">
 
-            <!-- Topbar -->
             <div th:replace="admin/fragments/topbar :: adminTopBar"></div>
 
-            <!-- Begin Page Content -->
             <div class="container-fluid">
 
-                <!-- Content Row -->
                 <div class="row">
-                    <!-- Content Column -->
-                    <div class="col-lg-6 mb-4">
-                        <form th:action="@{/inventory/add}" method="post">
-                            <div class="form-group">
-                                <label for="itemClassification">품목구분</label>
-                                <select id="itemClassification" name="itemClassification" class="form-control" required>
-                                    <option value="" disabled selected>선택하세요</option>
-                                    <option value="category1">bakedgoods</option>
-                                    <option value="category2">beverage</option>
-                                    <option value="category3">cannedfood</option>
-                                    <option value="category4">certain</option>
-                                    <option value="category5">condiment</option>
-                                    <option value="category6">dairy</option>
-                                    <option value="category7">fruit</option>
-                                    <option value="category8">frozenfood</option>
-                                    <option value="category9">grain</option>
-                                    <option value="category10">herb</option>
-                                    <option value="category11">legume</option>
-                                    <option value="category12">meat</option>
-                                    <option value="category13">noodle</option>
-                                    <option value="category14">nut</option>
-                                    <option value="category15">oil</option>
-                                    <option value="category16">seed</option>
-                                    <option value="category17">seafood</option>
-                                    <option value="category18">spice</option>
-                                    <option value="category19">snack</option>
-                                    <option value="category20">vegetable</option>
-                                </select>
+                    <div class="col-lg-6">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">재고 추가</h6>
                             </div>
-                            <div class="form-group">
-                                <label for="productName">자재명</label>
-                                <select id="productName" name="productName" class="form-control" required>
-                                    <option value="" disabled selected>선택하세요</option>
-                                    <option value="product1">carrot</option>
-                                    <option value="product2">chicken</option>
-                                    <option value="product3">butter</option>
-                                    <option value="product4">banana</option>
-                                    <option value="product5">beef</option>
-                                    <option value="product6">bread</option>
-                                    <option value="product7">potato</option>
-                                    <option value="product8">tomato</option>
-                                    <option value="product9">cheese</option>
-                                    <option value="product10">sugar</option>
-                                    <option value="product11">pasta</option>
-                                    <option value="product12">bean</option>
-                                    <option value="product13">yogurt</option>
-                                    <option value="product14">flour</option>
-                                    <option value="product15">apple</option>
-                                    <option value="product16">salt</option>
-                                    <option value="product17">egg</option>
-                                    <option value="product18">milk</option>
-                                    <option value="product19">rice</option>
-                                    <option value="product20">olive</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="warehouseName">창고이름</label>
-                                <select id="warehouseName" name="warehouseName" class="form-control" required>
-                                    <option value="" disabled selected>선택하세요</option>
-                                    <option value="warehouse1">Nexus</option>
-                                    <option value="warehouse2">Orion</option>
-                                    <option value="warehouse3">Titan</option>
-                                    <option value="warehouse4">Vega</option>
-                                    <option value="warehouse5">Nova</option>
-                                    <option value="warehouse6">Atlas</option>
-                                    <option value="warehouse7">Luna</option>
-                                    <option value="warehouse8">Astra</option>
-                                    <option value="warehouse9">Echo</option>
-                                    <option value="warehouse10">Draco</option>
-                                    <option value="warehouse11">Helix</option>
-                                    <option value="warehouse12">Raven</option>
-                                    <option value="warehouse13">Lyric</option>
-                                    <option value="warehouse14">Onyx</option>
-                                    <option value="warehouse15">Pulse</option>
-                                    <option value="warehouse16">Pixel</option>
-                                    <option value="warehouse17">Rogue</option>
-                                    <option value="warehouse18">Storm</option>
-                                    <option value="warehouse19">Blaze</option>
-                                    <option value="warehouse20">Flash</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="manufacturerName">제조업체명</label>
-                                <select id="manufacturerName" name="manufacturerName" class="form-control" required>
-                                    <option value="" disabled selected>선택하세요</option>
-                                    <option value="manufacturer1">Wilson</option>
-                                    <option value="manufacturer2">Hudson</option>
-                                    <option value="manufacturer3">Smith</option>
-                                    <option value="manufacturer4">Carter</option>
-                                    <option value="manufacturer5">Gonzalez</option>
-                                    <option value="manufacturer6">Daniels</option>
-                                    <option value="manufacturer7">Stanley</option>
-                                    <option value="manufacturer8">Sloan</option>
-                                    <option value="manufacturer9">Cortez</option>
-                                    <option value="manufacturer10">Rodriguez</option>
-                                    <option value="manufacturer11">Evans</option>
-                                    <option value="manufacturer12">Oliver</option>
-                                    <option value="manufacturer13">Hernandez</option>
-                                    <option value="manufacturer14">Goodman</option>
-                                    <option value="manufacturer15">Richardson</option>
-                                    <option value="manufacturer16">Harrison</option>
-                                    <option value="manufacturer17">Jackson</option>
-                                    <option value="manufacturer18">Williams</option>
-                                    <option value="manufacturer19">Jacobs</option>
-                                    <option value="manufacturer20">Rodriguez</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="price">단가</label>
-                                <input type="number" id="price" name="price" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="stock">재고수량</label>
-                                <input type="number" id="stock" name="stock" class="form-control" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">재고 추가</button>
-                        </form>
-                        <!-- ==============================내용이 들어가는 곳입니다.================================ -->
-                        <!-- =================================================================================== -->
-                        <!-- =================================================================================== -->
-                        <!-- 입력 태그에 데이터를 각각입력하면 패널에 뜨도록 만들기 -->
-                        <div class="col-lg-6 mb-4">
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">정보</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div id="details-container">
-                                        <p><strong>품목구분:</strong> <span id="detail-itemClassification"></span></p>
-                                        <p><strong>자재명:</strong> <span id="detail-productName"></span></p>
-                                        <p><strong>창고이름:</strong> <span id="detail-warehouseName"></span></p>
-                                        <p><strong>제조업체명:</strong> <span id="detail-manufacturerName"></span></p>
-                                        <p><strong>단가:</strong> <span id="detail-price"></span></p>
-                                        <p><strong>재고수량:</strong> <span id="detail-stock"></span></p>
+                            <div class="card-body">
+                                <form id="stockForm">
+                                    <div class="form-group">
+                                        <label for="itemClassification">품목구분</label>
+                                        <select id="itemClassification" name="itemClassification" class="form-control" required>
+                                            <option value="" disabled selected>선택하세요</option>
+                                            <option value="bakedgoods">bakedgoods</option>
+                                            <option value="beverage">beverage</option>
+                                            <option value="cannedfood">cannedfood</option>
+                                            <option value="certain">certain</option>
+                                            <option value="condiment">condiment</option>
+                                            <option value="dairy">dairy</option>
+                                            <option value="fruit">fruit</option>
+                                            <option value="frozenfood">frozenfood</option>
+                                            <option value="grain">grain</option>
+                                            <option value="herb">herb</option>
+                                            <option value="legume">legume</option>
+                                            <option value="meat">meat</option>
+                                            <option value="noodle">noodle</option>
+                                            <option value="nut">nut</option>
+                                            <option value="oil">oil</option>
+                                            <option value="seed">seed</option>
+                                            <option value="seafood">seafood</option>
+                                            <option value="spice">spice</option>
+                                            <option value="snack">snack</option>
+                                            <option value="vegetable">vegetable</option>
+                                        </select>
                                     </div>
-                                </div>
+                                    <div class="form-group">
+                                        <label for="productName">자재명</label>
+                                        <select id="productName" name="productName" class="form-control" required>
+                                            <option value="" disabled selected>선택하세요</option>
+                                            <option value="carrot">carrot</option>
+                                            <option value="chicken">chicken</option>
+                                            <option value="butter">butter</option>
+                                            <option value="banana">banana</option>
+                                            <option value="beef">beef</option>
+                                            <option value="bread">bread</option>
+                                            <option value="potato">potato</option>
+                                            <option value="tomato">tomato</option>
+                                            <option value="cheese">cheese</option>
+                                            <option value="sugar">sugar</option>
+                                            <option value="pasta">pasta</option>
+                                            <option value="bean">bean</option>
+                                            <option value="yogurt">yogurt</option>
+                                            <option value="flour">flour</option>
+                                            <option value="apple">apple</option>
+                                            <option value="salt">salt</option>
+                                            <option value="egg">egg</option>
+                                            <option value="milk">milk</option>
+                                            <option value="rice">rice</option>
+                                            <option value="olive">olive</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="warehouseName">창고이름</label>
+                                        <select id="warehouseName" name="warehouseName" class="form-control" required>
+                                            <option value="" disabled selected>선택하세요</option>
+                                            <option value="Nexus">Nexus</option>
+                                            <option value="Orion">Orion</option>
+                                            <option value="Titan">Titan</option>
+                                            <option value="Vega">Vega</option>
+                                            <option value="Nova">Nova</option>
+                                            <option value="Atlas">Atlas</option>
+                                            <option value="Luna">Luna</option>
+                                            <option value="Astra">Astra</option>
+                                            <option value="Echo">Echo</option>
+                                            <option value="Draco">Draco</option>
+                                            <option value="Helix">Helix</option>
+                                            <option value="Raven">Raven</option>
+                                            <option value="Lyric">Lyric</option>
+                                            <option value="Onyx">Onyx</option>
+                                            <option value="Pulse">Pulse</option>
+                                            <option value="Pixel">Pixel</option>
+                                            <option value="Rogue">Rogue</option>
+                                            <option value="Storm">Storm</option>
+                                            <option value="Blaze">Blaze</option>
+                                            <option value="Flash">Flash</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="manufacturerName">제조업체명</label>
+                                        <select id="manufacturerName" name="manufacturerName" class="form-control" required>
+                                            <option value="" disabled selected>선택하세요</option>
+                                            <option value="Wilson">Wilson</option>
+                                            <option value="Hudson">Hudson</option>
+                                            <option value="Smith">Smith</option>
+                                            <option value="Carter">Carter</option>
+                                            <option value="Gonzalez">Gonzalez</option>
+                                            <option value="Daniels">Daniels</option>
+                                            <option value="Stanley">Stanley</option>
+                                            <option value="Sloan">Sloan</option>
+                                            <option value="Cortez">Cortez</option>
+                                            <option value="Rodriguez">Rodriguez</option>
+                                            <option value="Evans">Evans</option>
+                                            <option value="Oliver">Oliver</option>
+                                            <option value="Hernandez">Hernandez</option>
+                                            <option value="Goodman">Goodman</option>
+                                            <option value="Richardson">Richardson</option>
+                                            <option value="Harrison">Harrison</option>
+                                            <option value="Jackson">Jackson</option>
+                                            <option value="Williams">Williams</option>
+                                            <option value="Jacobs">Jacobs</option>
+                                            <option value="Rodriguez">Rodriguez</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="price">단가</label>
+                                        <input type="number" id="price" name="price" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="stock">재고수량</label>
+                                        <input type="number" id="stock" name="stock" class="form-control" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">재고 추가</button>
+                                </form>
                             </div>
                         </div>
                     </div>
 
-
-                        <!-- =================================================================================== -->
-                        <!-- =================================================================================== -->
-                        <!-- =================================================================================== -->
-                        <!-- ==============================내용이 들어가는 곳입니다.================================ -->
+                    <!-- 정보 패널 -->
+                    <div class="col-lg-6">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">추가된 재고</h6>
+                            </div>
+                            <div class="card-body">
+                                <div id="details-container">
+                                    <p><strong>품목구분:</strong> <span id="detail-itemClassification"></span></p>
+                                    <p><strong>자재명:</strong> <span id="detail-productName"></span></p>
+                                    <p><strong>창고이름:</strong> <span id="detail-warehouseName"></span></p>
+                                    <p><strong>제조업체명:</strong> <span id="detail-manufacturerName"></span></p>
+                                    <p><strong>단가:</strong> <span id="detail-price"></span></p>
+                                    <p><strong>재고수량:</strong> <span id="detail-stock"></span></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
             </div>
-            <!-- /.container-fluid -->
 
         </div>
-        <!-- End of Main Content -->
-
-        <!-- Footer -->
         <div th:replace="admin/fragments/footer :: adminFooter"></div>
-
     </div>
-    <!-- End of Content Wrapper -->
 
 </div>
-<!-- End of Page Wrapper -->
 
-<!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
 
-<!-- Logout Modal-->
 <div th:replace="admin/fragments/modal :: adminModal"></div>
 
-<!-- Bootstrap core JavaScript-->
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript-->
 <script src="/js/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
 <script src="/js/sb-admin-2.min.js"></script>
 
-<!-- Page level plugins -->
-<script src="/js/Chart.min.js"></script>
+<script>
+    document.getElementById('stockForm').addEventListener('submit', function (event) {
+        event.preventDefault();
 
-<!-- Page level custom scripts -->
-<script src="/js/demo/chart-area-demo.js"></script>
-<script src="/js/demo/chart-pie-demo.js"></script>
+        const inventoryManagementDTO = {
+            itemClassification: document.getElementById('itemClassification').value,
+            productName: document.getElementById('productName').value,
+            manufacturerName: document.getElementById('manufacturerName').value,
+            warehouseName: document.getElementById('warehouseName').value,
+            price: document.getElementById('price').value,
+            stock: document.getElementById('stock').value,
+        };
+
+        axios.post('/admin/inventory/add', inventoryManagementDTO)
+            .then(function (response) {
+                const itemClassification = document.getElementById('itemClassification').value;
+                const productName = document.getElementById('productName').value;
+                const warehouseName = document.getElementById('warehouseName').value;
+                const manufacturerName = document.getElementById('manufacturerName').value;
+                const price = document.getElementById('price').value;
+                const stock = document.getElementById('stock').value;
+
+                document.getElementById('detail-itemClassification').textContent = itemClassification;
+                document.getElementById('detail-productName').textContent = productName;
+                document.getElementById('detail-warehouseName').textContent = warehouseName;
+                document.getElementById('detail-manufacturerName').textContent = manufacturerName;
+                document.getElementById('detail-price').textContent = price;
+                document.getElementById('detail-stock').textContent = stock;
+
+                alert('재고가 성공적으로 추가되었습니다.');
+            })
+            .catch(function (error) {
+                alert('재고 추가에 실패했습니다.');
+            });
+    });
+</script>
 
 </body>
 
