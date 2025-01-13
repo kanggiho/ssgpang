@@ -100,6 +100,7 @@
             margin-bottom: 10px; /* 항목 간 간격 */
             transition: background-color 0.3s ease; /* 배경색 변화에 부드러운 전환 효과 추가 */
         }
+
         .question-item:hover {
             background-color: #e2e6ea; /* 마우스를 올렸을 때 배경색 변화 */
         }
@@ -142,10 +143,10 @@
                     </div>
                     <div class="col-lg-6 mb-4">
                         <div class="question-list">
-                            <div class="question-header">자주 묻는 질문</div>
-                            <div class="question-item">What are your operating hours?</div>
+                            <div class="question-header">What are your operating hours?</div>
                             <div class="question-item">How can I contact customer support?</div>
                             <div class="question-item">Where is your store located?</div>
+                            <div class="question-item">What payment methods do you accept?</div>
                             <!-- 더 많은 질문 항목 추가 가능 -->
                         </div>
                     </div>
@@ -195,34 +196,52 @@
     const chatInput = document.getElementById('chatInput');
     const sendButton = document.getElementById('sendButton');
 
+    // 메시지 보내기 버튼 클릭 시 이벤트 리스너
     sendButton.addEventListener('click', sendMessage);
+    // Enter 키로 메시지 보내기 기능 추가
     chatInput.addEventListener('keypress', function (e) {
         if (e.key === 'Enter') sendMessage();
     });
 
+    // 사용자 메시지 보내기
     function sendMessage() {
-        const message = chatInput.value.trim();
-        if (message === '') return;
+        const message = chatInput.value.trim();  // 입력된 메시지 가져오기
+        if (message === '') return;  // 빈 메시지는 보내지 않음
 
+        // 사용자 메시지 화면에 추가
         addMessageToChat('user', message);
-        chatInput.value = '';
-        setTimeout(() => {
-            addMessageToChat('bot', 'This is a response from the chatbot!');
-        }, 500);
+        chatInput.value = '';  // 입력창 비우기
+
+        // 서버에 질문 전송
+        axios.post('/user/chatbot/ask', {
+            question: message  // 요청 본문에 질문 담기
+        })
+            .then(response => {
+                // 봇 응답 화면에 추가
+                addMessageToChat('bot', response.data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // 오류 발생 시 봇이 응답하는 내용
+                addMessageToChat('bot', '죄송합니다. 요청 처리 중 오류가 발생했습니다.');
+            });
     }
 
+    // 메시지를 채팅창에 추가하는 함수
     function addMessageToChat(sender, message) {
         const messageElement = document.createElement('div');
         messageElement.classList.add('chat-message');
         messageElement.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
         messageElement.textContent = message;
         chatBody.appendChild(messageElement);
-        chatBody.scrollTop = chatBody.scrollHeight;
+        chatBody.scrollTop = chatBody.scrollHeight;  // 항상 스크롤을 최신 메시지로 유지
     }
+
+    // 질문 항목을 클릭하여 입력창에 자동으로 입력하도록 설정
     document.querySelectorAll('.question-item').forEach(item => {
-        item.addEventListener('click', function() {
-            chatInput.value = this.textContent;
-            chatInput.focus();
+        item.addEventListener('click', function () {
+            chatInput.value = this.textContent;  // 클릭된 질문을 입력창에 설정
+            chatInput.focus();  // 입력창에 포커스를 맞춤
         });
     });
 </script>
