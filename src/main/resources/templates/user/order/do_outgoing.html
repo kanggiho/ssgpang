@@ -178,6 +178,7 @@
             axios.post('/user/order/save', data)
                 .then(response => {
                     alert('발주 성공');
+                    location.reload(); // 페이지 새로고침
                 })
                 .catch(error => {
                     console.error(error);

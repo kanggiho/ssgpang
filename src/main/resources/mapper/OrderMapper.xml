@@ -58,7 +58,8 @@
             output.release_date AS release_date,
             output.confirm_num AS confirm_num,
             output.confirm_id AS confirm_id,
-            output.status AS status
+            output.status AS status,
+            output.output_id AS output_id
         FROM
             output
                 JOIN product ON output.product_code = product.product_code
@@ -77,6 +78,41 @@
         SELECT uid
         FROM user
         WHERE id = #{id}
+    </select>
+
+
+
+<!--    발주요청관리-->
+
+    <!-- 승인 처리 -->
+    <update id="updateApproval">
+        UPDATE output
+        SET confirm_num = #{confirmNum},
+            confirm_id = #{confirmId},
+            status = #{status}
+        WHERE output_id = #{outputId}
+    </update>
+
+    <!-- 거절 처리 -->
+    <update id="updateStatus">
+        UPDATE output
+        SET status = #{status},
+            confirm_num = 0,
+            confirm_id = 0
+        WHERE output_id = #{outputId}
+    </update>
+
+
+    <update id="updateAdminInventory" parameterType="com.shinsegae.project.order.vo.OrderInventoryUpdateVO">
+        update inventory
+        set stock = stock + #{change}
+        where product_code = #{productCode}
+    </update>
+
+    <select id="findProductCode" resultType="java.lang.Integer">
+        SELECT product_code
+        FROM product
+        WHERE product_name = #{productName}
     </select>
 
 
