@@ -8,7 +8,8 @@
     </insert>
 
     <select id="selectInputAll" resultType="com.shinsegae.project.incoming.vo.IncomingManagementDTO">
-        select i.input_num, p.product_name, m.manufacturer_name, i.warehoused_quantity, i.warehoused_date
+        select i.input_num, p.product_name, m.manufacturer_name, i.warehoused_quantity, i.warehoused_date,
+
         from input i
                  join product p
                       on i.product_code = p.product_code
