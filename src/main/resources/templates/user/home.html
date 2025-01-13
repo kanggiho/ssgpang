@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -29,7 +29,8 @@
 <body id="page-top">
 
 <!-- Page Wrapper -->
-<div id="wrapper">
+<!-- 세션에 userId만 있을 때 유저 페이지를 표시하도록 처리-->
+<div id="wrapper" th:if="${session.userId != null and session.adminId == null}">
 
     <!-- Sidebar -->
     <div th:replace="user/fragments/sidebar :: userSideBar"></div>
@@ -240,6 +241,7 @@
             <!-- End of Content Wrapper -->
 
         </div>
+
         <!-- End of Page Wrapper -->
 
         <!-- Scroll to Top Button-->
@@ -249,6 +251,8 @@
 
         <!-- Logout Modal-->
         <div th:replace="user/fragments/modal :: userModal"></div>
+    </div>
+</div>
 
         <!-- Bootstrap core JavaScript-->
         <script src="/js/jquery.min.js"></script>

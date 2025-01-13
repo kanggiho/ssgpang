@@ -31,6 +31,23 @@
         .table-hover tbody tr:hover {
             background-color: #f5f5f5; /* 행에 마우스 올릴 때 색 변경 */
         }
+
+        /* 추가된 필터 섹션 스타일 */
+        .filter-section {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        .filter-section label {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .filter-section .radio-group,
+        .filter-section .dropdown-group {
+            display: inline-block;
+            margin-right: 20px;
+        }
     </style>
 
 </head>
@@ -48,6 +65,35 @@
 
                 <!-- Page Heading -->
                 <h1 class="h3 mb-4 text-gray-800">발주내역 확인</h1>
+
+                <!-- 필터 섹션 추가 -->
+                <div class="filter-section">
+                    <!-- 상태 필터 라디오 버튼 -->
+                    <div class="radio-group">
+                        <label>상태 필터:</label>
+                        <label class="mr-2">
+                            <input type="radio" name="statusFilter" value="대기중"> 대기중
+                        </label>
+                        <label class="mr-2">
+                            <input type="radio" name="statusFilter" value="승인"> 승인
+                        </label>
+                        <label class="mr-2">
+                            <input type="radio" name="statusFilter" value="거절"> 거절
+                        </label>
+                        <label class="mr-2">
+                            <input type="radio" name="statusFilter" value="전체" checked> 전체
+                        </label>
+                    </div>
+
+                    <!-- ID 필터 드롭다운 -->
+                    <div class="dropdown-group">
+                        <label for="idFilter">아이디 필터:</label>
+                        <select id="idFilter">
+                            <option value="current">현재 로그인 유저</option>
+                            <option value="all" selected>전체</option>
+                        </select>
+                    </div>
+                </div>
 
                 <div class="row">
                     <!-- Table Column -->
@@ -98,6 +144,7 @@
                             <div class="card-body">
                                 <div id="details-container">
                                     <p><strong>자재명:</strong> <span id="detail-productName"></span></p>
+                                    <p><strong>아이디:</strong> <span id="detail-id"></span></p>
                                     <p><strong>단가:</strong> <span id="detail-unitPrice"></span></p>
                                     <p><strong>발주량:</strong> <span id="detail-releaseQuantity"></span></p>
                                     <p><strong>발주날짜:</strong> <span id="detail-releaseDate"></span></p>
@@ -116,11 +163,14 @@
     </div>
 </div>
 
+<!-- JavaScript 라이브러리 -->
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/jquery.easing.min.js"></script>
 <script src="/js/sb-admin-2.min.js"></script>
+
 <script>
+    // 상세보기 함수 (기존)
     function showDetails(row) {
         const data = {
             productName: row.children[0].innerText,
@@ -139,9 +189,78 @@
         document.getElementById('detail-releaseQuantity').innerText = data.releaseQuantity;
         document.getElementById('detail-releaseDate').innerText = data.releaseDate;
         document.getElementById('detail-confirmNum').innerText = data.confirmNum;
-        document.getElementById('detail-confirmId').innerText = data.approverName;
+        document.getElementById('detail-confirmId').innerText = data.confirmId;
         document.getElementById('detail-status').innerText = data.status;
     }
+
+    // 테이블 필터링 함수
+    function filterTable() {
+        // 라디오 버튼에서 현재 선택된 status 값
+        const statusRadios = document.getElementsByName('statusFilter');
+        let selectedStatus = '전체';
+        for (let radio of statusRadios) {
+            if (radio.checked) {
+                selectedStatus = radio.value;
+                break;
+            }
+        }
+
+        var currentUserId = /*[[${session.userId}]]*/ 'abcd1234';
+
+        // 드롭다운에서 현재 선택된 ID 필터 값
+        const idFilterValue = document.getElementById('idFilter').value;
+
+        // 테이블의 모든 <tr> 가져오기 (thead 제외, tbody만)
+        const tableBody = document.querySelector('#dataTable tbody');
+        const rows = tableBody.getElementsByTagName('tr');
+
+        for (let i = 0; i < rows.length; i++) {
+            const tds = rows[i].getElementsByTagName('td');
+            const productName = tds[0].innerText;
+            const rowId       = tds[1].innerText; // 아이디
+            const unitPrice   = tds[2].innerText;
+            const quantity    = tds[3].innerText;
+            const date        = tds[4].innerText;
+            const confirmNum  = tds[5].innerText;
+            const confirmId   = tds[6].innerText; // 승인자이름
+            const status      = tds[7].innerText; // 상태
+            
+
+            // 1) status 필터 확인
+            // '전체'면 필터 무시, 그 외면 해당 status랑 같은지 비교
+            let statusMatch = (selectedStatus === '전체' || status === selectedStatus);
+
+            // 2) id 필터 확인
+            // 'all'이면 필터 무시, 'current'면 로그인 유저 아이디(currentUserId)와 rowId(발주 요청자)가 같은지 비교
+            let idMatch = true;
+            if (idFilterValue === 'current') {
+                // rowId가 현재 로그인 유저 ID와 같아야 함
+                idMatch = (rowId === currentUserId);
+            }
+
+            // 두 조건을 모두 만족하면 보여주고, 아니면 숨김
+            if (statusMatch && idMatch) {
+                rows[i].style.display = '';  // 보이기
+            } else {
+                rows[i].style.display = 'none'; // 숨기기
+            }
+        }
+    }
+
+    // 페이지 로드 후 이벤트 리스너 설정
+    window.addEventListener('DOMContentLoaded', () => {
+        // 라디오 버튼 change 이벤트에 필터 함수 연결
+        const statusRadios = document.getElementsByName('statusFilter');
+        for (let radio of statusRadios) {
+            radio.addEventListener('change', filterTable);
+        }
+
+        // 드롭다운 change 이벤트에 필터 함수 연결
+        document.getElementById('idFilter').addEventListener('change', filterTable);
+
+        // 페이지 로드 시 기본 필터 적용
+        filterTable();
+    });
 </script>
 
 </body>
