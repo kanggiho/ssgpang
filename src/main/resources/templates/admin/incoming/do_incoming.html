@@ -1,106 +1,214 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>SSGPANG Fresh</title>
+    <meta charset="UTF-8">
+    <title>입고신청</title>
 
     <!-- Custom fonts for this template-->
     <link href="/css/all.css" rel="stylesheet" type="text/css">
-    <link
-            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-            rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.css" rel="stylesheet">
     <link rel="icon" href="/img/favicon/starfavicon.png">
 
-</head>
+    <!-- axios, etc. -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
+    <style>
+        .table-responsive {
+            max-height: 495px;
+            overflow-y: auto;
+        }
+        .table td, .table th {
+            padding: 5px 7px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .table-hover tbody tr:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
 <body id="page-top">
 
-<!-- Page Wrapper -->
 <div id="wrapper">
-
     <!-- Sidebar -->
     <div th:replace="admin/fragments/sidebar :: adminSideBar"></div>
 
-    <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
-
-        <!-- Main Content -->
         <div id="content">
-
             <!-- Topbar -->
             <div th:replace="admin/fragments/topbar :: adminTopBar"></div>
 
-            <!-- Begin Page Content -->
             <div class="container-fluid">
+                <!-- Page Heading -->
+                <h1 class="h3 mb-4 text-gray-800">입고신청</h1>
 
-                <!-- Content Row -->
                 <div class="row">
-                    <!-- Content Column -->
-                    <div class="col-lg-6 mb-4">
-                        <!-- ==============================내용이 들어가는 곳입니다.================================ -->
-                        <!-- =================================================================================== -->
-                        <!-- =================================================================================== -->
-                        <!-- =================================================================================== -->
+                    <!-- 테이블 영역 -->
+                    <div class="col-lg-8">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">입고 가능한 제품</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered text-center table-hover" width="100%" cellspacing="0">
+                                        <thead>
+                                        <tr>
+                                            <th>제품명</th>
+                                            <th>제조업체명</th>
+                                            <th>단가</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <!--
+                                             Controller에서 model.addAttribute("incomingRequest", list)를
+                                             넘겨준 데이터를 반복 출력
+                                        -->
+                                        <tr th:each="row : ${incomingRequest}"
+                                            th:data-product-code="${row.productCode}"
+                                            th:data-manufacturer-name="${row.manufacturerName}"
+                                            th:data-manufacturer-code = "${row.manufacturerCode}"
+                                            th:data-price="${row.price}"
+                                            onclick="showDetails(this)">
+                                            <td th:text="${row.productName}">제품명</td>
+                                            <td th:text="${row.manufacturerName}">제조업체명</td>
+                                            <td th:text="${row.price}">단가</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                        <h1>입고하기 화면</h1>
+                    <!-- 상세 정보 & 신청 영역 -->
+                    <div class="col-lg-4">
+                        <!-- 상세 정보 카드 -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">상세 정보</h6>
+                            </div>
+                            <div class="card-body">
+                                <div id="details-container">
+                                    <p><strong>제품명:</strong> <span id="detail-productName">-</span></p>
+                                    <p><strong>제조업체명:</strong> <span id="detail-manufacturerName">-</span></p>
+                                    <p><strong>단가:</strong> <span id="detail-price">-</span></p>
+                                </div>
+                            </div>
+                        </div>
 
-                        <!-- =================================================================================== -->
-                        <!-- =================================================================================== -->
-                        <!-- =================================================================================== -->
-                        <!-- ==============================내용이 들어가는 곳입니다.================================ -->
+                        <!-- 신청 카드 -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">입고신청</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group d-flex align-items-center justify-content-between">
+                                    <label for="requestCount">신청 개수</label>
+                                    <input type="number" class="form-control" id="requestCount"
+                                           value="0" min="0" placeholder="수량 입력"
+                                           style="width: 150px"/>
+                                </div>
+                                <p style="font-size: 15pt">
+                                    <strong>총 가격 :</strong>
+                                    <span id="detail-total">0</span>
+                                </p>
+                                <a id="applyBtn" class="btn btn-primary">
+                                    <i class="fas fa-inbox fa-sm"></i>
+                                    입고하기
+                                </a>
+                                <a id="resetBtn" class="btn btn-danger">
+                                    <i class="fa-solid fa-rotate-right"></i>
+                                    새로고침
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
+                <!-- /.row -->
             </div>
-            <!-- /.container-fluid -->
-
         </div>
-        <!-- End of Main Content -->
-
-        <!-- Footer -->
         <div th:replace="admin/fragments/footer :: adminFooter"></div>
-
     </div>
-    <!-- End of Content Wrapper -->
-
 </div>
-<!-- End of Page Wrapper -->
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div th:replace="admin/fragments/modal :: adminModal"></div>
-
-<!-- Bootstrap core JavaScript-->
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript-->
 <script src="/js/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
 <script src="/js/sb-admin-2.min.js"></script>
 
-<!-- Page level plugins -->
-<script src="/js/Chart.min.js"></script>
+<script>
+    let selectedData = {};
 
-<!-- Page level custom scripts -->
-<script src="/js/demo/chart-area-demo.js"></script>
-<script src="/js/demo/chart-pie-demo.js"></script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // "입고하기" 버튼 클릭
+        document.getElementById('applyBtn').addEventListener('click', function () {
+            if (!selectedData.productCode) {
+                alert('먼저 입고할 항목을 선택해주세요.');
+                return;
+            }
+
+            // 입력된 수량
+            const requestCount = parseInt(document.getElementById('requestCount').value) || 0;
+
+            const data = {
+                // inputNum은 보통 AUTO_INCREMENT로 자동 생성되므로 생략 가능
+                manufacturerCode: selectedData.manufacturerCode,  // manufacturerCode를 보내야 함
+                productCode: selectedData.productCode,
+                warehousedQuantity: requestCount,               // 요청 수량을 warehousedQuantity로 매핑
+                warehousedDate: null                             // null일 경우 COALESCE로 현재 날짜 처리
+            };
+
+            axios.post('/admin/incoming/save', data)
+                .then(response => {
+                    alert('입고 신청 완료');
+                    // 필요 시 페이지 새로고침
+                    // location.reload();
+                })
+                .catch(error => {
+                    console.error(error);
+                    alert('입고 신청 실패');
+                });
+        });
+
+        // 새로고침 버튼
+        document.getElementById('resetBtn').addEventListener('click', function (){
+            location.reload();
+        });
+    });
+
+    // 테이블 행 클릭 시 상세정보 표시
+    function showDetails(row) {
+        selectedData = {
+            productCode: row.getAttribute('data-product-code'),
+            manufacturerCode: row.getAttribute('data-manufacturer-code'),
+            manufacturerName: row.getAttribute('data-manufacturer-name'),
+            price: row.getAttribute('data-price'),
+            productName: row.children[0].innerText
+        };
+
+        // 상세 영역 채우기
+        document.getElementById('detail-productName').innerText = selectedData.productName;
+        document.getElementById('detail-manufacturerName').innerText = selectedData.manufacturerName;
+        document.getElementById('detail-price').innerText = selectedData.price;
+
+        // 신청 개수/총가격 초기화
+        const inputField = document.getElementById('requestCount');
+        inputField.value = 0;
+        document.getElementById('detail-total').innerText = '0';
+
+        // 입력값 변경될 때마다 총 가격 계산
+        inputField.addEventListener('input', function() {
+            let val = parseInt(inputField.value) || 0;
+            if (val < 0) val = 0;
+            inputField.value = val;
+            document.getElementById('detail-total').innerText = val * parseInt(selectedData.price);
+        });
+    }
+</script>
 
 </body>
-
 </html>
