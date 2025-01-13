@@ -163,6 +163,9 @@
     </div>
 </div>
 
+<div th:replace="user/fragments/modal :: userModal"></div>
+
+
 <!-- JavaScript 라이브러리 -->
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.bundle.min.js"></script>
@@ -205,7 +208,7 @@
             }
         }
 
-        var currentUserId = /*[[${session.userId}]]*/ 'abcd1234';
+        var currentUserId = '[[${userId}]]';
 
         // 드롭다운에서 현재 선택된 ID 필터 값
         const idFilterValue = document.getElementById('idFilter').value;

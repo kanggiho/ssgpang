@@ -5,6 +5,9 @@
 
 
 
+
+
+
     <select id="selectOutputAll" resultType="com.shinsegae.project.order.vo.OutputVO">
         select *
         from output
@@ -69,6 +72,11 @@
                 END,
             output.release_date ASC;
 
+    </select>
+    <select id="findUserUid" resultType="java.lang.Integer">
+        SELECT uid
+        FROM user
+        WHERE id = #{id}
     </select>
 
 

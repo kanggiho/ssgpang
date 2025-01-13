@@ -17,6 +17,9 @@ public interface OrderMapper {
 
     void updateInventory(OrderInventoryUpdateVO updateVO);
 
+    //유저 uid찾기
+    int findUserUid(String id);
+
 
     // 발주내역확인
     List<OutputVO> selectOutputAll();
