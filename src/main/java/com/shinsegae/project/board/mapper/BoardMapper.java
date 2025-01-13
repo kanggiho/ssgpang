@@ -1,8 +1,6 @@
 package com.shinsegae.project.board.mapper;
 
 import com.shinsegae.project.board.vo.BoardVO;
-import com.shinsegae.project.dashboard.vo.*;
-import com.shinsegae.project.incoming.vo.InputVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

@@ -116,9 +116,9 @@ axios.get('/admin/home_admin/areaChart')
                     yAxes: [{
                         ticks: {
                             beginAtZero: true, // Y축 0부터 시작
-                            stepSize: 10, // Y축 1000 단위
-                            max: 200, // Y축 최대값
-                            maxTicksLimit: 5,
+                            stepSize: 100, // Y축 1000 단위
+                            // max: 200, // Y축 최대값
+                            // maxTicksLimit: 5,
                             autoSkip: true,
                             fontSize: 14, // 글씨 크기 설정
                             fontStyle: 'bold', // 글씨 스타일 설정 (굵게)
