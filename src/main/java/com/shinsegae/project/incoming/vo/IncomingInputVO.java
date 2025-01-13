@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class InputVO {
-   private int input_num;
-   private String manufacturer_code;
-   private int product_code;
-   private int warehoused_quantity;
-   private String warehoused_date;
+public class IncomingInputVO {
+   private int inputNum;
+   private String manufacturerCode;
+   private int productCode;
+   private int warehousedQuantity;
+   private String warehousedDate;
 }
