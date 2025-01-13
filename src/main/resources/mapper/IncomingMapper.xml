@@ -8,8 +8,7 @@
     </insert>
 
     <select id="selectInputAll" resultType="com.shinsegae.project.incoming.vo.IncomingManagementDTO">
-        select i.input_num, p.product_name, m.manufacturer_name, i.warehoused_quantity, i.warehoused_date,
-
+        select i.input_num, p.product_name, m.manufacturer_name, i.warehoused_quantity, i.warehoused_date
         from input i
                  join product p
                       on i.product_code = p.product_code
@@ -17,6 +16,7 @@
                       on m.manufacturer_code = i.manufacturer_code
         order by input_num;
     </select>
+
     <select id="selectRequestAll" resultType="com.shinsegae.project.incoming.vo.IncomingRequestDTO">
         select
             p.product_code as productCode,
