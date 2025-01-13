@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shinsegae.project.chatbot.mapper.ChatBotMapper">
+
+    <!-- 주어진 질문에 대한 답변을 찾는 쿼리 -->
+    <select id="findAnswerByQuestion" parameterType="string" resultType="com.shinsegae.project.chatbot.vo.ChatBotVO">
+        SELECT id, question, answer
+        FROM questions
+        WHERE question = #{question}
+    </select>
+
+    <!-- 모든 질문 목록을 반환하는 쿼리 -->
+    <select id="findAllQuestions" resultType="com.shinsegae.project.chatbot.vo.ChatBotVO">
+        SELECT id, question, answer
+        FROM questions
+    </select>
+
+</mapper>
