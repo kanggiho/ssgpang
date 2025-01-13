@@ -25,7 +25,7 @@ axios.get('/user/home/piechart_output')
                 labels: labels_product,
                 datasets: [{
                     data: data_totalQuantity,
-                    backgroundColor: ["#1E3A8A","#2563EB","#60A5FA", "#93C5FD","#E0F2FE"],
+                    backgroundColor: ["#ffe49c","rgba(246,176,133,0.7)","rgba(192,245,174,0.7)", "#9bcaff","#e7d0fd"],
                     hoverBackgroundColor: [
                 ],
                     hoverBorderColor: "rgba(234, 236, 244, 1)",

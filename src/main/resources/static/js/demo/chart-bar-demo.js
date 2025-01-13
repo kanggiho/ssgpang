@@ -185,7 +185,7 @@ axios.get('/user/home/barchart_output')
             label: "발주수량",
             data: data_outputQuantity,
             yAxisID: 'yAxisRight', //오른쪽 축ID
-            borderColor: "rgba(238,183,166,0.93)",
+            borderColor: "rgba(246,176,133,0.7)",
             backgroundColor: "rgb(255,143,107)",
             fill: false,
             tension: 0.2,         // 선의 곡률(부드럽게)
