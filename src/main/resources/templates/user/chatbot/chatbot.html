@@ -143,11 +143,9 @@
                     </div>
                     <div class="col-lg-6 mb-4">
                         <div class="question-list">
-                            <div class="question-header">What are your operating hours?</div>
-                            <div class="question-item">How can I contact customer support?</div>
-                            <div class="question-item">Where is your store located?</div>
-                            <div class="question-item">What payment methods do you accept?</div>
-                            <!-- 더 많은 질문 항목 추가 가능 -->
+                            <div class="question-header">Frequently Asked Questions</div>
+                            <div th:each="question : ${questions}" class="question-item" th:text="${question.question}" th:data-answer="${question.answer}" onclick="handleQuestionClick(this)">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -238,12 +236,16 @@
     }
 
     // 질문 항목을 클릭하여 입력창에 자동으로 입력하도록 설정
-    document.querySelectorAll('.question-item').forEach(item => {
-        item.addEventListener('click', function () {
-            chatInput.value = this.textContent;  // 클릭된 질문을 입력창에 설정
-            chatInput.focus();  // 입력창에 포커스를 맞춤
-        });
-    });
+    function handleQuestionClick(element) {
+        const question = element.textContent;
+        const answer = element.getAttribute('data-answer');
+
+        // 사용자 메시지 화면에 추가
+        addMessageToChat('user', question);
+
+        // 봇 응답 화면에 추가
+        addMessageToChat('bot', answer);
+    }
 </script>
 
 </body>

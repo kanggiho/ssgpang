@@ -7,33 +7,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/user/chatbot")
 public class ChatBotController {
 
     @Autowired
     private ChatBotService chatBotService;
 
-    @GetMapping("chatbot")
-    public String chatbotPage() {
-        return "user/chatbot/chatbot";
-    }
 
-    @PostMapping("/ask")
-    public String askQuestion(@RequestBody ChatBotVO chatBotVO) {
-        String answer = chatBotService.getAnswer(chatBotVO.getQuestion());
-        return answer != null ? answer : "죄송합니다. 질문을 이해할 수 없습니다.";
-    }
-
-    // 모든 준비된 질문 목록을 반환하는 API
-    @GetMapping("/questions")
-    public List<ChatBotVO> getQuestions() {
-        return chatBotService.getAllQuestions();
+    @GetMapping("user/chatbot/chatbot")
+    public String getChatbotPage(Model model) {
+        // 데이터베이스에서 질문과 답변 리스트 가져오기
+        List<ChatBotVO> questions = chatBotService.getAllQuestions();
+        // 모델에 데이터 전달
+        model.addAttribute("questions", questions);
+        return "user/chatbot/chatbot"; // Thymeleaf 템플릿 이름
     }
 }
 
