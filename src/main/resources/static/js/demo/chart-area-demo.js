@@ -27,10 +27,13 @@ function number_format(number, decimals, dec_point, thousands_sep) {
     return s.join(dec);
 }
 
+//관리자 대시보드 area Chart: 입출고현황
+//입고수량
 const InputQuantity = [];
+//출고수량
 const OutputQuantity = [];
 
-axios.get('/admin/home_admin/chart1')
+axios.get('/admin/home_admin/areaChart')
     .then(function (response) {
         const areaChartInputData = response.data.areaChartInputData;
         const areaChartOutputData = response.data.areaChartOutputData;
@@ -38,13 +41,14 @@ axios.get('/admin/home_admin/chart1')
         console.log(areaChartInputData);
         console.log(areaChartOutputData);
 
+        //데이터 넣기
         for (let i = 0; i < 12; i++) {
             InputQuantity.push(areaChartInputData[i].warehousedQuantity);
             OutputQuantity.push(areaChartOutputData[i].releaseQuantity);
         }
 
 
-        // Area Chart Example
+        // Area Chart
         var ctx = document.getElementById("myAreaChart");
         var myLineChart = new Chart(ctx, {
             type: 'line',
@@ -52,13 +56,13 @@ axios.get('/admin/home_admin/chart1')
                 labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
                 datasets: [{
                     label: "입고량",
-                    lineTension: 0.3,
-                    backgroundColor: "rgba(78, 115, 223, 0.05)",
-                    borderColor: "rgb(97,147,255)",
-                    pointRadius: 3,
-                    pointBackgroundColor: "rgb(98,131,229)",
+                    lineTension: 0.5,
+                    backgroundColor: "rgba(78,115,223,0.02)",
+                    borderColor: "rgb(123,163,250)",
+                    pointRadius:3,
+                    pointBackgroundColor: "rgb(123,163,250)",
                     pointBorderColor: "rgba(78, 115, 223, 1)",
-                    pointHoverRadius: 3,
+                    pointHoverRadius: 5 ,
                     pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
                     pointHoverBorderColor: "rgba(78, 115, 223, 1)",
                     pointHitRadius: 10,
@@ -67,13 +71,13 @@ axios.get('/admin/home_admin/chart1')
                 },
                     {
                         label: "출고량",
-                        lineTension: 0.3,
-                        backgroundColor: "rgba(231, 74, 59, 0.05)",
+                        lineTension: 0.5,
+                        backgroundColor: "rgba(231,74,59,0.02)",
                         borderColor: "rgb(255,143,107)",
-                        pointRadius: 3,
-                        pointBackgroundColor: "rgba(231, 74, 59, 1)",
-                        pointBorderColor: "rgba(231, 74, 59, 1)",
-                        pointHoverRadius: 3,
+                        pointRadius:3,
+                        pointBackgroundColor: "rgb(255,143,107)",
+                        pointBorderColor: "rgb(252,96,47)",
+                        pointHoverRadius: 5,
                         pointHoverBackgroundColor: "rgba(231, 74, 59, 1)",
                         pointHoverBorderColor: "rgba(231, 74, 59, 1)",
                         pointHitRadius: 10,
@@ -102,17 +106,22 @@ axios.get('/admin/home_admin/chart1')
                             drawBorder: false
                         },
                         ticks: {
-                            maxTicksLimit: 12
+                            maxTicksLimit: 12,
+                            autoSkip: true,
+                            fontSize: 14, // 글씨 크기 설정
+                            fontStyle: 'bold', // 글씨 스타일 설정 (굵게)
                         }
                     }],
+                    //y축
                     yAxes: [{
                         ticks: {
                             beginAtZero: true, // Y축 0부터 시작
                             stepSize: 10, // Y축 1000 단위
                             max: 200, // Y축 최대값
                             maxTicksLimit: 5,
-                            padding: 10,
-                            // Include a dollar sign in the ticks
+                            autoSkip: true,
+                            fontSize: 14, // 글씨 크기 설정
+                            fontStyle: 'bold', // 글씨 스타일 설정 (굵게)
                             callback: function(value, index, values) {
                                 return number_format(value);
                             }
@@ -127,7 +136,14 @@ axios.get('/admin/home_admin/chart1')
                     }],
                 },
                 legend: {
-                    display: false
+                    display: true,
+                    position: 'right',
+                    align: 'start',
+                    labels: {
+                        fontSize: 14, // 글씨 크기
+                        fontColor: "#000", // 범례 글씨 색상
+                        fontStyle: 'bold', // 범례 글씨 스타일
+                    }
                 },
                 tooltips: {
                     backgroundColor: "rgb(255,255,255)",
