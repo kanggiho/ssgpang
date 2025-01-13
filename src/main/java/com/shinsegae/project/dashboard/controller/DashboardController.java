@@ -36,7 +36,8 @@ public class DashboardController {
     //bar chart: 월별 발주 현황(발주량, 발주금액)
     @GetMapping("user/home/barchart_output")
     @ResponseBody
-    public ResponseEntity<Map<String, Object>> barchart_output() {
+    public ResponseEntity<Map<String, Object>> barchart_output(HttpSession session) {
+        //String userId = session.getAttribute("id").toString();
         List<UserBarChartQuantityDTO> UserOutputQuantity = dashboardService.selectUserOutputQuantity();
         List<UserBarChartPriceDTO> UserOutputPrice= dashboardService.selectUserOutputPrice();
         Map<String, Object> result = new HashMap<>();
@@ -47,9 +48,9 @@ public class DashboardController {
 
 
     //pie chart: 나의 발주정보
-    @GetMapping("user/home/piechart_output")
+    @GetMapping("user/home/pieChart_output")
     @ResponseBody
-    public ResponseEntity<List<UserPieChartDTO>> piechart_output() {
+    public ResponseEntity<List<UserPieChartDTO>> pieChart_output() {
         List<UserPieChartDTO> userPieChartData = dashboardService.selectUserPieChartData();
         return ResponseEntity.ok(userPieChartData);
     }
@@ -69,9 +70,9 @@ public class DashboardController {
     }
 
     //area chart: 월별 입출고 현황
-    @GetMapping("admin/home_admin/areachart")
+    @GetMapping("admin/home_admin/areaChart")
     @ResponseBody
-    public ResponseEntity<Map<String, Object>> areachart() {
+    public ResponseEntity<Map<String, Object>> areaChart() {
         List<AreaChartInputDTO> areaChartInputData = dashboardService.selectAreaChartInputData();
         List<AreaChartOutputDTO> areaChartOutputData= dashboardService.selectAreaChartOutputData();
         Map<String, Object> result = new HashMap<>();

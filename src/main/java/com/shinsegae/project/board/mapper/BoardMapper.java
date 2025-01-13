@@ -21,7 +21,4 @@ public interface BoardMapper {
     int deleteBoard(int no);
     //게시글 내용 조건 검색
     List<BoardVO> getBoardByContent(String find);
-
-    //페이징 처리
-
 }

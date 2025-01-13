@@ -26,7 +26,7 @@
     <!-- 게시글 수정 -->
     <update id="updateBoard" parameterType="boardVO">
         UPDATE board
-        SET title = #{title}, content=#{content}, writer = #{writer}
+        SET title = #{title}, content=#{content}, writer = #{writer}, post_date = NOW()
         WHERE no = #{no}
     </update>
 
@@ -42,4 +42,6 @@
         FROM board
         WHERE title LIKE CONCAT('%',#{find},'%')
     </select>
+
+
 </mapper>

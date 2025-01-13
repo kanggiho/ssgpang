@@ -33,7 +33,7 @@ const InputQuantity = [];
 //출고수량
 const OutputQuantity = [];
 
-axios.get('/admin/home_admin/areachart')
+axios.get('/admin/home_admin/areaChart')
     .then(function (response) {
         const areaChartInputData = response.data.areaChartInputData;
         const areaChartOutputData = response.data.areaChartOutputData;

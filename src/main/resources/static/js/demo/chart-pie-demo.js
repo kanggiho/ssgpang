@@ -8,7 +8,7 @@ const labels_product = []
 //발주수량
 const data_totalQuantity = [];
 
-axios.get('/user/home/piechart_output')
+axios.get('/user/home/pieChart_output')
     .then(function (response){
         const userPieChartData = response.data;
         console.log(userPieChartData);
