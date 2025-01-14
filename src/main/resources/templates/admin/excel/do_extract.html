@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>데이터 내보내기</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="/css/all.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/css/sb-admin-2.css" rel="stylesheet">
+    <link rel="icon" href="/img/favicon/starfavicon.png">
+
+    <!-- axios, etc. -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <style>
+        .table-responsive {
+            max-height: 495px;
+            overflow-y: auto;
+        }
+        .table td, .table th {
+            padding: 5px 7px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .table-hover tbody tr:hover {
+            background-color: #f5f5f5;
+        }
+        /* 추가된 스타일 */
+        .card-custom {
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .btn-custom {
+            background-color: #4e73df;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        .btn-custom:hover {
+            background-color: #2e59d9;
+            color: white;
+        }
+    </style>
+</head>
+<body id="page-top">
+
+<div id="wrapper">
+    <!-- Sidebar -->
+    <div th:replace="admin/fragments/sidebar :: adminSideBar"></div>
+
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+            <!-- Topbar -->
+            <div th:replace="admin/fragments/topbar :: adminTopBar"></div>
+
+            <div class="container-fluid">
+                <!-- Page Heading -->
+                <h1 class="h3 mb-4 text-gray-800">데이터 내보내기</h1>
+
+                <div class="row">
+                    <!-- 데이터 추출하기 -->
+                    <div class="col-lg-8 offset-lg-2">
+                        <div class="card shadow mb-4 card-custom">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">선택 데이터 내보내기</h6>
+                            </div>
+                            <div class="card-body">
+                                <form th:action="@{/admin/excel/do_extract/extract}" method="post">
+                                    <div class="form-group">
+                                        <label for="dataType">데이터 유형 선택</label>
+                                        <select class="form-control" id="dataType" name="dataType" required>
+                                            <option value="" disabled selected>선택하세요</option>
+                                            <option value="input">입고</option>
+                                            <option value="inventory">재고</option>
+                                            <option value="output">발주</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fileName">엑셀 파일명 입력</label>
+                                        <input type="text" class="form-control" id="fileName" name="fileName" placeholder="예: 입고_데이터" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-custom btn-block">엑셀 추출</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:replace="admin/fragments/footer :: adminFooter"></div>
+    </div>
+</div>
+
+<!-- Logout Modal-->
+<div th:replace="admin/fragments/modal :: adminModal"></div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/jquery.easing.min.js"></script>
+<script src="/js/sb-admin-2.min.js"></script>
+
+</body>
+</html>

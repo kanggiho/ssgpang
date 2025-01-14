@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>데이터 업데이트</title>
+
+  <!-- Custom fonts for this template -->
+  <link href="/css/all.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="/css/sb-admin-2.css" rel="stylesheet">
+  <link rel="icon" href="/img/favicon/starfavicon.png">
+
+  <!-- axios -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <style>
+    .card-custom {
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-custom {
+      background-color: #4e73df;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+
+    .btn-custom:hover {
+      background-color: #2e59d9;
+    }
+
+    .btn-cancel {
+      background-color: #d9534f;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+
+    .btn-cancel:hover {
+      background-color: #c9302c;
+    }
+
+    .file-label {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body id="page-top">
+
+<div id="wrapper">
+  <!-- Sidebar -->
+  <div th:replace="admin/fragments/sidebar :: adminSideBar"></div>
+
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+      <!-- Topbar -->
+      <div th:replace="admin/fragments/topbar :: adminTopBar"></div>
+
+      <div class="container-fluid">
+        <!-- Page Heading -->
+        <h1 class="h3 mb-4 text-gray-800">데이터 업데이트</h1>
+
+        <div class="row">
+          <div class="col-lg-8 offset-lg-2">
+            <div class="card shadow mb-4 card-custom">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">엑셀 파일 업로드</h6>
+              </div>
+              <div class="card-body">
+                <form id="uploadForm">
+                  <!-- 데이터 유형 선택 -->
+                  <div class="form-group">
+                    <label for="dataType">데이터 유형 선택</label>
+                    <select class="form-control" id="dataType" name="dataType" required>
+                      <option value="" disabled selected>선택하세요</option>
+                      <option value="input">입고</option>
+                      <option value="inventory">재고</option>
+                      <option value="output">발주</option>
+                    </select>
+                  </div>
+
+                  <!-- 파일 업로드 -->
+                  <div class="form-group">
+                    <label for="fileUpload" class="file-label">엑셀 파일 선택</label>
+                    <input type="file" class="form-control-file" id="fileUpload" name="file" accept=".xlsx" required>
+                  </div>
+
+                  <!-- 버튼 그룹 -->
+                  <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-custom" id="uploadButton">업데이트</button>
+                    <button type="button" class="btn btn-cancel" id="cancelButton">취소</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div th:replace="admin/fragments/footer :: adminFooter"></div>
+  </div>
+</div>
+
+<!-- Logout Modal -->
+<div th:replace="admin/fragments/modal :: adminModal"></div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/jquery.easing.min.js"></script>
+<script src="/js/sb-admin-2.min.js"></script>
+
+<script>
+  document.getElementById('uploadButton').addEventListener('click', function () {
+    const formData = new FormData(document.getElementById('uploadForm'));
+
+    //admin/excel/
+    axios.post('do_insert/insert', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+            .then(response => {
+              alert('업데이트 성공: ' + response.data);
+            })
+            .catch(error => {
+              alert('업데이트 실패: ' + error.response.data);
+            });
+  });
+
+  document.getElementById('cancelButton').addEventListener('click', function () {
+    document.getElementById('uploadForm').reset();
+    alert('업로드가 취소되었습니다.');
+  });
+</script>
+
+</body>
+</html>

@@ -48,6 +48,19 @@
             display: inline-block;
             margin-right: 20px;
         }
+
+        /* 활성화 / 비활성화 버튼 색상 */
+        .btn-disabled {
+            background-color: gray;
+            border-color: gray;
+            color: white;
+            cursor: not-allowed;
+        }
+        .btn-enabled {
+            background-color: red;
+            border-color: red;
+            color: white;
+        }
     </style>
 
 </head>
@@ -107,6 +120,7 @@
                                     <table class="table table-bordered text-center table-hover" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                         <tr>
+                                            <th>발주번호</th>
                                             <th>자재명</th>
                                             <th>아이디</th>
                                             <th>단가</th>
@@ -119,6 +133,7 @@
                                         </thead>
                                         <tbody>
                                         <tr th:each="row : ${tableData}" th:data-id="${row.id}" onclick="showDetails(this)">
+                                            <td th:text="${row.outputId}"></td>
                                             <td th:text="${row.productName}"></td>
                                             <td th:text="${row.id}"></td>
                                             <td th:text="${row.unitPrice}"></td>
@@ -143,6 +158,7 @@
                             </div>
                             <div class="card-body">
                                 <div id="details-container">
+                                    <p><strong>발주번호:</strong> <span id="detail-outputId"></span></p>
                                     <p><strong>자재명:</strong> <span id="detail-productName"></span></p>
                                     <p><strong>아이디:</strong> <span id="detail-id"></span></p>
                                     <p><strong>단가:</strong> <span id="detail-unitPrice"></span></p>
@@ -152,6 +168,13 @@
                                     <p><strong>승인자이름:</strong> <span id="detail-confirmId"></span></p>
                                     <p><strong>승인여부:</strong> <span id="detail-status"></span></p>
                                 </div>
+
+                                <!-- 취소하기 버튼 -->
+                                <button id="cancel-button" class="btn btn-disabled" disabled>취소하기</button>
+                                <!--
+                                  초기에는 비활성 상태로 두고,
+                                  조건(아이디=로그인유저 & 상태=대기중) 만족 시 enable로 전환
+                                -->
                             </div>
                         </div>
                     </div>
@@ -165,35 +188,59 @@
 
 <div th:replace="user/fragments/modal :: userModal"></div>
 
-
 <!-- JavaScript 라이브러리 -->
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/jquery.easing.min.js"></script>
 <script src="/js/sb-admin-2.min.js"></script>
+<!-- axios 라이브러리 추가 -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <script>
-    // 상세보기 함수 (기존)
+    // 현재 로그인 유저 ID (Thymeleaf 예시)
+    // 실제 로그인 유저의 ID를 Thymeleaf로부터 받아온다고 가정
+    // 예: <span th:text="${userId}" id="loggedInUser"></span> 등을 통해 전달하거나,
+    //    직접 [[${userId}]] 로 참조해도 됨
+    const currentUserId = '[[${userId}]]';
+
+    const cancelButton = document.getElementById('cancel-button');
+
+    // 상세보기 함수
     function showDetails(row) {
         const data = {
-            productName: row.children[0].innerText,
-            id: row.children[1].innerText,
-            unitPrice: row.children[2].innerText,
-            releaseQuantity: row.children[3].innerText,
-            releaseDate: row.children[4].innerText,
-            confirmNum: row.children[5].innerText,
-            confirmId: row.children[6].innerText,
-            status: row.children[7].innerText,
+            outputId:        row.children[0].innerText,
+            productName:     row.children[1].innerText,
+            id:              row.children[2].innerText,
+            unitPrice:       row.children[3].innerText,
+            releaseQuantity: row.children[4].innerText,
+            releaseDate:     row.children[5].innerText,
+            confirmNum:      row.children[6].innerText,
+            confirmId:       row.children[7].innerText,
+            status:          row.children[8].innerText,
         };
 
-        document.getElementById('detail-productName').innerText = data.productName;
-        document.getElementById('detail-id').innerText = data.id;
-        document.getElementById('detail-unitPrice').innerText = data.unitPrice;
-        document.getElementById('detail-releaseQuantity').innerText = data.releaseQuantity;
-        document.getElementById('detail-releaseDate').innerText = data.releaseDate;
-        document.getElementById('detail-confirmNum').innerText = data.confirmNum;
-        document.getElementById('detail-confirmId').innerText = data.confirmId;
-        document.getElementById('detail-status').innerText = data.status;
+        document.getElementById('detail-outputId').innerText       = data.outputId;
+        document.getElementById('detail-productName').innerText    = data.productName;
+        document.getElementById('detail-id').innerText            = data.id;
+        document.getElementById('detail-unitPrice').innerText      = data.unitPrice;
+        document.getElementById('detail-releaseQuantity').innerText= data.releaseQuantity;
+        document.getElementById('detail-releaseDate').innerText    = data.releaseDate;
+        document.getElementById('detail-confirmNum').innerText     = data.confirmNum;
+        document.getElementById('detail-confirmId').innerText      = data.confirmId;
+        document.getElementById('detail-status').innerText         = data.status;
+
+        // 취소하기 버튼 활성/비활성 처리
+        if (data.id === currentUserId && data.status === '대기중') {
+            // 활성화 (빨간색)
+            cancelButton.disabled = false;
+            cancelButton.classList.remove('btn-disabled');
+            cancelButton.classList.add('btn-enabled');
+        } else {
+            // 비활성화 (회색)
+            cancelButton.disabled = true;
+            cancelButton.classList.remove('btn-enabled');
+            cancelButton.classList.add('btn-disabled');
+        }
     }
 
     // 테이블 필터링 함수
@@ -208,8 +255,6 @@
             }
         }
 
-        var currentUserId = '[[${userId}]]';
-
         // 드롭다운에서 현재 선택된 ID 필터 값
         const idFilterValue = document.getElementById('idFilter').value;
 
@@ -219,36 +264,52 @@
 
         for (let i = 0; i < rows.length; i++) {
             const tds = rows[i].getElementsByTagName('td');
-            const productName = tds[0].innerText;
-            const rowId       = tds[1].innerText; // 아이디
-            const unitPrice   = tds[2].innerText;
-            const quantity    = tds[3].innerText;
-            const date        = tds[4].innerText;
-            const confirmNum  = tds[5].innerText;
-            const confirmId   = tds[6].innerText; // 승인자이름
-            const status      = tds[7].innerText; // 상태
-            
+            const rowId  = tds[2].innerText; // 아이디
+            const status = tds[8].innerText; // 상태
 
-            // 1) status 필터 확인
-            // '전체'면 필터 무시, 그 외면 해당 status랑 같은지 비교
+            // 1) status 필터 확인 ('전체'면 필터 무시)
             let statusMatch = (selectedStatus === '전체' || status === selectedStatus);
 
-            // 2) id 필터 확인
-            // 'all'이면 필터 무시, 'current'면 로그인 유저 아이디(currentUserId)와 rowId(발주 요청자)가 같은지 비교
+            // 2) id 필터 확인 ('all'이면 필터 무시, 'current'면 로그인 유저 ID와 같아야 함)
             let idMatch = true;
             if (idFilterValue === 'current') {
-                // rowId가 현재 로그인 유저 ID와 같아야 함
                 idMatch = (rowId === currentUserId);
             }
 
             // 두 조건을 모두 만족하면 보여주고, 아니면 숨김
             if (statusMatch && idMatch) {
-                rows[i].style.display = '';  // 보이기
+                rows[i].style.display = '';
             } else {
-                rows[i].style.display = 'none'; // 숨기기
+                rows[i].style.display = 'none';
             }
         }
     }
+
+    // 취소하기 버튼 클릭 이벤트
+    cancelButton.addEventListener('click', function() {
+        // 비활성화 상태면 동작X
+        if (this.disabled) return;
+
+        // 발주번호 가져오기
+        const outputId = document.getElementById('detail-outputId').innerText;
+        const productName = document.getElementById('detail-productName').innerText;
+        const releaseQuantity = document.getElementById('detail-releaseQuantity').innerText;
+
+        // axios를 이용해 서버로 취소 요청
+        axios.post('/user/order/cancelOrder', {
+            outputId: outputId,
+            productName: productName,
+            releaseQuantity: releaseQuantity
+        })
+            .then(function(response) {
+                alert('취소 요청이 완료되었습니다.');
+                location.reload();
+            })
+            .catch(function(error) {
+                alert('취소 요청 중 오류가 발생했습니다.');
+                console.error(error);
+            });
+    });
 
     // 페이지 로드 후 이벤트 리스너 설정
     window.addEventListener('DOMContentLoaded', () => {

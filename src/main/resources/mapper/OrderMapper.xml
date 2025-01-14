@@ -2,10 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shinsegae.project.order.mapper.OrderMapper">
-
-
-
-
+    <delete id="cancelOutput" parameterType="java.lang.Integer">
+        DELETE FROM output WHERE output_id = #{outputId}
+    </delete>
 
 
     <select id="selectOutputAll" resultType="com.shinsegae.project.order.vo.OutputVO">

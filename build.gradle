@@ -48,6 +48,9 @@ dependencies {
     // Spring Security의 Crypto 모듈
     implementation 'org.springframework.security:spring-security-crypto:6.0.0'
 
+    // Apache POI for Excel
+    implementation 'org.apache.poi:poi-ooxml:5.2.3' // 최신 버전 확인
+
 }
 
 tasks.named('test') {
