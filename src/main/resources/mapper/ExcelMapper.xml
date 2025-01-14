@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shinsegae.project.excel.mapper.ExcelMapper">
+
+    <select id="findAllInput" resultType="com.shinsegae.project.excel.vo.ExcelInputVO">
+        SELECT input_num, manufacturer_code, product_code, warehoused_quantity, warehoused_date
+        FROM input
+    </select>
+
+    <select id="findAllInventory" resultType="com.shinsegae.project.excel.vo.ExcelInventoryVO">
+        SELECT *
+        FROM inventory
+    </select>
+
+    <select id="findAllOutput" resultType="com.shinsegae.project.excel.vo.ExcelOutputVO">
+        SELECT *
+        FROM output
+    </select>
+
+</mapper>
