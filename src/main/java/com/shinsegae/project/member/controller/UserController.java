@@ -91,6 +91,15 @@ public class UserController {
         return isEmailAvailable;
     }
 
+    //유저 이메일 유효성 검증
+    @GetMapping("checkTel")
+    @ResponseBody
+    public boolean checkTel(@RequestParam String tel) {
+        System.out.println("user tel >> " + tel);
+        boolean isTelAvailable = userService.checkTel(tel);
+        return isTelAvailable;
+    }
+
     //유저 회원가입
     @GetMapping("register")
     public String register() {

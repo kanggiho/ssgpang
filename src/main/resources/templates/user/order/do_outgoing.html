@@ -145,6 +145,9 @@
     </div>
 </div>
 
+<div th:replace="user/fragments/modal :: userModal"></div>
+
+
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/jquery.easing.min.js"></script>
@@ -175,6 +178,7 @@
             axios.post('/user/order/save', data)
                 .then(response => {
                     alert('발주 성공');
+                    location.reload(); // 페이지 새로고침
                 })
                 .catch(error => {
                     console.error(error);

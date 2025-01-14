@@ -75,14 +75,14 @@ public class UserService {
         return userMapper.selectUserById(id) == null;
     }
 
-    //유저 이메일 유효성 검증
+    // 이메일이 DB에 존재하는지 확인
     public boolean checkEmail(String email) {
-        return userMapper.selectEmailById(email) == null;
+        return userMapper.checkEmail(email);
     }
 
-    // 이메일이 DB에 존재하는지 확인
-    public boolean isEmailExists(String email) {
-        return userMapper.isEmailExists(email);
+    // 전화번호가 DB에 존재하는지 확인
+    public boolean checkTel(String tel) {
+        return userMapper.checkTel(tel);
     }
 
     // 임시 비밀번호 DB에 저장 (암호화 후)

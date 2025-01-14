@@ -6,100 +6,312 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
     <title>SSGPANG Fresh</title>
 
     <!-- Custom fonts for this template-->
     <link href="/css/all.css" rel="stylesheet" type="text/css">
-    <link
-            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-            rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.css" rel="stylesheet">
     <link rel="icon" href="/img/favicon/starfavicon.png">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <style>
+        .table-responsive {
+            max-height: 495px; /* 테이블 높이 제한 */
+            overflow-y: auto;  /* 스크롤 추가 */
+        }
+
+        .table td, .table th {
+            padding: 5px 7px; /* 행 패딩 조절 */
+            text-align: center; /* 텍스트 중앙 정렬 */
+            vertical-align: middle; /* 세로 중앙 정렬 */
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: #f5f5f5; /* 행에 마우스 올릴 때 색 변경 */
+        }
+
+        /* 추가된 필터 섹션 스타일 */
+        .filter-section {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        .filter-section label {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .filter-section .radio-group,
+        .filter-section .dropdown-group {
+            display: inline-block;
+            margin-right: 20px;
+        }
+    </style>
 
 </head>
 
 <body id="page-top">
 
-<!-- Page Wrapper -->
 <div id="wrapper">
-
-    <!-- Sidebar -->
     <div th:replace="admin/fragments/sidebar :: adminSideBar"></div>
 
-    <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
-
-        <!-- Main Content -->
         <div id="content">
-
-            <!-- Topbar -->
             <div th:replace="admin/fragments/topbar :: adminTopBar"></div>
 
-            <!-- Begin Page Content -->
             <div class="container-fluid">
 
-                <!-- Content Row -->
-                <div class="row">
-                    <!-- Content Column -->
-                    <div class="col-lg-6 mb-4">
-                        <!-- ==============================내용이 들어가는 곳입니다.================================ -->
-                        <!-- =================================================================================== -->
-                        <!-- =================================================================================== -->
-                        <!-- =================================================================================== -->
+                <!-- Page Heading -->
+                <h1 class="h3 mb-4 text-gray-800">발주요청 관리</h1>
 
-                        <h1>발주요청관리 화면</h1>
+                <!-- 필터 섹션 추가 -->
+                <div class="filter-section">
+                    <!-- 상태 필터 라디오 버튼 -->
+                    <div class="radio-group">
+                        <label>상태 필터:</label>
+                        <label class="mr-2">
+                            <input type="radio" name="statusFilter" value="대기중"> 대기중
+                        </label>
+                        <label class="mr-2">
+                            <input type="radio" name="statusFilter" value="승인"> 승인
+                        </label>
+                        <label class="mr-2">
+                            <input type="radio" name="statusFilter" value="거절"> 거절
+                        </label>
+                        <label class="mr-2">
+                            <input type="radio" name="statusFilter" value="전체" checked> 전체
+                        </label>
+                    </div>
 
-                        <!-- =================================================================================== -->
-                        <!-- =================================================================================== -->
-                        <!-- =================================================================================== -->
-                        <!-- ==============================내용이 들어가는 곳입니다.================================ -->
+                    <!-- ID 필터 드롭다운 -->
+                    <div class="dropdown-group">
+                        <label for="idFilter">아이디 필터:</label>
+                        <select id="idFilter">
+                            <option value="current">현재 관리자</option>
+                            <option value="all" selected>전체</option>
+                        </select>
                     </div>
                 </div>
 
+                <div class="row">
+                    <!-- Table Column -->
+                    <div class="col-lg-8">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">발주내역</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered text-center table-hover" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                        <tr>
+                                            <th>발주번호</th>
+                                            <th>자재명</th>
+                                            <th>아이디</th>
+                                            <th>단가</th>
+                                            <th>발주량</th>
+                                            <th>발주날짜</th>
+                                            <th>승인번호</th>
+                                            <th>승인자이름</th>
+                                            <th>승인여부</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="row : ${tableData}" th:data-id="${row.id}" onclick="showDetails(this)">
+                                            <td th:text="${row.outputId}"></td>
+                                            <td th:text="${row.productName}"></td>
+                                            <td th:text="${row.id}"></td>
+                                            <td th:text="${row.unitPrice}"></td>
+                                            <td th:text="${row.releaseQuantity}"></td>
+                                            <td th:text="${row.releaseDate}"></td>
+                                            <td th:text="${row.confirmNum}"></td>
+                                            <td th:text="${row.confirmId}"></td>
+                                            <td th:text="${row.status}"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Details Column -->
+                    <div class="col-lg-4">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">정보</h6>
+                            </div>
+                            <div class="card-body">
+                                <div id="details-container">
+                                    <p><strong>발주번호:</strong> <span id="detail-outputId"></span></p>
+                                    <p><strong>자재명:</strong> <span id="detail-productName"></span></p>
+                                    <p><strong>아이디:</strong> <span id="detail-id"></span></p>
+                                    <p><strong>단가:</strong> <span id="detail-unitPrice"></span></p>
+                                    <p><strong>발주량:</strong> <span id="detail-releaseQuantity"></span></p>
+                                    <p><strong>발주날짜:</strong> <span id="detail-releaseDate"></span></p>
+                                    <p><strong>승인번호:</strong> <span id="detail-confirmNum"></span></p>
+                                    <p><strong>승인자이름:</strong> <span id="detail-confirmId"></span></p>
+                                    <p><strong>승인여부:</strong> <span id="detail-status"></span></p>
+                                </div>
+                                <button type="button" class="btn btn-success" onclick="handleApproval('approve')">승인</button>
+                                <button type="button" class="btn btn-danger" onclick="handleApproval('reject')">거절</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- /.container-fluid -->
-
         </div>
-        <!-- End of Main Content -->
 
-        <!-- Footer -->
         <div th:replace="admin/fragments/footer :: adminFooter"></div>
-
     </div>
-    <!-- End of Content Wrapper -->
-
 </div>
-<!-- End of Page Wrapper -->
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
 <div th:replace="admin/fragments/modal :: adminModal"></div>
 
-<!-- Bootstrap core JavaScript-->
+
+<!-- JavaScript 라이브러리 -->
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript-->
 <script src="/js/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
 <script src="/js/sb-admin-2.min.js"></script>
 
-<!-- Page level plugins -->
-<script src="/js/Chart.min.js"></script>
+<script>
+    let data = {};
 
-<!-- Page level custom scripts -->
-<script src="/js/demo/chart-area-demo.js"></script>
-<script src="/js/demo/chart-pie-demo.js"></script>
+    // 상세보기 함수 (기존)
+    function showDetails(row) {
+        data = {
+            outputId: row.children[0].innerText,
+            productName: row.children[1].innerText,
+            id: row.children[2].innerText,
+            unitPrice: row.children[3].innerText,
+            releaseQuantity: row.children[4].innerText,
+            releaseDate: row.children[5].innerText,
+            confirmNum: row.children[6].innerText,
+            confirmId: row.children[7].innerText,
+            status: row.children[8].innerText,
+        };
+
+        document.getElementById('detail-outputId').innerText = data.outputId;
+        document.getElementById('detail-productName').innerText = data.productName;
+        document.getElementById('detail-id').innerText = data.id;
+        document.getElementById('detail-unitPrice').innerText = data.unitPrice;
+        document.getElementById('detail-releaseQuantity').innerText = data.releaseQuantity;
+        document.getElementById('detail-releaseDate').innerText = data.releaseDate;
+        document.getElementById('detail-confirmNum').innerText = data.confirmNum;
+        document.getElementById('detail-confirmId').innerText = data.confirmId;
+        document.getElementById('detail-status').innerText = data.status;
+    }
+
+    // 승인/거절 요청 처리
+    function handleApproval(actionType) {
+        if (!data.outputId) {
+            alert("처리할 요청을 먼저 선택하세요.");
+            return;
+        }
+
+        const requestData = {
+            outputId: parseInt(data.outputId), // 현재 선택된 요청 ID
+            actionType: actionType,  // "approve" 또는 "reject"
+            releaseQuantity: parseInt(data.releaseQuantity),
+            productName: data.productName.toString()
+        };
+
+        if (data.status === '대기중'){
+            // Axios로 POST 요청 전송
+            axios.post('/admin/order/handle', requestData)
+                .then(response => {
+                    if (response.data === 'SUCCESS') {
+                        alert(actionType === 'approve' ? '승인되었습니다.' : '거절되었습니다.');
+                        location.reload(); // 페이지 새로고침
+                    } else {
+                        alert('처리 실패: ' + response.data);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error.response ? error.response.data : error.message);
+                    alert('오류가 발생했습니다. 관리자에게 문의하세요.');
+                });
+        }else{
+            alert('대기중인 상태만 승인, 거절이 가능합니다.')
+        }
+    }
+
+
+
+    // 테이블 필터링 함수
+    function filterTable() {
+        // 라디오 버튼에서 현재 선택된 status 값
+        const statusRadios = document.getElementsByName('statusFilter');
+        let selectedStatus = '전체';
+        for (let radio of statusRadios) {
+            if (radio.checked) {
+                selectedStatus = radio.value;
+                break;
+            }
+        }
+
+        var currentUserId = '[[${adminId}]]';
+
+        // 드롭다운에서 현재 선택된 ID 필터 값
+        const idFilterValue = document.getElementById('idFilter').value;
+
+        // 테이블의 모든 <tr> 가져오기 (thead 제외, tbody만)
+        const tableBody = document.querySelector('#dataTable tbody');
+        const rows = tableBody.getElementsByTagName('tr');
+
+        for (let i = 0; i < rows.length; i++) {
+            const tds = rows[i].getElementsByTagName('td');
+            const outputId    = tds[0].innerText;
+            const productName = tds[1].innerText;
+            const rowId       = tds[2].innerText; // 아이디
+            const unitPrice   = tds[3].innerText;
+            const quantity    = tds[4].innerText;
+            const date        = tds[5].innerText;
+            const confirmNum  = tds[6].innerText;
+            const confirmId   = tds[7].innerText; // 승인자이름
+            const status      = tds[8].innerText; // 상태
+
+
+            // 1) status 필터 확인
+            // '전체'면 필터 무시, 그 외면 해당 status랑 같은지 비교
+            let statusMatch = (selectedStatus === '전체' || status === selectedStatus);
+
+            // 2) id 필터 확인
+            // 'all'이면 필터 무시, 'current'면 로그인 유저 아이디(currentUserId)와 rowId(발주 요청자)가 같은지 비교
+            let idMatch = true;
+            if (idFilterValue === 'current') {
+                // rowId가 현재 로그인 유저 ID와 같아야 함
+                idMatch = (confirmId === currentUserId);
+            }
+
+            // 두 조건을 모두 만족하면 보여주고, 아니면 숨김
+            if (statusMatch && idMatch) {
+                rows[i].style.display = '';  // 보이기
+            } else {
+                rows[i].style.display = 'none'; // 숨기기
+            }
+        }
+    }
+
+    // 페이지 로드 후 이벤트 리스너 설정
+    window.addEventListener('DOMContentLoaded', () => {
+        // 라디오 버튼 change 이벤트에 필터 함수 연결
+        const statusRadios = document.getElementsByName('statusFilter');
+        for (let radio of statusRadios) {
+            radio.addEventListener('change', filterTable);
+        }
+
+        // 드롭다운 change 이벤트에 필터 함수 연결
+        document.getElementById('idFilter').addEventListener('change', filterTable);
+
+        // 페이지 로드 시 기본 필터 적용
+        filterTable();
+    });
+</script>
 
 </body>
 

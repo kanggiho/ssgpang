@@ -16,6 +16,7 @@
                       on m.manufacturer_code = i.manufacturer_code
         order by input_num;
     </select>
+
     <select id="selectRequestAll" resultType="com.shinsegae.project.incoming.vo.IncomingRequestDTO">
         select
             p.product_code as productCode,
