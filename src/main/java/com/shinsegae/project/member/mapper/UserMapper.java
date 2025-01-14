@@ -1,7 +1,6 @@
 package com.shinsegae.project.member.mapper;
 
 import com.shinsegae.project.member.vo.UserVO;
-import org.apache.catalina.User;
 import org.apache.ibatis.annotations.Mapper;
 
 
