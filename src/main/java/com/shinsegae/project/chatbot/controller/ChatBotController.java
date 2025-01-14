@@ -2,6 +2,7 @@ package com.shinsegae.project.chatbot.controller;
 
 import com.shinsegae.project.chatbot.service.ChatBotService;
 import com.shinsegae.project.chatbot.vo.ChatBotVO;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,7 @@ public class ChatBotController {
 
 
     @GetMapping("user/chatbot/chatbot")
+    @Operation(summary = "챗봇", description = "질문과 답변 데이터를 모델에 추가")
     public String getChatbotPage(Model model) {
         // 데이터베이스에서 질문과 답변 리스트 가져오기
         List<ChatBotVO> questions = chatBotService.getAllQuestions();

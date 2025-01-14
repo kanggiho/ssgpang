@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,7 @@ public class OrderAdminController {
     private final OrderService orderService;
 
     @GetMapping("manage_outgoing_request")
+    @Operation(summary = "발주 요청 관리 페이지", description = "발주 요청 데이터를 조회하여 발주 요청 관리 페이지를 반환")
     public String manage_outgoing_request(Model model, HttpSession session) {
         List<OrderManagementDTO> list = orderService.selectOutputConfirmTable();
         model.addAttribute("tableData", list);
@@ -32,6 +34,7 @@ public class OrderAdminController {
     }
 
     @PostMapping("handle")
+    @Operation(summary = "발주 요청 처리", description = "발주 요청을 승인하거나 거절")
     public ResponseEntity<String> handleOrder(@RequestBody HandleDTO request, HttpSession session) {
         int adminId = Integer.parseInt((String) session.getAttribute("adminId"));
 

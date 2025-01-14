@@ -1,6 +1,7 @@
 package com.shinsegae.project.search.controller;
 
 import com.shinsegae.project.search.vo.LinkDTO;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +40,7 @@ public class SearchController {
     );
 
     @GetMapping("/admin/search/search")
+    @Operation(summary = "검색 페이지", description = "접근 가능한 링크를 검색어에 따라 필터링하여 반환")
     public String searchPage(@RequestParam(value = "query", required = false) String query, Model model,
                              HttpSession session) {
         // 세션에서 사용자 ID 확인

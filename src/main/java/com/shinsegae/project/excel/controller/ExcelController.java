@@ -1,6 +1,7 @@
 package com.shinsegae.project.excel.controller;
 
 import com.shinsegae.project.excel.service.ExcelService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -25,12 +26,14 @@ public class ExcelController {
     //========================================내보내기 기능========================================
 
     @GetMapping("/do_extract")
+    @Operation(summary = "엑셀 데이터 내보내기", description = "엑셀 데이터를 내보내기 위한 메인 페이지를 반환")
     public String doExtractMain(){
         return "admin/excel/do_extract";
     }
 
     @PostMapping("/do_extract/extract")
     @ResponseBody
+    @Operation(summary = "엑셀 데이터 내보내기", description = "선택한 데이터 유형을 기반으로 엑셀 파일을 생성하여 반환")
     public ResponseEntity<InputStreamResource> exportDataToExcel(
             @RequestParam("dataType") String dataType,
             @RequestParam("fileName") String fileName) {
@@ -60,11 +63,13 @@ public class ExcelController {
     //========================================가져오기 기능========================================
 
     @GetMapping("/do_insert")
+    @Operation(summary = "엑셀 데이터 가져오기 메인")
     public String doInsertMain(){
         return "admin/excel/do_insert";
     }
 
     @PostMapping("/do_insert/insert")
+    @Operation(summary = "엑셀 데이터 업로드", description = "업로드된 엑셀 파일을 읽어 데이터베이스에 삽입")
     public ResponseEntity<String> uploadExcelFile(@RequestParam("file") MultipartFile file,
                                                   @RequestParam("dataType") String dataType) {
         try {
