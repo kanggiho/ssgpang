@@ -3,6 +3,7 @@ package com.shinsegae.project.board.controller;
 import com.shinsegae.project.board.service.BoardService;
 import com.shinsegae.project.board.vo.BoardVO;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,9 +17,9 @@ import java.util.List;
 @Controller
 @RequestMapping("admin/board")
 @RequiredArgsConstructor
+@Tag(name = "게시판")
 public class AdminBoardController {
     private final BoardService boardService;
-
 
     @GetMapping("board")
     @Operation(summary = "게시판 페이지", description = "관리자가 모든 게시글 목록을 조회할 수 있는 페이지를 반환")

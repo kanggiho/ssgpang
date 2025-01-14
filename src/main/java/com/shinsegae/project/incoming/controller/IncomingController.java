@@ -4,6 +4,7 @@ import com.shinsegae.project.incoming.service.IncomingService;
 import com.shinsegae.project.incoming.vo.IncomingInputVO;
 import com.shinsegae.project.incoming.vo.IncomingManagementDTO;
 import com.shinsegae.project.incoming.vo.IncomingRequestDTO;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("admin/incoming")
+@Tag(name = "입고관리")
 public class IncomingController {
 
     private final IncomingService incomingService;

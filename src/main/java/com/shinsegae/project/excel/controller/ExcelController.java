@@ -2,6 +2,7 @@ package com.shinsegae.project.excel.controller;
 
 import com.shinsegae.project.excel.service.ExcelService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -19,6 +20,7 @@ import java.nio.charset.StandardCharsets;
 @Controller
 @RequestMapping("/admin/excel")
 @RequiredArgsConstructor
+@Tag(name = "엑셀파일로 가져오기/내보내기")
 public class ExcelController {
 
     private final ExcelService excelService;

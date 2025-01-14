@@ -3,6 +3,7 @@ package com.shinsegae.project.inventory.controller;
 import com.shinsegae.project.inventory.service.InventoryService;
 import com.shinsegae.project.inventory.vo.InventoryManagementDTO;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("admin/inventory")
 @RequiredArgsConstructor
+@Tag(name = "재고관리")
 public class InventoryController {
 
     private final InventoryService inventoryService;

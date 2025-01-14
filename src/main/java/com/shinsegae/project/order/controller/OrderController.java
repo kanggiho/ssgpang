@@ -5,6 +5,7 @@ import com.shinsegae.project.order.vo.OrderInventoryManagementDTO;
 import com.shinsegae.project.order.vo.OrderManagementDTO;
 import com.shinsegae.project.order.vo.OutputVO;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import java.util.List;
 @Controller
 @RequestMapping("user/order")
 @AllArgsConstructor
+@Tag(name = "사용자 재고처리")
 public class  OrderController {
 
     private final OrderService orderService;

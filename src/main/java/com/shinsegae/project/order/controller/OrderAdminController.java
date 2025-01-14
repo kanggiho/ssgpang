@@ -3,6 +3,7 @@ package com.shinsegae.project.order.controller;
 import com.shinsegae.project.order.service.OrderService;
 import com.shinsegae.project.order.vo.OrderManagementDTO;
 import com.shinsegae.project.order.vo.HandleDTO;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ import java.util.List;
 @Controller
 @RequestMapping("admin/order")
 @AllArgsConstructor
+@Tag(name = "관리자 재고처리")
 public class OrderAdminController {
 
     private final OrderService orderService;

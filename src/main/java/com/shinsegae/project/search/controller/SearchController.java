@@ -2,6 +2,7 @@ package com.shinsegae.project.search.controller;
 
 import com.shinsegae.project.search.vo.LinkDTO;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
+@Tag(name = "검색")
 public class SearchController {
 
     // 모든 가능한 링크 목록을 정의

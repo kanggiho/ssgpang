@@ -5,6 +5,7 @@ import com.shinsegae.project.member.service.UserService;
 import com.shinsegae.project.member.vo.AdminVO;
 import com.shinsegae.project.member.vo.UserVO;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Controller
 @RequiredArgsConstructor
+@Tag(name = "관리자 로그인")
 public class AdminController {
 
     private final AdminService adminService;

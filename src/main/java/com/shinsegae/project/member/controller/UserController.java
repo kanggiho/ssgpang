@@ -5,6 +5,7 @@ import com.shinsegae.project.member.service.UserService;
 import com.shinsegae.project.member.vo.AdminVO;
 import com.shinsegae.project.member.vo.UserVO;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("user/member")
 @RequiredArgsConstructor
+@Tag(name = "사용자 로그인")
 public class UserController {
     private final UserService userService;
     private final AdminService adminService;

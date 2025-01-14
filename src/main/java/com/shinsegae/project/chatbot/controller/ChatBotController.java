@@ -3,6 +3,7 @@ package com.shinsegae.project.chatbot.controller;
 import com.shinsegae.project.chatbot.service.ChatBotService;
 import com.shinsegae.project.chatbot.vo.ChatBotVO;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
+@Tag(name = "챗봇")
 public class ChatBotController {
 
     @Autowired
