@@ -31,8 +31,8 @@ public class BoardService {
     public int deleteBoard(int no){
         return boardMapper.deleteBoard(no);
     }
-    //게시글 내용 조건 검색
-    public List<BoardVO> getBoardByContent(String find){
-        return boardMapper.getBoardByContent(find);
+    //게시글 제목 조건 검색
+    public List<BoardVO> getBoardByTitle(String find){
+        return boardMapper.getBoardByTitle(find);
     }
 }

@@ -53,8 +53,7 @@
                                     <h6 class="m-0 font-weight-bold text-primary">게시글 작성</h6>
                                 </div>
                                 <div class="card-body">
-                                    <div class="d-grid mt-4">
-                                        <form action="/admin/board/create2" method="post">
+                                        <form id="boardForm" action="/admin/board/create2" onsubmit="boardCreate()" method="post">
                                             <div class="mb-3">
                                                 <label for="title" class="form-label">제목</label>
                                                 <input type="text" id="title" name="title" class="form-control" placeholder="제목을 입력하세요" required>
@@ -68,10 +67,9 @@
                                                 <textarea id="content" name="content" class="form-control" rows="10" placeholder="내용을 입력하세요" required></textarea>
                                             </div>
                                             <div class="d-grid">
-                                                <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="boardCreate()">작성하기</button>
+                                                <button type="submit" class="btn btn-primary btn-lg btn-block">작성하기</button>
                                             </div>
                                         </form>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -118,9 +116,18 @@
 <script src="/js/demo/chart-pie-demo.js"></script>
 
 <script>
-function boardCreate() {
-    alert("작성 완료되었습니다.");
-}
+    function boardCreate() {
+        // 폼 가져오기
+        const form = document.getElementById('boardForm');
+
+        if (form.checkValidity()) {
+            // 입력값이 모두 있는 경우에만 실행
+            alert('작성 완료되었습니다.');
+            return true; // 폼 제출
+        }
+        // 입력값이 없는 경우 폼 제출 중단
+        return false;
+    }
 </script>
 </body>
 

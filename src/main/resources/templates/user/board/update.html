@@ -53,13 +53,12 @@
                                     <h6 class="m-0 font-weight-bold text-primary">게시글 수정</h6>
                                 </div>
                                 <div class="card-body">
-                                <form action="/user/board/update2" method="post">
+                                <form id="boardForm" action="/user/board/update2" method="post">
                                     <!-- 게시글 번호 -->
                                     <input type="hidden" name="no" th:value="${boardVO.no}">
 
                                     <!-- 작성자 -->
-                                    <input type="hidden" name="writer" th:value="${userId}">
-
+                                    <input type="hidden" name="writer">
 
                                     <!-- 제목 -->
                                     <div class="form-group">
@@ -71,7 +70,7 @@
                                     <!-- 내용 -->
                                     <div class="form-group">
                                         <label for="content" class="font-weight-bold">내용</label>
-                                        <textarea id="content" name="content" class="form-control" rows="5"
+                                        <textarea id="postContent" name="content" class="form-control" rows="5"
                                                   required th:text="${boardVO.content}"></textarea>
                                     </div>
 
@@ -125,6 +124,32 @@
 <!-- Page level custom scripts -->
 <script src="/js/demo/chart-area-demo.js"></script>
 <script src="/js/demo/chart-pie-demo.js"></script>
+
+<script>
+    // 기존 값 저장
+    const initialTitle = document.getElementById('title').value;
+    const initialContent = document.getElementById('postContent').value;
+
+    // 폼 가져오기
+    const form = document.getElementById('boardForm');
+    // 폼 제출
+    form.addEventListener("submit", function (event) {
+        // 현재 입력값
+        const currentTitle = document.getElementById('title').value;
+        const currentContent = document.getElementById('postContent').value;
+
+        // 제목과 내용 중 하나라도 수정되었는지 확인
+        if (initialTitle !== currentTitle || initialContent !== currentContent) {
+            // 하나라도 수정되었다면 수정 완료 메시지
+            alert("수정이 완료되었습니다.");
+            return; // 폼 제출
+        }
+        // 둘 다 수정되지 않은 경우
+        alert("수정된 내용이 없습니다.");
+        event.preventDefault(); // 폼 제출 중단
+    });
+</script>
+
 
 </body>
 
