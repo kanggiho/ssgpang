@@ -201,7 +201,7 @@
             }
 
             // 전화번호가 수정되었을 때 중복 체크
-            axios.get("/user/member/checkTel?tel=" + tel)
+            axios.get("/user/member/checkTel?tel=" + encodeURIComponent(tel))
                 .then(function (response) {
                     const isTelAvailable = response.data;
 
