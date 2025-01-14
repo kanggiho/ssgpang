@@ -55,7 +55,7 @@ public class AdminBoardController {
     //게시글 제목 조건 검색
     @GetMapping("find")
     public String find(String find, Model model) {
-        List<BoardVO> list = boardService.getBoardByContent(find);
+        List<BoardVO> list = boardService.getBoardByTitle(find);
         model.addAttribute("list", list);
         return "admin/board/board";
     }

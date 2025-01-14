@@ -54,10 +54,10 @@ axios.get('/admin/home_admin/barchart_user_output')
             hoverBackgroundColor: "#5b93ff",
            //borderColor: "#5b93ff",
             //borderSkipped: false ,
-            borderWidth: 2,
+            borderWidth: 3,
             borderRadius: 20,
             borderdSkipped: false,
-            maxBarThickness: 12,
+            maxBarThickness: 15,
           }],
         },
         options: {
@@ -146,21 +146,31 @@ axios.get('/admin/home_admin/barchart_user_output')
 
 //사용자 대시보드 Bar Chart: 월별 발주량, 발주금액
 //발주금액
-const data_outputPrice = [];
+const data_outputPrice = Array(12).fill(0);
 //발주수량
-const data_outputQuantity = [];
+const data_outputQuantity = Array(12).fill(0);
 
 axios.get('/user/home/barchart_output')
     .then(function (response) {
       const UserOutputPrice = response.data.UserOutputPrice;
       const UserOutputQuantity = response.data.UserOutputQuantity;
 
-      // 배열에 데이터 넣기
-      for (let i = 0; i < 12; i++) {
-        //발주금액 데이터
-        data_outputPrice.push(UserOutputPrice[i].releasePrice);
-        //발주수량 데이터
-        data_outputQuantity.push(UserOutputQuantity[i].releaseQuantity);
+      //배열에 데이터 넣기
+      //발주금액 데이터
+      for (let i = 0; i < UserOutputPrice.length; i++) {
+        const item = UserOutputPrice[i];
+        const monthIndex = item.releaseMonth - 1; // month는 1~12, 배열 인덱스는 0~11
+        if (monthIndex >= 0 && monthIndex < 12) {
+          data_outputPrice[monthIndex] = item.releasePrice;
+        }
+      }
+      //발주수량 데이터
+      for (let i = 0; i < UserOutputQuantity.length; i++) {
+        const item = UserOutputQuantity[i];
+        const monthIndex = item.releaseMonth - 1;
+        if (monthIndex >= 0 && monthIndex < 12) {
+          data_outputQuantity[monthIndex] = item.releaseQuantity;
+        }
       }
 
       //bar chart
@@ -178,7 +188,7 @@ axios.get('/user/home/barchart_output')
             backgroundColor: "#1e32bb",
             hoverBackgroundColor: "#2e59d9",
             borderColor: "#4e73df",
-            maxBarThickness: 12,
+            maxBarThickness: 15,
           },{
             //선그래프: 발주수량
             type: 'line',

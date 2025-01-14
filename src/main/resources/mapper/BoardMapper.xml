@@ -36,12 +36,10 @@
         WHERE no = #{no}
     </delete>
 
-    <!-- 게시글 내용 조건 검색 -->
-    <select id="getBoardByContent" parameterType="String" resultType="com.shinsegae.project.board.vo.BoardVO">
+    <!-- 게시글 제목 조건 검색 -->
+    <select id="getBoardByTitle" parameterType="String" resultType="com.shinsegae.project.board.vo.BoardVO">
         SELECT no,title,content,writer, DATE(post_date) AS post_date
         FROM board
         WHERE title LIKE CONCAT('%',#{find},'%')
     </select>
-
-
 </mapper>

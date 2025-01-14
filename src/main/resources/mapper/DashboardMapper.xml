@@ -49,6 +49,7 @@
         FROM output o
         JOIN user u ON u.uid = o.user_id
         WHERE o.release_date IS NOT NULL
+        And o.status = '승인'
         AND u.id = #{userId}
         GROUP BY releaseMonth
         ORDER BY releaseMonth;
@@ -56,10 +57,11 @@
 
     <!-- bar chart: 월별 발주금액 -->
     <select id="selectUserOutputPrice" resultType="com.shinsegae.project.dashboard.vo.UserBarChartPriceDTO">
-        SELECT DATE_FORMAT(release_date, '%m') AS releaseMonth, SUM(release_quantity * unit_price) AS releasePrice
+        SELECT DATE_FORMAT(o.release_date, '%m') AS releaseMonth, SUM(o.release_quantity * unit_price) AS releasePrice
         FROM output o
         JOIN user u ON u.uid = o.user_id
         WHERE o.release_date IS NOT NULL
+        And o.status = '승인'
         AND u.id = #{userId}
         GROUP BY releaseMonth
         ORDER BY releaseMonth;
@@ -77,6 +79,7 @@
         ORDER BY totalQuantity DESC
         LIMIT 5
     </select>
+
 
     <!-- 관리자 대시보드 -->
     <!-- 총 재고량 -->
@@ -96,6 +99,7 @@
         SELECT SUM(release_quantity)
         FROM output
         WHERE release_date = CURRENT_DATE()
+        AND status = '승인'
     </select>
 
     <!-- 발주 승인요청 -->
@@ -103,7 +107,7 @@
         SELECT COUNT(*)
         FROM output
         WHERE status = '대기중'
-          AND release_date = CURRENT_DATE()
+        AND release_date = CURRENT_DATE()
     </select>
 
     <!-- area chart: 월별 입고량 -->
@@ -119,6 +123,7 @@
         SELECT DATE_FORMAT(release_date, '%m') AS releaseMonth, SUM(release_quantity) AS releaseQuantity
         FROM output
         WHERE release_date IS NOT NULL
+        AND status = '승인'
         GROUP BY releaseMonth
         ORDER BY releaseMonth
     </select>
@@ -135,8 +140,8 @@
     <select id="selectTodayInputProduct" resultType="com.shinsegae.project.dashboard.vo.TodayInputDTO">
         SELECT i.input_num, m.manufacturer_name, p.product_code, p.product_name, i.warehoused_quantity
         FROM input i
-                 JOIN manufacture m ON i.manufacturer_code = m.manufacturer_code
-                 JOIN product p ON i.product_code = p.product_code
+        JOIN manufacture m ON i.manufacturer_code = m.manufacturer_code
+        JOIN product p ON i.product_code = p.product_code
         WHERE warehoused_date = CURRENT_DATE;
     </select>
 </mapper>

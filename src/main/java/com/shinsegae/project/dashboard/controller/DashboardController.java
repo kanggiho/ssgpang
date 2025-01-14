@@ -2,7 +2,6 @@ package com.shinsegae.project.dashboard.controller;
 
 import com.shinsegae.project.dashboard.service.DashboardService;
 import com.shinsegae.project.dashboard.vo.*;
-import com.shinsegae.project.order.vo.OrderManagementDTO;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,13 +22,12 @@ public class DashboardController {
     //사용자 대시보드
     @GetMapping("user/home")
     public String home(HttpSession session, Model model) {
-        //session.setAttribute("id", "giho");
         //상단 카드: 발주 승인대기, 승인완료, 승인거절, 총발주건수
         String userId = session.getAttribute("userId").toString();
-        model.addAttribute("statusWaiting", dashboardService.selectOutputByStatusWaiting(userId));
-        model.addAttribute("statusApproval", dashboardService.selectOutputByStatusApproval(userId));
-        model.addAttribute("statusReject", dashboardService.selectOutputByStatusReject(userId));
-        model.addAttribute("totalOutputQuantity", dashboardService.selectTotalOutputQuantity(userId));
+        model.addAttribute("statusWaiting", dashboardService.selectOutputByStatusWaiting(userId)); //발주 승인대기
+        model.addAttribute("statusApproval", dashboardService.selectOutputByStatusApproval(userId)); //승인완료
+        model.addAttribute("statusReject", dashboardService.selectOutputByStatusReject(userId)); //승인거절
+        model.addAttribute("totalOutputQuantity", dashboardService.selectTotalOutputQuantity(userId)); //총 발주
         return "user/home";
     }
 
@@ -38,14 +36,13 @@ public class DashboardController {
     @ResponseBody
     public ResponseEntity<Map<String, Object>> barchart_output(HttpSession session) {
         String userId = session.getAttribute("userId").toString();
-        List<UserBarChartQuantityDTO> UserOutputQuantity = dashboardService.selectUserOutputQuantity(userId);
-        List<UserBarChartPriceDTO> UserOutputPrice= dashboardService.selectUserOutputPrice(userId);
+        List<UserBarChartQuantityDTO> UserOutputQuantity = dashboardService.selectUserOutputQuantity(userId); //발주량
+        List<UserBarChartPriceDTO> UserOutputPrice= dashboardService.selectUserOutputPrice(userId); //발주금액
         Map<String, Object> result = new HashMap<>();
         result.put("UserOutputQuantity", UserOutputQuantity);
         result.put("UserOutputPrice", UserOutputPrice);
         return ResponseEntity.ok(result);
     }
-
 
     //pie chart: 나의 발주정보
     @GetMapping("user/home/pieChart_output")
@@ -58,14 +55,14 @@ public class DashboardController {
 
 
     //관리자 대시보드
-    //상단 카드: 총재고량, 입고수량, 출고수량, 발주 승인요청
+    //상단 카드: 총재고량, 입고수량, 출고수량, 발주 요청
     @GetMapping("admin/home_admin")
     public String home_admin(Model model, HttpSession session) {
         String adminId = session.getAttribute("adminId").toString();
-        model.addAttribute("totalInventory", dashboardService.selectTotalInventory());
-        model.addAttribute("inputQuantity", dashboardService.selectInputQuantity());
-        model.addAttribute("outputQuantity", dashboardService.selectOutputQuantity());
-        model.addAttribute("outputStatus", dashboardService.selectOutputByStatus());
+        model.addAttribute("totalInventory", dashboardService.selectTotalInventory()); //총 재고량
+        model.addAttribute("inputQuantity", dashboardService.selectInputQuantity()); //입고수량
+        model.addAttribute("outputQuantity", dashboardService.selectOutputQuantity()); //출고수량
+        model.addAttribute("outputStatus", dashboardService.selectOutputByStatus()); //발주 요청
         //table: 오늘의 입고 상품
         List<TodayInputDTO> list = dashboardService.selectTodayInputProduct();
         model.addAttribute("inputList", list);
@@ -76,8 +73,8 @@ public class DashboardController {
     @GetMapping("admin/home_admin/areaChart")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> areaChart() {
-        List<AreaChartInputDTO> areaChartInputData = dashboardService.selectAreaChartInputData();
-        List<AreaChartOutputDTO> areaChartOutputData= dashboardService.selectAreaChartOutputData();
+        List<AreaChartInputDTO> areaChartInputData = dashboardService.selectAreaChartInputData(); //월별 입고량
+        List<AreaChartOutputDTO> areaChartOutputData= dashboardService.selectAreaChartOutputData(); //월별 출고량
         Map<String, Object> result = new HashMap<>();
         result.put("areaChartInputData", areaChartInputData);
         result.put("areaChartOutputData", areaChartOutputData);

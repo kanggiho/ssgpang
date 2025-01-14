@@ -17,6 +17,6 @@ public interface BoardMapper {
     int updateBoard(BoardVO boardVO);
     //게시글 삭제
     int deleteBoard(int no);
-    //게시글 내용 조건 검색
-    List<BoardVO> getBoardByContent(String find);
+    //게시글 제목 조건 검색
+    List<BoardVO> getBoardByTitle(String find);
 }
