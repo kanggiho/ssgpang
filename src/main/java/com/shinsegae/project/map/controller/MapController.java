@@ -11,15 +11,21 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("admin/map")
 @RequiredArgsConstructor
 public class MapController {
     private final MapService mapService;
 
-    @GetMapping("map")
+    @GetMapping("admin/map/map")
     public String getWarehouse(Model model) {
         List<Map<String, Object>> warehouseData = mapService.getWarehouseData();
         model.addAttribute("warehouseData", warehouseData);
         return "admin/map/map";
+    }
+
+    @GetMapping("user/map/map")
+    public String getWarehouse2(Model model) {
+        List<Map<String, Object>> warehouseData = mapService.getWarehouseData();
+        model.addAttribute("warehouseData", warehouseData);
+        return "user/map/map";
     }
 }

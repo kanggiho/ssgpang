@@ -22,7 +22,7 @@ public class EmailController {
     @PostMapping("/find_pw")
     public String findPassword(@RequestParam("email") String email, Model model) {
         // 이메일이 DB에 존재하는지 확인
-        if (userService.isEmailExists(email)) {
+        if (userService.checkEmail(email)) {
             // 임시 비밀번호 생성
             String tempPassword = emailService.tempPassword();
 
