@@ -97,7 +97,8 @@
         UPDATE output
         SET status = #{status},
             confirm_num = 0,
-            confirm_id = 0
+            confirm_id = 0,
+            release_date = null
         WHERE output_id = #{outputId}
     </update>
 
