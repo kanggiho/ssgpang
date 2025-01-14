@@ -18,19 +18,28 @@
     </select>
 
     <select id="selectRequestAll" resultType="com.shinsegae.project.incoming.vo.IncomingRequestDTO">
-        select
+        select DISTINCT
             p.product_code as productCode,
             p.product_name as productName,
             m.manufacturer_name as manufacturerName,
             m.manufacturer_code as manufacturerCode,
+            inv.code as code,
+            inv.warehouse_id as warehouseId,
             inv.price as price
         from input i
-                 join product p
-                      on i.product_code = p.product_code
-                 join manufacture m
-                      on m.manufacturer_code = i.manufacturer_code
-                 join inventory inv
-                      on inv.product_code = p.product_code
+                 join product p on i.product_code = p.product_code
+                 join manufacture m on m.manufacturer_code = i.manufacturer_code
+                 join inventory inv on inv.product_code = p.product_code
         order by p.product_name;
     </select>
+
+
+    <insert id="insertInventory" parameterType="com.shinsegae.project.incoming.vo.IncomingInventoryVO">
+        INSERT INTO inventory (code, product_code, manufacturer_code, warehouse_id, price, stock)
+        VALUES (#{code}, #{product_code}, #{manufacturer_code}, #{warehouse_id}, #{price}, #{stock})
+            ON DUPLICATE KEY UPDATE
+        stock = stock + VALUES(stock)
+    </insert>
+
+
 </mapper>
