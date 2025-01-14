@@ -29,9 +29,9 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 
 //관리자 대시보드 area Chart: 입출고현황
 //입고수량
-const InputQuantity = [];
+const InputQuantity = Array(12).fill(0);
 //출고수량
-const OutputQuantity = [];
+const OutputQuantity = Array(12).fill(0);
 
 axios.get('/admin/home_admin/areaChart')
     .then(function (response) {
@@ -41,10 +41,23 @@ axios.get('/admin/home_admin/areaChart')
         console.log(areaChartInputData);
         console.log(areaChartOutputData);
 
-        //데이터 넣기
-        for (let i = 0; i < 12; i++) {
-            InputQuantity.push(areaChartInputData[i].warehousedQuantity);
-            OutputQuantity.push(areaChartOutputData[i].releaseQuantity);
+        // 데이터 넣기
+        //입고량 (warehousedMonth)
+        for (let i = 0; i < areaChartInputData.length; i++) {
+            const item = areaChartInputData[i];
+            const monthIndex = item.warehousedMonth - 1; // 1~12 → 0~11
+            if (monthIndex >= 0 && monthIndex < 12) {
+                InputQuantity[monthIndex] = item.warehousedQuantity;
+            }
+        }
+
+        //출고량 (releaseMonth)
+        for (let i = 0; i < areaChartOutputData.length; i++) {
+            const item = areaChartOutputData[i];
+            const monthIndex = item.releaseMonth - 1;
+            if (monthIndex >= 0 && monthIndex < 12) {
+                OutputQuantity[monthIndex] = item.releaseQuantity;
+            }
         }
 
 

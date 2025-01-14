@@ -26,7 +26,6 @@ public class DashboardService {
     }
     //총 발주건수
     public Integer selectTotalOutputQuantity(String userId){
-        //return dashboardMapper.selectTotalOutputQuantity(userId);
         Integer result = dashboardMapper.selectTotalOutputQuantity(userId);
         if (result == null) {
             return 0;
@@ -74,13 +73,12 @@ public class DashboardService {
     }
     //발주 승인요청
     public Integer selectOutputByStatus(){
-        return dashboardMapper.selectOutputByStatus();
-//        Integer result = dashboardMapper.selectOutputByStatus();
-//        if (result == null) {
-//            return 0;
-//        } else {
-//            return result;
-//        }
+        Integer result = dashboardMapper.selectOutputByStatus();
+        if (result == null) {
+            return 0;
+        } else {
+            return result;
+        }
     }
 
     //area chart: 월별 입고량
