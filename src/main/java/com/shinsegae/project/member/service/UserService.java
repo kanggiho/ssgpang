@@ -20,7 +20,8 @@ public class UserService {
         System.out.println("vo에 암호화된 pw >>> " + userVO.getPassword());
         int result = userMapper.insertUser(userVO);
         return result;
-    };
+    }
+
 
     //유저 로그인
     public boolean login(UserVO userVO) {
@@ -45,31 +46,48 @@ public class UserService {
 
     //유저 회원정보수정
     public int updateUser(UserVO userVO) {
+        if (userVO.getPassword() != null && !userVO.getPassword().isEmpty()) {
+            String updatePassword = passwordEncoder.encode(userVO.getPassword());
+            userVO.setPassword(updatePassword);
+        }
+
         return userMapper.updateUser(userVO);
-    };
+    }
 
-    //유저 회원탈퇴
-    public int deleteUser(String id){
+
+    public int deleteUser(String id) {
         return userMapper.deleteUser(id);
-    };
+    }
 
-    public UserVO selectUserById(String id){
+
+    public UserVO selectUserById(String id) {
         return userMapper.selectUserById(id);
-    };
+    }
 
 
     //유저 전화번호로 ID 찾기
-    public String selectIdByUserTel(String tel){
+    public String selectIdByUserTel(String tel) {
         return userMapper.selectIdByUserTel(tel);
-    };
+    }
 
     //유저 아이디 중복 확인
     public boolean checkId(String id) {
         return userMapper.selectUserById(id) == null;
     }
 
-    //유저 이메일 유효성 검증
+    // 이메일이 DB에 존재하는지 확인
     public boolean checkEmail(String email) {
-        return userMapper.selectEmailById(email) == null;
+        return userMapper.checkEmail(email);
+    }
+
+    // 전화번호가 DB에 존재하는지 확인
+    public boolean checkTel(String tel) {
+        return userMapper.checkTel(tel);
+    }
+
+    // 임시 비밀번호 DB에 저장 (암호화 후)
+    public void updateTemporaryPassword(String email, String password) {
+        String encodedPassword = passwordEncoder.encode(password);  // 비밀번호 암호화
+        userMapper.updateTemporaryPassword(email, encodedPassword);
     }
 }

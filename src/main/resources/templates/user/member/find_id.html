@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 
 <head>
     
@@ -9,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     
-    <title>SSGPANG - Forgot ID</title>
+    <title>SSGPANG - ID 찾기</title>
     
     <!-- Custom fonts for this template-->
     <link href="/css/all.css" rel="stylesheet" type="text/css">
@@ -29,6 +30,8 @@
         }
     </style>
 
+    <!-- Axios for HTTP requests -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 </head>
 
@@ -46,7 +49,7 @@
                     <!-- Nested Row within Card Body -->
                     <div class="row">
                         <div class="col-lg-6 d-none d-lg-block bg-password-image" style="align-items:center !important; display: flex !important; justify-content:center !important;">
-                            <img src="/img/member/forgot_pw.png" alt="이미지 자리" width="191" height="187">
+                            <img src="/img/member/find_id.png" alt="이미지 자리" width="191" height="187">
                         </div>
                         <div class="col-lg-6">
                             <div class="p-5">
@@ -57,13 +60,13 @@
                                 <form class="user">
                                     <div class="form-group">
                                         <input type="tel" class="form-control form-control-user"
-                                               id="exampleInputPhone" aria-describedby="telHelp"
+                                               id="telFindId"
                                                placeholder="전화번호 입력">
                                     </div>
-                                    <!-- !!!!!!!!!!!!! 아이디 찾는 페이지 만들기 !!!!!!!!!!!!! -->
-                                    <a href="/user/member/login" class="btn btn-primary btn-user btn-block">
+
+                                    <button type="button" class="btn btn-primary btn-user btn-block" onclick="findId()">
                                         ID 찾기
-                                    </a>
+                                    </button>
                                 </form>
                                 <hr>
                                 <nav class="nav justify-content-center">
@@ -93,6 +96,34 @@
 <!-- Custom scripts for all pages-->
 <script src="/js/sb-admin-2.min.js"></script>
 
+<th:block>
+    <script>
+
+        function findId() {
+            const tel = document.getElementById("telFindId").value;
+
+            if (!tel) {
+                alert("전화번호를 입력해주세요.");
+                return;
+            }
+
+            axios.post("/user/member/find_id", { tel })
+                .then(function(response) {
+                    // 서버로부터 받은 결과
+                    const userId = response.data.userId;
+                    if (userId) {
+                        alert(`찾으시는 ID는 [ ${userId} ] 입니다!`);
+                    } else {
+                        alert("등록된 전화번호가 없습니다.");
+                    }
+                })
+                .catch(function(error) {
+                    console.error("아이디 찾기 오류:", error);
+                    alert("서버 오류가 발생했습니다. 다시 시도해주세요.");
+                });
+        }
+    </script>
+</th:block>
 </body>
 
 </html>

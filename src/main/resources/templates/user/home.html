@@ -24,6 +24,65 @@
     <!-- Axios 라이브러리 -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
+    <style>
+        /* 공통 카드 스타일 */
+        .card {
+            border-radius: 15px; /* 카드 모서리를 둥글게 */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 카드 그림자 */
+        }
+
+        /* 아이콘 배경 스타일 */
+        .card-icon {
+            width: 55px;
+            height: 55px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 80%; /* 아이콘 배경을 둥글게 */
+            font-size: 1.8rem; /* 아이콘 크기 */
+        }
+
+         /*왼쪽 테두리 스타일*/
+        .border-left-1 {
+            border-left: 5px solid rgba(248, 217, 159, 0.7); /* 노란색 테두리 */
+        }
+
+        .border-left-2 {
+            border-left: 5px solid rgba(141, 227, 153, 0.7); /* 초록색 테두리 */
+        }
+
+        .border-left-3 {
+            border-left: 5px solid rgba(248, 190, 190, 0.7); /* 빨간색 테두리 */
+        }
+
+        .border-left-4 {
+            border-left: 4px solid rgba(155, 202, 252, 0.7); /* 파란색 테두리 */
+        }
+
+        /* 연한 노란색 */
+        .bg-1 {
+            background-color: rgba(246, 215, 160, 0.3); /* 연한 노란색 */
+            color: rgb(218, 170, 93); /* 진한 노란색 아이콘 */
+        }
+
+        /* 연한 초록색 */
+        .bg-2 {
+            background-color: rgba(200, 240, 220, 0.5); /* 연한 초록색 배경 */
+            color: rgb(0, 150, 136); /* 진한 초록색 아이콘 */
+        }
+
+        /* 연한 빨간색 */
+        .bg-3 {
+            background-color: rgba(255, 225, 225, 0.5); /* 연한 빨간색 배경 */
+            color: rgb(242, 88, 88); /* 진한 빨간색 아이콘 */
+        }
+
+        .bg-4 {
+            background-color: rgba(0, 123, 255, 0.15); /* 연한 파란색 */
+            color: #007BFF; /* 진한 파란색 아이콘 */
+        }
+    </style>
+
 </head>
 
 <body id="page-top">
@@ -54,64 +113,76 @@
                 </div>
 
                 <!-- TODAY Section -->
-                <div class="card shadow-sm mb-4 today-section" style="border-radius: 10px; border: 1px solid #e0e0e0;">
-                    <div class="card-header py-3" style="background-color: #f8f9fc; border-bottom: 1px solid #e0e0e0;">
-                        <h6 class="m-0 font-weight-bold">발주</h6>
-                    </div>
-                    <h6 class="m-0 font-weight-bold">TODAY</h6>
+<!--                <div class="card shadow-sm mb-4 today-section" style="border-radius: 10px; border: 1px solid #e0e0e0;">-->
+<!--                    <div class="card-header py-3" style="background-color: #f8f9fc; border-bottom: 1px solid #e0e0e0;">-->
+<!--                        <h6 class="m-0 font-weight-bold text-gray-800">발주</h6>-->
+<!--                    </div>-->
                     <div class="card-body">
                         <!-- Card content here -->
                         <!-- Content Row -->
                         <div class="row">
 
-                            <!-- Earnings (Monthly) Card Example -->
+                            <!-- 승인대기 카드 -->
                             <div class="col-xl-3 col-md-6 mb-4">
-                                <div class="card shadow h-100 py-2" style="color: #5b93ff">
+                                <div class="card border-left-1 shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #5b93ff;font-size: 15px;">
-                                                    승인대기</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${statusWaiting} + '건'"></div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-boxes fa-2x" style="color: #5b93ff;"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Earnings (Monthly) Card Example -->
-                            <div class="col-xl-3 col-md-6 mb-4">
-                                <div class="card shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #ff8f6b;font-size: 15px;">
-                                                    승인완료</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${statusApproval} + '건'"></div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Earnings (Monthly) Card Example -->
-                            <div class="col-xl-3 col-md-6 mb-4">
-                                <div class="card shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #ffd66b;font-size: 15px;">승인거절
+                                                <div class="text-lg font-weight-bold text-uppercase mb-1 text-gray-800" style="font-size: 16px;">
+                                                    승인대기
                                                 </div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${statusReject} + '건'"></div>
+                                                <div class="h5 mb-0 font-weight-bold"
+                                                     th:text="${statusWaiting} + '건'"></div>
                                             </div>
                                             <div class="col-auto">
-                                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                                <div class="card-icon bg-1">
+                                                    <i class="fas fa-hourglass-half"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 승인완료 -->
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-left-2 shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-uppercase mb-1 text-gray-800"
+                                                     style="font-size: 16px;">
+                                                    승인완료
+                                                </div>
+                                                <div class="h5 mb-0 font-weight-bold "
+                                                     th:text="${statusApproval} + '건'"></div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <div class="card-icon bg-2">
+                                                    <i class="fas fa-check-circle"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Earnings (Monthly) Card Example -->
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-left-3 shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-uppercase mb-1 text-gray-800"
+                                                     style="font-size: 16px;">승인거절
+                                                </div>
+                                                <div class="h5 mb-0 font-weight-bold"
+                                                     th:text="${statusReject} + '건'"></div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <div class="card-icon bg-3">
+                                                    <i class="fas fa-times-circle"></i>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -120,19 +191,20 @@
 
                             <!-- Pending Requests Card Example -->
                             <div class="col-xl-3 col-md-6 mb-4">
-                                <div class="card shadow h-100 py-2">
+                                <div class="card border-left-4 shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #cc97f7;font-size: 15px;">
-                                                    총 발주 </div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${totalOutputQuantity} + '건'"></div>
-                                                <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #cc97f7;font-size: 15px;">
-                                                    총 발주비용 </div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${totalOutputCost} + '원'"></div>
+                                                <div class="text-xs font-weight-bold text-uppercase mb-1 text-gray-800" style="font-size: 16px;">
+                                                    총 발주
+                                                </div>
+                                                <div class="h5 mb-0 font-weight-bold"
+                                                     th:text="${totalOutputQuantity} + '건'"></div>
                                             </div>
                                             <div class="col-auto">
-                                                <i class="fas fa-clock fa-2x" style="color: #cc97f7"></i>
+                                                <div class="card-icon bg-4">
+                                                    <i class="fas fa-truck"></i>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -140,43 +212,22 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
 
                 <!-- Content Row -->
                 <div class="row">
                     <!-- Bar Chart -->
-                    <div class="col-12">
+                    <div class="col-8">
                         <div class="card shadow mb-4">
                             <!-- Card Header - Dropdown -->
                             <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold">발주 현황</h6>
+                                <h6 class="m-0 font-weight-bold text-gray-800">발주 현황</h6>
                             </div>
                             <!-- Card Body -->
                             <div class="card-body">
                                 <div class="chart-bar">
                                     <canvas id="myBarChart2"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Content Row -->
-                <div class="row">
-                    <!--테이블 -->
-                    <!-- Content Column -->
-                    <div class="col-xl-8 col-lg-7">
-                        <div class="card shadow mb-4">
-                            <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold">오늘 입고되는 재고</h6>
-                            </div>
-                            <!-- Card Body -->
-                            <div class="card-body">
-                                <div class="chart-bar">
-                                    <canvas id=""></canvas>
                                 </div>
                             </div>
                         </div>
@@ -187,46 +238,32 @@
                     <div class="col-xl-4 col-lg-5">
                         <div class="card shadow mb-4">
                             <!-- Card Header - Dropdown -->
-                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold">나의 발주정보</h6>
-                            <div class="dropdown no-arrow">
-                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                     aria-labelledby="dropdownMenuLink">
-                                    <div class="dropdown-header">Dropdown Header:</div>
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Something else here</a>
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-gray-800">나의 발주정보</h6>
+                                <div class="dropdown no-arrow">
+                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                         aria-labelledby="dropdownMenuLink">
+                                        <div class="dropdown-header">Dropdown Header:</div>
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- Card Body -->
-                        <div class="card-body">
-                            <div class="chart-pie pt-4 pb-2">
-                                <canvas id="myPieChart"></canvas>
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <div class="chart-pie pt-4 pb-2">
+                                    <canvas id="myPieChart"></canvas>
+                                </div>
+                                <div class="mt-4 text-center small">
+
+                                </div>
                             </div>
-                            <div class="mt-4 text-center small">
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle" style="color: #5b93ff" th:text="${userPieChartData[0].productName}" ></i>
-                                        </span>
-                                <span class="mr-2">
-                                            <i class="fas fa-circle" style="color: #ff8f6b" th:text="${userPieChartData[1].productName}"></i>
-                                        </span>
-                                <span class="mr-2">
-                                            <i class="fas fa-circle" style="color: #ffd66b" th:text="${userPieChartData[2].productName}"></i>
-                                </span>
-                                <span class="mr-2">
-                                            <i class="fas fa-circle" style="color: #ffd66b" th:text="${userPieChartData[3].productName}"></i>
-                                </span>
-                                <span class="mr-2">
-                                            <i class="fas fa-circle" style="color: #ffd66b" th:text="${userPieChartData[4].productName}"></i>
-                                </span>
-                            </div>
-                        </div>
                         </div>
                     </div>
                     <!-- /.container-fluid -->

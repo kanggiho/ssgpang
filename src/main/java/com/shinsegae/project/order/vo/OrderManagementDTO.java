@@ -17,4 +17,5 @@ public class OrderManagementDTO {
     private int confirmNum;
     private int confirmId;
     private String status;
+    private int outputId;
 }

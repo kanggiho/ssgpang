@@ -6,101 +6,148 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
     <title>SSGPANG Fresh</title>
 
     <!-- Custom fonts for this template-->
     <link href="/css/all.css" rel="stylesheet" type="text/css">
-    <link
-            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-            rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.css" rel="stylesheet">
     <link rel="icon" href="/img/favicon/starfavicon.png">
 
+    <style>
+        .table-responsive {
+            max-height: 495px; /* 테이블 높이 제한 */
+            overflow-y: auto;  /* 스크롤 추가 */
+        }
+
+        .table td, .table th {
+            padding: 5px 7px; /* 행 패딩 조절 */
+            text-align: center; /* 텍스트 중앙 정렬 */
+            vertical-align: middle; /* 세로 중앙 정렬 */
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: #f5f5f5; /* 행에 마우스 올릴 때 색 변경 */
+        }
+    </style>
+
 </head>
 
 <body id="page-top">
 
-<!-- Page Wrapper -->
 <div id="wrapper">
-
-    <!-- Sidebar -->
+    <!-- 사이드바 -->
     <div th:replace="admin/fragments/sidebar :: adminSideBar"></div>
 
-    <!-- Content Wrapper -->
+    <!-- 메인 콘텐츠 영역 -->
     <div id="content-wrapper" class="d-flex flex-column">
-
-        <!-- Main Content -->
         <div id="content">
-
-            <!-- Topbar -->
+            <!-- 상단바 -->
             <div th:replace="admin/fragments/topbar :: adminTopBar"></div>
 
-            <!-- Begin Page Content -->
+            <!-- 실제 페이지 컨테이너 -->
             <div class="container-fluid">
 
-                <!-- Content Row -->
+                <!-- 페이지 제목 -->
+                <h1 class="h3 mb-4 text-gray-800">입고내역 확인</h1>
+
                 <div class="row">
-                    <!-- Content Column -->
-                    <div class="col-lg-6 mb-4">
-                        <!-- ==============================내용이 들어가는 곳입니다.================================ -->
-                        <!-- =================================================================================== -->
-                        <!-- =================================================================================== -->
-                        <!-- =================================================================================== -->
-
-                        <h1>입고내역확인 화면</h1>
-
-                        <!-- =================================================================================== -->
-                        <!-- =================================================================================== -->
-                        <!-- =================================================================================== -->
-                        <!-- ==============================내용이 들어가는 곳입니다.================================ -->
+                    <!-- 왼쪽 테이블 컬럼 -->
+                    <div class="col-lg-8">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">입고내역</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <!-- 테이블 시작 -->
+                                    <table class="table table-bordered text-center table-hover" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                        <tr>
+                                            <th>입고번호</th>
+                                            <th>상품명</th>
+                                            <th>제조사명</th>
+                                            <th>입고수량</th>
+                                            <th>입고일자</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <!-- incomingList 순회 -->
+                                        <tr th:each="row : ${incomingList}" onclick="showDetails(this)">
+                                            <!-- 각 컬럼 데이터 출력 -->
+                                            <td th:text="${row.inputNum}"></td>
+                                            <td th:text="${row.productName}"></td>
+                                            <td th:text="${row.manufacturerName}"></td>
+                                            <td th:text="${row.warehousedQuantity}"></td>
+                                            <td th:text="${row.warehousedDate}"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <!-- 테이블 끝 -->
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- 오른쪽 상세정보 컬럼 -->
+                    <div class="col-lg-4">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">정보</h6>
+                            </div>
+                            <div class="card-body">
+                                <div id="details-container">
+                                    <!-- 클릭한 행의 상세정보가 표시될 영역 -->
+                                    <p><strong>입고번호:</strong> <span id="detail-inputNum"></span></p>
+                                    <p><strong>상품명:</strong> <span id="detail-productName"></span></p>
+                                    <p><strong>제조사명:</strong> <span id="detail-manufacturerName"></span></p>
+                                    <p><strong>입고수량:</strong> <span id="detail-warehousedQuantity"></span></p>
+                                    <p><strong>입고일자:</strong> <span id="detail-warehousedDate"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /오른쪽 상세정보 컬럼 -->
                 </div>
-
             </div>
-            <!-- /.container-fluid -->
-
         </div>
-        <!-- End of Main Content -->
 
-        <!-- Footer -->
+        <!-- 푸터 -->
         <div th:replace="admin/fragments/footer :: adminFooter"></div>
-
     </div>
-    <!-- End of Content Wrapper -->
-
 </div>
-<!-- End of Page Wrapper -->
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div th:replace="admin/fragments/modal :: adminModal"></div>
-
-<!-- Bootstrap core JavaScript-->
+<!-- 공통 JS -->
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript-->
 <script src="/js/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
 <script src="/js/sb-admin-2.min.js"></script>
 
-<!-- Page level plugins -->
-<script src="/js/Chart.min.js"></script>
+<script>
+    /**
+     * 테이블 행을 클릭했을 때,
+     * 해당 행의 정보를 상세 영역에 표시하는 함수
+     */
+    function showDetails(row) {
+        // 각 셀의 innerText를 추출하여 객체로 구성
+        const data = {
+            inputNum: row.children[0].innerText,
+            productName: row.children[1].innerText,
+            manufacturerName: row.children[2].innerText,
+            warehousedQuantity: row.children[3].innerText,
+            warehousedDate: row.children[4].innerText
+        };
 
-<!-- Page level custom scripts -->
-<script src="/js/demo/chart-area-demo.js"></script>
-<script src="/js/demo/chart-pie-demo.js"></script>
+        // 오른쪽 상세 영역에 데이터 반영
+        document.getElementById('detail-inputNum').innerText = data.inputNum;
+        document.getElementById('detail-productName').innerText = data.productName;
+        document.getElementById('detail-manufacturerName').innerText = data.manufacturerName;
+        document.getElementById('detail-warehousedQuantity').innerText = data.warehousedQuantity;
+        document.getElementById('detail-warehousedDate').innerText = data.warehousedDate;
+    }
+</script>
 
 </body>
-
 </html>

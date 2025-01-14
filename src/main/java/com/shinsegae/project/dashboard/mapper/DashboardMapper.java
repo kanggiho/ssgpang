@@ -7,49 +7,35 @@ import java.util.List;
 
 @Mapper
 public interface DashboardMapper {
-    //관리자
-    //상단 카드 4개
-    //1. 총 재고량
+    //사용자 대시보드
+    //상단 카드: 발주 승인대기, 승인완료, 승인거절, 총발주건수
+    Integer selectOutputByStatusWaiting(String id);
+    Integer selectOutputByStatusApproval(String id);
+    Integer selectOutputByStatusReject(String id);
+    Integer selectTotalOutputQuantity(String id);
+
+    //bar chart: 월별 발주량, 발주금액
+    List<UserBarChartQuantityDTO> selectUserOutputQuantity(String userId);
+    List<UserBarChartPriceDTO> selectUserOutputPrice(String userId);
+
+    //pie chart: 나의 발주정보
+    List<UserPieChartDTO> selectUserPieChartData(String userId);
+
+
+    //관리자 대시보드
+    //상단 카드: 총재고량, 입고수량, 출고수량, 발주 승인요청
     int selectTotalInventory();
-    //2. 총 입고량
     Integer selectInputQuantity();
-    //3. 총 출고량
     Integer selectOutputQuantity();
-    //4. 승인대기 중 발주요청
     Integer selectOutputByStatus();
 
-    //pie chart
-    List<PieChartDTO> selectPieChartData();
-
-    //Area chart 입고량
+    //area chart: 월별 입고량,출고량
     List<AreaChartInputDTO> selectAreaChartInputData();
-    //Area chart 출고량
     List<AreaChartOutputDTO> selectAreaChartOutputData();
 
-    //Bar chart
+    //table: 오늘의 입고 상품
+    List<TodayInputDTO> selectTodayInputProduct();
+
+    //bar chart: 지점별 출고현황
     List<BarChartDTO> selectBarChartData();
-
-    //사용자
-    //상단 카드 5개
-    //1. 승인대기 중 발주요청
-    Integer selectOutputByStatusWaiting();
-    //2. 승인완료된 발주요청
-    Integer selectOutputByStatusApproval();
-    //3. 승인거절된 발주요청
-    Integer selectOutputByStatusReject();
-    //4. 이번달 총 발주량
-    int selectTotalOutputQuantity();
-    //5. 이번달 총 발주비용
-    int selectTotalOutputPrice();
-
-    //bar chart - 월별 발주량
-    List<UserBarChartQuantityDTO> selectUserOutputQuantity();
-    //bar chart - 월별 발주금액
-    List<UserBarChartPriceDTO> selectUserOutputPrice();
-
-
-    //pie chart - 사용자의 발주 품목 top5
-    List<UserPieChartDTO> selectUserPieChartData();
-
-
 }

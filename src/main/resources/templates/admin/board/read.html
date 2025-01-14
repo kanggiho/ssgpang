@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SSGPANG Fresh</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="/css/all.css" rel="stylesheet" type="text/css">
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/css/sb-admin-2.css" rel="stylesheet">
+    <link rel="icon" href="/img/favicon/starfavicon.png">
+
+</head>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <div th:replace="admin/fragments/sidebar :: adminSideBar"></div>
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <div th:replace="admin/fragments/topbar :: adminTopBar"></div>
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <!-- Content Row -->
+                <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h4 th:text="${boardVO.title}">제목</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-4">
+                                        <div>
+                                            <strong>작성자:</strong>
+                                            <span th:text="${boardVO.writer}">작성자</span>
+                                        </div>
+                                        <div class="text-right">
+                                            <strong>작성일:</strong>
+                                            <span th:text="${boardVO.postDate}">작성일</span>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="mb-4">
+                                        <p th:text="${boardVO.content}">게시글 내용</p>
+                                    </div>
+                                    <!-- 관리자이거나 작성자인 경우에만 버튼 표시  -->
+                                    <div th:if="${adminId != null or (userId != null and userId == boardVO.writer)}">
+                                    <div class="text-center mt-4">
+                                        <!-- 수정 버튼 -->
+                                        <a th:href="@{/admin/board/update(no=${boardVO.no})}" class="btn btn-warning">수정하기</a>
+
+                                        <!-- 삭제 버튼 -->
+                                        <form action="/admin/board/delete" method="get" style="display:inline;"
+                                              onsubmit="return confirmDelete();">
+                                            <input type="hidden" name="no" th:value="${boardVO.no}">
+                                            <button type="submit" class="btn btn-danger">삭제하기</button>
+                                        </form>
+
+                                        <!-- 목록으로 버튼 -->
+                                        <a href="/admin/board/board" class="btn btn-primary">목록으로</a>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+</div>
+<!-- End of Main Content -->
+
+<!-- Footer -->
+<div th:replace="admin/fragments/footer :: adminFooter"></div>
+
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div th:replace="admin/fragments/modal :: adminModal"></div>
+
+<!-- Bootstrap core JavaScript-->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="/js/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="/js/sb-admin-2.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="/js/Chart.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="/js/demo/chart-area-demo.js"></script>
+<script src="/js/demo/chart-pie-demo.js"></script>
+<script>
+    function confirmDelete() {
+        return confirm("정말 삭제하시겠습니까?");
+    }
+</script>
+
+</body>
+
+</html>
