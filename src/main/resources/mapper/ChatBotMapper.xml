@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.shinsegae.project.chatbot.mapper.ChatBotMapper"></mapper>
+<mapper namespace="com.shinsegae.project.chatbot.mapper.ChatBotMapper">
+
+    <!-- resultMap을 정의하여 쿼리 결과를 VO 객체에 매핑 -->
+    <resultMap id="chatBotResultMap" type="com.shinsegae.project.chatbot.vo.ChatBotVO">
+        <result property="id" column="id"/>
+        <result property="question" column="question"/>
+        <result property="answer" column="answer"/>
+    </resultMap>
+
+    <!-- questions 테이블에서 모든 질문과 답변을 가져오는 SQL -->
+    <select id="getAllQuestions" resultMap="chatBotResultMap">
+        SELECT id, question, answer
+        FROM questions
+    </select>
+
+</mapper>
