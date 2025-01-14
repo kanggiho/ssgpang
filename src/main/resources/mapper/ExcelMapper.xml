@@ -19,4 +19,43 @@
         FROM output
     </select>
 
+
+    <!-- 테이블 데이터 삭제 -->
+    <delete id="deleteInputData">
+        DELETE FROM input
+    </delete>
+
+    <delete id="deleteInventoryData">
+        DELETE FROM inventory
+    </delete>
+
+    <delete id="deleteOutputData">
+        DELETE FROM output
+    </delete>
+
+    <!-- 새 데이터 삽입 -->
+    <insert id="insertExcelInputData">
+        INSERT INTO input (input_num, manufacturer_code, product_code, warehoused_quantity, warehoused_date)
+        VALUES
+        <foreach collection="inputList" item="item" separator=",">
+            (#{item.inputNum}, #{item.manufacturerCode}, #{item.productCode}, #{item.warehousedQuantity}, #{item.warehousedDate})
+        </foreach>
+    </insert>
+
+    <insert id="insertExcelInventoryData">
+        INSERT INTO inventory (code, product_code, manufacturer_code, warehouse_id, price, stock)
+        VALUES
+        <foreach collection="inventoryList" item="item" separator=",">
+            (#{item.code}, #{item.productCode}, #{item.manufacturerCode}, #{item.warehouseId}, #{item.price}, #{item.stock})
+        </foreach>
+    </insert>
+
+    <insert id="insertExcelOutputData">
+        INSERT INTO output (output_id, product_code, warehouse_id, user_id, confirm_num, confirm_id, status, unit_price, release_quantity, release_date)
+        VALUES
+        <foreach collection="outputList" item="item" separator=",">
+            (#{item.outputId}, #{item.productCode}, #{item.warehouseId}, #{item.userId}, #{item.confirmNum}, #{item.confirmId}, #{item.status}, #{item.unitPrice}, #{item.releaseQuantity}, #{item.releaseDate})
+        </foreach>
+    </insert>
+
 </mapper>

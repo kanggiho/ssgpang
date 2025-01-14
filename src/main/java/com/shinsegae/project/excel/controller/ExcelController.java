@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -20,6 +21,8 @@ import java.nio.charset.StandardCharsets;
 public class ExcelController {
 
     private final ExcelService excelService;
+
+    //========================================내보내기 기능========================================
 
     @GetMapping("/do_extract")
     public String doExtractMain(){
@@ -54,8 +57,30 @@ public class ExcelController {
                 .body(new InputStreamResource(in));
     }
 
+    //========================================가져오기 기능========================================
+
     @GetMapping("/do_insert")
     public String doInsertMain(){
         return "admin/excel/do_insert";
     }
+
+    @PostMapping("/do_insert/insert")
+    public ResponseEntity<String> uploadExcelFile(@RequestParam("file") MultipartFile file,
+                                                  @RequestParam("dataType") String dataType) {
+        try {
+            if(dataType.equals("input")){
+                excelService.insertInputExcelData(file.getInputStream());
+            }else if(dataType.equals("inventory")){
+                excelService.insertInventoryExcelData(file.getInputStream());
+            }else if(dataType.equals("output")){
+                excelService.insertOutputExcelData(file.getInputStream());
+            }
+
+            return ResponseEntity.ok("엑셀 데이터가 성공적으로 업데이트되었습니다.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("엑셀 데이터를 업데이트하는 중 오류가 발생했습니다.");
+        }
+    }
+
 }

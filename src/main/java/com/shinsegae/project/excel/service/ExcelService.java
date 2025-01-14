@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,6 +21,10 @@ import java.util.List;
 public class ExcelService {
 
     private final ExcelMapper excelMapper;
+
+
+    //========================================내보내기 기능========================================
+
 
     public ByteArrayInputStream exportDataToExcel(String dataType, String fileName) throws IOException {
         try (Workbook workbook = new XSSFWorkbook(); ByteArrayOutputStream out = new ByteArrayOutputStream()) {
@@ -143,4 +149,148 @@ public class ExcelService {
             sheet.autoSizeColumn(i);
         }
     }
+
+
+
+    //========================================가져오기 기능========================================
+
+
+
+    public void insertInputExcelData(InputStream inputStream) throws Exception {
+        List<ExcelInputVO> inputList = new ArrayList<>();
+
+        // 엑셀 파일 읽기
+        try (Workbook workbook = new XSSFWorkbook(inputStream)) {
+            Sheet sheet = workbook.getSheetAt(0); // 첫 번째 시트
+            for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
+                Row row = sheet.getRow(rowIndex);
+                if (row == null) continue;
+
+                ExcelInputVO inputVO = ExcelInputVO.builder()
+                        .inputNum((int) getCellValueAsNumeric(row.getCell(0))) // Numeric 처리
+                        .manufacturerCode(getCellValueAsString(row.getCell(1))) // String 처리
+                        .productCode((int) getCellValueAsNumeric(row.getCell(2)))
+                        .warehousedQuantity((int) getCellValueAsNumeric(row.getCell(3)))
+                        .warehousedDate(getCellValueAsString(row.getCell(4)))
+                        .build();
+
+                inputList.add(inputVO);
+            }
+        }
+
+        // 테이블 데이터 초기화
+        excelMapper.deleteInputData();
+
+        // 새 데이터 삽입
+        excelMapper.insertExcelInputData(inputList);
+    }
+
+
+    public void insertInventoryExcelData(InputStream inputStream) throws Exception {
+        List<ExcelInventoryVO> inventoryList = new ArrayList<>();
+
+        // 엑셀 파일 읽기
+        try (Workbook workbook = new XSSFWorkbook(inputStream)) {
+            Sheet sheet = workbook.getSheetAt(0); // 첫 번째 시트
+            for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
+                Row row = sheet.getRow(rowIndex);
+                if (row == null) continue;
+
+                ExcelInventoryVO inventoryVO = ExcelInventoryVO.builder()
+                        .code(getCellValueAsString(row.getCell(0))) // Numeric 처리
+                        .productCode((int) getCellValueAsNumeric(row.getCell(1)))
+                        .manufacturerCode(getCellValueAsString(row.getCell(2))) // String 처리
+                        .warehouseId((int) getCellValueAsNumeric(row.getCell(3)))
+                        .price((int) getCellValueAsNumeric(row.getCell(4)))
+                        .stock((int) getCellValueAsNumeric(row.getCell(5)))
+                        .build();
+
+                inventoryList.add(inventoryVO);
+            }
+        }
+
+        // 테이블 데이터 초기화
+        excelMapper.deleteInventoryData();
+
+        // 새 데이터 삽입
+        excelMapper.insertExcelInventoryData(inventoryList);
+    }
+
+    public void insertOutputExcelData(InputStream inputStream) throws Exception {
+        List<ExcelOutputVO> outputList = new ArrayList<>();
+
+        // 엑셀 파일 읽기
+        try (Workbook workbook = new XSSFWorkbook(inputStream)) {
+            Sheet sheet = workbook.getSheetAt(0); // 첫 번째 시트
+            for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
+                Row row = sheet.getRow(rowIndex);
+                if (row == null) continue;
+
+                ExcelOutputVO outputVO = ExcelOutputVO.builder()
+                        .outputId((int) getCellValueAsNumeric(row.getCell(0))) // Numeric 처리
+                        .productCode((int) getCellValueAsNumeric(row.getCell(1))) // Numeric 처리
+                        .warehouseId((int) getCellValueAsNumeric(row.getCell(2)))
+                        .userId((int) getCellValueAsNumeric(row.getCell(3)))
+                        .confirmNum((int) getCellValueAsNumeric(row.getCell(4)))
+                        .confirmId((int) getCellValueAsNumeric(row.getCell(5)))
+                        .status(getCellValueAsString(row.getCell(6)))
+                        .unitPrice((int) getCellValueAsNumeric(row.getCell(7)))
+                        .releaseQuantity((int) getCellValueAsNumeric(row.getCell(8)))
+                        .releaseDate(getCellValueAsString(row.getCell(9)))
+                        .build();
+
+                outputList.add(outputVO);
+            }
+        }
+
+        // 테이블 데이터 초기화
+        excelMapper.deleteOutputData();
+
+        // 새 데이터 삽입
+        excelMapper.insertExcelOutputData(outputList);
+    }
+
+
+
+    // 셀 값이 숫자인 경우 처리
+    private double getCellValueAsNumeric(Cell cell) {
+        if (cell == null) return 0;
+        if (cell.getCellType() == CellType.NUMERIC) {
+            return cell.getNumericCellValue();
+        } else if (cell.getCellType() == CellType.STRING) {
+            return Double.parseDouble(cell.getStringCellValue());
+        }
+        return 0;
+    }
+
+    // 셀 값이 문자열인 경우 처리
+    private String getCellValueAsString(Cell cell) {
+        if (cell == null) return "";
+        if (cell.getCellType() == CellType.STRING) {
+            return cell.getStringCellValue();
+        } else if (cell.getCellType() == CellType.NUMERIC) {
+            return String.valueOf((int) cell.getNumericCellValue());
+        }
+        return "";
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
