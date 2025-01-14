@@ -8,10 +8,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,6 +18,20 @@ import java.util.List;
 public class  OrderController {
 
     private final OrderService orderService;
+
+    public static class CancelRequest {
+        private String outputId;
+        private String productName;
+        private String releaseQuantity;
+        public String getOutputId() { return outputId; }
+        public void setOutputId(String outputId) { this.outputId = outputId; }
+        public String getProductName() { return productName; }
+        public void setProductName(String productName) { this.productName = productName; }
+        public String getReleaseQuantity() { return releaseQuantity; }
+        public void setReleaseQuantity(String releaseQuantity) { this.releaseQuantity = releaseQuantity; }
+    }
+
+
 
 
     @GetMapping("do_outgoing")
@@ -48,7 +59,16 @@ public class  OrderController {
         return "redirect:/user/order/do_outgoing";
     }
 
-
+    @PostMapping("/cancelOrder")
+    @ResponseBody
+    public String cancelOrder(@RequestBody CancelRequest request) {
+        String outputId = request.getOutputId();
+        String productName = request.getProductName();
+        String releaseQuantity = request.getReleaseQuantity();
+        orderService.cancelOrder(outputId,productName,releaseQuantity);
+        // 취소 처리 완료 후 메시지나 상태를 return
+        return "취소 완료";
+    }
 
 
 }

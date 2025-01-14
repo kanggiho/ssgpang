@@ -22,7 +22,7 @@ public interface OrderMapper {
     // 발주내역확인
     List<OutputVO> selectOutputAll();
     List<OrderManagementDTO> selectOrderManagementAll();
-
+    void cancelOutput(int outputId);
 
     // 발주요청관리
 
