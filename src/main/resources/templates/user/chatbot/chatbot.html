@@ -193,7 +193,7 @@
     const chatBody = document.getElementById('chatBody');
     const chatInput = document.getElementById('chatInput');
     const sendButton = document.getElementById('sendButton');
-
+    let answer = ""; //전역변수로 선언하여 모든 함수에서 사용할 수 있는 변수로 선언함.
     // 메시지 보내기 버튼 클릭 시 이벤트 리스너
     sendButton.addEventListener('click', sendMessage);
     // Enter 키로 메시지 보내기 기능 추가
@@ -210,19 +210,22 @@
         addMessageToChat('user', message);
         chatInput.value = '';  // 입력창 비우기
 
-        // 서버에 질문 전송
-        axios.post('/user/chatbot/ask', {
-            question: message  // 요청 본문에 질문 담기
-        })
-            .then(response => {
-                // 봇 응답 화면에 추가
-                addMessageToChat('bot', response.data);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                // 오류 발생 시 봇이 응답하는 내용
-                addMessageToChat('bot', '죄송합니다. 요청 처리 중 오류가 발생했습니다.');
-            });
+        //const answer = element.getAttribute('data-answer');
+        addMessageToChat('bot', answer);
+
+        //     // 서버에 질문 전송
+        //     axios.post('/user/chatbot/ask', {
+        //         question: message  // 요청 본문에 질문 담기
+        //     })
+        //         .then(response => {
+        //             // 봇 응답 화면에 추가
+        //             addMessageToChat('bot', response.data);
+        //         })
+        //         .catch(error => {
+        //             console.error('Error:', error);
+        //             // 오류 발생 시 봇이 응답하는 내용
+        //             addMessageToChat('bot', '죄송합니다. 요청 처리 중 오류가 발생했습니다.');
+        //         });
     }
 
     // 메시지를 채팅창에 추가하는 함수
@@ -237,15 +240,17 @@
 
     // 질문 항목을 클릭하여 입력창에 자동으로 입력하도록 설정
     function handleQuestionClick(element) {
-        const question = element.textContent;
-        const answer = element.getAttribute('data-answer');
+        const question = element.textContent; //질문
+        answer = element.getAttribute('data-answer');
 
+        chatInput.value = question;
         // 사용자 메시지 화면에 추가
-        addMessageToChat('user', question);
+        //addMessageToChat('user', question);
 
         // 봇 응답 화면에 추가
-        addMessageToChat('bot', answer);
+        //addMessageToChat('bot', answer);
     }
+
 </script>
 
 </body>
