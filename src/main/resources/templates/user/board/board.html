@@ -29,7 +29,7 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
-    <div th:replace="admin/fragments/sidebar :: adminSideBar"></div>
+    <div th:replace="user/fragments/sidebar :: userSideBar"></div>
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -38,7 +38,7 @@
         <div id="content">
 
             <!-- Topbar -->
-            <div th:replace="admin/fragments/topbar :: adminTopBar"></div>
+            <div th:replace="user/fragments/topbar :: userTopBar"></div>
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
@@ -55,7 +55,7 @@
                                 <div class="card-body">
                                     <div class="d-grid mt-4">
                                         <div class="text-right">
-                                            <form action="/admin/board/find" method="get">
+                                            <form action="/user/board/find" method="get">
                                                 제목검색 <input name="find">
                                                 <button type="submit" class="btn btn-primary">검색</button>
                                             </form>
@@ -75,7 +75,7 @@
                                             <tr th:each="boardVO : ${list}">
                                                 <td th:text="${boardVO.no}"></td>
                                                 <td>
-                                                    <a th:href="@{/admin/board/read(no=${boardVO.no})}" th:text="${boardVO.title}">
+                                                    <a th:href="@{/user/board/read(no=${boardVO.no})}" th:text="${boardVO.title}">
                                                     </a>
                                                 </td>
                                                 <td th:text="${boardVO.writer}"></td>
@@ -85,7 +85,7 @@
                                              </tbody>
                                         </table>
                                         <div class="d-grid mt-4">
-                                            <a href="/admin/board/create" class="btn btn-primary btn-lg btn-block">새 게시글 작성</a>
+                                            <a href="/user/board/create" class="btn btn-primary btn-lg btn-block">새 게시글 작성</a>
                                         </div>
                                     </div>
                                 </div>
@@ -100,7 +100,7 @@
         <!-- End of Main Content -->
 
         <!-- Footer -->
-        <div th:replace="admin/fragments/footer :: adminFooter"></div>
+        <div th:replace="user/fragments/footer :: userFooter"></div>
 
     </div>
     <!-- End of Content Wrapper -->
@@ -114,7 +114,7 @@
 </a>
 
 <!-- Logout Modal-->
-<div th:replace="admin/fragments/modal :: adminModal"></div>
+<div th:replace="user/fragments/modal :: userModal"></div>
 
 <!-- Bootstrap core JavaScript-->
 <script src="/js/jquery.min.js"></script>

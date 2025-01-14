@@ -61,7 +61,7 @@ public class DashboardController {
     //상단 카드: 총재고량, 입고수량, 출고수량, 발주 승인요청
     @GetMapping("admin/home_admin")
     public String home_admin(Model model, HttpSession session) {
-        String userId = session.getAttribute("adminId").toString();
+        String adminId = session.getAttribute("adminId").toString();
         model.addAttribute("totalInventory", dashboardService.selectTotalInventory());
         model.addAttribute("inputQuantity", dashboardService.selectInputQuantity());
         model.addAttribute("outputQuantity", dashboardService.selectOutputQuantity());

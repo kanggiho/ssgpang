@@ -2,6 +2,7 @@ package com.shinsegae.project.board.controller;
 
 import com.shinsegae.project.board.service.BoardService;
 import com.shinsegae.project.board.vo.BoardVO;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,8 +28,10 @@ public class UserBoardController {
 
     //게시글 등록
     @GetMapping("create")
-    public String create() {
-        return "user/board/create";
+    public String create(Model model,HttpSession session) {
+        String userId = (String) session.getAttribute("userId");
+        model.addAttribute("userId", userId);
+        return "user/board/create"; //게시글 작성 페이지로
     }
 
     @PostMapping("create2")
@@ -39,7 +42,11 @@ public class UserBoardController {
 
     //게시글 번호로 조회
     @GetMapping("read")
-    public String read(int no, Model model) {
+    public String read(int no, Model model,HttpSession session) {
+        String adminId = (String) session.getAttribute("adminId");
+        String userId = (String)session.getAttribute("userId");
+        model.addAttribute("adminId", adminId);
+        model.addAttribute("userId", userId);
         BoardVO boardVO = boardService.selectBoardByNo(no);
         model.addAttribute("boardVO", boardVO);
         return "user/board/read"; //게시글 상세보기 페이지로
@@ -57,6 +64,7 @@ public class UserBoardController {
     //게시글 조회 후 수정
     @GetMapping("update")
     public String update(int no, Model model) {
+        //게시글 조회
         BoardVO boardVO = boardService.selectBoardByNo(no);
         model.addAttribute("boardVO", boardVO);
         return "user/board/update";

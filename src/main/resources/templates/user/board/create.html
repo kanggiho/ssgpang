@@ -29,7 +29,7 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
-    <div th:replace="admin/fragments/sidebar :: adminSideBar"></div>
+    <div th:replace="user/fragments/sidebar :: userSideBar"></div>
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -38,7 +38,7 @@
         <div id="content">
 
             <!-- Topbar -->
-            <div th:replace="admin/fragments/topbar :: adminTopBar"></div>
+            <div th:replace="user/fragments/topbar :: userTopBar"></div>
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
@@ -50,50 +50,41 @@
                         <div class="col-lg-12">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">게시글 수정</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">게시글 작성</h6>
                                 </div>
                                 <div class="card-body">
-                                <form action="/admin/board/update2" method="post">
-                                    <!-- 게시글 번호 -->
-                                    <input type="hidden" name="no" th:value="${boardVO.no}">
-
-                                    <!-- 작성자 -->
-                                    <input type="hidden" name="writer" th:value="${userId}">
-
-
-                                    <!-- 제목 -->
-                                    <div class="form-group">
-                                        <label for="title" class="font-weight-bold">제목</label>
-                                        <input type="text" id="title" name="title" class="form-control"
-                                               th:value="${boardVO.title}" required>
+                                    <div class="d-grid mt-4">
+                                        <form action="/user/board/create2" method="post">
+                                            <div class="mb-3">
+                                                <label for="title" class="form-label">제목</label>
+                                                <input type="text" id="title" name="title" class="form-control" placeholder="제목을 입력하세요" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="writer" class="form-label">작성자</label>
+                                                <input type="text" id="writer" name="writer" class="form-control" th:value="${userId}" readonly required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="content" class="form-label">내용</label>
+                                                <textarea id="content" name="content" class="form-control" rows="10" placeholder="내용을 입력하세요" required></textarea>
+                                            </div>
+                                            <div class="d-grid">
+                                                <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="boardCreate()">작성하기</button>
+                                            </div>
+                                        </form>
                                     </div>
-
-                                    <!-- 내용 -->
-                                    <div class="form-group">
-                                        <label for="content" class="font-weight-bold">내용</label>
-                                        <textarea id="content" name="content" class="form-control" rows="5"
-                                                  required th:text="${boardVO.content}"></textarea>
-                                    </div>
-
-                                    <!-- 수정 완료 버튼 -->
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-primary">수정 완료</button>
-                                        <a href="/admin/board/board" class="btn btn-secondary">취소</a>
-                                    </div>
-                                </form>
                                 </div>
-
                             </div>
                         </div>
                 </div>
 
             </div>
+            <!-- /.container-fluid -->
 
         </div>
-
+        <!-- End of Main Content -->
 
         <!-- Footer -->
-        <div th:replace="admin/fragments/footer :: adminFooter"></div>
+        <div th:replace="user/fragments/footer :: userFooter"></div>
 
     </div>
     <!-- End of Content Wrapper -->
@@ -107,7 +98,7 @@
 </a>
 
 <!-- Logout Modal-->
-<div th:replace="admin/fragments/modal :: adminModal"></div>
+<div th:replace="user/fragments/modal :: userModal"></div>
 
 <!-- Bootstrap core JavaScript-->
 <script src="/js/jquery.min.js"></script>
@@ -126,6 +117,11 @@
 <script src="/js/demo/chart-area-demo.js"></script>
 <script src="/js/demo/chart-pie-demo.js"></script>
 
+<script>
+function boardCreate() {
+    alert("작성 완료되었습니다.");
+}
+</script>
 </body>
 
 </html>
