@@ -8,19 +8,18 @@ import java.util.List;
 @Mapper
 public interface DashboardMapper {
     //사용자 대시보드
-    //상단 카드: 발주 승인대기, 승인완료, 승인거절, 총발주건수, 총 발주비용
-    Integer selectOutputByStatusWaiting();
-    Integer selectOutputByStatusApproval();
-    Integer selectOutputByStatusReject();
-    int selectTotalOutputQuantity();
-    int selectTotalOutputPrice();
+    //상단 카드: 발주 승인대기, 승인완료, 승인거절, 총발주건수
+    Integer selectOutputByStatusWaiting(String id);
+    Integer selectOutputByStatusApproval(String id);
+    Integer selectOutputByStatusReject(String id);
+    Integer selectTotalOutputQuantity(String id);
 
     //bar chart: 월별 발주량, 발주금액
-    List<UserBarChartQuantityDTO> selectUserOutputQuantity();
-    List<UserBarChartPriceDTO> selectUserOutputPrice();
+    List<UserBarChartQuantityDTO> selectUserOutputQuantity(String userId);
+    List<UserBarChartPriceDTO> selectUserOutputPrice(String userId);
 
     //pie chart: 나의 발주정보
-    List<UserPieChartDTO> selectUserPieChartData();
+    List<UserPieChartDTO> selectUserPieChartData(String userId);
 
 
     //관리자 대시보드

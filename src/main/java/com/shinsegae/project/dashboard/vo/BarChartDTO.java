@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class BarChartDTO {
-    private String warehouseName;
+    private int userId;
     private int releaseQuantity;
 }

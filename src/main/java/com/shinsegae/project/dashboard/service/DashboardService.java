@@ -13,39 +13,40 @@ public class DashboardService {
     private final DashboardMapper dashboardMapper;
     //사용자 대시보드
     //발주 승인대기
-    public Integer selectOutputByStatusWaiting(){
-        return dashboardMapper.selectOutputByStatusWaiting();
+    public Integer selectOutputByStatusWaiting(String userId){
+        return dashboardMapper.selectOutputByStatusWaiting(userId);
     }
     //승인완료
-    public Integer selectOutputByStatusApproval(){
-        return dashboardMapper.selectOutputByStatusApproval();
+    public Integer selectOutputByStatusApproval(String userId){
+        return dashboardMapper.selectOutputByStatusApproval(userId);
     }
     //승인거절
-    public Integer selectOutputByStatusReject(){
-        return dashboardMapper.selectOutputByStatusReject();
+    public Integer selectOutputByStatusReject(String userId){
+        return dashboardMapper.selectOutputByStatusReject(userId);
     }
     //총 발주건수
-    public int selectTotalOutputQuantity(){
-        return dashboardMapper.selectTotalOutputQuantity();
-
-    }
-    //총 발주비용
-    public int selectTotalOutputPrice(){
-        return dashboardMapper.selectTotalOutputPrice();
+    public Integer selectTotalOutputQuantity(String userId){
+        //return dashboardMapper.selectTotalOutputQuantity(userId);
+        Integer result = dashboardMapper.selectTotalOutputQuantity(userId);
+        if (result == null) {
+            return 0;
+        } else {
+            return result;
+        }
     }
 
     //bar chart: 월별 발주량
-    public List<UserBarChartQuantityDTO> selectUserOutputQuantity(){
-        return dashboardMapper.selectUserOutputQuantity();
+    public List<UserBarChartQuantityDTO> selectUserOutputQuantity(String userId){
+        return dashboardMapper.selectUserOutputQuantity(userId);
     }
     //bar chart: 월별 발주금액
-    public List<UserBarChartPriceDTO> selectUserOutputPrice(){
-        return dashboardMapper.selectUserOutputPrice();
+    public List<UserBarChartPriceDTO> selectUserOutputPrice(String userId){
+        return dashboardMapper.selectUserOutputPrice(userId);
     }
 
     //pie chart: 나의 발주정보
-    public List<UserPieChartDTO> selectUserPieChartData(){
-        return dashboardMapper.selectUserPieChartData();
+    public List<UserPieChartDTO> selectUserPieChartData(String userId){
+        return dashboardMapper.selectUserPieChartData(userId);
     }
 
     //관리자 대시보드

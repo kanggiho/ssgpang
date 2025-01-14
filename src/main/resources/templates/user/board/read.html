@@ -29,7 +29,7 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
-    <div th:replace="admin/fragments/sidebar :: adminSideBar"></div>
+    <div th:replace="user/fragments/sidebar :: userSideBar"></div>
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -38,7 +38,7 @@
         <div id="content">
 
             <!-- Topbar -->
-            <div th:replace="admin/fragments/topbar :: adminTopBar"></div>
+            <div th:replace="user/fragments/topbar :: userTopBar"></div>
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
@@ -68,17 +68,17 @@
                                     <div th:if="${adminId != null or (userId != null and userId == boardVO.writer)}">
                                     <div class="text-center mt-4">
                                         <!-- 수정 버튼 -->
-                                        <a th:href="@{/admin/board/update(no=${boardVO.no})}" class="btn btn-warning">수정하기</a>
+                                        <a th:href="@{/user/board/update(no=${boardVO.no})}" class="btn btn-warning">수정하기</a>
 
                                         <!-- 삭제 버튼 -->
-                                        <form action="/admin/board/delete" method="get" style="display:inline;"
+                                        <form action="/user/board/delete" method="get" style="display:inline;"
                                               onsubmit="return confirmDelete();">
                                             <input type="hidden" name="no" th:value="${boardVO.no}">
                                             <button type="submit" class="btn btn-danger">삭제하기</button>
                                         </form>
 
                                         <!-- 목록으로 버튼 -->
-                                        <a href="/admin/board/board" class="btn btn-primary">목록으로</a>
+                                        <a href="/user/board/board" class="btn btn-primary">목록으로</a>
                                     </div>
                                 </div>
                                 </div>
@@ -94,7 +94,7 @@
 <!-- End of Main Content -->
 
 <!-- Footer -->
-<div th:replace="admin/fragments/footer :: adminFooter"></div>
+<div th:replace="user/fragments/footer :: userFooter"></div>
 
 
 <!-- Scroll to Top Button-->
@@ -103,7 +103,7 @@
 </a>
 
 <!-- Logout Modal-->
-<div th:replace="admin/fragments/modal :: adminModal"></div>
+<div th:replace="user/fragments/modal :: userModal"></div>
 
 <!-- Bootstrap core JavaScript-->
 <script src="/js/jquery.min.js"></script>

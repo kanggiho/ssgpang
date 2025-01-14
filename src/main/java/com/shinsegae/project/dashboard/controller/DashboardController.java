@@ -23,13 +23,13 @@ public class DashboardController {
     //사용자 대시보드
     @GetMapping("user/home")
     public String home(HttpSession session, Model model) {
-        session.setAttribute("id", "giho");
-        //상단 카드: 발주 승인대기, 승인완료, 승인거절, 총발주건수, 총 발주비용
-        model.addAttribute("statusWaiting", dashboardService.selectOutputByStatusWaiting());
-        model.addAttribute("statusApproval", dashboardService.selectOutputByStatusApproval());
-        model.addAttribute("statusReject", dashboardService.selectOutputByStatusReject());
-        model.addAttribute("totalOutputQuantity", dashboardService.selectTotalOutputQuantity());
-        model.addAttribute("totalOutputPrice", dashboardService.selectTotalOutputPrice());
+        //session.setAttribute("id", "giho");
+        //상단 카드: 발주 승인대기, 승인완료, 승인거절, 총발주건수
+        String userId = session.getAttribute("userId").toString();
+        model.addAttribute("statusWaiting", dashboardService.selectOutputByStatusWaiting(userId));
+        model.addAttribute("statusApproval", dashboardService.selectOutputByStatusApproval(userId));
+        model.addAttribute("statusReject", dashboardService.selectOutputByStatusReject(userId));
+        model.addAttribute("totalOutputQuantity", dashboardService.selectTotalOutputQuantity(userId));
         return "user/home";
     }
 
@@ -37,9 +37,9 @@ public class DashboardController {
     @GetMapping("user/home/barchart_output")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> barchart_output(HttpSession session) {
-        //String userId = session.getAttribute("id").toString();
-        List<UserBarChartQuantityDTO> UserOutputQuantity = dashboardService.selectUserOutputQuantity();
-        List<UserBarChartPriceDTO> UserOutputPrice= dashboardService.selectUserOutputPrice();
+        String userId = session.getAttribute("userId").toString();
+        List<UserBarChartQuantityDTO> UserOutputQuantity = dashboardService.selectUserOutputQuantity(userId);
+        List<UserBarChartPriceDTO> UserOutputPrice= dashboardService.selectUserOutputPrice(userId);
         Map<String, Object> result = new HashMap<>();
         result.put("UserOutputQuantity", UserOutputQuantity);
         result.put("UserOutputPrice", UserOutputPrice);
@@ -50,15 +50,18 @@ public class DashboardController {
     //pie chart: 나의 발주정보
     @GetMapping("user/home/pieChart_output")
     @ResponseBody
-    public ResponseEntity<List<UserPieChartDTO>> pieChart_output() {
-        List<UserPieChartDTO> userPieChartData = dashboardService.selectUserPieChartData();
+    public ResponseEntity<List<UserPieChartDTO>> pieChart_output(HttpSession session) {
+        String userId = session.getAttribute("userId").toString();
+        List<UserPieChartDTO> userPieChartData = dashboardService.selectUserPieChartData(userId);
         return ResponseEntity.ok(userPieChartData);
     }
+
 
     //관리자 대시보드
     //상단 카드: 총재고량, 입고수량, 출고수량, 발주 승인요청
     @GetMapping("admin/home_admin")
-    public String home_admin(Model model) {
+    public String home_admin(Model model, HttpSession session) {
+        String adminId = session.getAttribute("adminId").toString();
         model.addAttribute("totalInventory", dashboardService.selectTotalInventory());
         model.addAttribute("inputQuantity", dashboardService.selectInputQuantity());
         model.addAttribute("outputQuantity", dashboardService.selectOutputQuantity());
