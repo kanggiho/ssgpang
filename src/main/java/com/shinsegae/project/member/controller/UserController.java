@@ -4,6 +4,8 @@ import com.shinsegae.project.member.service.AdminService;
 import com.shinsegae.project.member.service.UserService;
 import com.shinsegae.project.member.vo.AdminVO;
 import com.shinsegae.project.member.vo.UserVO;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +20,14 @@ import java.util.Map;
 @Controller
 @RequestMapping("user/member")
 @RequiredArgsConstructor
+@Tag(name = "사용자 로그인")
 public class UserController {
     private final UserService userService;
     private final AdminService adminService;
 
     // 유저 로그인 GET 요청
     @GetMapping("login")
+    @Operation(summary = "유저 로그인 페이지", description = "유저 및 관리자 세션 상태에 따라 로그인 페이지 또는 홈으로 이동")
     public String login(HttpSession session) {
         if (session == null) {
             return "redirect:/user/member/login";
@@ -39,6 +43,7 @@ public class UserController {
 
     // 유저 로그인 POST 요청
     @PostMapping("login")
+    @Operation(summary = "로그인 처리", description = "유저 및 관리자의 로그인 요청을 처리")
     public String login(UserVO userVO, AdminVO adminVO,
                         HttpSession session, Model model) {
         boolean result = userService.login(userVO);
@@ -61,6 +66,7 @@ public class UserController {
 
     // 유저 로그아웃
     @GetMapping("logout")
+    @Operation(summary = "로그아웃 처리", description = "현재 세션을 무효화하고 로그인 페이지로 이동")
     public String logout(HttpSession session) {
         session.invalidate();
 
@@ -76,6 +82,7 @@ public class UserController {
     //유저 아이디 유효성 검증
     @GetMapping("checkId")
     @ResponseBody
+    @Operation(summary = "아이디 유효성 검증", description = "입력된 아이디의 사용 가능 여부를 확인")
     public boolean checkId(@RequestParam String id) {
         System.out.println("user id >> " + id);
         boolean result = userService.checkId(id);
@@ -85,15 +92,17 @@ public class UserController {
     //유저 이메일 유효성 검증
     @GetMapping("checkEmail")
     @ResponseBody
+    @Operation(summary = "이메일 유효성 검증", description = "입력된 이메일의 사용 가능 여부를 확인")
     public boolean checkEmail(@RequestParam String email) {
         System.out.println("user email >> " + email);
         boolean isEmailAvailable = userService.checkEmail(email);
         return isEmailAvailable;
     }
 
-    //유저 이메일 유효성 검증
+    //유저 전화번호 유효성 검증
     @GetMapping("checkTel")
     @ResponseBody
+    @Operation(summary = "전화번호 유효성 검증", description = "입력된 전화번호의 사용 가능 여부를 확인")
     public boolean checkTel(@RequestParam String tel) {
         System.out.println("user tel >> " + tel);
         boolean isTelAvailable = userService.checkTel(tel);
@@ -102,11 +111,13 @@ public class UserController {
 
     //유저 회원가입
     @GetMapping("register")
+    @Operation(summary = "회원가입 페이지", description = "회원가입 페이지를 반환")
     public String register() {
         return "user/member/register";
     }
 
     @PostMapping("register")
+    @Operation(summary = "회원가입 처리", description = "유저 회원가입을 처리")
     public String register2(UserVO userVO) {
         System.out.println("userVO >> " + userVO);
         userService.insertUser(userVO);
@@ -116,12 +127,14 @@ public class UserController {
 
     //유저 ID 찾기
     @GetMapping("find_id")
+    @Operation(summary = "ID 찾기 페이지", description = "유저 ID 찾기 페이지를 반환")
     public String find_id() {
         return "user/member/find_id";
     }
 
     @PostMapping("find_id")
     @ResponseBody
+    @Operation(summary = "ID 찾기 처리", description = "전화번호를 통해 유저 ID를 조회")
     public ResponseEntity<Map<String, Object>> find_id2(@RequestBody Map<String, String> request) {
         String tel = request.get("tel");
         System.out.printf("user find_id >> " + tel);
@@ -141,6 +154,7 @@ public class UserController {
 
     //유저 PW 찾기
     @GetMapping("find_pw")
+    @Operation(summary = "비밀번호 찾기 페이지", description = "유저 비밀번호 찾기 페이지를 반환")
     public String find_pw() {
 
         return "user/member/find_pw";
@@ -148,6 +162,7 @@ public class UserController {
 
     // 유저 회원정보
     @GetMapping("info")
+    @Operation(summary = "유저 정보 조회", description = "세션에서 유저 정보를 조회하여 반환")
     public String info(HttpSession session, Model model) {
         // 세션에서 id 가져오기
         String userId = (String) session.getAttribute("userId");
@@ -170,6 +185,7 @@ public class UserController {
 
     // 회원정보수정
     @GetMapping("update")
+    @Operation(summary = "회원정보 수정 페이지", description = "회원정보를 수정할 수 있는 페이지를 반환")
     public String update(HttpSession session, Model model) {
         String userId = (String) session.getAttribute("userId");
 
@@ -184,6 +200,7 @@ public class UserController {
 
     // 회원정보수정
     @PostMapping("update")
+    @Operation(summary = "회원정보 수정 처리", description = "유저 정보를 수정하고 결과에 따라 페이지를 반환")
     public String update(UserVO userVO) {
         int result = userService.updateUser(userVO);
 
@@ -195,11 +212,13 @@ public class UserController {
     }
 
     @GetMapping("delete")
+    @Operation(summary = "회원탈퇴 페이지", description = "유저 탈퇴 페이지를 반환")
     public String delete() {
         return "user/member/delete";
     }
 
     @PostMapping("delete")
+    @Operation(summary = "회원탈퇴 처리", description = "유저 탈퇴를 처리하고 결과에 따라 페이지를 반환")
     public String delete(String id, HttpSession session,
                          @RequestParam("agree") boolean agree,
                          Model model) {
