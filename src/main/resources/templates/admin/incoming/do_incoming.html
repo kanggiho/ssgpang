@@ -70,13 +70,16 @@
                                         <tr th:each="row : ${incomingRequest}"
                                             th:data-product-code="${row.productCode}"
                                             th:data-manufacturer-name="${row.manufacturerName}"
-                                            th:data-manufacturer-code = "${row.manufacturerCode}"
+                                            th:data-manufacturer-code="${row.manufacturerCode}"
+                                            th:data-code="${row.code}"
+                                            th:data-warehouse-id="${row.warehouseId}"
                                             th:data-price="${row.price}"
                                             onclick="showDetails(this)">
                                             <td th:text="${row.productName}">제품명</td>
                                             <td th:text="${row.manufacturerName}">제조업체명</td>
                                             <td th:text="${row.price}">단가</td>
                                         </tr>
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -151,28 +154,28 @@
                 return;
             }
 
-            // 입력된 수량
             const requestCount = parseInt(document.getElementById('requestCount').value) || 0;
 
             const data = {
-                // inputNum은 보통 AUTO_INCREMENT로 자동 생성되므로 생략 가능
-                manufacturerCode: selectedData.manufacturerCode,  // manufacturerCode를 보내야 함
+                manufacturerCode: selectedData.manufacturerCode,
                 productCode: selectedData.productCode,
-                warehousedQuantity: requestCount,               // 요청 수량을 warehousedQuantity로 매핑
-                warehousedDate: null                             // null일 경우 COALESCE로 현재 날짜 처리
+                warehousedQuantity: requestCount,
+                warehousedDate: null,
+                code: selectedData.code,
+                warehouseId: selectedData.warehouseId,
+                price: selectedData.price
             };
 
             axios.post('/admin/incoming/save', data)
                 .then(response => {
                     alert('입고 신청 완료');
-                    // 필요 시 페이지 새로고침
-                    // location.reload();
                 })
                 .catch(error => {
                     console.error(error);
                     alert('입고 신청 실패');
                 });
         });
+
 
         // 새로고침 버튼
         document.getElementById('resetBtn').addEventListener('click', function (){
@@ -187,8 +190,11 @@
             manufacturerCode: row.getAttribute('data-manufacturer-code'),
             manufacturerName: row.getAttribute('data-manufacturer-name'),
             price: row.getAttribute('data-price'),
-            productName: row.children[0].innerText
+            productName: row.children[0].innerText,
+            code: row.getAttribute('data-code'),
+            warehouseId: row.getAttribute('data-warehouse-id')
         };
+
 
         // 상세 영역 채우기
         document.getElementById('detail-productName').innerText = selectedData.productName;
