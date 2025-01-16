@@ -39,18 +39,23 @@
     <select id="checkEmail"
             parameterType="string"
             resultType="java.lang.Boolean">
-        SELECT CASE WHEN COUNT(*) > 0 THEN true ELSE false END
-        FROM user
-        WHERE email = #{email};
+        SELECT EXISTS (
+            SELECT 1
+            FROM user
+            WHERE email = #{email}
+        ) AS is_exists;
     </select>
 
     <!-- 전화번호 검증 -->
     <select id="checkTel"
             parameterType="string"
             resultType="java.lang.Boolean">
-        SELECT CASE WHEN COUNT(*) > 0 THEN true ELSE false END
-        FROM user
-        WHERE tel = #{tel};
+        SELECT EXISTS (
+            SELECT 1
+            FROM user
+            WHERE tel = #{tel}
+        ) AS is_exists;
+
 
     </select>
 
