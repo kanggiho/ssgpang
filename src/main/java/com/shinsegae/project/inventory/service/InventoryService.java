@@ -18,6 +18,7 @@ public class InventoryService {
     @Autowired
     private final InventoryMapper inventoryMapper;
 
+    // 재고 조회
     public List<InventoryManagementDTO> selectInventoryAll() {
         return inventoryMapper.selectInventoryAll();
     }
@@ -49,18 +50,22 @@ public class InventoryService {
         }
     }
 
+    //드롭다운값: 품목 조회
     public List<String> getClassification() {
         return inventoryMapper.getClassification();
     }
 
+    //드롭다운값: 자재 조회
     public List<String> getProduct() {
         return inventoryMapper.getProduct();
     }
 
+    //드롭다운값: 제조업체 조회
     public List<String> getManufacturer() {
         return inventoryMapper.getManufacturer();
     }
 
+    //드롭다운값: 창고 조회
     public List<String> getWarehouse() {
         return inventoryMapper.getWarehouse();
     }
