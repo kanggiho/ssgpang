@@ -61,104 +61,44 @@
                                         <label for="itemClassification">품목구분</label>
                                         <select id="itemClassification" name="itemClassification" class="form-control" required>
                                             <option value="" disabled selected>선택하세요</option>
-                                            <option value="bakedgoods">bakedgoods</option>
-                                            <option value="beverage">beverage</option>
-                                            <option value="cannedfood">cannedfood</option>
-                                            <option value="certain">certain</option>
-                                            <option value="condiment">condiment</option>
-                                            <option value="dairy">dairy</option>
-                                            <option value="fruit">fruit</option>
-                                            <option value="frozenfood">frozenfood</option>
-                                            <option value="grain">grain</option>
-                                            <option value="herb">herb</option>
-                                            <option value="legume">legume</option>
-                                            <option value="meat">meat</option>
-                                            <option value="noodle">noodle</option>
-                                            <option value="nut">nut</option>
-                                            <option value="oil">oil</option>
-                                            <option value="seed">seed</option>
-                                            <option value="seafood">seafood</option>
-                                            <option value="spice">spice</option>
-                                            <option value="snack">snack</option>
-                                            <option value="vegetable">vegetable</option>
+                                            <option th:each="classification : ${classifications}"
+                                                    th:value="${classification}"
+                                                    th:text="${classification}"
+                                                    th:data-classification="${classification}">
+                                            </option>
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="productName">자재명</label>
                                         <select id="productName" name="productName" class="form-control" required>
                                             <option value="" disabled selected>선택하세요</option>
-                                            <option value="carrot">carrot</option>
-                                            <option value="chicken">chicken</option>
-                                            <option value="butter">butter</option>
-                                            <option value="banana">banana</option>
-                                            <option value="beef">beef</option>
-                                            <option value="bread">bread</option>
-                                            <option value="potato">potato</option>
-                                            <option value="tomato">tomato</option>
-                                            <option value="cheese">cheese</option>
-                                            <option value="sugar">sugar</option>
-                                            <option value="pasta">pasta</option>
-                                            <option value="bean">bean</option>
-                                            <option value="yogurt">yogurt</option>
-                                            <option value="flour">flour</option>
-                                            <option value="apple">apple</option>
-                                            <option value="salt">salt</option>
-                                            <option value="egg">egg</option>
-                                            <option value="milk">milk</option>
-                                            <option value="rice">rice</option>
-                                            <option value="olive">olive</option>
+                                            <option th:each="product : ${products}"
+                                                    th:value="${product}"
+                                                    th:text="${product}"
+                                                    th:data-product="${product}">
+                                            </option>
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="warehouseName">창고이름</label>
                                         <select id="warehouseName" name="warehouseName" class="form-control" required>
                                             <option value="" disabled selected>선택하세요</option>
-                                            <option value="시흥지사">시흥지사</option>
-                                            <option value="부산남구지사">부산남구지사</option>
-                                            <option value="금천지사">금천지사</option>
-                                            <option value="인천남동지사">인천남동지사</option>
-                                            <option value="구미지사">구미지사</option>
-                                            <option value="원주지사">원주지사</option>
-                                            <option value="광주북구지사">광주북구지사</option>
-                                            <option value="해운대지사">해운대지사</option>
-                                            <option value="대전서구지사">대전서구지사</option>
-                                            <option value="제주지사">제주지사</option>
-                                            <option value="청주지사">청주지사</option>
-                                            <option value="전주지사">전주지사</option>
-                                            <option value="양산지사">양산지사</option>
-                                            <option value="여주지사">여주지사</option>
-                                            <option value="용인지사">용인지사</option>
-                                            <option value="이천지사">이천지사</option>
-                                            <option value="화성지사">화성지사</option>
-                                            <option value="인천서구지사">인천서구지사</option>
-                                            <option value="안산지사">안산지사</option>
-                                            <option value="김해지사">김해지사</option>
+                                            <option th:each="warehouse : ${warehouses}"
+                                                    th:value="${warehouse}"
+                                                    th:text="${warehouse}"
+                                                    th:data-warehouse="${warehouse}">
+                                            </option>
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="manufacturerName">제조업체명</label>
                                         <select id="manufacturerName" name="manufacturerName" class="form-control" required>
                                             <option value="" disabled selected>선택하세요</option>
-                                            <option value="Wilson">Wilson</option>
-                                            <option value="Hudson">Hudson</option>
-                                            <option value="Smith">Smith</option>
-                                            <option value="Carter">Carter</option>
-                                            <option value="Gonzalez">Gonzalez</option>
-                                            <option value="Daniels">Daniels</option>
-                                            <option value="Stanley">Stanley</option>
-                                            <option value="Sloan">Sloan</option>
-                                            <option value="Cortez">Cortez</option>
-                                            <option value="Rodriguez">Rodriguez</option>
-                                            <option value="Evans">Evans</option>
-                                            <option value="Oliver">Oliver</option>
-                                            <option value="Hernandez">Hernandez</option>
-                                            <option value="Goodman">Goodman</option>
-                                            <option value="Richardson">Richardson</option>
-                                            <option value="Harrison">Harrison</option>
-                                            <option value="Jackson">Jackson</option>
-                                            <option value="Williams">Williams</option>
-                                            <option value="Jacobs">Jacobs</option>
-                                            <option value="Rodriguez">Rodriguez</option>
+                                            <option th:each="manufacturer : ${manufacturers}"
+                                                    th:value="${manufacturer}"
+                                                    th:text="${manufacturer}"
+                                                    th:data-manufacturer="${manufacturer}">
+                                            </option>
                                         </select>
                                     </div>
                                     <div class="form-group">

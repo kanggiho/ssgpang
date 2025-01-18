@@ -20,6 +20,22 @@
                  JOIN classification c ON i.code = c.code;
     </select>
 
+    <select id="getClassification" resultType="String">
+        SELECT item_classification from classification
+    </select>
+
+    <select id="getProduct" resultType="String">
+        SELECT product_name from product
+    </select>
+
+    <select id="getManufacturer" resultType="String">
+        SELECT manufacturer_name from manufacture
+    </select>
+
+    <select id="getWarehouse" resultType="String">
+        SELECT warehouse_name from warehouse
+    </select>
+
     <!-- 재고 수량만 변경할수 있도록 구현 -->
     <update id="updateStock" parameterType="map">
         UPDATE inventory

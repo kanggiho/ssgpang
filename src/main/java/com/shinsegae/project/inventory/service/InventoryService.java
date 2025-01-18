@@ -33,10 +33,12 @@ public class InventoryService {
         }
     }
 
+    // 새로운 재고 추가
     public int insertInventory(InventoryManagementDTO inventoryManagementDTO) {
         return inventoryMapper.insertInventory(inventoryManagementDTO);
     }
 
+    // 재고 삭제
     public boolean deleteInventory(String code) {
         try {
             inventoryMapper.deleteInventory(code);  // Mapper의 deleteInventory 메서드 호출
@@ -45,6 +47,22 @@ public class InventoryService {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public List<String> getClassification() {
+        return inventoryMapper.getClassification();
+    }
+
+    public List<String> getProduct() {
+        return inventoryMapper.getProduct();
+    }
+
+    public List<String> getManufacturer() {
+        return inventoryMapper.getManufacturer();
+    }
+
+    public List<String> getWarehouse() {
+        return inventoryMapper.getWarehouse();
     }
 
 }
