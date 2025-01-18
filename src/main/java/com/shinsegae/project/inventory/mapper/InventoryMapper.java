@@ -11,7 +11,6 @@ import java.util.Map;
 @Mapper
 public interface InventoryMapper {
     List<InventoryManagementDTO> selectInventoryAll();
-    List<InventoryManagementDTO> getInventoryByContent();
     void updateStock(@Param("code") String code, @Param("stock") int stock);
     int insertInventory(InventoryManagementDTO inventoryManagementDTO);
     void deleteInventory(String code);
