@@ -36,6 +36,6 @@ public interface DashboardMapper {
     //table: 오늘의 입고 상품
     List<TodayInputDTO> selectTodayInputProduct();
 
-    //bar chart: 지점별 출고현황
+    //bar chart: 사용자별 출고현황
     List<BarChartDTO> selectBarChartData();
 }

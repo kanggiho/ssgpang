@@ -37,10 +37,9 @@ axios.get('/admin/home_admin/barchart_user_output')
     .then(function (response) {
       const barChartData = response.data;
       for (let i = 0; i < barChartData.length; i++) {
-        labels_user.push(barChartData[i].userId);
+        labels_user.push(barChartData[i].name);
         data_quantity.push(barChartData[i].releaseQuantity);
       }
-      console.log(barChartData);
 
       var ctx = document.getElementById("myBarChart");
       var myBarChart = new Chart(ctx, {

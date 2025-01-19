@@ -35,7 +35,7 @@
 
     <!-- 총 발주건수 -->
     <select id="selectTotalOutputQuantity" resultType="java.lang.Integer">
-        SELECT SUM(release_quantity)
+        SELECT COUNT(*)
         FROM output o
         JOIN user u ON u.uid = o.user_id
         WHERE MONTH(release_date) = MONTH(CURDATE())
@@ -128,12 +128,13 @@
         ORDER BY releaseMonth
     </select>
 
-    <!-- bar chart: 지점별 출고현황 -->
+    <!-- bar chart: 사용자별 출고현황 -->
     <select id="selectBarChartData" resultType="com.shinsegae.project.dashboard.vo.BarChartDTO">
-        SELECT sum(release_quantity) AS releaseQuantity, user_id
-        FROM output
-        WHERE status = '승인'
-        GROUP BY user_id
+        SELECT sum(o.release_quantity) AS releaseQuantity, u.name
+        FROM output o
+        JOIN user u
+        WHERE o.status = '승인'
+        GROUP BY name
     </select>
 
     <!-- table: 오늘의 입고 상품 -->
