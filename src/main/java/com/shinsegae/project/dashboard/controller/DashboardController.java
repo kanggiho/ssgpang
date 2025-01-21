@@ -90,9 +90,9 @@ public class DashboardController {
         return ResponseEntity.ok(result);
     }
 
-    // bar chart: 지점별 출고 현황
-    @Operation(summary = "지점별 출고 현황",
-            description = "각 지점의 출고 현황 데이터를 JSON 형식으로 반환")
+    // bar chart: 사용자별 출고 현황
+    @Operation(summary = "사용자별 출고 현황",
+            description = "각 사용자의 출고 현황 데이터를 JSON 형식으로 반환")
     @GetMapping("admin/home_admin/barchart_user_output")
     @ResponseBody
     public ResponseEntity<List<BarChartDTO>> barchart_user_output() {
