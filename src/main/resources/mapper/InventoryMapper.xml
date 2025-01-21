@@ -20,25 +20,20 @@
                  JOIN classification c ON i.code = c.code;
     </select>
 
-    <!-- 재고 드롭다운 필터링 -->
-    <select id="getInventoryByContent"
-            parameterType="string"
-            resultType="com.shinsegae.project.inventory.vo.InventoryManagementDTO">
-        SELECT
-            c.item_classification,
-            p.product_name,
-            w.warehouse_name,
-            m.manufacturer_name,
-            i.price,
-            i.stock
-        FROM
-            inventory i
-                JOIN product p ON p.product_code = i.product_code
-                JOIN manufacture m ON i.manufacturer_code = m.manufacturer_code
-                JOIN warehouse w ON i.warehouse_id = w.warehouse_id
-                JOIN classification c ON i.code = c.code
-        WHERE
-            c.item_classification = #{item_classification}
+    <select id="getClassification" resultType="String">
+        SELECT item_classification from classification
+    </select>
+
+    <select id="getProduct" resultType="String">
+        SELECT product_name from product
+    </select>
+
+    <select id="getManufacturer" resultType="String">
+        SELECT manufacturer_name from manufacture
+    </select>
+
+    <select id="getWarehouse" resultType="String">
+        SELECT warehouse_name from warehouse
     </select>
 
     <!-- 재고 수량만 변경할수 있도록 구현 -->
