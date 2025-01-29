@@ -16,5 +16,8 @@ public class IncomingRequestDTO {
    private String warehousedQuantity;
    private String warehousedDate;
    private String manufacturerCode;
+   private String item_classification;
+   private String code;
    private int price;
+   private int warehouseId;
 }

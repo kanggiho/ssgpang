@@ -45,8 +45,15 @@ dependencies {
     //  spring security
     //************************************************************************
     // password암호화
+
     // Spring Security의 Crypto 모듈
     implementation 'org.springframework.security:spring-security-crypto:6.0.0'
+
+    //************************************************************************
+//  swagger(rest 사용 설명서 만들기)
+//************************************************************************
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
+
 
     // Apache POI for Excel
     implementation 'org.apache.poi:poi-ooxml:5.2.3' // 최신 버전 확인
