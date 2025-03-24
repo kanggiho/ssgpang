@@ -18,32 +18,9 @@ public class InventoryService {
     @Autowired
     private final InventoryMapper inventoryMapper;
 
+    // 재고 조회
     public List<InventoryManagementDTO> selectInventoryAll() {
         return inventoryMapper.selectInventoryAll();
-    }
-
-    public Map<String, Integer> getSum(List<InventoryManagementDTO> list){
-        Map<String, Integer> map = new HashMap<>(); // 키 - 값 쌍으로 데이터 저장 인터페이스
-
-        int sum1 = 0; //900
-        int sum2 = 0; //1000
-
-        for (InventoryManagementDTO dto : list) {
-            sum1 += dto.getPrice();
-        }
-
-        map.put("sum1", sum1);
-
-        for (InventoryManagementDTO dto : list) {
-            sum2 += dto.getStock();
-        }
-
-        map.put("sum2", sum2);
-
-        return map; //{900, 1000}
-    }
-    public List<InventoryManagementDTO> getInventoryByContent() {
-        return inventoryMapper.getInventoryByContent();
     }
 
     // 수량 업데이트
@@ -57,10 +34,12 @@ public class InventoryService {
         }
     }
 
+    // 새로운 재고 추가
     public int insertInventory(InventoryManagementDTO inventoryManagementDTO) {
         return inventoryMapper.insertInventory(inventoryManagementDTO);
     }
 
+    // 재고 삭제
     public boolean deleteInventory(String code) {
         try {
             inventoryMapper.deleteInventory(code);  // Mapper의 deleteInventory 메서드 호출
@@ -69,6 +48,26 @@ public class InventoryService {
             e.printStackTrace();
             return false;
         }
+    }
+
+    //드롭다운값: 품목 조회
+    public List<String> getClassification() {
+        return inventoryMapper.getClassification();
+    }
+
+    //드롭다운값: 자재 조회
+    public List<String> getProduct() {
+        return inventoryMapper.getProduct();
+    }
+
+    //드롭다운값: 제조업체 조회
+    public List<String> getManufacturer() {
+        return inventoryMapper.getManufacturer();
+    }
+
+    //드롭다운값: 창고 조회
+    public List<String> getWarehouse() {
+        return inventoryMapper.getWarehouse();
     }
 
 }
