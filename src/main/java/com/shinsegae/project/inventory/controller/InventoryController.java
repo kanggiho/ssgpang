@@ -28,19 +28,32 @@ public class InventoryController {
     @GetMapping("confirm_inventory_list")
     @Operation(summary = "재고 확인 리스트", description = "재고 데이터와 합계를 조회하여 재고 확인 리스트 페이지를 반환")
     public String confirm_inventory_list(Model model) {
+        List<String> classifications = inventoryService.getClassification();
+        List<String> products = inventoryService.getProduct();
+        List<String> warehouses = inventoryService.getWarehouse();
+        List<String> manufacturers = inventoryService.getManufacturer();
 
-        List<InventoryManagementDTO> list = inventoryService.selectInventoryAll();
-        Map<String, Integer> sumList = inventoryService.getSum(list);
+        model.addAttribute("classifications", classifications);
+        model.addAttribute("products", products);
+        model.addAttribute("warehouses", warehouses);
+        model.addAttribute("manufacturers", manufacturers);
+
         model.addAttribute("confirm_inventory_list", inventoryService.selectInventoryAll());
-        model.addAttribute("sumList", sumList);
-        //모델로 전달(sumList)
-        //${sumList.sum1} 출력
         return "admin/inventory/confirm_inventory_list";
     }
 
     @GetMapping("edit_inventory")
     @Operation(summary = "재고 편집 페이지", description = "재고를 수정하기 위한 편집 페이지를 반환")
-    public String edit_inventory() {
+    public String edit_inventory(Model model) {
+        List<String> classifications = inventoryService.getClassification();
+        List<String> products = inventoryService.getProduct();
+        List<String> warehouses = inventoryService.getWarehouse();
+        List<String> manufacturers = inventoryService.getManufacturer();
+
+        model.addAttribute("classifications", classifications);
+        model.addAttribute("products", products);
+        model.addAttribute("warehouses", warehouses);
+        model.addAttribute("manufacturers", manufacturers);
         return "admin/inventory/edit_inventory";
     }
 
